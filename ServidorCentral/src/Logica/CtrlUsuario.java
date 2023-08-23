@@ -1,5 +1,5 @@
 package Logica;
 
-public class CtrlUsuario {
+public class CtrlUsuario implements IUsuario {
 
 }
