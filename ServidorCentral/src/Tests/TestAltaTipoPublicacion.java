@@ -75,7 +75,6 @@ public class TestAltaTipoPublicacion {
 		Map<String, DTTipoPublicacion> retorno = ctrlTipos.obtenerDataTipos();
 		Assertions.assertTrue(retorno.isEmpty());
 	}
-
 }
 
 

@@ -54,6 +54,7 @@ public class AltaOferta extends JInternalFrame{
 		setResizable(true);
 		setIconifiable(true);
 		setTitle("Alta de Oferta Laboral");
+		setBounds(0, 0, 621, 441);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {40, 0, 100, 30, 50};
 		gridBagLayout.rowHeights = new int[] {30, 30, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30};
