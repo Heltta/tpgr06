@@ -21,4 +21,15 @@ public class ManejadorKeywords {
 	public Set<String> obtenerKeywords(){
 		return this.keywords.keySet();
 	}
+	public void agregarKeyword(String keyword) {
+		Keyword key = new Keyword(keyword);
+		this.keywords.put(keyword, key);
+	}
+	
+	public Boolean existeKeyword(String keyword) {
+		return this.keywords.containsKey(keyword);
+	}
+	public void clear() {
+		this.keywords.clear();
+	}
 }

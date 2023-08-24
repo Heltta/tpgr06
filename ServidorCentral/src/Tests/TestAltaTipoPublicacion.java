@@ -45,6 +45,7 @@ public class TestAltaTipoPublicacion {
 		Assertions.assertEquals("Ya existe un tipo de publicacion de nombre Deluxe", thrown.getMessage());
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	//Test construccion correcta de objetos
 	void AltaTipoPublicacionTest2() throws nombreTipoPublicacionRepetido {

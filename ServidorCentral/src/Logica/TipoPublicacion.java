@@ -10,7 +10,7 @@ public class TipoPublicacion {
 	private double costo;
 	private Date fecha;
 	
-	TipoPublicacion(String nombre, String descripcion, int exposicion, Date fecha, double costo, double duracion){
+	public TipoPublicacion(String nombre, String descripcion, int exposicion, Date fecha, double costo, double duracion){
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.exposicion = exposicion;

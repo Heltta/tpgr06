@@ -27,6 +27,15 @@ public class CtrlTipos implements ITipos {
 		ManejadorTipo muTipo = ManejadorTipo.getInstance();
 		muTipo.clear();
 	}
+	
+	public Boolean ingresarKeyword (String keyword) {
+		ManejadorKeywords mk = ManejadorKeywords.getInstance();
+		Boolean res = !mk.existeKeyword(keyword);
+		if (res) {
+			mk.agregarKeyword(keyword);
+		}
+		return res;
+	}
 }
 
 
