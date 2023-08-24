@@ -9,37 +9,26 @@ import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import java.awt.GridLayout;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
+
+import Logica.IUsuario;
+
 import java.awt.Insets;
 import javax.swing.JTextArea;
 import javax.swing.JList;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.awt.event.ActionEvent;
 
 public class ConsultaUsuario extends JInternalFrame {
-	private JTextField textField;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ConsultaUsuario frame = new ConsultaUsuario();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public ConsultaUsuario() {
+	private IUsuario IU;
+	public ConsultaUsuario(IUsuario IUs) {
+		IU=IUs;
 		setResizable(true);
 		setTitle("Consulta de Usuario");
 		setBounds(100, 100, 497, 431);
@@ -47,7 +36,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
 		
 		JLabel lblNewLabel = new JLabel("Nombre del Usuario:");
@@ -57,14 +46,20 @@ public class ConsultaUsuario extends JInternalFrame {
 		gbc_lblNewLabel.gridy = 0;
 		getContentPane().add(lblNewLabel, gbc_lblNewLabel);
 		
-		textField = new JTextField();
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.insets = new Insets(0, 0, 5, 0);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 3;
-		gbc_textField.gridy = 0;
-		getContentPane().add(textField, gbc_textField);
-		textField.setColumns(10);
+		ArrayList<String> nicknameUsuarios= IU.listarUsuarios();
+		DefaultListModel<String> l1 = new DefaultListModel<>();
+		for (int i = 0; i < nicknameUsuarios.size(); i++) {
+			 l1.add(i, nicknameUsuarios.get(i));
+		}
+		l1.add(1, "Buenas tardes");
+		l1.add(2, "Buenas noches");
+		JList list_1 = new JList<>(l1);
+		GridBagConstraints gbc_list_1 = new GridBagConstraints();
+		gbc_list_1.insets = new Insets(0, 0, 5, 0);
+		gbc_list_1.fill = GridBagConstraints.BOTH;
+		gbc_list_1.gridx = 3;
+		gbc_list_1.gridy = 0;
+		getContentPane().add(list_1, gbc_list_1);
 		
 		JLabel lblNewLabel_1 = new JLabel("Nombre:");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
@@ -74,6 +69,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
 		JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
 		gbc_textArea.insets = new Insets(0, 0, 5, 0);
 		gbc_textArea.fill = GridBagConstraints.BOTH;
@@ -89,6 +85,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
 		JTextArea textArea_1 = new JTextArea();
+		textArea_1.setEditable(false);
 		GridBagConstraints gbc_textArea_1 = new GridBagConstraints();
 		gbc_textArea_1.insets = new Insets(0, 0, 5, 0);
 		gbc_textArea_1.fill = GridBagConstraints.BOTH;
@@ -104,6 +101,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(lblNewLabel_3, gbc_lblNewLabel_3);
 		
 		JTextArea textArea_1_1 = new JTextArea();
+		textArea_1_1.setEditable(false);
 		GridBagConstraints gbc_textArea_1_1 = new GridBagConstraints();
 		gbc_textArea_1_1.insets = new Insets(0, 0, 5, 0);
 		gbc_textArea_1_1.fill = GridBagConstraints.BOTH;
@@ -119,6 +117,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(lblNewLabel_4, gbc_lblNewLabel_4);
 		
 		JTextArea textArea_1_2 = new JTextArea();
+		textArea_1_2.setEditable(false);
 		GridBagConstraints gbc_textArea_1_2 = new GridBagConstraints();
 		gbc_textArea_1_2.insets = new Insets(0, 0, 5, 0);
 		gbc_textArea_1_2.fill = GridBagConstraints.BOTH;
@@ -134,6 +133,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(lblNewLabel_5, gbc_lblNewLabel_5);
 		
 		JTextArea textArea_1_3 = new JTextArea();
+		textArea_1_3.setEditable(false);
 		GridBagConstraints gbc_textArea_1_3 = new GridBagConstraints();
 		gbc_textArea_1_3.insets = new Insets(0, 0, 5, 0);
 		gbc_textArea_1_3.fill = GridBagConstraints.BOTH;
@@ -149,6 +149,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(lblNewLabel_6, gbc_lblNewLabel_6);
 		
 		JTextArea textArea_1_4 = new JTextArea();
+		textArea_1_4.setEditable(false);
 		GridBagConstraints gbc_textArea_1_4 = new GridBagConstraints();
 		gbc_textArea_1_4.insets = new Insets(0, 0, 5, 0);
 		gbc_textArea_1_4.fill = GridBagConstraints.BOTH;
@@ -164,6 +165,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(lblNewLabel_7, gbc_lblNewLabel_7);
 		
 		JTextArea textArea_1_5 = new JTextArea();
+		textArea_1_5.setEditable(false);
 		GridBagConstraints gbc_textArea_1_5 = new GridBagConstraints();
 		gbc_textArea_1_5.insets = new Insets(0, 0, 5, 0);
 		gbc_textArea_1_5.fill = GridBagConstraints.BOTH;
@@ -179,6 +181,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(lblNewLabel_8, gbc_lblNewLabel_8);
 		
 		JTextArea textArea_1_6 = new JTextArea();
+		textArea_1_6.setEditable(false);
 		GridBagConstraints gbc_textArea_1_6 = new GridBagConstraints();
 		gbc_textArea_1_6.insets = new Insets(0, 0, 5, 0);
 		gbc_textArea_1_6.fill = GridBagConstraints.BOTH;

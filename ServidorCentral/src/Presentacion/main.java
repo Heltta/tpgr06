@@ -47,7 +47,7 @@ public class main {
         frmAltaOferta.setBounds(0, 0, 613, 401);
         frmTrabajoUy.getContentPane().add(frmAltaTipoPublicacion);
         frmTrabajoUy.getContentPane().add(frmAltaOferta);
-        frmConsultaUsuario = new ConsultaUsuario();
+        frmConsultaUsuario = new ConsultaUsuario(ctrlUsuario);
         frmConsultaUsuario.setBounds(0,0, 500, 500);
         frmTrabajoUy.getContentPane().add(frmConsultaUsuario); 
        
