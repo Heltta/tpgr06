@@ -36,33 +36,20 @@ public class OfertaLaboral {
 	public String getNombre() {
 		return nombre;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 	public String getCiudad() {
 		return ciudad;
-	}
-	public void setCiudad(String ciudad) {
-		this.ciudad = ciudad;
 	}
 	public String getDepartamento() {
 		return departamento;
 	}
-	public void setDepartamento(String departamento) {
-		this.departamento = departamento;
-	}
 	public int getRemuneracion() {
 		return remuneracion;
 	}
-	public void setRemuneracion(int remuneracion) {
-		this.remuneracion = remuneracion;
-	}
+	
 	public Date getFecha() {
 		return fecha;
 	}
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
+	
 	public double getCosto() {
 		return costo;
 	}
@@ -75,21 +62,15 @@ public class OfertaLaboral {
 	public Map<String, Postulante> getPostulantes() {
 		return Postulantes;
 	}
-	public void setPostulantes(Map<String, Postulante> postulantes) {
-		Postulantes = postulantes;
-	}
+
 	public TipoPublicacion getTipo() {
 		return tipo;
 	}
-	public void setTipo(TipoPublicacion tipo) {
-		this.tipo = tipo;
-	}
+
 	public Set<String> getKeywords() {
 		return Keywords;
 	}
-	public void setKeywords(Set<String> keywords) {
-		Keywords = keywords;
-	}
+
 	public Compra getCompra() {
 		return compra;
 	}

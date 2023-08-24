@@ -8,10 +8,12 @@ import Excepciones.nombreTipoPublicacionRepetido;
 
 public interface ITipos {
 
-	void ingresarDatosTipoPublicacion(String nombreT, String descripcionT, int exposicionT, Date fechaT, double costoT, double duracionT) 
+	 public abstract void ingresarDatosTipoPublicacion(String nombreT, String descripcionT, int exposicionT, Date fechaT, double costoT, double duracionT)
 			throws nombreTipoPublicacionRepetido;
 	
-	public Map<String, DTTipoPublicacion> obtenerDataTipos();
+	public abstract Map<String, DTTipoPublicacion> obtenerDataTipos();
 	
-	public void borrarTipos();
+	public abstract void borrarTipos();
+	public abstract Boolean ingresarKeyword(String keyword);
+	
 }

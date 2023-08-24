@@ -11,7 +11,7 @@ public class ManejadorOferta {
 	 public ManejadorOferta() {
 		 Ofertas = new HashMap<String,OfertaLaboral>();
 	 }
-	 static ManejadorOferta getInstancia() {
+	 public static ManejadorOferta getInstancia() {
 		 if (instancia==null) {
 			 instancia=new ManejadorOferta();
 		 }

@@ -7,8 +7,11 @@ public class Keyword {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
+	public Keyword(String nombre) {
+		super();
 		this.nombre = nombre;
 	}
+
+
 	
 }

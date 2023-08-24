@@ -3,6 +3,7 @@ package Logica;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -49,7 +50,7 @@ public class ManejadorUsuario {
  }
  
  public Set<String> obtenerPostulantes(){
-	 Set<String> res = Collections.emptySet();
+	 Set<String> res = new HashSet<String>();
 	 for (Iterator<Map.Entry<String, Usuario>> entries = this.usuarios.entrySet().iterator(); entries.hasNext(); ) {
 		    Map.Entry<String, Usuario> entry = entries.next();
 		    if (entry.getValue() instanceof Postulante) {		  
@@ -59,7 +60,8 @@ public class ManejadorUsuario {
 	 return res;
  }
  public Set<String> obtenerEmpresas(){
-	 Set<String> res = Collections.emptySet();
+	 
+	 Set<String> res = new HashSet<String>();
 	 for (Iterator<Map.Entry<String, Usuario>> entries = this.usuarios.entrySet().iterator(); entries.hasNext(); ) {
 		    Map.Entry<String, Usuario> entry = entries.next();
 		    if (entry.getValue() instanceof Empresa) {
@@ -74,5 +76,9 @@ public void agregarUsuario(Usuario u) {
 }
 public Boolean existeUsuario(String nickUsuario) {
 	return this.usuarios.containsKey(nickUsuario);
+}
+
+public void clear() {
+	this.usuarios.clear();
 }
 }
