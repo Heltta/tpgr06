@@ -40,7 +40,7 @@ public class main {
     public main() {
         initialize();
         frmAltaTipoPublicacion = new AltaTipoPublicacion(ctrlTipos);
-        frmAltaTipoPublicacion.setBounds(0, 0, 613, 401);
+        frmAltaTipoPublicacion.setBounds(0, 0, 343, 316);
         frmTrabajoUy.getContentPane().setLayout(null);
         
         frmTrabajoUy.getContentPane().add(frmAltaTipoPublicacion);
@@ -53,7 +53,7 @@ public class main {
     			
         frmTrabajoUy = new JFrame();
         frmTrabajoUy.setTitle("Trabajo.UY");
-        frmTrabajoUy.setBounds(100, 100, 629, 462);
+        frmTrabajoUy.setBounds(100, 100, 691, 521);
         frmTrabajoUy.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         JMenuBar menuBar = new JMenuBar();

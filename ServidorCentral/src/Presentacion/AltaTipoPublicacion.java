@@ -22,6 +22,9 @@ import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import java.awt.Component;
+import javax.swing.Box;
+import java.awt.Dimension;
 
 @SuppressWarnings("serial")
 public class AltaTipoPublicacion extends JInternalFrame {
@@ -41,15 +44,22 @@ public class AltaTipoPublicacion extends JInternalFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Alta de Tipo de Publicacion de Oferta Laboral");
-        setBounds(10, 40, 410, 427);
+        setBounds(10, 40, 398, 448);
 
 
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[] {30, 30, 0, 0, 0, 30, 0, 30, 0};
         gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-        gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+        gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+        gridBagLayout.rowWeights = new double[]{0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
+		
+		Component rigidArea = Box.createRigidArea(new Dimension(20, 20));
+		GridBagConstraints gbc_rigidArea = new GridBagConstraints();
+		gbc_rigidArea.insets = new Insets(0, 0, 5, 5);
+		gbc_rigidArea.gridx = 0;
+		gbc_rigidArea.gridy = 1;
+		getContentPane().add(rigidArea, gbc_rigidArea);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -198,6 +208,13 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		gbc_btnCancelar.gridx = 4;
 		gbc_btnCancelar.gridy = 15;
 		getContentPane().add(btnCancelar, gbc_btnCancelar);
+		
+		Component rigidArea_1 = Box.createRigidArea(new Dimension(20, 20));
+		GridBagConstraints gbc_rigidArea_1 = new GridBagConstraints();
+		gbc_rigidArea_1.insets = new Insets(0, 0, 5, 0);
+		gbc_rigidArea_1.gridx = 7;
+		gbc_rigidArea_1.gridy = 17;
+		getContentPane().add(rigidArea_1, gbc_rigidArea_1);
 		
 	}
 			

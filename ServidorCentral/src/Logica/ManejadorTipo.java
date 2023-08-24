@@ -18,7 +18,7 @@ public class ManejadorTipo {
 		return instance;
 	}
 	
-	public boolean obtenerTipoPublicacion(String nombre) {
+	public boolean existeTipoPublicacion(String nombre) {
 		return tiposPublicacion.containsKey(nombre);
 	}
 	
