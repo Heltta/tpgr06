@@ -1,6 +1,7 @@
 package Logica;
 
 import java.util.Date;
+import java.util.Map;
 
 import Excepciones.nombreTipoPublicacionRepetido;
 
@@ -10,10 +11,11 @@ public class CtrlTipos implements ITipos {
 		ManejadorTipo muTipo = ManejadorTipo.getInstance();
 		boolean existeNombre = muTipo.existeTipoPublicacion(nombreT);
 		if (existeNombre) {
-			throw new nombreTipoPublicacionRepetido("Ya existe un tipo de publicacion de nombre" + nombreT);
+			throw new nombreTipoPublicacionRepetido("Ya existe un tipo de publicacion de nombre " + nombreT);
 		}
 			TipoPublicacion nuevoTipo = new TipoPublicacion(nombreT, descripcionT, exposicionT, fechaT, costoT, duracionT);
 			muTipo.agregar(nuevoTipo);
+	
 	}
 }
 

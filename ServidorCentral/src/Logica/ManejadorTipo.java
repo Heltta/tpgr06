@@ -2,6 +2,7 @@ package Logica;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class ManejadorTipo {
 	private static ManejadorTipo instance = null;
@@ -25,4 +26,9 @@ public class ManejadorTipo {
 	public void agregar(TipoPublicacion tp) {
 		tiposPublicacion.put(tp.getNombre(), tp);
 	}
+
+	public Set<String> obtenerTipos(){
+		return this.tiposPublicacion.keySet();
+	}
+
 }

@@ -193,7 +193,7 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		GridBagConstraints gbc_btnAceptar = new GridBagConstraints();
 		gbc_btnAceptar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAceptar.gridx = 3;
-		gbc_btnAceptar.gridy = 15;
+		gbc_btnAceptar.gridy = 13;
 		getContentPane().add(btnAceptar, gbc_btnAceptar);		
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -206,7 +206,7 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
 		gbc_btnCancelar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCancelar.gridx = 4;
-		gbc_btnCancelar.gridy = 15;
+		gbc_btnCancelar.gridy = 13;
 		getContentPane().add(btnCancelar, gbc_btnCancelar);
 		
 		Component rigidArea_1 = Box.createRigidArea(new Dimension(20, 20));
