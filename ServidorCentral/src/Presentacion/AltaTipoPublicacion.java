@@ -269,6 +269,7 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		textAreaDescripcion.selectAll();
 		textAreaDescripcion.replaceSelection("");
 		textFieldExposicion.setText("");
+		chooserFechaAlta.setDate(null);
 		textFieldDuracion.setText("");
 		textFieldCosto.setText("");
 		

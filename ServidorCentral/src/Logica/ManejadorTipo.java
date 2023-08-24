@@ -30,5 +30,7 @@ public class ManejadorTipo {
 	public Set<String> obtenerTipos(){
 		return this.tiposPublicacion.keySet();
 	}
-
+	public TipoPublicacion obtenerTipo(String nomTipo) {
+		return this.tiposPublicacion.get(nomTipo);
+	}
 }

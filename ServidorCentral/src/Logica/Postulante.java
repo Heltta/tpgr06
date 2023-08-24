@@ -6,7 +6,7 @@ import java.util.Map;
 public class Postulante extends Usuario {
 	String nacionalidad;
 	LocalDate fechaNacimiento;
-	Map.Entry<String, Postulacion> Postulaciones;
+	Map<String, Postulacion> Postulaciones;
 	void postularAOferta(OfertaLaboral of) {
 		
 	}
@@ -29,10 +29,10 @@ public class Postulante extends Usuario {
 	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-	public Map.Entry<String, Postulacion> getPostulaciones() {
+	public Map<String, Postulacion> getPostulaciones() {
 		return Postulaciones;
 	}
-	public void setPostulaciones(Map.Entry<String, Postulacion> postulaciones) {
+	public void setPostulaciones(Map<String, Postulacion> postulaciones) {
 		Postulaciones = postulaciones;
 	}
 	

@@ -6,8 +6,8 @@ public class Empresa extends Usuario {
 	String nombreEmpresa;
 	String descripcion;
 	String link;
-	Map.Entry<String, OfertaLaboral> Ofertas;
-	Map.Entry<String,Compra> Compras;
+	Map<String, OfertaLaboral> Ofertas;
+	Map<String,Compra> Compras;
 	
 
 	public Empresa(String nickname, String mail, String nombre, String apellido, String nombreEmpresa,
@@ -35,17 +35,20 @@ public class Empresa extends Usuario {
 	public void setLink(String link) {
 		this.link = link;
 	}
-	public Map.Entry<String, OfertaLaboral> getOfertas() {
+	public Map<String, OfertaLaboral> getOfertas() {
 		return Ofertas;
 	}
-	public void setOfertas(Map.Entry<String, OfertaLaboral> ofertas) {
+	public void setOfertas(Map<String, OfertaLaboral> ofertas) {
 		Ofertas = ofertas;
 	}
-	public Map.Entry<String, Compra> getCompras() {
+	public Map<String, Compra> getCompras() {
 		return Compras;
 	}
-	public void setCompras(Map.Entry<String, Compra> compras) {
+	public void setCompras(Map<String, Compra> compras) {
 		Compras = compras;
+	}
+	public void agregarOferta(OfertaLaboral o) {
+		this.Ofertas.put(o.getNombre(), o);
 	}
 	
 }

@@ -13,7 +13,6 @@ import Logica.IUsuario;
 import javax.swing.JMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JInternalFrame;
 
 
 public class main {
@@ -22,6 +21,7 @@ public class main {
     private AltaTipoPublicacion frmAltaTipoPublicacion;
     private IUsuario ctrlUsuario;
     private ITipos ctrlTipos;
+    private AltaOferta frmAltaOferta;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -42,8 +42,13 @@ public class main {
         frmAltaTipoPublicacion = new AltaTipoPublicacion(ctrlTipos);
         frmAltaTipoPublicacion.setBounds(0, 0, 343, 316);
         frmTrabajoUy.getContentPane().setLayout(null);
-        
+        frmAltaOferta = new AltaOferta(ctrlUsuario);
+        frmAltaOferta.setBounds(0, 0, 613, 401);
         frmTrabajoUy.getContentPane().add(frmAltaTipoPublicacion);
+        frmTrabajoUy.getContentPane().add(frmAltaOferta);
+        
+       
+        
     }
 
     private void initialize() {
@@ -78,6 +83,18 @@ public class main {
         menuUsuarios.add(menuItemModDatosUser);
         
         JMenuItem menuItemAltaOferta = new JMenuItem("Alta de Oferta Laboral");
+        menuItemAltaOferta.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		String[] empresas = new String[ctrlUsuario.listarEmpresas().size()];
+        		empresas =ctrlUsuario.listarEmpresas().toArray(empresas);
+        		String[] tipos = new String[ctrlUsuario.listarTiposDePublicacion().size()];
+        		tipos =ctrlUsuario.listarTiposDePublicacion().toArray(tipos);
+        		String[] key = new String[ctrlUsuario.listarKeywords().size()];
+        		key=ctrlUsuario.listarKeywords().toArray(key);
+        		frmAltaOferta.actualizar(empresas,tipos,key);
+        		frmAltaOferta.setVisible(true);
+        	}
+        });
         menuOferta.add(menuItemAltaOferta);
         
         JMenuItem menuItemConsultaOferta = new JMenuItem("Consulta de Oferta Laboral");
