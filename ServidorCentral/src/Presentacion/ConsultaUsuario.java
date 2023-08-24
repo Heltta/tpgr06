@@ -51,8 +51,8 @@ public class ConsultaUsuario extends JInternalFrame {
 		for (int i = 0; i < nicknameUsuarios.size(); i++) {
 			 l1.add(i, nicknameUsuarios.get(i));
 		}
-		l1.add(1, "Buenas tardes");
-		l1.add(2, "Buenas noches");
+//		l1.add(1, "Buenas tardes");
+//		l1.add(2, "Buenas noches");
 		JList list_1 = new JList<>(l1);
 		GridBagConstraints gbc_list_1 = new GridBagConstraints();
 		gbc_list_1.insets = new Insets(0, 0, 5, 0);
