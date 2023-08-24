@@ -1,5 +1,6 @@
 package Logica;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -33,4 +34,18 @@ public class ManejadorTipo {
 	public TipoPublicacion obtenerTipo(String nomTipo) {
 		return this.tiposPublicacion.get(nomTipo);
 	}
+	
+	public Map<String, DTTipoPublicacion> obtenerDataTipos(){
+		Map<String, DTTipoPublicacion> datatipos = new HashMap<String, DTTipoPublicacion>();
+		tiposPublicacion.forEach((nombre, tipoP)->{
+			datatipos.put(tipoP.getNombre(), new DTTipoPublicacion(tipoP.getNombre(), tipoP.getDescripcion(),
+					tipoP.getExposicion(), tipoP.getDuracion(), tipoP.getCosto(), tipoP.getFecha()));
+		});
+		return datatipos;
+	}
+	
+	public void clear() {
+		tiposPublicacion.clear();
+	}
+	
 }

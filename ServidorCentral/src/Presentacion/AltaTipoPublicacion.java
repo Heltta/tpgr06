@@ -203,6 +203,7 @@ public class AltaTipoPublicacion extends JInternalFrame {
 				limpiarAltaTipo();
 			}
 		});
+		
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
 		gbc_btnCancelar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCancelar.gridx = 4;

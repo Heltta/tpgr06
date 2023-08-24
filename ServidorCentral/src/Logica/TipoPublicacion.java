@@ -23,47 +23,23 @@ public class TipoPublicacion {
 		return nombre;
 	}
 	
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	
 	public String getDescripcion() {
 		return descripcion;
-	}
-	
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
 	}
 	
 	public int getExposicion() {
 		return exposicion;
 	}
 	
-	public void setExposicion(int exposicion) {
-		this.exposicion = exposicion;
-	}
-	
 	public double getDuracion() {
 		return duracion;
-	}
-	
-	public void setDuracion(double duracion) {
-		this.duracion = duracion;
 	}
 	
 	public double getCosto() {
 		return costo;
 	}
-	
-	public void setCosto(double costo) {
-		this.costo = costo;
-	}
-	
+
 	public Date getFecha() {
 		return fecha;
-	}
-	
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
 	}
 }

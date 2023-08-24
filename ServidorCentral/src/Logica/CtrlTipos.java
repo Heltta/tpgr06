@@ -1,5 +1,6 @@
 package Logica;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
@@ -15,7 +16,16 @@ public class CtrlTipos implements ITipos {
 		}
 			TipoPublicacion nuevoTipo = new TipoPublicacion(nombreT, descripcionT, exposicionT, fechaT, costoT, duracionT);
 			muTipo.agregar(nuevoTipo);
+	}
 	
+	public Map<String, DTTipoPublicacion> obtenerDataTipos() {
+		ManejadorTipo muTipo = ManejadorTipo.getInstance();
+		return muTipo.obtenerDataTipos();
+	}
+	
+	public void borrarTipos() {
+		ManejadorTipo muTipo = ManejadorTipo.getInstance();
+		muTipo.clear();
 	}
 }
 
