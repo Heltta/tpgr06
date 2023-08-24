@@ -23,6 +23,7 @@ public class main {
     private ITipos ctrlTipos;
     private AltaOferta frmAltaOferta;
     private ConsultaUsuario frmConsultaUsuario;
+    private AgregarTipoPublicacionAPaquete frmAgregarTipoPublicacionAPaquete;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -40,11 +41,11 @@ public class main {
 
     public main() {
         initialize();
-        frmAltaTipoPublicacion = new AltaTipoPublicacion(ctrlTipos);
-        frmAltaTipoPublicacion.setBounds(0, 0, 343, 316);
         frmTrabajoUy.getContentPane().setLayout(null);
+        frmAltaTipoPublicacion = new AltaTipoPublicacion(ctrlTipos);
         frmAltaOferta = new AltaOferta(ctrlUsuario);
-        frmAltaOferta.setBounds(0, 0, 613, 401);
+        frmAgregarTipoPublicacionAPaquete = new AgregarTipoPublicacionAPaquete(ctrlTipos);
+        frmTrabajoUy.getContentPane().add(frmAgregarTipoPublicacionAPaquete);
         frmTrabajoUy.getContentPane().add(frmAltaTipoPublicacion);
         frmTrabajoUy.getContentPane().add(frmAltaOferta);
         frmConsultaUsuario = new ConsultaUsuario(ctrlUsuario);
