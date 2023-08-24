@@ -5,14 +5,24 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+
+import Logica.Fabrica;
+import Logica.ITipos;
+import Logica.IUsuario;
+
 import javax.swing.JMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JInternalFrame;
 
 
 public class main {
 
     private JFrame frmTrabajoUy;
+    private AltaTipoPublicacion frmAltaTipoPublicacion;
+    private PostulacionOferta frmPostulacionOferta;
+    private IUsuario ctrlUsuario;
+    private ITipos ctrlTipos;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -30,14 +40,30 @@ public class main {
 
     public main() {
         initialize();
+        frmAltaTipoPublicacion = new AltaTipoPublicacion(ctrlTipos);
+        frmAltaTipoPublicacion.setBounds(21, 11, 246, 211);
+        frmAltaTipoPublicacion.setVisible(false);
+        frmTrabajoUy.getContentPane().setLayout(null);
+        
+        frmTrabajoUy.getContentPane().add(frmAltaTipoPublicacion);
+        frmPostulacionOferta = new PostulacionOferta(ctrlUsuario);
+        frmPostulacionOferta.setBounds(21, 11, 246, 211);
+        frmPostulacionOferta.setVisible(false);
+        frmTrabajoUy.getContentPane().setLayout(null);
+        
+        frmTrabajoUy.getContentPane().add(frmPostulacionOferta);
     }
 
     private void initialize() {
+    	Fabrica fab = Fabrica.getInstance();
+    	ctrlUsuario = fab.getIUsuario();
+    	ctrlTipos = fab.getITipos();
+    			
         frmTrabajoUy = new JFrame();
         frmTrabajoUy.setTitle("Trabajo.UY");
-        frmTrabajoUy.setBounds(100, 100, 450, 400);
+        frmTrabajoUy.setBounds(100, 100, 629, 462);
         frmTrabajoUy.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        
         JMenuBar menuBar = new JMenuBar();
         frmTrabajoUy.setJMenuBar(menuBar);
 
@@ -67,8 +93,17 @@ public class main {
         
         JMenuItem menuItemPostulacion = new JMenuItem("Postulacion a Oferta Laboral");
         menuOferta.add(menuItemPostulacion);
-        
+        menuItemPostulacion.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frmPostulacionOferta.setVisible(true);
+            }
+        });
         JMenuItem menuItemAltaTipo = new JMenuItem("Alta de Tipo de Publicacion de Oferta Laboral");
+        menuItemAltaTipo.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frmAltaTipoPublicacion.setVisible(true);
+            }
+        });
         menuTipos.add(menuItemAltaTipo);
         
         JMenuItem menuItemCrearPaquete = new JMenuItem("Crear Paquete de Tipos de Publicacion");
