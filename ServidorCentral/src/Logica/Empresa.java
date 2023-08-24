@@ -1,13 +1,14 @@
 package Logica;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Empresa extends Usuario {
 	String nombreEmpresa;
 	String descripcion;
 	String link;
-	Map.Entry<String, OfertaLaboral> Ofertas;
-	Map.Entry<String,Compra> Compras;
+	Map<String, OfertaLaboral> Ofertas;
+	Map<String,Compra> Compras;
 	
 
 	public Empresa(String nickname, String mail, String nombre, String apellido, String nombreEmpresa,
@@ -16,36 +17,28 @@ public class Empresa extends Usuario {
 		this.nombreEmpresa = nombreEmpresa;
 		this.descripcion = descripcion;
 		this.link = link;
+		this.Ofertas=null;
 	}
 	public String getNombreEmpresa() {
 		return nombreEmpresa;
 	}
-	public void setNombreEmpresa(String nombreEmpresa) {
-		this.nombreEmpresa = nombreEmpresa;
-	}
+	
 	public String getDescripcion() {
 		return descripcion;
-	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
 	}
 	public String getLink() {
 		return link;
 	}
-	public void setLink(String link) {
-		this.link = link;
-	}
-	public Map.Entry<String, OfertaLaboral> getOfertas() {
+
+	public Map<String, OfertaLaboral> getOfertas() {
 		return Ofertas;
 	}
-	public void setOfertas(Map.Entry<String, OfertaLaboral> ofertas) {
-		Ofertas = ofertas;
-	}
-	public Map.Entry<String, Compra> getCompras() {
-		return Compras;
-	}
-	public void setCompras(Map.Entry<String, Compra> compras) {
-		Compras = compras;
+
+	public void agregarOferta(OfertaLaboral o) {
+		if (Ofertas==null) {
+			Ofertas= new HashMap<String,OfertaLaboral>();
+		}
+		this.Ofertas.put(o.getNombre(), o);
 	}
 	
 }

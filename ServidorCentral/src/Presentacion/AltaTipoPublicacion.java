@@ -5,7 +5,6 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,6 +21,12 @@ import java.awt.event.ActionListener;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
+import java.awt.Component;
+import javax.swing.Box;
+import java.awt.Dimension;
+import javax.swing.JPanel;
+import javax.swing.BoxLayout;
 
 @SuppressWarnings("serial")
 public class AltaTipoPublicacion extends JInternalFrame {
@@ -31,8 +36,7 @@ public class AltaTipoPublicacion extends JInternalFrame {
 	private JTextArea textAreaDescripcion;
 	private JDateChooser chooserFechaAlta;
 	private ITipos ctrlTipos;
-	private JTextField textFieldCosto;
-	
+	private JTextField textFieldCosto;	
 	
 	public AltaTipoPublicacion(ITipos ctrlTipos) {
 		this.ctrlTipos = ctrlTipos;
@@ -42,15 +46,22 @@ public class AltaTipoPublicacion extends JInternalFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Alta de Tipo de Publicacion de Oferta Laboral");
-        setBounds(10, 40, 523, 588);
-		
-		
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] {30, 30, 0, 0, 0, 30, 0, 30, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+        setBounds(10, 40, 606, 571);
+
+
+        GridBagLayout gridBagLayout = new GridBagLayout();
+        gridBagLayout.columnWidths = new int[] {30, 30, 0, 0, 0, 30, 0, 30, 0};
+        gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+        gridBagLayout.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
+		
+		Component rigidArea = Box.createRigidArea(new Dimension(20, 20));
+		GridBagConstraints gbc_rigidArea = new GridBagConstraints();
+		gbc_rigidArea.insets = new Insets(0, 0, 5, 5);
+		gbc_rigidArea.gridx = 0;
+		gbc_rigidArea.gridy = 1;
+		getContentPane().add(rigidArea, gbc_rigidArea);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -58,7 +69,7 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		gbc_lblNombre.anchor = GridBagConstraints.EAST;
 		gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNombre.gridx = 2;
-		gbc_lblNombre.gridy = 1;
+		gbc_lblNombre.gridy = 2;
 		getContentPane().add(lblNombre, gbc_lblNombre);
 		
 		textFieldNombre = new JTextField();
@@ -67,7 +78,7 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		gbc_textFieldNombre.gridwidth = 2;
 		gbc_textFieldNombre.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldNombre.gridx = 3;
-		gbc_textFieldNombre.gridy = 1;
+		gbc_textFieldNombre.gridy = 2;
 		getContentPane().add(textFieldNombre, gbc_textFieldNombre);
 		textFieldNombre.setColumns(10);
 		
@@ -80,16 +91,37 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		gbc_lblDescripcion.gridy = 3;
 		getContentPane().add(lblDescripcion, gbc_lblDescripcion);
 		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(10, 80));
+		panel.setMinimumSize(new Dimension(10, 60));
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.gridwidth = 2;
+		gbc_panel.gridheight = 3;
+		gbc_panel.insets = new Insets(0, 0, 5, 5);
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 3;
+		gbc_panel.gridy = 3;
+		getContentPane().add(panel, gbc_panel);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setMinimumSize(new Dimension(23, 60));
+		panel.add(scrollPane);
+		
 		textAreaDescripcion = new JTextArea();
+		textAreaDescripcion.setMinimumSize(new Dimension(5, 60));
+		scrollPane.setViewportView(textAreaDescripcion);
+		textAreaDescripcion.setRows(WIDTH);
 		textAreaDescripcion.setLineWrap(true);
-		GridBagConstraints gbc_textAreaDescripcion = new GridBagConstraints();
-		gbc_textAreaDescripcion.anchor = GridBagConstraints.SOUTH;
-		gbc_textAreaDescripcion.gridwidth = 2;
-		gbc_textAreaDescripcion.insets = new Insets(0, 0, 5, 5);
-		gbc_textAreaDescripcion.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textAreaDescripcion.gridx = 3;
-		gbc_textAreaDescripcion.gridy = 3;
-		getContentPane().add(textAreaDescripcion, gbc_textAreaDescripcion);
+		
+		Component verticalStrut = Box.createVerticalStrut(20);
+		verticalStrut.setMinimumSize(new Dimension(0, 40));
+		GridBagConstraints gbc_verticalStrut = new GridBagConstraints();
+		gbc_verticalStrut.gridheight = 2;
+		gbc_verticalStrut.insets = new Insets(0, 0, 5, 5);
+		gbc_verticalStrut.gridx = 2;
+		gbc_verticalStrut.gridy = 4;
+		getContentPane().add(verticalStrut, gbc_verticalStrut);
 		
 		JLabel lblExposicion = new JLabel("Exposicion:");
 		lblExposicion.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -97,7 +129,7 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		gbc_lblExposicion.anchor = GridBagConstraints.EAST;
 		gbc_lblExposicion.insets = new Insets(0, 0, 5, 5);
 		gbc_lblExposicion.gridx = 2;
-		gbc_lblExposicion.gridy = 5;
+		gbc_lblExposicion.gridy = 6;
 		getContentPane().add(lblExposicion, gbc_lblExposicion);
 		
 		textFieldExposicion = new JTextField();
@@ -106,16 +138,9 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		gbc_textFieldExposicion.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldExposicion.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldExposicion.gridx = 3;
-		gbc_textFieldExposicion.gridy = 5;
+		gbc_textFieldExposicion.gridy = 6;
 		getContentPane().add(textFieldExposicion, gbc_textFieldExposicion);
 		textFieldExposicion.setColumns(10);
-		
-		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				cmdAltaTipoPublicacion(e);
-			}
-		});
 		
 		JLabel lblDuracion = new JLabel("Duracion:");
 		lblDuracion.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -142,7 +167,7 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		gbc_lblCosto.anchor = GridBagConstraints.EAST;
 		gbc_lblCosto.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCosto.gridx = 2;
-		gbc_lblCosto.gridy = 9;
+		gbc_lblCosto.gridy = 8;
 		getContentPane().add(lblCosto, gbc_lblCosto);
 		
 		textFieldCosto = new JTextField();
@@ -152,9 +177,10 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		gbc_textFieldCosto.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldCosto.fill = GridBagConstraints.BOTH;
 		gbc_textFieldCosto.gridx = 3;
-		gbc_textFieldCosto.gridy = 9;
+		gbc_textFieldCosto.gridy = 8;
 		getContentPane().add(textFieldCosto, gbc_textFieldCosto);
 		textFieldCosto.setColumns(10);
+		
 		
 		JLabel lblFecha = new JLabel("Fecha:");
 		lblFecha.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -162,7 +188,7 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		gbc_lblFecha.anchor = GridBagConstraints.EAST;
 		gbc_lblFecha.insets = new Insets(0, 0, 5, 5);
 		gbc_lblFecha.gridx = 2;
-		gbc_lblFecha.gridy = 11;
+		gbc_lblFecha.gridy = 9;
 		getContentPane().add(lblFecha, gbc_lblFecha);
 		
 		//Codigo para desactivar la edicion del campo de texto fecha en el JDateChooser
@@ -175,13 +201,8 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		gbc_chooserFechaAlta.insets = new Insets(0, 0, 5, 5);
 		gbc_chooserFechaAlta.fill = GridBagConstraints.BOTH;
 		gbc_chooserFechaAlta.gridx = 3;
-		gbc_chooserFechaAlta.gridy = 11;
+		gbc_chooserFechaAlta.gridy = 9;
 		getContentPane().add(chooserFechaAlta, gbc_chooserFechaAlta);
-		GridBagConstraints gbc_btnAceptar = new GridBagConstraints();
-		gbc_btnAceptar.insets = new Insets(0, 0, 0, 5);
-		gbc_btnAceptar.gridx = 3;
-		gbc_btnAceptar.gridy = 17;
-		getContentPane().add(btnAceptar, gbc_btnAceptar);		
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
@@ -190,32 +211,78 @@ public class AltaTipoPublicacion extends JInternalFrame {
 				limpiarAltaTipo();
 			}
 		});
+		
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cmdAltaTipoPublicacion(e);
+			}
+		});
+		GridBagConstraints gbc_btnAceptar = new GridBagConstraints();
+		gbc_btnAceptar.insets = new Insets(0, 0, 5, 5);
+		gbc_btnAceptar.gridx = 3;
+		gbc_btnAceptar.gridy = 10;
+		getContentPane().add(btnAceptar, gbc_btnAceptar);		
+		
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
-		gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
+		gbc_btnCancelar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCancelar.gridx = 4;
-		gbc_btnCancelar.gridy = 17;
+		gbc_btnCancelar.gridy = 10;
 		getContentPane().add(btnCancelar, gbc_btnCancelar);
 		
-		 
+		Component rigidArea_1 = Box.createRigidArea(new Dimension(20, 20));
+		GridBagConstraints gbc_rigidArea_1 = new GridBagConstraints();
+		gbc_rigidArea_1.insets = new Insets(0, 0, 5, 0);
+		gbc_rigidArea_1.gridx = 7;
+		gbc_rigidArea_1.gridy = 12;
+		getContentPane().add(rigidArea_1, gbc_rigidArea_1);
+		
 	}
 			
 	private void cmdAltaTipoPublicacion(ActionEvent e) {
-		String nombreT = this.textFieldNombre.getText();
-		String descripcionT = this.textAreaDescripcion.getText();
-		int exposicionT = Integer.parseInt(textFieldExposicion.getText());
-		Date fechaT = this.chooserFechaAlta.getDate();
-		double costoT = Integer.parseInt(textFieldCosto.getText());
-		double duracionT = Integer.parseInt(textFieldDuracion.getText());
+		if (checkFormulario()) {
+			String nombreT = this.textFieldNombre.getText();
+			String descripcionT = this.textAreaDescripcion.getText();
+			int exposicionT = Integer.parseInt(textFieldExposicion.getText());
+			Date fechaT = this.chooserFechaAlta.getDate();
+			double costoT = Integer.parseInt(textFieldCosto.getText());
+			double duracionT = Double.parseDouble(textFieldDuracion.getText());
+		
+			try {
+				ctrlTipos.ingresarDatosTipoPublicacion(nombreT, descripcionT, exposicionT, fechaT, costoT, duracionT);
+				JOptionPane.showMessageDialog(this, "El Tipo de Publicacion se ha creado con éxito", "Agregar Tipo de Publicacion",
+	                    JOptionPane.INFORMATION_MESSAGE);
+			} catch (nombreTipoPublicacionRepetido exc) {
+				JOptionPane.showMessageDialog(this, exc.getMessage(), "Agregar Tipo de Publicacion",
+	                    JOptionPane.INFORMATION_MESSAGE);
+			}
+		}		
+	}
 	
-		try {
-			ctrlTipos.ingresarDatosTipoPublicacion(nombreT, descripcionT, exposicionT, fechaT, costoT, duracionT);
-			JOptionPane.showMessageDialog(this, "El Tipo de Publicacion se ha creado con éxito", "Agregar Tipo de Publicacion",
-                    JOptionPane.INFORMATION_MESSAGE);
-		} catch (nombreTipoPublicacionRepetido exc) {
-			JOptionPane.showMessageDialog(this, exc.getMessage(), "Agregar Tipo de Publicacion",
-                    JOptionPane.INFORMATION_MESSAGE);
+	private boolean checkFormulario() {
+		String nombreT = textFieldNombre.getText();
+		String descripcionT = textAreaDescripcion.getText();
+		String exposicionT = textFieldExposicion.getText();
+		String duracionT = textFieldDuracion.getText();
+		String costoT = textFieldCosto.getText();
+		Date fechaT = this.chooserFechaAlta.getDate();
+		
+		if (nombreT.isEmpty() || descripcionT.isEmpty() || fechaT == null || exposicionT.isEmpty() ||
+				duracionT.isEmpty() || costoT.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Debe llenar todos los campos", "Alta Tipo de Publicacion", JOptionPane.ERROR_MESSAGE);
+			return false;
 		}
 		
+		try {
+			Double.parseDouble(costoT);
+			Double.parseDouble(duracionT);
+			Integer.parseInt(exposicionT);
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, "Debe ingresar un numero", "Alta Tipo de Publicacion", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+			
+		return true;
 	}
 	
 	private void limpiarAltaTipo() {
@@ -223,6 +290,7 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		textAreaDescripcion.selectAll();
 		textAreaDescripcion.replaceSelection("");
 		textFieldExposicion.setText("");
+		chooserFechaAlta.setDate(null);
 		textFieldDuracion.setText("");
 		textFieldCosto.setText("");
 		

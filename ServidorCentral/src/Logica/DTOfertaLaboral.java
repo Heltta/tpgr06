@@ -1,10 +1,10 @@
 package Logica;
 
 import java.util.Date;
-import java.util.Map;
 import java.util.Set;
 
-public class OfertaLaboral {
+public class DTOfertaLaboral {
+
 	private String nombre;
 	private String descripcion;
 	private String ciudad;
@@ -13,13 +13,12 @@ public class OfertaLaboral {
 	private int remuneracion;
 	private Date fecha;
 	private double costo;
-	private Map<String,Postulante> Postulantes;
-	private TipoPublicacion tipo;
+	private Set<DTPostulacion> postulaciones;
+	private String tipo;
 	private Set<String> Keywords;
-	private Compra compra;
 	
-	public OfertaLaboral(String nombre,String descripcion, String ciudad, String departamento, DTHorario horario, int remuneracion,
-			Date fecha, TipoPublicacion tipo, Set<String> keywords) {
+	public DTOfertaLaboral(String nombre,String descripcion, String ciudad, String departamento, DTHorario horario, int remuneracion,
+			Date fecha, String tipo, Set<String> keywords, Set<DTPostulacion> postulaciones) {
 		super();
 		this.nombre = nombre;
 		this.descripcion=descripcion;
@@ -30,8 +29,7 @@ public class OfertaLaboral {
 		this.fecha = fecha;
 		this.tipo = tipo;
 		Keywords = keywords;
-		Postulantes=null;
-		compra=null;
+		this.postulaciones=postulaciones;
 	}
 	public String getNombre() {
 		return nombre;
@@ -45,37 +43,20 @@ public class OfertaLaboral {
 	public int getRemuneracion() {
 		return remuneracion;
 	}
-	
 	public Date getFecha() {
 		return fecha;
 	}
-	
 	public double getCosto() {
 		return costo;
 	}
-	public void setCosto() {
-		if (this.compra==null) {
-			this.costo=this.tipo.getCosto();
-		}
-		//Faltaria el tema costo con compra de paquete pero todavia no hay caso de uso
+	public Set<DTPostulacion> getPostulaciones() {
+		return postulaciones;
 	}
-	public Map<String, Postulante> getPostulantes() {
-		return Postulantes;
-	}
-
-	public TipoPublicacion getTipo() {
+	public String getTipo() {
 		return tipo;
 	}
-
 	public Set<String> getKeywords() {
 		return Keywords;
-	}
-
-	public Compra getCompra() {
-		return compra;
-	}
-	public void setCompra(Compra compra) {
-		this.compra = compra;
 	}
 	public String getDescripcion() {
 		return descripcion;

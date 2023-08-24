@@ -23,6 +23,10 @@ public class main {
     private PostulacionOferta frmPostulacionOferta;
     private IUsuario ctrlUsuario;
     private ITipos ctrlTipos;
+    private AltaOferta frmAltaOferta;
+    private ConsultaUsuario frmConsultaUsuario;
+    private AgregarTipoPublicacionAPaquete frmAgregarTipoPublicacionAPaquete;
+
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -40,17 +44,23 @@ public class main {
 
     public main() {
         initialize();
-        frmAltaTipoPublicacion = new AltaTipoPublicacion(ctrlTipos);
-        frmAltaTipoPublicacion.setBounds(21, 11, 246, 211);
-        frmAltaTipoPublicacion.setVisible(false);
+
         frmTrabajoUy.getContentPane().setLayout(null);
-        
+        frmAltaTipoPublicacion = new AltaTipoPublicacion(ctrlTipos);
+        frmAltaOferta = new AltaOferta(ctrlUsuario);
+        frmAgregarTipoPublicacionAPaquete = new AgregarTipoPublicacionAPaquete(ctrlTipos);
+        frmTrabajoUy.getContentPane().add(frmAgregarTipoPublicacionAPaquete);
         frmTrabajoUy.getContentPane().add(frmAltaTipoPublicacion);
+        frmTrabajoUy.getContentPane().add(frmAltaOferta);
+        frmConsultaUsuario = new ConsultaUsuario(ctrlUsuario);
+        frmConsultaUsuario.setBounds(0,0, 500, 500);
+        frmTrabajoUy.getContentPane().add(frmConsultaUsuario); 
+        
+        //Postulacion oferta
         frmPostulacionOferta = new PostulacionOferta(ctrlUsuario);
         frmPostulacionOferta.setBounds(21, 11, 246, 211);
         frmPostulacionOferta.setVisible(false);
         frmTrabajoUy.getContentPane().setLayout(null);
-        
         frmTrabajoUy.getContentPane().add(frmPostulacionOferta);
     }
 
@@ -61,7 +71,7 @@ public class main {
     			
         frmTrabajoUy = new JFrame();
         frmTrabajoUy.setTitle("Trabajo.UY");
-        frmTrabajoUy.setBounds(100, 100, 629, 462);
+        frmTrabajoUy.setBounds(100, 100, 691, 521);
         frmTrabajoUy.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         JMenuBar menuBar = new JMenuBar();
@@ -80,12 +90,29 @@ public class main {
         menuUsuarios.add(menuItemAltaUser);
 
         JMenuItem menuItemConsultaUser = new JMenuItem("Consulta de Usuario");
+        menuItemConsultaUser.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frmConsultaUsuario.setVisible(true);
+            }
+        });
         menuUsuarios.add(menuItemConsultaUser);
         
         JMenuItem menuItemModDatosUser = new JMenuItem("Modificar Datos de Usuario");
         menuUsuarios.add(menuItemModDatosUser);
         
         JMenuItem menuItemAltaOferta = new JMenuItem("Alta de Oferta Laboral");
+        menuItemAltaOferta.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		String[] empresas = new String[ctrlUsuario.listarEmpresas().size()];
+        		empresas =ctrlUsuario.listarEmpresas().toArray(empresas);
+        		String[] tipos = new String[ctrlUsuario.listarTiposDePublicacion().size()];
+        		tipos =ctrlUsuario.listarTiposDePublicacion().toArray(tipos);
+        		String[] key = new String[ctrlUsuario.listarKeywords().size()];
+        		key=ctrlUsuario.listarKeywords().toArray(key);
+        		frmAltaOferta.actualizar(empresas,tipos,key);
+        		frmAltaOferta.setVisible(true);
+        	}
+        });
         menuOferta.add(menuItemAltaOferta);
         
         JMenuItem menuItemConsultaOferta = new JMenuItem("Consulta de Oferta Laboral");

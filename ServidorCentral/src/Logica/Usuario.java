@@ -28,16 +28,4 @@ public class Usuario {
 		return apellido;
 	}
 
-	public void setNickname(String newNick) {
-		this.nickname = newNick;
-	}
-	public void setMail(String newMail) {
-		this.nickname = newMail;
-	}
-	public void setNombre(String newNombre) {
-		this.nickname = newNombre;
-	}
-	public void setApellido(String newApellido) {
-		this.nickname = newApellido;
-	}
 }
