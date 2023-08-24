@@ -5,18 +5,18 @@ import java.util.Map;
 import java.util.Set;
 
 public class OfertaLaboral {
-	String nombre;
-	String descripcion;
-	String ciudad;
-	String departamento;
-	DTHorario horario;
-	int remuneracion;
-	Date fecha;
-	double costo;
-	Map<String,Postulante> Postulantes;
-	TipoPublicacion tipo;
-	Set<String> Keywords;
-	Compra compra;
+	private String nombre;
+	private String descripcion;
+	private String ciudad;
+	private String departamento;
+	private DTHorario horario;
+	private int remuneracion;
+	private Date fecha;
+	private double costo;
+	private Map<String,Postulante> Postulantes;
+	private TipoPublicacion tipo;
+	private Set<String> Keywords;
+	private Compra compra;
 	
 	public OfertaLaboral(String nombre,String descripcion, String ciudad, String departamento, DTHorario horario, int remuneracion,
 			Date fecha, TipoPublicacion tipo, Set<String> keywords) {
@@ -96,6 +96,10 @@ public class OfertaLaboral {
 	public void setCompra(Compra compra) {
 		this.compra = compra;
 	}
-	
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public DTHorario getHorario() {
+		return horario;
+	}
 }
-

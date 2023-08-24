@@ -22,6 +22,7 @@ public class main {
     private IUsuario ctrlUsuario;
     private ITipos ctrlTipos;
     private AltaOferta frmAltaOferta;
+    private ConsultaUsuario frmConsultaUsuario;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -46,9 +47,11 @@ public class main {
         frmAltaOferta.setBounds(0, 0, 613, 401);
         frmTrabajoUy.getContentPane().add(frmAltaTipoPublicacion);
         frmTrabajoUy.getContentPane().add(frmAltaOferta);
-        
+        frmConsultaUsuario = new ConsultaUsuario();
+        frmConsultaUsuario.setBounds(0,0, 500, 500);
+        frmTrabajoUy.getContentPane().add(frmConsultaUsuario); 
        
-        
+    
     }
 
     private void initialize() {
@@ -77,6 +80,11 @@ public class main {
         menuUsuarios.add(menuItemAltaUser);
 
         JMenuItem menuItemConsultaUser = new JMenuItem("Consulta de Usuario");
+        menuItemConsultaUser.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frmConsultaUsuario.setVisible(true);
+            }
+        });
         menuUsuarios.add(menuItemConsultaUser);
         
         JMenuItem menuItemModDatosUser = new JMenuItem("Modificar Datos de Usuario");
