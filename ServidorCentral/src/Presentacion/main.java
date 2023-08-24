@@ -40,8 +40,7 @@ public class main {
     public main() {
         initialize();
         frmAltaTipoPublicacion = new AltaTipoPublicacion(ctrlTipos);
-        frmAltaTipoPublicacion.setBounds(21, 11, 297, 271);
-        frmAltaTipoPublicacion.setVisible(true);
+        frmAltaTipoPublicacion.setBounds(0, 0, 613, 401);
         frmTrabajoUy.getContentPane().setLayout(null);
         
         frmTrabajoUy.getContentPane().add(frmAltaTipoPublicacion);
