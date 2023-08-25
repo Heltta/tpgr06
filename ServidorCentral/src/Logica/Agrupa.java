@@ -13,7 +13,11 @@ public class Agrupa {
 		return cant;
 	}
 
-	public void setCant(int cant) {
-		this.cant = cant;
+	public TipoPublicacion getTipo() {
+		return tipo;
+	}
+
+	public void setCant(int i) {
+		cant = i;
 	}
 }

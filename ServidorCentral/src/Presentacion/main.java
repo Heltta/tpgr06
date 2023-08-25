@@ -27,6 +27,7 @@ public class main {
     private ConsultaUsuario frmConsultaUsuario;
     private AgregarTipoPublicacionAPaquete frmAgregarTipoPublicacionAPaquete;
     private ConsultaOferta frmConsultaOferta;
+    private CrearPaqueteTiposPublicacion frmCrearPaqueteTiposPublicacion;
 
 
     public static void main(String[] args) {
