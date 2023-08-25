@@ -352,27 +352,6 @@ public class ConsultaOferta extends JInternalFrame{
 				table.setModel(dtm);
 			}
 		}
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy");
-		Set<DTPostulacion> postulaciones = new HashSet<>();
-		postulaciones.add(new DTPostulacion(new Date(),"hola","asdsddfgdfgdfgdfgdfgdfgdfgfgdfgdfgfdgdd","dfg"));
-		postulaciones.add(new DTPostulacion(new Date(),"hola","asdsddfgdfgdfgdfgdfgdfgdfgfgdfgdfgfdgdd","dfg"));
-		postulaciones.add(new DTPostulacion(new Date(),"hola","asdsddfgdfgdfgdfgdfgdfgdfgfgdfgdfgfdgdd","dfg"));
-		postulaciones.add(new DTPostulacion(new Date(),"hola","asdsddfgdfgdfgdfgdfgdfgdfgfgdfgdfgfdgdd","dfg"));
-		postulaciones.add(new DTPostulacion(new Date(),"hola","asdsddfgdfgdfgdfgdfgdfgdfgfgdfgdfgfdgdd","dfg"));
-		postulaciones.add(new DTPostulacion(new Date(),"hola","asdsddfgdfgdfgdfgdfgdfgdfgfgdfgdfgfdgdd","dfg"));
-		postulaciones.add(new DTPostulacion(new Date(),"hola","asdsddfgdfgdfgdfgdfgdfgdfgfgdfgdfgfdgdd","dfg"));
-		postulaciones.add(new DTPostulacion(new Date(),"hola","asdsddfgdfgdfgdfgdfgdfgdfgfgdfgdfgfdgdd","dfg"));
-		postulaciones.add(new DTPostulacion(new Date(),"hola","asdsddfgdfgdfgdfgdfgdfgdfgfgdfgdfgfdgdd","dfg"));
-		postulaciones.add(new DTPostulacion(new Date(),"hola","asdsddfgdfgdfgdfgdfgdfgdfgfgdfgdfgfdgdd","dfg"));
-		postulaciones.add(new DTPostulacion(new Date(),"asda","asda","asdsddd"));
-		String[] data = new String[postulaciones.size() + 1];
-		for(DTPostulacion post : postulaciones) {
-			data[0] = formato.format(post.getFechaPostulacion());
-			data[1] = post.getResumenCV();
-			data[2] = post.getDescripcion();
-			dtm.addRow(data);
-			table.setModel(dtm);
-		}
 	}
 	private void limpiarCampos() {
 		cbEmpresa.setSelectedIndex(0);
