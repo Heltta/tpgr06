@@ -2,6 +2,7 @@ package Logica;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class Empresa extends Usuario {
 	String nombreEmpresa;
@@ -40,5 +41,11 @@ public class Empresa extends Usuario {
 		}
 		this.Ofertas.put(o.getNombre(), o);
 	}
-	
+	public Set<String> getNombreOfertas(){
+		Set<String> lista = null;
+		if(Ofertas != null) {
+			lista = Ofertas.keySet();
+		}
+		return lista;
+	}
 }
