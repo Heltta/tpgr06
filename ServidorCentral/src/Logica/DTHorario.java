@@ -9,5 +9,10 @@ public class DTHorario {
 		this.horarioInicio=LocalTime.parse(horIn);
 		this.horarioFin=LocalTime.parse(horFin);
 	}
-
+	public LocalTime getInicio() {
+		return this.horarioInicio;
+	}
+	public LocalTime getFin() {
+		return this.horarioFin;
+	}
 }

@@ -83,4 +83,12 @@ public class OfertaLaboral {
 	public DTHorario getHorario() {
 		return horario;
 	}
+	public Boolean existePostulante(String nombre) {
+		return Postulantes.containsKey(nombre);
+	}
+	public void agregarPostulante(Postulante post) {
+		if(!Postulantes.containsKey(post.getNickname())) {
+			Postulantes.put(post.getNickname(), post);
+		}
+	}
 }

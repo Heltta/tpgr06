@@ -9,12 +9,18 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
 import java.awt.Insets;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.event.ListDataListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.JTextArea;
+import javax.swing.ListModel;
 
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
@@ -33,10 +39,10 @@ import java.awt.event.ActionEvent;
 public class PostulacionOferta extends JInternalFrame {
 	private JComboBox<String> cbEmpresa;
 	private JComboBox<String> cbOferta;
-	private JList<String> lsPostulantes;
 	private JTextArea taCV;
 	private JTextArea taMotivacion;
 	private JDateChooser chooserFecha;
+	private final JList<String> lsPostulantes;
 	private IUsuario ctrlUsuario;
 	
 	public PostulacionOferta(IUsuario ctrlUsuario) {
@@ -86,17 +92,33 @@ public class PostulacionOferta extends JInternalFrame {
 					  cbOferta.addItem("Seleccionar");
 				  }
 			  }
-		});
+		});	
+		lsPostulantes = new JList<String>();
 		cbOferta.addItemListener(new ItemListener() {
 			  public void itemStateChanged(ItemEvent itemEvent) {
-				  
-				  //ConsultaOferta consulta = new ConsultaOferta(cbEmpresa.getSelectedItem().toString(), cbOferta.getSelectedItem().toString());
+				  if(cbOferta.getSelectedIndex() != 0) {
+					 ConsultaOferta consulta = new ConsultaOferta(ctrlUsuario, cbEmpresa.getSelectedItem().toString(), cbOferta.getSelectedItem().toString());
+					 consulta.setVisible(true); 
+					 final DefaultListModel<String> model = new DefaultListModel<String>();
+					 for(String post : ctrlUsuario.listarPostulantes()) {
+						 model.addElement(post);
+					 }
+					 lsPostulantes.setModel(model);
+				  }
 			  }
 		});
-		
+		lsPostulantes.addListSelectionListener(new ListSelectionListener(){
+			public void valueChanged(ListSelectionEvent e){
+				if (!lsPostulantes.isSelectionEmpty()) {
+					taCV.setEditable(false);
+					taMotivacion.setEditable(true);
+					chooserFecha.setEnabled(true);
+				}
+			}
+		});
 		GridBagConstraints gbc_cbEmpresa_1 = new GridBagConstraints();
 		gbc_cbEmpresa_1.gridwidth = 2;
-		gbc_cbEmpresa_1.insets = new Insets(0, 0, 5, 5);
+		gbc_cbEmpresa_1.insets = new Insets(0, 0, 5, 0);
 		gbc_cbEmpresa_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbEmpresa_1.gridx = 1;
 		gbc_cbEmpresa_1.gridy = 1;
@@ -111,7 +133,7 @@ public class PostulacionOferta extends JInternalFrame {
 		
 		GridBagConstraints gbc_cbOferta_1 = new GridBagConstraints();
 		gbc_cbOferta_1.gridwidth = 2;
-		gbc_cbOferta_1.insets = new Insets(0, 0, 5, 5);
+		gbc_cbOferta_1.insets = new Insets(0, 0, 5, 0);
 		gbc_cbOferta_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbOferta_1.gridx = 1;
 		gbc_cbOferta_1.gridy = 3;
@@ -120,20 +142,23 @@ public class PostulacionOferta extends JInternalFrame {
 		JLabel lblPostulantes = new JLabel("Postulantes");
 		GridBagConstraints gbc_lblPostulantes = new GridBagConstraints();
 		gbc_lblPostulantes.gridwidth = 2;
-		gbc_lblPostulantes.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPostulantes.insets = new Insets(0, 0, 5, 0);
 		gbc_lblPostulantes.gridx = 1;
 		gbc_lblPostulantes.gridy = 5;
 		getContentPane().add(lblPostulantes, gbc_lblPostulantes);
 		
-		lsPostulantes = new JList<String>();
-		GridBagConstraints gbc_lsPostulantes_1 = new GridBagConstraints();
-		gbc_lsPostulantes_1.gridwidth = 2;
-		gbc_lsPostulantes_1.gridheight = 5;
-		gbc_lsPostulantes_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lsPostulantes_1.fill = GridBagConstraints.BOTH;
-		gbc_lsPostulantes_1.gridx = 1;
-		gbc_lsPostulantes_1.gridy = 6;
-		getContentPane().add(lsPostulantes, gbc_lsPostulantes_1);
+		JScrollPane scrollPane_2 = new JScrollPane();
+		GridBagConstraints gbc_scrollPane_2 = new GridBagConstraints();
+		gbc_scrollPane_2.gridwidth = 2;
+		gbc_scrollPane_2.gridheight = 5;
+		gbc_scrollPane_2.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane_2.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane_2.gridx = 1;
+		gbc_scrollPane_2.gridy = 6;
+		getContentPane().add(scrollPane_2, gbc_scrollPane_2);
+		
+
+		scrollPane_2.setViewportView(lsPostulantes);
 		
 		JLabel lblCV = new JLabel("CV Reducido");
 		GridBagConstraints gbc_lblCV = new GridBagConstraints();
@@ -147,12 +172,13 @@ public class PostulacionOferta extends JInternalFrame {
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridwidth = 2;
-		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPane.gridx = 1;
 		gbc_scrollPane.gridy = 11;
 		getContentPane().add(scrollPane, gbc_scrollPane);
 		
 		taCV = new JTextArea();
+		taCV.setEditable(false);
 		scrollPane.setViewportView(taCV);
 		taCV.setLineWrap(true);
 		
@@ -166,19 +192,22 @@ public class PostulacionOferta extends JInternalFrame {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
 		gbc_scrollPane_1.gridwidth = 2;
-		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane_1.gridx = 1;
 		gbc_scrollPane_1.gridy = 12;
 		getContentPane().add(scrollPane_1, gbc_scrollPane_1);
 		
 		taMotivacion = new JTextArea();
+		taMotivacion.setEditable(false);
 		scrollPane_1.setViewportView(taMotivacion);
 		taMotivacion.setLineWrap(true);
 		
 		chooserFecha = new JDateChooser();
+		chooserFecha.getCalendarButton().setEnabled(false);
 		JTextFieldDateEditor editorFecha = (JTextFieldDateEditor) chooserFecha.getDateEditor();
 		editorFecha.setEditable(false);
+		editorFecha.setEnabled(false);
 		
 		JLabel lblFecha = new JLabel("Fecha");
 		GridBagConstraints gbc_lblFecha = new GridBagConstraints();
@@ -188,7 +217,7 @@ public class PostulacionOferta extends JInternalFrame {
 		getContentPane().add(lblFecha, gbc_lblFecha);
 		GridBagConstraints gbc_dateChooser = new GridBagConstraints();
 		gbc_dateChooser.gridwidth = 2;
-		gbc_dateChooser.insets = new Insets(0, 0, 5, 5);
+		gbc_dateChooser.insets = new Insets(0, 0, 5, 0);
 		gbc_dateChooser.fill = GridBagConstraints.HORIZONTAL;
 		gbc_dateChooser.gridx = 1;
 		gbc_dateChooser.gridy = 13;
@@ -215,7 +244,6 @@ public class PostulacionOferta extends JInternalFrame {
 			}
 		});
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
-		gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCancelar.gridx = 2;
 		gbc_btnCancelar.gridy = 15;
 		getContentPane().add(btnCancelar, gbc_btnCancelar);
@@ -239,7 +267,7 @@ public class PostulacionOferta extends JInternalFrame {
 				}
 			}
 			if(cantidadErrores == 0) {
-				ctrlUsuario.ingresarDatosPostulacion(postulante, cv, motivacion, empresa, oferta, fecha);
+				ctrlUsuario.ingresarDatosPostulacion(postulante, cv, motivacion, oferta, fecha);
 				JOptionPane.showMessageDialog(this, "Se ha agregado la postulación con éxito", "Postulación a oferta laboral", JOptionPane.INFORMATION_MESSAGE);
 			}else {
 				throw new Exception(mensaje);

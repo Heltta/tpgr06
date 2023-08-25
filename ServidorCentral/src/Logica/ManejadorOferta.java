@@ -9,7 +9,7 @@ public class ManejadorOferta {
 	static ManejadorOferta instancia=null;
 	 private Map<String,OfertaLaboral> Ofertas;
 	 
-	 public ManejadorOferta() {
+	 private ManejadorOferta() {
 		 Ofertas = new HashMap<String,OfertaLaboral>();
 	 }
 	 public static ManejadorOferta getInstancia() {

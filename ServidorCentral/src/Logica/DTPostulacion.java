@@ -1,22 +1,22 @@
 package Logica;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class DTPostulacion {
 
-	LocalDate fechaPostulacion;
+	Date fechaPostulacion;
 	String resumenCV;
 	String descripcion;
 	String nombreOferta;
 	
-	public DTPostulacion(LocalDate fechaPostulacion, String resumenCV, String descripcion, String nombreOferta) {
+	public DTPostulacion(Date fechaPostulacion, String resumenCV, String descripcion, String nombreOferta) {
 		super();
 		this.fechaPostulacion = fechaPostulacion;
 		this.resumenCV = resumenCV;
 		this.descripcion = descripcion;
 		this.nombreOferta= nombreOferta;
 	}
-	public LocalDate getFechaPostulacion() {
+	public Date getFechaPostulacion() {
 		return fechaPostulacion;
 	}
 	public String getResumenCV() {
