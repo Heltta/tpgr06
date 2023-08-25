@@ -70,7 +70,7 @@ public class CtrlUsuario implements IUsuario {
 			ManejadorTipo mt = ManejadorTipo.getInstance();
 			TipoPublicacion tipo = mt.obtenerTipo(nombreTipo);
 			ManejadorUsuario mu = ManejadorUsuario.getInstance();
-			Empresa e = (Empresa) mu.obtenerUsuario(nickname);
+			Empresa e = (Empresa) mu.getUsuario(nickname);
 			OfertaLaboral o = new OfertaLaboral(nombre,descripcion,ciudad,departamento,horario,remuneracion,fecha,tipo,keyword);
 			o.setCosto();
 			e.agregarOferta(o);
@@ -82,5 +82,12 @@ public class CtrlUsuario implements IUsuario {
 		ManejadorKeywords mk = ManejadorKeywords.getInstance();
 		return mk.obtenerKeywords();
 	}
-	
+	public Set<String> obtenerOfertasDeEmpresa(String empresa){
+		ManejadorUsuario mu = ManejadorUsuario.getInstance();
+		if(mu.existeUsuario(empresa)) {
+			return ((Empresa) mu.getUsuario(empresa)).getNombreOfertas();
+		}else {
+			return null;
+		}
+	}
 }
