@@ -33,6 +33,7 @@ public class main {
             public void run() {
                 try {
                     main window = new main();
+                    window.frmTrabajoUy.setBounds(0,0,800,600);
                     window.frmTrabajoUy.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -48,21 +49,18 @@ public class main {
         frmTrabajoUy.getContentPane().setLayout(null);
         frmAltaTipoPublicacion = new AltaTipoPublicacion(ctrlTipos);
         frmAltaOferta = new AltaOferta(ctrlUsuario);
+        frmPostulacionOferta = new PostulacionOferta(ctrlUsuario);
         frmAgregarTipoPublicacionAPaquete = new AgregarTipoPublicacionAPaquete(ctrlTipos);
         frmAgregarTipoPublicacionAPaquete.setBounds(491, 56, 423, 266);
         frmTrabajoUy.getContentPane().add(frmAgregarTipoPublicacionAPaquete);
         frmTrabajoUy.getContentPane().add(frmAltaTipoPublicacion);
         frmTrabajoUy.getContentPane().add(frmAltaOferta);
+        frmTrabajoUy.getContentPane().add(frmPostulacionOferta);
         frmConsultaUsuario = new ConsultaUsuario(ctrlUsuario);
         frmConsultaUsuario.setBounds(0,0, 500, 500);
         frmTrabajoUy.getContentPane().add(frmConsultaUsuario); 
         
-        //Postulacion oferta
-        frmPostulacionOferta = new PostulacionOferta(ctrlUsuario);
-        frmPostulacionOferta.setBounds(21, 11, 246, 211);
-        frmPostulacionOferta.setVisible(false);
         frmTrabajoUy.getContentPane().setLayout(null);
-        frmTrabajoUy.getContentPane().add(frmPostulacionOferta);
     }
 
     private void initialize() {
