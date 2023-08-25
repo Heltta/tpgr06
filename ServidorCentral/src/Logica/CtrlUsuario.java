@@ -22,16 +22,21 @@ public class CtrlUsuario implements IUsuario {
 		ManejadorUsuario manejador=ManejadorUsuario.getInstance();
 		Usuario u= manejador.getUsuario(nickname);
 		DTUsuario datosUsuario;
+		ManejadorOferta mo= ManejadorOferta.getInstancia();
+		Map<String,OfertaLaboral> ofertasLaborales= mo.getOfertas();
 		if(u instanceof Empresa) {
 			Empresa e= (Empresa)u;
-			datosUsuario=new DTEmpresa(e.getNickname(), e.getMail(), e.getNombre(), e.getApellido(), e.getNombreEmpresa(), e.getDescripcion(), e.getLink());
+			Set<String> nombreOfertasEmpresa= e.getOfertas().keySet();
+			datosUsuario=new DTEmpresa(e.getNickname(), e.getMail(), e.getNombre(), e.getApellido(), e.getNombreEmpresa(), e.getDescripcion(), e.getLink(), nombreOfertasEmpresa);
 		}
 		else {
 			Postulante p= (Postulante)u;
-			datosUsuario=new DTPostulante(p.getNickname(), p.getMail(), p.getNombre(), p.getApellido(), p.getNacionalidad(), p.getFechaNacimiento());
+			Set<String> nombreOfertasPostulante= p.getPostulaciones().keySet();
+			datosUsuario=new DTPostulante(p.getNickname(), p.getMail(), p.getNombre(), p.getApellido(), p.getNacionalidad(), p.getFechaNacimiento(), nombreOfertasPostulante);
 		}
 		return datosUsuario;
 	}
+
 	public DTOfertaLaboral seleccionarOfertaLaboral(String nombre) {
 		ManejadorOferta mo= ManejadorOferta.getInstancia();
 		OfertaLaboral o = mo.obtenerOferta(nombre);

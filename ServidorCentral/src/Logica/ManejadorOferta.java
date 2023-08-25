@@ -2,11 +2,12 @@ package Logica;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class ManejadorOferta {
 	
 	static ManejadorOferta instancia=null;
-	 Map<String,OfertaLaboral> Ofertas;
+	 private Map<String,OfertaLaboral> Ofertas;
 	 
 	 public ManejadorOferta() {
 		 Ofertas = new HashMap<String,OfertaLaboral>();
@@ -25,5 +26,8 @@ public class ManejadorOferta {
 	 }
 	 public Boolean existeOferta(String nomOferta) {
 		 return this.Ofertas.containsKey(nomOferta);
+	 }
+	 public Map<String,OfertaLaboral> getOfertas(){
+		 return Ofertas;
 	 }
 }

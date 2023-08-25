@@ -26,7 +26,9 @@ public class ManejadorUsuario {
 	}
 	
 	 public Usuario obtenerUsuario(String nickUsuario) {
-		 return usuarios.get(nickUsuario);
+		 Usuario u=null;
+		 if (usuarios.containsKey(nickUsuario)) { u=usuarios.get(nickUsuario);}
+		 return u;
 	 }
 	
 	public ArrayList<String> getNicknames(){
