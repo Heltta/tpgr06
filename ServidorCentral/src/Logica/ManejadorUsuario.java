@@ -21,7 +21,7 @@ public class ManejadorUsuario {
 		return instance;
 	}
 	
-	public ManejadorUsuario() {
+	private ManejadorUsuario() {
 		usuarios= new HashMap<String,Usuario>();
 	}
 	

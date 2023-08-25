@@ -26,6 +26,7 @@ public class main {
     private AltaOferta frmAltaOferta;
     private ConsultaUsuario frmConsultaUsuario;
     private AgregarTipoPublicacionAPaquete frmAgregarTipoPublicacionAPaquete;
+    private ConsultaOferta frmConsultaOferta;
 
 
     public static void main(String[] args) {
@@ -50,12 +51,14 @@ public class main {
         frmAltaTipoPublicacion = new AltaTipoPublicacion(ctrlTipos);
         frmAltaOferta = new AltaOferta(ctrlUsuario);
         frmPostulacionOferta = new PostulacionOferta(ctrlUsuario);
+        frmConsultaOferta = new ConsultaOferta(ctrlUsuario, "", "");
         frmAgregarTipoPublicacionAPaquete = new AgregarTipoPublicacionAPaquete(ctrlTipos);
         frmAgregarTipoPublicacionAPaquete.setBounds(491, 56, 423, 266);
         frmTrabajoUy.getContentPane().add(frmAgregarTipoPublicacionAPaquete);
         frmTrabajoUy.getContentPane().add(frmAltaTipoPublicacion);
         frmTrabajoUy.getContentPane().add(frmAltaOferta);
         frmTrabajoUy.getContentPane().add(frmPostulacionOferta);
+        frmTrabajoUy.getContentPane().add(frmConsultaOferta);
         frmConsultaUsuario = new ConsultaUsuario(ctrlUsuario);
         frmConsultaUsuario.setBounds(0,0, 500, 500);
         frmTrabajoUy.getContentPane().add(frmConsultaUsuario); 
@@ -115,6 +118,11 @@ public class main {
         menuOferta.add(menuItemAltaOferta);
         
         JMenuItem menuItemConsultaOferta = new JMenuItem("Consulta de Oferta Laboral");
+        menuItemConsultaOferta.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frmConsultaOferta.setVisible(true);
+            }
+        });
         menuOferta.add(menuItemConsultaOferta);
         
         JMenuItem menuItemPostulacion = new JMenuItem("Postulacion a Oferta Laboral");
@@ -150,6 +158,10 @@ public class main {
         
         JMenuItem menuItemAltaKeyword = new JMenuItem("Alta de Keyword");
         menuTipos.add(menuItemAltaKeyword);
-    }
+    };
     
+    public void CargarDatosDePrueba() {
+    	//De mientras que no hay alta de usuario.
+    	
+    }
 }

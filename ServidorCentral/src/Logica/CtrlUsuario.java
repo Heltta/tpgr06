@@ -6,12 +6,20 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.ArrayList;
 import Excepciones.PostulanteRepetido;
+import Excepciones.nombreTipoPublicacionRepetido;
 
 public class CtrlUsuario implements IUsuario {
 
 
-	public void ingresarDatosPostulacion(String postulante, String cv, String motivacion, String empresa, String oferta, Date fecha) throws PostulanteRepetido {
-		throw new PostulanteRepetido("El usuario " + postulante + " ya se encuentra postulado a la oferta laboral seleccionada");
+	public void ingresarDatosPostulacion(String postulante, String cv, String motivacion, String oferta, Date fecha) throws PostulanteRepetido {
+		ManejadorOferta mo = ManejadorOferta.getInstancia();
+		ManejadorUsuario mu = ManejadorUsuario.getInstance();
+		OfertaLaboral ofertaLab = mo.obtenerOferta(oferta);
+		if (ofertaLab.existePostulante(postulante)) {
+			throw new PostulanteRepetido("El usuario " + postulante + " ya se encuentra postulado a la oferta laboral seleccionada");
+		}else {
+			((Postulante) mu.getUsuario(postulante)).postularAOferta(ofertaLab, fecha, cv, motivacion);
+		}
 	}
 
 	public ArrayList<String> listarUsuarios(){
@@ -56,6 +64,10 @@ public class CtrlUsuario implements IUsuario {
 	public Set<String> listarEmpresas(){
 		ManejadorUsuario mu = ManejadorUsuario.getInstance();
 		return mu.obtenerEmpresas();
+	}
+	public Set<String> listarPostulantes(){
+		ManejadorUsuario mu = ManejadorUsuario.getInstance();
+		return mu.obtenerPostulantes();
 	}
 	public Set<String> listarTiposDePublicacion(){
 		ManejadorTipo mt = ManejadorTipo.getInstance();
