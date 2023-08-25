@@ -2,13 +2,12 @@ package Logica;
 
 import java.util.Date;
 
+import Excepciones.nombrePaqueteRepetido;
 import Excepciones.nombreTipoPublicacionRepetido;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
-
-import Excepciones.nombreTipoPublicacionRepetido;
 
 public class CtrlTipos implements ITipos {
 
@@ -33,9 +32,19 @@ public class CtrlTipos implements ITipos {
 		return muTipo.obtenerDataTipos();
 	}
 	
+	public Map<String, DTPaquete> obtenerDataPaquetes(){
+		ManejadorPaquete muPaquete = ManejadorPaquete.getInstance();
+		return muPaquete.obtenerDataPaquetes();
+	}
+	
 	public void borrarTipos() {
 		ManejadorTipo muTipo = ManejadorTipo.getInstance();
 		muTipo.clear();
+	}
+	
+	public void borrarPaquetes() {
+		ManejadorPaquete muPaquete = ManejadorPaquete.getInstance();
+		muPaquete.clear();
 	}
 	
 	public Boolean ingresarKeyword (String keyword) {
@@ -59,6 +68,17 @@ public class CtrlTipos implements ITipos {
 		TipoPublicacion tipo = muTipos.obtenerTipo(nombreTipo);
 		PaqueteTipoPublicacion paquete = muPaquete.obtenerPaquete(nombrePaquete);
 		paquete.agregarTipo(tipo, cant);
+	}
+	
+	public void ingresarDatosPaquete(String nombre, String descripcion, int validez, double descuento, double costo, Date fechaAlta)throws nombrePaqueteRepetido {
+		ManejadorPaquete muPaquete = ManejadorPaquete.getInstance();
+		boolean existe = muPaquete.existePaquete(nombre);
+		if (existe) {
+			throw new nombrePaqueteRepetido("Ya existe un Paquete de nombre " + nombre);
+		} else {
+			PaqueteTipoPublicacion nuevoPaquete = new PaqueteTipoPublicacion(nombre, descripcion, descuento, fechaAlta, costo, validez);
+			muPaquete.agregarPaquete(nuevoPaquete);
+		}
 	}
 }
 

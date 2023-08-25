@@ -1,16 +1,28 @@
 package Logica;
 
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 public class PaqueteTipoPublicacion {
-	String nombre;
-    String descripcion;
-    double descuento;
-    LocalDate fecha;
-    double costo;
-    int PeriodoValidez;
-    Map<String, Agrupa> TiposPublicacion;
+	private String nombre;
+    private String descripcion;
+    private double descuento;
+    private Date fecha;
+    private double costo;
+    private int PeriodoValidez;
+    private Map<String, Agrupa> TiposPublicacion;
+    
+    public PaqueteTipoPublicacion(String nombre, String descripcion, double descuento, Date fecha, double costo, int PeriodoValidez) {
+    	this.nombre = nombre;
+    	this.descripcion = descripcion;
+    	this.descuento = descuento;
+    	this.fecha = fecha;
+    	this.costo = costo;
+    	this.PeriodoValidez = PeriodoValidez;
+    	TiposPublicacion = new HashMap<String, Agrupa>();
+    }
     
 	public String getNombre() {
 		return nombre;
@@ -35,11 +47,11 @@ public class PaqueteTipoPublicacion {
 		this.descuento = descuento;
 	}
 	
-	public LocalDate getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 	
-	public void setFecha(LocalDate fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 	

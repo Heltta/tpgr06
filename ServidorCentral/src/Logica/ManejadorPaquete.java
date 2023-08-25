@@ -26,5 +26,25 @@ public class ManejadorPaquete {
 	public PaqueteTipoPublicacion obtenerPaquete(String nombrePaquete) {
 		return paquetes.get(nombrePaquete);
 	}
+	
+	public boolean existePaquete(String nombreP) {
+		return paquetes.containsKey(nombreP);
+	}
+
+	public void clear() {
+		paquetes.clear();
+	}
+
+	public void agregarPaquete(PaqueteTipoPublicacion nuevoPaquete) {
+		paquetes.put(nuevoPaquete.getNombre(), nuevoPaquete);
+	}
+
+	public Map<String, DTPaquete> obtenerDataPaquetes() {
+		Map<String, DTPaquete> dataPaquetes = new HashMap<String, DTPaquete>();
+		paquetes.forEach((nombre, paquete)->{
+			dataPaquetes.put(paquete.getNombre(), new DTPaquete(paquete));
+			});
+		return dataPaquetes;
+	}
 
 }

@@ -28,13 +28,15 @@ import javax.swing.BoxLayout;
 import javax.swing.JSplitPane;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 @SuppressWarnings("serial")
 public class AgregarTipoPublicacionAPaquete extends JInternalFrame {
 	private ITipos ctrlTipos;
-	private JTextField textFieldCantidad;
 	private JComboBox<String> comboBoxPaquete;
 	private JComboBox<String> comboBoxTipo;
+	private JSpinner spinnerCant;
 
 	public AgregarTipoPublicacionAPaquete(ITipos ctrlTipos) {
 		this.ctrlTipos = ctrlTipos;
@@ -79,6 +81,7 @@ public class AgregarTipoPublicacionAPaquete extends JInternalFrame {
         panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.X_AXIS));
         
         comboBoxPaquete = new JComboBox<String>();
+        comboBoxPaquete.addItem("Seleccionar");
         panel_1.add(comboBoxPaquete);
 
         
@@ -102,6 +105,7 @@ public class AgregarTipoPublicacionAPaquete extends JInternalFrame {
         panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.X_AXIS));
         
         comboBoxTipo = new JComboBox<String>();
+        comboBoxTipo.addItem("Seleccionar");
         panel_2.add(comboBoxTipo);
         
         JLabel lblCantidad = new JLabel("Cantidad:");
@@ -123,45 +127,9 @@ public class AgregarTipoPublicacionAPaquete extends JInternalFrame {
         getContentPane().add(panel_3, gbc_panel_3);
         panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.X_AXIS));
         
-        JButton btnMenos = new JButton("-");
-        btnMenos.setHorizontalAlignment(SwingConstants.LEFT);
-        btnMenos.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		int cant = 1;
-        		try {
-        			cant = Integer.parseInt(textFieldCantidad.getText());
-        		} catch (NumberFormatException ev) {
-        			cant = 1;
-        		}
-        		cant--;
-        		if (cant < 1) cant = 1;
-        		textFieldCantidad.setText(Integer.toString(cant));
-        	}
-        });
-        panel_3.add(btnMenos);
-        
-        textFieldCantidad = new JTextField();
-        textFieldCantidad.setHorizontalAlignment(SwingConstants.RIGHT);
-        textFieldCantidad.setText("1");
-        panel_3.add(textFieldCantidad);
-        textFieldCantidad.setColumns(10);
-        
-        JButton btnMas = new JButton("+");
-        btnMas.setHorizontalAlignment(SwingConstants.RIGHT);
-        btnMas.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		int cant = 0;
-        		try {
-        			cant = Integer.parseInt(textFieldCantidad.getText());
-        		} catch (NumberFormatException ev) {
-        			cant = 0;
-        		}
-        		cant++;
-        		if (cant < 1) cant = 1;
-        		textFieldCantidad.setText(Integer.toString(cant));
-        	}
-        });
-        panel_3.add(btnMas);
+        spinnerCant = new JSpinner();
+        spinnerCant.setModel(new SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        panel_3.add(spinnerCant);
         
         JPanel panel = new JPanel();
         GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -177,9 +145,10 @@ public class AgregarTipoPublicacionAPaquete extends JInternalFrame {
         btnAgregar.setHorizontalAlignment(SwingConstants.LEFT);
         btnAgregar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		System.out.println(comboBoxPaquete.getSelectedIndex());
         		if(checkFormulario()) {
         			ctrlTipos.agregarTipoPublicacion(comboBoxPaquete.getSelectedItem().toString(), 
-            				comboBoxTipo.getSelectedItem().toString(), Integer.parseInt(textFieldCantidad.getText()));
+            				comboBoxTipo.getSelectedItem().toString(), Integer.parseInt((String)spinnerCant.getValue()));
             		setVisible(false);
             		limpiarAgregarTipoAPaquete();
         		}
@@ -224,24 +193,25 @@ public class AgregarTipoPublicacionAPaquete extends JInternalFrame {
     
     public void limpiarAgregarTipoAPaquete() {
     	comboBoxPaquete.removeAllItems();
+    	comboBoxPaquete.addItem("Seleccionar");
     	comboBoxTipo.removeAllItems();
-    	textFieldCantidad.setText("0");
+    	comboBoxTipo.addItem("Seleccionar");
+    	spinnerCant.setValue(Integer.parseInt("1"));
     }
     
     public boolean checkFormulario() {
-    	String cantT = textFieldCantidad.getText();
+    	String cantT = spinnerCant.getValue().toString();
     	if (cantT.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Debe llenar todos los campos", "Alta Tipo de Publicacion", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Debe llenar todos los campos", "Agregar Tipo de Publicacion a Paquete", JOptionPane.ERROR_MESSAGE);
 			return false;
-    	} else if (comboBoxPaquete.getSelectedIndex() == -1 || comboBoxTipo.getSelectedIndex() == -1) {
-    		JOptionPane.showMessageDialog(this, "Debe seleccionar un valor de la lista", "Alta Tipo de Publicacion", JOptionPane.ERROR_MESSAGE);
+    	} else if (comboBoxPaquete.getSelectedIndex() == 0 || comboBoxTipo.getSelectedIndex() == 0) {
+    		JOptionPane.showMessageDialog(this, "Debe seleccionar un valor de la lista", "Agregar Tipo de Publicacion a Paquete", JOptionPane.ERROR_MESSAGE);
     		return false;
     	} else {
 			try {
-				Integer.parseInt(textFieldCantidad.getText());
+				Integer.parseInt((String)spinnerCant.getValue());
 			}catch (NumberFormatException ev) {
 				JOptionPane.showMessageDialog(this, "Debe ingresar un valor entero", "Agregar Tipo de Publicacion a Paquete", JOptionPane.ERROR_MESSAGE);
-				textFieldCantidad.setText("1");
 				return false;
 			}
     	return true;
