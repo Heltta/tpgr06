@@ -66,4 +66,14 @@ public class PaqueteTipoPublicacion {
 	public void setTiposPublicacion(Map<String, Agrupa> tiposPublicacion) {
 		TiposPublicacion = tiposPublicacion;
 	}
+	
+	public void agregarTipo(TipoPublicacion tipo, int cant) {
+		if (TiposPublicacion.containsKey(tipo.getNombre())) {
+			Agrupa tipoExistente = TiposPublicacion.get(tipo.getNombre());
+			tipoExistente.setCant(tipoExistente.getCant() + cant);
+		} else {
+			Agrupa tipoAgregado = new Agrupa(tipo, cant);
+			TiposPublicacion.put(tipo.getNombre(), tipoAgregado);
+		}
+	}
 }
