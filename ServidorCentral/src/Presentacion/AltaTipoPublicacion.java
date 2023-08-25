@@ -105,11 +105,10 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setMinimumSize(new Dimension(23, 60));
+		scrollPane.setPreferredSize(new Dimension(50, 80));
 		panel.add(scrollPane);
 		
 		textAreaDescripcion = new JTextArea();
-		textAreaDescripcion.setMinimumSize(new Dimension(5, 60));
 		scrollPane.setViewportView(textAreaDescripcion);
 		textAreaDescripcion.setRows(WIDTH);
 		textAreaDescripcion.setLineWrap(true);
