@@ -49,6 +49,7 @@ public class main {
         frmAltaTipoPublicacion = new AltaTipoPublicacion(ctrlTipos);
         frmAltaOferta = new AltaOferta(ctrlUsuario);
         frmAgregarTipoPublicacionAPaquete = new AgregarTipoPublicacionAPaquete(ctrlTipos);
+        frmAgregarTipoPublicacionAPaquete.setBounds(491, 56, 423, 266);
         frmTrabajoUy.getContentPane().add(frmAgregarTipoPublicacionAPaquete);
         frmTrabajoUy.getContentPane().add(frmAltaTipoPublicacion);
         frmTrabajoUy.getContentPane().add(frmAltaOferta);
@@ -71,7 +72,7 @@ public class main {
     			
         frmTrabajoUy = new JFrame();
         frmTrabajoUy.setTitle("Trabajo.UY");
-        frmTrabajoUy.setBounds(100, 100, 691, 521);
+        frmTrabajoUy.setBounds(100, 100, 960, 599);
         frmTrabajoUy.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         JMenuBar menuBar = new JMenuBar();
@@ -137,6 +138,13 @@ public class main {
         menuTipos.add(menuItemCrearPaquete);
         
         JMenuItem menuItemAgregarTipo = new JMenuItem("Agregar Tipo de Publicacion a Paquete");
+        menuItemAgregarTipo.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		frmAgregarTipoPublicacionAPaquete.cargarPaquetes();
+        		frmAgregarTipoPublicacionAPaquete.cargarTiposPaquete();
+        		frmAgregarTipoPublicacionAPaquete.setVisible(true);
+        	}
+        });
         menuTipos.add(menuItemAgregarTipo);
         
         JMenuItem menuItemConsultaPaquete = new JMenuItem("Consulta de Paquete de Tipos de Publicacion");
@@ -145,4 +153,5 @@ public class main {
         JMenuItem menuItemAltaKeyword = new JMenuItem("Alta de Keyword");
         menuTipos.add(menuItemAltaKeyword);
     }
+    
 }

@@ -6,10 +6,12 @@ import Excepciones.nombreTipoPublicacionRepetido;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
+import java.util.Set;
 
 import Excepciones.nombreTipoPublicacionRepetido;
 
 public class CtrlTipos implements ITipos {
+
 	public void ingresarDatosTipoPublicacion(String nombreT, String descripcionT, int exposicionT, Date fechaT,
 			double costoT, double duracionT) throws nombreTipoPublicacionRepetido {
 		ManejadorTipo muTipo = ManejadorTipo.getInstance();
@@ -19,6 +21,11 @@ public class CtrlTipos implements ITipos {
 		}
 			TipoPublicacion nuevoTipo = new TipoPublicacion(nombreT, descripcionT, exposicionT, fechaT, costoT, duracionT);
 			muTipo.agregar(nuevoTipo);
+	}
+	
+	public Set<String> listarPaquetes(){
+		ManejadorPaquete muPaquete = ManejadorPaquete.getInstance();
+		return muPaquete.obtenerPaquetes();
 	}
 	
 	public Map<String, DTTipoPublicacion> obtenerDataTipos() {
@@ -38,6 +45,20 @@ public class CtrlTipos implements ITipos {
 			mk.agregarKeyword(keyword);
 		}
 		return res;
+	}
+
+	@Override
+	public Set<String> listarTiposPublicacion() {
+		ManejadorTipo muTipos = ManejadorTipo.getInstance();
+		return muTipos.obtenerTipos();
+	}
+	
+	public void agregarTipoPublicacion(String nombrePaquete, String nombreTipo, int cant) {
+		ManejadorTipo muTipos = ManejadorTipo.getInstance();
+		ManejadorPaquete muPaquete = ManejadorPaquete.getInstance();
+		TipoPublicacion tipo = muTipos.obtenerTipo(nombreTipo);
+		PaqueteTipoPublicacion paquete = muPaquete.obtenerPaquete(nombrePaquete);
+		paquete.agregarTipo(tipo, cant);
 	}
 }
 
