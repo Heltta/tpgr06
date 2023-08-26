@@ -110,40 +110,8 @@ public class ConsultaOferta extends JInternalFrame{
 		getContentPane().add(lblEmpresa, gbc_lblEmpresa);
 		
 		cbOferta = new JComboBox<String>();
+		cbOferta.addItem("Seleccionar");
 		cbEmpresa = new JComboBox<String>();
-
-		if(!empresa.isEmpty() && !oferta.isEmpty()) {
-			cbEmpresa.setEnabled(false);
-			cbOferta.setEnabled(false);
-			cbOferta.addItem(empresa);
-			cbEmpresa.addItem(oferta);
-			mostrarDatos(ctrlUsuario.seleccionarOfertaLaboral(oferta),dtm);
-		}else {
-			cbOferta.addItem("Seleccionar");
-			cbEmpresa.addItem("Seleccionar");
-			for(String nomEmpresa : ctrlUsuario.listarEmpresas()) {
-				cbEmpresa.addItem(nomEmpresa);
-			}
-			cbEmpresa.addItemListener(new ItemListener() {
-				public void itemStateChanged(ItemEvent itemEvent) {
-					if(cbEmpresa.getSelectedIndex() != 0) {
-						cbOferta.removeAllItems();
-						cbOferta.addItem("Seleccionar");
-						for(String oferta : ctrlUsuario.obtenerOfertasDeEmpresa(cbEmpresa.getSelectedItem().toString())) {
-						  cbOferta.addItem(oferta);
-						}
-					}else {
-						cbOferta.removeAllItems();
-						cbOferta.addItem("Seleccionar");
-					}
-				}
-			});
-			cbOferta.addItemListener(new ItemListener() {
-				public void itemStateChanged(ItemEvent itemEvent) {
-					mostrarDatos(ctrlUsuario.seleccionarOfertaLaboral(cbOferta.getSelectedItem().toString()),dtm);
-				}
-			});
-		}
 		
 		GridBagConstraints gbc_cbEmpresa = new GridBagConstraints();
 		gbc_cbEmpresa.insets = new Insets(0, 0, 5, 0);
@@ -322,13 +290,62 @@ public class ConsultaOferta extends JInternalFrame{
 			}
 		});
 		
-		
 		GridBagConstraints gbc_btnCerrar = new GridBagConstraints();
 		gbc_btnCerrar.anchor = GridBagConstraints.EAST;
 		gbc_btnCerrar.gridx = 2;
 		gbc_btnCerrar.gridy = 15;
 		getContentPane().add(btnCerrar, gbc_btnCerrar);
 		
+		if(!empresa.isEmpty() && !oferta.isEmpty()) {
+			cbEmpresa.setEnabled(false);
+			cbOferta.setEnabled(false);
+			cbOferta.addItem(empresa);
+			cbEmpresa.addItem(oferta);
+			mostrarDatos(ctrlUsuario.seleccionarOfertaLaboral(oferta),dtm);
+		}
+			cbEmpresa.addItemListener(new ItemListener() {
+				public void itemStateChanged(ItemEvent itemEvent) {
+					if (itemEvent.getStateChange() == ItemEvent.SELECTED) {
+						limpiarCampos();
+						if(cbEmpresa.getSelectedIndex() != 0) {
+							cbOferta.removeAllItems();
+							String emp = (cbEmpresa.getSelectedItem() != null)?cbEmpresa.getSelectedItem().toString():"";
+							Set<String> ofertas = ctrlUsuario.obtenerOfertasDeEmpresa(emp);
+							  String[] ofertasCombo = new String[ofertas.size()+1];
+							  ofertasCombo[0] = "Seleccionar";
+							  int i = 1;
+							  for(String of : ofertas) {
+								  ofertasCombo[i] = of;
+								  i++;
+							  }
+							  cbOferta.setModel(new DefaultComboBoxModel<String> (ofertasCombo));
+						}else {
+							cbOferta.removeAllItems();
+							cbOferta.addItem("Seleccionar");
+						}
+					}
+				}
+			});
+			cbOferta.addItemListener(new ItemListener() {
+				public void itemStateChanged(ItemEvent itemEvent) {
+					if (itemEvent.getStateChange() == ItemEvent.SELECTED) {
+						if(cbOferta.getSelectedIndex() != 0) {
+							mostrarDatos(ctrlUsuario.seleccionarOfertaLaboral(cbOferta.getSelectedItem().toString()),dtm);
+						}
+					}
+				}
+			});
+	}
+	public void ListarEmpresas() {
+		Set<String> empresas = ctrlUsuario.listarEmpresas();
+		String[] empresasCombo = new String[empresas.size()+1];
+		empresasCombo[0] = "Seleccionar";
+		int i = 1;
+		for(String emp : empresas) {
+			empresasCombo[i] = emp;
+			i++;
+		}
+		cbEmpresa.setModel(new DefaultComboBoxModel<String> (empresasCombo));
 	}
 	private void mostrarDatos(DTOfertaLaboral datos, DefaultTableModel dtm) {
 		if(datos != null) {
@@ -352,8 +369,6 @@ public class ConsultaOferta extends JInternalFrame{
 		}
 	}
 	private void limpiarCampos() {
-		cbEmpresa.setSelectedIndex(0);
-		cbOferta.setSelectedIndex(0);
 		tfNombre.setText("");
 		tfCiudad.setText("");
 		tfDepartamento.setText("");
