@@ -1,6 +1,7 @@
 package Logica;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -30,7 +31,7 @@ public class OfertaLaboral {
 		this.fecha = fecha;
 		this.tipo = tipo;
 		Keywords = keywords;
-		Postulantes=null;
+		Postulantes= new HashMap<String,Postulante>();
 		compra=null;
 	}
 	public String getNombre() {

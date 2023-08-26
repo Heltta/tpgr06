@@ -2,6 +2,7 @@ package Logica;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Postulante extends Usuario {
@@ -21,7 +22,7 @@ public class Postulante extends Usuario {
 		super(nickname,mail,nombre,apellido);
 		this.nacionalidad = nacionalidad;
 		this.fechaNacimiento = fechaNacimiento;
-		this.Postulaciones=null;
+		this.Postulaciones= new HashMap<String, Postulacion>();
 	}
 	public String getNacionalidad() {
 		return nacionalidad;

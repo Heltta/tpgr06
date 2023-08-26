@@ -15,10 +15,12 @@ public class CtrlUsuario implements IUsuario {
 		ManejadorOferta mo = ManejadorOferta.getInstancia();
 		ManejadorUsuario mu = ManejadorUsuario.getInstance();
 		OfertaLaboral ofertaLab = mo.obtenerOferta(oferta);
-		if (ofertaLab.existePostulante(postulante)) {
-			throw new PostulanteRepetido("El usuario " + postulante + " ya se encuentra postulado a la oferta laboral seleccionada");
-		}else {
-			((Postulante) mu.getUsuario(postulante)).postularAOferta(ofertaLab, fecha, cv, motivacion);
+		if (ofertaLab != null) {
+			if (ofertaLab.existePostulante(postulante)) {
+				throw new PostulanteRepetido("El usuario " + postulante + " ya se encuentra postulado a la oferta laboral seleccionada");
+			}else {
+				((Postulante) mu.getUsuario(postulante)).postularAOferta(ofertaLab, fecha, cv, motivacion);
+			}
 		}
 	}
 
