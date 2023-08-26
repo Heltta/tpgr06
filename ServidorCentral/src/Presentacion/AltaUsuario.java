@@ -13,6 +13,7 @@ import javax.swing.Box;
 import java.awt.Dimension;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 
 public class AltaUsuario extends JInternalFrame {
 	/**
@@ -26,6 +27,7 @@ public class AltaUsuario extends JInternalFrame {
 	private JTextField nacionalidadField;
 	private JTextField descripcionField;
 	private JTextField linkField;
+	private String[] listaTiposDeUsuarios = { "Postulante", "Empresa" };
 
 	/**
 	 * Create the frame.
@@ -38,7 +40,7 @@ public class AltaUsuario extends JInternalFrame {
 		gridBagLayout.columnWidths = new int[] {0, 120, 169, 30};
 		gridBagLayout.rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 1.0, 1.0};
-		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0};
+		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0};
 		getContentPane().setLayout(gridBagLayout);
 		
 		Component rigidArea = Box.createRigidArea(new Dimension(20, 20));
@@ -116,79 +118,103 @@ public class AltaUsuario extends JInternalFrame {
 		getContentPane().add(apellidoField, gbc_apellidoField);
 		apellidoField.setColumns(10);
 		
+		JLabel tipoUsuario = new JLabel("Tipo de usuario");
+		GridBagConstraints gbc_tipoUsuario = new GridBagConstraints();
+		gbc_tipoUsuario.insets = new Insets(0, 0, 5, 5);
+		gbc_tipoUsuario.anchor = GridBagConstraints.EAST;
+		gbc_tipoUsuario.gridx = 1;
+		gbc_tipoUsuario.gridy = 5;
+		getContentPane().add(tipoUsuario, gbc_tipoUsuario);
+		JComboBox tiposDeUsuarioCombo = new JComboBox(listaTiposDeUsuarios);
+		tiposDeUsuarioCombo.setSelectedIndex(-1);
+		GridBagConstraints gbc_tiposDeUsuarioCombo = new GridBagConstraints();
+		gbc_tiposDeUsuarioCombo.insets = new Insets(0, 0, 5, 5);
+		gbc_tiposDeUsuarioCombo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tiposDeUsuarioCombo.gridx = 2;
+		gbc_tiposDeUsuarioCombo.gridy = 5;
+		getContentPane().add(tiposDeUsuarioCombo, gbc_tiposDeUsuarioCombo);
+		
 		JLabel nacionalidad = new JLabel("Nacionalidad");
+		nacionalidad.setEnabled(false);
 		GridBagConstraints gbc_nacionalidad = new GridBagConstraints();
 		gbc_nacionalidad.anchor = GridBagConstraints.EAST;
 		gbc_nacionalidad.insets = new Insets(0, 0, 5, 5);
 		gbc_nacionalidad.gridx = 1;
-		gbc_nacionalidad.gridy = 5;
+		gbc_nacionalidad.gridy = 6;
 		getContentPane().add(nacionalidad, gbc_nacionalidad);
 		
 		nacionalidadField = new JTextField();
+		nacionalidadField.setEnabled(false);
 		GridBagConstraints gbc_nacionalidadField = new GridBagConstraints();
 		gbc_nacionalidadField.insets = new Insets(0, 0, 5, 5);
 		gbc_nacionalidadField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_nacionalidadField.gridx = 2;
-		gbc_nacionalidadField.gridy = 5;
+		gbc_nacionalidadField.gridy = 6;
 		getContentPane().add(nacionalidadField, gbc_nacionalidadField);
 		nacionalidadField.setColumns(10);
 		
 		JLabel fechaNacimiento = new JLabel("Fecha de nacimiento");
+		fechaNacimiento.setEnabled(false);
 		GridBagConstraints gbc_fechaNacimiento = new GridBagConstraints();
 		gbc_fechaNacimiento.anchor = GridBagConstraints.EAST;
 		gbc_fechaNacimiento.insets = new Insets(0, 0, 5, 5);
 		gbc_fechaNacimiento.gridx = 1;
-		gbc_fechaNacimiento.gridy = 6;
+		gbc_fechaNacimiento.gridy = 7;
 		getContentPane().add(fechaNacimiento, gbc_fechaNacimiento);
 		
 		JDateChooser fechaDeNacimientoChooser = new JDateChooser();
 		GridBagConstraints gbc_fechaDeNacimientoChooser = new GridBagConstraints();
+		fechaDeNacimientoChooser.setEnabled(false);
 		gbc_fechaDeNacimientoChooser.insets = new Insets(0, 0, 5, 5);
 		gbc_fechaDeNacimientoChooser.fill = GridBagConstraints.BOTH;
 		gbc_fechaDeNacimientoChooser.gridx = 2;
-		gbc_fechaDeNacimientoChooser.gridy = 6;
+		gbc_fechaDeNacimientoChooser.gridy = 7;
 		getContentPane().add(fechaDeNacimientoChooser, gbc_fechaDeNacimientoChooser);
 		
 		JLabel descripcion = new JLabel("Descripcion");
+		descripcion.setEnabled(false);
 		GridBagConstraints gbc_descripcion = new GridBagConstraints();
 		gbc_descripcion.anchor = GridBagConstraints.EAST;
 		gbc_descripcion.insets = new Insets(0, 0, 5, 5);
 		gbc_descripcion.gridx = 1;
-		gbc_descripcion.gridy = 7;
+		gbc_descripcion.gridy = 8;
 		getContentPane().add(descripcion, gbc_descripcion);
 		
 		descripcionField = new JTextField();
+		descripcionField.setEnabled(false);
 		GridBagConstraints gbc_descripcionField = new GridBagConstraints();
 		gbc_descripcionField.insets = new Insets(0, 0, 5, 5);
 		gbc_descripcionField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_descripcionField.gridx = 2;
-		gbc_descripcionField.gridy = 7;
+		gbc_descripcionField.gridy = 8;
 		getContentPane().add(descripcionField, gbc_descripcionField);
 		descripcionField.setColumns(10);
 		
 		JLabel link = new JLabel("Link");
+		link.setEnabled(false);
 		GridBagConstraints gbc_link = new GridBagConstraints();
 		gbc_link.anchor = GridBagConstraints.EAST;
 		gbc_link.insets = new Insets(0, 0, 5, 5);
 		gbc_link.gridx = 1;
-		gbc_link.gridy = 8;
+		gbc_link.gridy = 9;
 		getContentPane().add(link, gbc_link);
 		
 		linkField = new JTextField();
+		linkField.setEnabled(false);
 		GridBagConstraints gbc_linkField = new GridBagConstraints();
 		gbc_linkField.insets = new Insets(0, 0, 5, 5);
 		gbc_linkField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_linkField.gridx = 2;
-		gbc_linkField.gridy = 8;
+		gbc_linkField.gridy = 9;
 		getContentPane().add(linkField, gbc_linkField);
 		linkField.setColumns(10);
 		
 		JButton submit = new JButton("Crear Usuario");
 		GridBagConstraints gbc_submit = new GridBagConstraints();
 		gbc_submit.anchor = GridBagConstraints.EAST;
-		gbc_submit.insets = new Insets(0, 0, 5, 5);
+		gbc_submit.insets = new Insets(0, 0, 0, 5);
 		gbc_submit.gridx = 2;
-		gbc_submit.gridy = 9;
+		gbc_submit.gridy = 10;
 		getContentPane().add(submit, gbc_submit);
 		
 		Component rigidArea_1 = Box.createRigidArea(new Dimension(20, 20));
