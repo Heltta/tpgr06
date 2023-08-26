@@ -21,12 +21,14 @@ public class ManejadorUsuario {
 		return instance;
 	}
 	
-	public ManejadorUsuario() {
+	private ManejadorUsuario() {
 		usuarios= new HashMap<String,Usuario>();
 	}
 	
 	 public Usuario obtenerUsuario(String nickUsuario) {
-		 return usuarios.get(nickUsuario);
+		 Usuario u=null;
+		 if (usuarios.containsKey(nickUsuario)) { u=usuarios.get(nickUsuario);}
+		 return u;
 	 }
 	
 	public ArrayList<String> getNicknames(){

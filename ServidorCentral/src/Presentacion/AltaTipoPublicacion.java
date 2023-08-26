@@ -25,6 +25,8 @@ import javax.swing.JScrollPane;
 import java.awt.Component;
 import javax.swing.Box;
 import java.awt.Dimension;
+import javax.swing.JPanel;
+import javax.swing.BoxLayout;
 
 @SuppressWarnings("serial")
 public class AltaTipoPublicacion extends JInternalFrame {
@@ -44,14 +46,14 @@ public class AltaTipoPublicacion extends JInternalFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Alta de Tipo de Publicacion de Oferta Laboral");
-        setBounds(10, 40, 398, 448);
+        setBounds(10, 40, 606, 571);
 
 
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[] {30, 30, 0, 0, 0, 30, 0, 30, 0};
-        gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-        gridBagLayout.rowWeights = new double[]{0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+        gridBagLayout.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
 		
 		Component rigidArea = Box.createRigidArea(new Dimension(20, 20));
@@ -89,19 +91,36 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		gbc_lblDescripcion.gridy = 3;
 		getContentPane().add(lblDescripcion, gbc_lblDescripcion);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
-		gbc_scrollPane_1.gridwidth = 2;
-		gbc_scrollPane_1.gridheight = 2;
-		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 5);
-		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane_1.gridx = 3;
-		gbc_scrollPane_1.gridy = 3;
-		getContentPane().add(scrollPane_1, gbc_scrollPane_1);
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(10, 80));
+		panel.setMinimumSize(new Dimension(10, 60));
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.gridwidth = 2;
+		gbc_panel.gridheight = 3;
+		gbc_panel.insets = new Insets(0, 0, 5, 5);
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 3;
+		gbc_panel.gridy = 3;
+		getContentPane().add(panel, gbc_panel);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setPreferredSize(new Dimension(50, 80));
+		panel.add(scrollPane);
 		
 		textAreaDescripcion = new JTextArea();
-		scrollPane_1.setViewportView(textAreaDescripcion);
+		scrollPane.setViewportView(textAreaDescripcion);
+		textAreaDescripcion.setRows(WIDTH);
 		textAreaDescripcion.setLineWrap(true);
+		
+		Component verticalStrut = Box.createVerticalStrut(20);
+		verticalStrut.setMinimumSize(new Dimension(0, 40));
+		GridBagConstraints gbc_verticalStrut = new GridBagConstraints();
+		gbc_verticalStrut.gridheight = 2;
+		gbc_verticalStrut.insets = new Insets(0, 0, 5, 5);
+		gbc_verticalStrut.gridx = 2;
+		gbc_verticalStrut.gridy = 4;
+		getContentPane().add(verticalStrut, gbc_verticalStrut);
 		
 		JLabel lblExposicion = new JLabel("Exposicion:");
 		lblExposicion.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -128,7 +147,7 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		gbc_lblDuracion.anchor = GridBagConstraints.EAST;
 		gbc_lblDuracion.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDuracion.gridx = 2;
-		gbc_lblDuracion.gridy = 8;
+		gbc_lblDuracion.gridy = 7;
 		getContentPane().add(lblDuracion, gbc_lblDuracion);
 		
 		textFieldDuracion = new JTextField();
@@ -137,7 +156,7 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		gbc_textFieldDuracion.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldDuracion.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldDuracion.gridx = 3;
-		gbc_textFieldDuracion.gridy = 8;
+		gbc_textFieldDuracion.gridy = 7;
 		getContentPane().add(textFieldDuracion, gbc_textFieldDuracion);
 		textFieldDuracion.setColumns(10);
 		
@@ -147,7 +166,7 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		gbc_lblCosto.anchor = GridBagConstraints.EAST;
 		gbc_lblCosto.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCosto.gridx = 2;
-		gbc_lblCosto.gridy = 10;
+		gbc_lblCosto.gridy = 8;
 		getContentPane().add(lblCosto, gbc_lblCosto);
 		
 		textFieldCosto = new JTextField();
@@ -157,9 +176,10 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		gbc_textFieldCosto.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldCosto.fill = GridBagConstraints.BOTH;
 		gbc_textFieldCosto.gridx = 3;
-		gbc_textFieldCosto.gridy = 10;
+		gbc_textFieldCosto.gridy = 8;
 		getContentPane().add(textFieldCosto, gbc_textFieldCosto);
 		textFieldCosto.setColumns(10);
+		
 		
 		JLabel lblFecha = new JLabel("Fecha:");
 		lblFecha.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -167,22 +187,29 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		gbc_lblFecha.anchor = GridBagConstraints.EAST;
 		gbc_lblFecha.insets = new Insets(0, 0, 5, 5);
 		gbc_lblFecha.gridx = 2;
-		gbc_lblFecha.gridy = 12;
+		gbc_lblFecha.gridy = 9;
 		getContentPane().add(lblFecha, gbc_lblFecha);
 		
 		//Codigo para desactivar la edicion del campo de texto fecha en el JDateChooser
 		chooserFechaAlta = new JDateChooser();
 		JTextFieldDateEditor editorFechaAlta = (JTextFieldDateEditor) chooserFechaAlta.getDateEditor();
 		editorFechaAlta.setEditable(false);
-
 		
 		GridBagConstraints gbc_chooserFechaAlta = new GridBagConstraints();
 		gbc_chooserFechaAlta.gridwidth = 2;
 		gbc_chooserFechaAlta.insets = new Insets(0, 0, 5, 5);
 		gbc_chooserFechaAlta.fill = GridBagConstraints.BOTH;
 		gbc_chooserFechaAlta.gridx = 3;
-		gbc_chooserFechaAlta.gridy = 12;
+		gbc_chooserFechaAlta.gridy = 9;
 		getContentPane().add(chooserFechaAlta, gbc_chooserFechaAlta);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				limpiarAltaTipo();
+			}
+		});
 		
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
@@ -193,28 +220,20 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		GridBagConstraints gbc_btnAceptar = new GridBagConstraints();
 		gbc_btnAceptar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAceptar.gridx = 3;
-		gbc_btnAceptar.gridy = 13;
+		gbc_btnAceptar.gridy = 10;
 		getContentPane().add(btnAceptar, gbc_btnAceptar);		
-		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				limpiarAltaTipo();
-			}
-		});
 		
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
 		gbc_btnCancelar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCancelar.gridx = 4;
-		gbc_btnCancelar.gridy = 13;
+		gbc_btnCancelar.gridy = 10;
 		getContentPane().add(btnCancelar, gbc_btnCancelar);
 		
 		Component rigidArea_1 = Box.createRigidArea(new Dimension(20, 20));
 		GridBagConstraints gbc_rigidArea_1 = new GridBagConstraints();
 		gbc_rigidArea_1.insets = new Insets(0, 0, 5, 0);
 		gbc_rigidArea_1.gridx = 7;
-		gbc_rigidArea_1.gridy = 17;
+		gbc_rigidArea_1.gridy = 12;
 		getContentPane().add(rigidArea_1, gbc_rigidArea_1);
 		
 	}

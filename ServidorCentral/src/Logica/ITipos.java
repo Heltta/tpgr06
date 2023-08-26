@@ -3,7 +3,9 @@ package Logica;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
+import java.util.Set;
 
+import Excepciones.nombrePaqueteRepetido;
 import Excepciones.nombreTipoPublicacionRepetido;
 
 public interface ITipos {
@@ -15,5 +17,10 @@ public interface ITipos {
 	
 	public abstract void borrarTipos();
 	public abstract Boolean ingresarKeyword(String keyword);
-	
+	public abstract Set<String> listarPaquetes();
+	public abstract Set<String> listarTiposPublicacion();
+	public void agregarTipoPublicacion(String nombrePaquete, String nombreTipo, int cant);
+	public abstract void borrarPaquetes();
+	public abstract void ingresarDatosPaquete(String nombre, String descripcion, int validez, double descuento, double costo, Date fechaAlta) throws nombrePaqueteRepetido;
+	public abstract Map<String, DTPaquete> obtenerDataPaquetes();
 }
