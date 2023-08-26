@@ -45,6 +45,7 @@ public class ConsultaUsuario extends JInternalFrame {
 	private JTextArea cLink;
 	private JComboBox lOfertasPostulante;
 	private JComboBox lOfertasEmpresa;
+	private ConsultaOferta frameOferta;
 	
 	public ConsultaUsuario(IUsuario IUs) {
 		setClosable(true);
@@ -275,5 +276,8 @@ public class ConsultaUsuario extends JInternalFrame {
 		}
 	}
 	public void seleccionarOferta(String nombreOferta) {
+		String nombreEmpresa= (String) lNicknames.getSelectedItem();
+		if(frameOferta!=null)frameOferta.setVisible(false);
+		frameOferta= new ConsultaOferta(IU, nombreEmpresa, nombreOferta);
 	}
 }
