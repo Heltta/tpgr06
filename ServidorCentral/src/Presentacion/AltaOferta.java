@@ -44,6 +44,7 @@ public class AltaOferta extends JInternalFrame{
 	private JTextField textFieldSal;
 	private JTextArea textArea;
 	private JDateChooser dateChooser;
+	JComboBox<String> comboBoxDepartamento;
 	public AltaOferta(IUsuario IUs) {
 		setResizable(true);
         setIconifiable(true);
@@ -95,6 +96,7 @@ public class AltaOferta extends JInternalFrame{
 		getContentPane().add(scrollPane, gbc_scrollPane);
 		
 		textArea = new JTextArea();
+		textArea.setLineWrap(true);
 		scrollPane.setViewportView(textArea);
 		
 		JLabel LabelRemuneracion = new JLabel("Remuneración: ");
@@ -192,7 +194,7 @@ public class AltaOferta extends JInternalFrame{
 		gbc_LabelDepartamento.gridy = 8;
 		getContentPane().add(LabelDepartamento, gbc_LabelDepartamento);
 		
-		JComboBox<String> comboBoxDepartamento = new JComboBox<String>(new String[] {"Montevideo", "Artigas", "Canelones", "CerroLargo", "Colonia", "Durazno", "Flores", "Florida", "Lavalleja", "Maldonado", "Paysandú", "Rivera", "Rocha", "RíoNegro", "Salto", "SanJosé", "Soriano", "Tacuarembó", "TreintaYTres"});
+		comboBoxDepartamento = new JComboBox<String>(new String[] {"Montevideo", "Artigas", "Canelones", "CerroLargo", "Colonia", "Durazno", "Flores", "Florida", "Lavalleja", "Maldonado", "Paysandú", "Rivera", "Rocha", "RíoNegro", "Salto", "SanJosé", "Soriano", "Tacuarembó", "TreintaYTres"});
 		GridBagConstraints gbc_comboBoxDepartamento = new GridBagConstraints();
 		gbc_comboBoxDepartamento.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxDepartamento.fill = GridBagConstraints.HORIZONTAL;
@@ -250,20 +252,7 @@ public class AltaOferta extends JInternalFrame{
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(checkFormulario()) {
-				String nombre = textFieldNombre.getText();
-				String descripcion = textArea.getText();
-				int remuneracion = Integer.parseInt(textFieldRemuneracion.getText());
-				String ciudad = textFieldCiudad.getText();
-				String departamento = (String)comboBoxDepartamento.getSelectedItem();
-				String nomTipo = (String)comboBoxTipo.getSelectedItem();
-				String nickname = (String)comboBoxEmpresa.getSelectedItem();
-				Set<String> keywords = new HashSet<String>(list.getSelectedValuesList());
-				Date fecha = dateChooser.getDate();
-				DTHorario horario = new DTHorario(textFieldEn.getText(),textFieldSal.getText());
-				IU.ingresarOferta(nickname,nomTipo,nombre,descripcion,horario,remuneracion,fecha,ciudad,departamento,keywords);
-				}
-	           
+				ingresarOferta(e);
 			}
 		});
 		GridBagConstraints gbc_btnConfirmar = new GridBagConstraints();
@@ -314,6 +303,31 @@ public class AltaOferta extends JInternalFrame{
         textFieldSal.setText("");
         dateChooser.setCalendar(null);
 		
+	}
+	
+	private void ingresarOferta(ActionEvent e) {
+		if(checkFormulario()) {
+			String nombre = textFieldNombre.getText();
+			String descripcion = textArea.getText();
+			int remuneracion = Integer.parseInt(textFieldRemuneracion.getText());
+			String ciudad = textFieldCiudad.getText();
+			String departamento = (String)comboBoxDepartamento.getSelectedItem();
+			String nomTipo = (String)comboBoxTipo.getSelectedItem();
+			String nickname = (String)comboBoxEmpresa.getSelectedItem();
+			Set<String> keywords = new HashSet<String>(list.getSelectedValuesList());
+			Date fecha = dateChooser.getDate();
+			DTHorario horario = new DTHorario(textFieldEn.getText(),textFieldSal.getText());
+			boolean ingreso = IU.ingresarOferta(nickname,nomTipo,nombre,descripcion,horario,remuneracion,fecha,ciudad,departamento,keywords);
+			if (!ingreso) {
+				JOptionPane.showMessageDialog(this, "La oferta ya se encuentra en el sistema", "Alta de Oferta Laboral",
+	                    JOptionPane.ERROR_MESSAGE);
+			}
+			else {
+				JOptionPane.showMessageDialog(this, "La oferta se registró con éxito", "Alta de Oferta Laboral",
+	                    JOptionPane.ERROR_MESSAGE);
+			}
+			}
+           
 	}
 	
 	public void actualizar(String[] listaEmpresas, String[] listaTipos,String[] listaKeywords) {
