@@ -45,7 +45,6 @@ public class ConsultaOferta extends JInternalFrame{
 	private JComboBox<String> cbEmpresa;
 	private JComboBox<String> cbOferta;
 	private IUsuario ctrlUsuario;
-	private DTOfertaLaboral datosOferta;
 	private JTextField tfNombre;
 	private JTextField tfCiudad;
 	private JTextField tfDepartamento;
@@ -330,7 +329,6 @@ public class ConsultaOferta extends JInternalFrame{
 		gbc_btnCerrar.gridy = 15;
 		getContentPane().add(btnCerrar, gbc_btnCerrar);
 		
-		mostrarDatos(null,dtm);
 	}
 	private void mostrarDatos(DTOfertaLaboral datos, DefaultTableModel dtm) {
 		if(datos != null) {

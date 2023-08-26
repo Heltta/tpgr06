@@ -1,5 +1,6 @@
 package Tests;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Date;
@@ -49,7 +50,7 @@ public class TestPostulacionOferta {
 		Postulante post = new Postulante("Juan123", "hola@mail.com", "Juan", "Perez", "Uruguayo", null);
 		mu.agregarUsuario(post);
 		OfertaLaboral oferta = new OfertaLaboral("Desarrollador", "trabajo junior", "Ciudad", "Mdeo", new DTHorario("08:00", "17:00"), 3000, new Date(2023,3,4), new TipoPublicacion("Oro", "descrip", 1, new Date(2023,5,1), 1000, 5), null);
-		oferta.agregarPostulante(post);
+		//oferta.agregarPostulante(post);
 		mo.agregarOferta(oferta);
 		
 		String postulante = "Juan123";
@@ -57,11 +58,8 @@ public class TestPostulacionOferta {
 		String motivacion = "ganas de trabajar";
 		String nomOferta = "Desarrollador";
 		Date fecha = new Date(2023,5,5);
-		try {
-			ctrlUsuario.ingresarDatosPostulacion(postulante, cv, motivacion, nomOferta, fecha);
-		}catch (PostulanteRepetido ex) {
-			fail(ex.getMessage());
-			ex.printStackTrace();
-		}	
+		ctrlUsuario.ingresarDatosPostulacion(postulante, cv, motivacion, nomOferta, fecha);
+
+		assertThrows(PostulanteRepetido.class, ()->{ctrlUsuario.ingresarDatosPostulacion(postulante, cv, motivacion, nomOferta, fecha);});
 	}
 }
