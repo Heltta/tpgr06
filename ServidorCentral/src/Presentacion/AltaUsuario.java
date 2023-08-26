@@ -5,21 +5,31 @@ import java.awt.EventQueue;
 import javax.swing.JInternalFrame;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.util.Date;
+
 import javax.swing.JTextField;
 import java.awt.Component;
 import javax.swing.Box;
 import java.awt.Dimension;
 import com.toedter.calendar.JDateChooser;
+
+import Logica.IUsuario;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
 
 public class AltaUsuario extends JInternalFrame {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private IUsuario ctrlUsuario;
 	private JTextField nicknameField;
 	private JTextField emailField;
 	private JTextField nombreField;
@@ -27,12 +37,15 @@ public class AltaUsuario extends JInternalFrame {
 	private JTextField nacionalidadField;
 	private JTextField descripcionField;
 	private JTextField linkField;
+	private JDateChooser fechaDeNacimientoChooser;
 	private String[] listaTiposDeUsuarios = { "Postulante", "Empresa" };
+	private JComboBox<String> tiposDeUsuarioCombo;
 
 	/**
 	 * Create the frame.
 	 */
-	public AltaUsuario() {
+	public AltaUsuario(IUsuario ctrlUsuario) {
+		this.ctrlUsuario = ctrlUsuario;
 		setClosable(true);
 		setTitle("Crear Usuario");
 		setBounds(100, 100, 450, 300);
@@ -125,7 +138,7 @@ public class AltaUsuario extends JInternalFrame {
 		gbc_tipoUsuario.gridx = 1;
 		gbc_tipoUsuario.gridy = 5;
 		getContentPane().add(tipoUsuario, gbc_tipoUsuario);
-		JComboBox tiposDeUsuarioCombo = new JComboBox(listaTiposDeUsuarios);
+		tiposDeUsuarioCombo = new JComboBox(listaTiposDeUsuarios);
 		tiposDeUsuarioCombo.setSelectedIndex(-1);
 		GridBagConstraints gbc_tiposDeUsuarioCombo = new GridBagConstraints();
 		gbc_tiposDeUsuarioCombo.insets = new Insets(0, 0, 5, 5);
@@ -162,7 +175,7 @@ public class AltaUsuario extends JInternalFrame {
 		gbc_fechaNacimiento.gridy = 7;
 		getContentPane().add(fechaNacimiento, gbc_fechaNacimiento);
 		
-		JDateChooser fechaDeNacimientoChooser = new JDateChooser();
+		fechaDeNacimientoChooser = new JDateChooser();
 		GridBagConstraints gbc_fechaDeNacimientoChooser = new GridBagConstraints();
 		fechaDeNacimientoChooser.setEnabled(false);
 		gbc_fechaDeNacimientoChooser.insets = new Insets(0, 0, 5, 5);
@@ -210,6 +223,12 @@ public class AltaUsuario extends JInternalFrame {
 		linkField.setColumns(10);
 		
 		JButton submit = new JButton("Crear Usuario");
+		submit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cmdAltaUsuario(e);
+				limpiarAltaTipo();
+			}
+		});
 		GridBagConstraints gbc_submit = new GridBagConstraints();
 		gbc_submit.anchor = GridBagConstraints.EAST;
 		gbc_submit.insets = new Insets(0, 0, 0, 5);
@@ -225,4 +244,56 @@ public class AltaUsuario extends JInternalFrame {
 
 	}
 
+	
+	private void cmdAltaUsuario(ActionEvent e) {
+		String tipoDeAltaUsuario = (String) (this.tiposDeUsuarioCombo.getSelectedItem());
+		String nickname = this.nicknameField.getText();
+		String nombre = this.emailField.getText();
+		String apellido = this.apellidoField.getText();
+		String nacionalidad = this.nacionalidadField.getText();
+	
+		try {
+			if(tipoDeAltaUsuario == "Postulante") {
+				// El Actor eligio crear un Postulante
+				String correoElectronico = this.emailField.getText();
+				Date fechaNacimiento = this.fechaDeNacimientoChooser.getDate();
+				
+				ctrlUsuario.ingresarPostulante(nickname, nombre, apellido, correoElectronico, fechaNacimiento, nacionalidad);
+				JOptionPane.showMessageDialog(this, "El Postulante se ha creado con éxito", "Agregar Usuario",
+	                    JOptionPane.INFORMATION_MESSAGE);
+					
+			} else if (tipoDeAltaUsuario == "Empresa") {
+				// El Actor eligio crear una Empresa
+				String descripcion = this.descripcionField.getText();
+				String link = this.linkField.getText();
+				
+				ctrlUsuario.ingresarEmpresa(nickname, nombre, apellido, nacionalidad, descripcion, link);
+				JOptionPane.showMessageDialog(this, "La Empresa se ha creado con éxito", "Agregar Usuario",
+	                    JOptionPane.INFORMATION_MESSAGE);
+				
+			} else {
+				throw new Exception("Ningun tipo de Usuario elegido");
+			}
+		} catch (Exception exc) {
+			JOptionPane.showMessageDialog(this, exc.getMessage(), "Agregar Usuario",
+                    JOptionPane.INFORMATION_MESSAGE);
+		}
+		
+	}
+	
+	private void limpiarAltaTipo() {
+		tiposDeUsuarioCombo.setSelectedIndex(-1);
+		// Campos de Usuario
+		nicknameField.setText("");
+		emailField.selectAll();
+		nombreField.replaceSelection("");
+		apellidoField.setText("");
+		// Campos de Postulante
+		nacionalidadField.setText("");
+		fechaDeNacimientoChooser.setDate(null);
+		// Campos de Empresa
+		descripcionField.setText("");
+		linkField.setText("");
+		
+	};
 }

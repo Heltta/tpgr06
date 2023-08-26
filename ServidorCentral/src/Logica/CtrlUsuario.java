@@ -12,7 +12,7 @@ import Excepciones.PostulanteRepetido;
 import Excepciones.nombreTipoPublicacionRepetido;
 
 public class CtrlUsuario implements IUsuario {
-
+	
 
 	public void ingresarDatosPostulacion(String postulante, String cv, String motivacion, String oferta, Date fecha) throws PostulanteRepetido {
 		ManejadorOferta mo = ManejadorOferta.getInstancia();
@@ -112,5 +112,24 @@ public class CtrlUsuario implements IUsuario {
 		}else {
 			return null;
 		}
+	}
+	public void ingresarPostulante(
+			String nickName,
+			String nombre,
+			String apellido,
+			String correoElectronico,
+			Date fechaNacimiento,
+			String nacionalidad) throws Exception {
+		throw new Exception("funcionalidad ingresarPostulante en desarrollo");
+	}
+	
+	public void ingresarEmpresa(
+			String nickName,
+			String nombre,
+			String apellido,
+			String correoElectronico,
+			String descripcion,
+			String link) throws Exception {
+		throw new Exception("funcionalidad ingresarEmpresa en desarrollo");
 	}
 }

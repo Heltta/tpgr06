@@ -16,4 +16,20 @@ public interface IUsuario {
 	public abstract DTOfertaLaboral seleccionarOfertaLaboral(String nombre);
 	public abstract void ingresarDatosPostulacion(String postulante, String cv, String motivacion, String oferta, Date fecha)throws PostulanteRepetido;
 	public abstract Set<String> obtenerOfertasDeEmpresa(String empresa);
+	public abstract void ingresarPostulante(
+			String nickName,
+			String nombre,
+			String apellido,
+			String correoElectronico,
+			Date fechaNacimiento,
+			String nacionalidad) throws Exception;
+	
+	public abstract void ingresarEmpresa(
+			String nickName,
+			String nombre,
+			String apellido,
+			String correoElectronico,
+			String descripcion,
+			String link) throws Exception;
+
 }
