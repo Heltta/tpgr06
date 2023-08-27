@@ -6,7 +6,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import Excepciones.PostulanteRepetido;
 import Excepciones.nombreTipoPublicacionRepetido;
@@ -113,6 +114,17 @@ public class CtrlUsuario implements IUsuario {
 			return null;
 		}
 	}
+	
+	private void checkUnicidad(String email, String nick) throws Exception {
+		ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstance();
+		if(manejadorUsuario.existeEmailDeUsuario(email)) {
+			throw new Exception("Correo electrónico ya existe");
+		}
+		if(manejadorUsuario.existeUsuario(nick)) {
+			throw new Exception("Nickname ya existe");
+		}
+	}
+	
 	public void ingresarPostulante(
 			String nickName,
 			String nombre,
@@ -120,7 +132,13 @@ public class CtrlUsuario implements IUsuario {
 			String correoElectronico,
 			Date fechaNacimiento,
 			String nacionalidad) throws Exception {
-		throw new Exception("funcionalidad ingresarPostulante en desarrollo");
+		
+		ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstance();
+		
+		checkUnicidad(correoElectronico, nickName);
+		
+		LocalDate localFechaNacimiento = LocalDate.ofInstant(fechaNacimiento.toInstant(), ZoneId.systemDefault());
+		manejadorUsuario.agregarUsuario(new Postulante(nickName, nombre, apellido, correoElectronico, nacionalidad, localFechaNacimiento));
 	}
 	
 	public void ingresarEmpresa(
@@ -128,8 +146,14 @@ public class CtrlUsuario implements IUsuario {
 			String nombre,
 			String apellido,
 			String correoElectronico,
+			String nombreEmpresa,
 			String descripcion,
 			String link) throws Exception {
-		throw new Exception("funcionalidad ingresarEmpresa en desarrollo");
+		
+		ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstance();
+		
+		checkUnicidad(correoElectronico, nickName);
+		
+		manejadorUsuario.agregarUsuario(new Empresa(nickName, nombre, apellido, nombreEmpresa, correoElectronico, descripcion, link));
 	}
 }
