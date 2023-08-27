@@ -136,7 +136,7 @@ public class CtrlUsuario implements IUsuario {
 		ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstance();
 		
 		checkUnicidad(correoElectronico, nickName);
-		manejadorUsuario.agregarUsuario(new Postulante(nickName, nombre, apellido, correoElectronico, nacionalidad, fechaNacimiento));
+		manejadorUsuario.agregarUsuario(new Postulante(nickName, correoElectronico, nombre, apellido, nacionalidad, fechaNacimiento));
 	}
 	
 	public void ingresarEmpresa(
@@ -152,6 +152,6 @@ public class CtrlUsuario implements IUsuario {
 		
 		checkUnicidad(correoElectronico, nickName);
 		
-		manejadorUsuario.agregarUsuario(new Empresa(nickName, nombre, apellido, nombreEmpresa, correoElectronico, descripcion, link));
+		manejadorUsuario.agregarUsuario(new Empresa(nickName, correoElectronico, nombre, apellido, nombreEmpresa, descripcion, link));
 	}
 }
