@@ -178,6 +178,8 @@ public class AgregarTipoPublicacionAPaquete extends JInternalFrame {
 	}
 	
     public void cargarPaquetes() {
+    	comboBoxPaquete.removeAllItems();
+    	comboBoxPaquete.addItem("Seleccionar");
     	Set<String> paquetesTipo = ctrlTipos.listarPaquetes();
     	for (String paquete : paquetesTipo) {
     		comboBoxPaquete.addItem(paquete);
@@ -185,6 +187,8 @@ public class AgregarTipoPublicacionAPaquete extends JInternalFrame {
     }
 
     public void cargarTiposPaquete() {
+    	comboBoxTipo.removeAllItems();
+    	comboBoxTipo.addItem("Seleccionar");
     	Set<String> tiposPublicacion = ctrlTipos.listarTiposPublicacion();
     	for (String tipo: tiposPublicacion) {
     		comboBoxTipo.addItem(tipo);

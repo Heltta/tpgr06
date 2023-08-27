@@ -40,6 +40,7 @@ public class main {
     private AgregarTipoPublicacionAPaquete frmAgregarTipoPublicacionAPaquete;
     private ConsultaOferta frmConsultaOferta;
     private CrearPaqueteTiposPublicacion frmCrearPaqueteTiposPublicacion;
+    private ConsultaPaquete frmConsultaPaquete;
 
 
     public static void main(String[] args) {
@@ -67,6 +68,7 @@ public class main {
         frmConsultaOferta = new ConsultaOferta(ctrlUsuario);
         frmPostulacionOferta = new PostulacionOferta(ctrlUsuario, frmConsultaOferta);
         frmAltaUsuario = new AltaUsuario(ctrlUsuario);
+        frmCrearPaqueteTiposPublicacion = new CrearPaqueteTiposPublicacion(ctrlTipos);
         frmAgregarTipoPublicacionAPaquete = new AgregarTipoPublicacionAPaquete(ctrlTipos);
         frmAgregarTipoPublicacionAPaquete.setBounds(0, 0, 423, 266);
         frmTrabajoUy.getContentPane().add(frmAgregarTipoPublicacionAPaquete);
@@ -75,9 +77,12 @@ public class main {
         frmTrabajoUy.getContentPane().add(frmPostulacionOferta);
         frmTrabajoUy.getContentPane().add(frmConsultaOferta);
         frmTrabajoUy.getContentPane().add(frmAltaUsuario);
+        frmTrabajoUy.getContentPane().add(frmCrearPaqueteTiposPublicacion);
         frmConsultaUsuario = new ConsultaUsuario(ctrlUsuario, frmConsultaOferta);
         frmConsultaUsuario.setBounds(0,0, 500, 500);
         frmTrabajoUy.getContentPane().add(frmConsultaUsuario); 
+        frmConsultaPaquete = new ConsultaPaquete(ctrlTipos);
+        frmTrabajoUy.getContentPane().add(frmConsultaPaquete);
         
         frmTrabajoUy.getContentPane().setLayout(null);
         
@@ -168,6 +173,11 @@ public class main {
         menuTipos.add(menuItemAltaTipo);
         
         JMenuItem menuItemCrearPaquete = new JMenuItem("Crear Paquete de Tipos de Publicacion");
+        menuItemCrearPaquete.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		frmCrearPaqueteTiposPublicacion.setVisible(true);
+        	}
+        });
         menuTipos.add(menuItemCrearPaquete);
         
         JMenuItem menuItemAgregarTipo = new JMenuItem("Agregar Tipo de Publicacion a Paquete");
@@ -181,6 +191,12 @@ public class main {
         menuTipos.add(menuItemAgregarTipo);
         
         JMenuItem menuItemConsultaPaquete = new JMenuItem("Consulta de Paquete de Tipos de Publicacion");
+        menuItemConsultaPaquete.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frmConsultaPaquete.cargarPaquetes();
+            	frmConsultaPaquete.setVisible(true);
+            }
+        });
         menuTipos.add(menuItemConsultaPaquete);
         
         JMenuItem menuItemAltaKeyword = new JMenuItem("Alta de Keyword");
