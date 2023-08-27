@@ -97,7 +97,7 @@ public class main {
         frmConsultaUsuario = new ConsultaUsuario(ctrlUsuario, frmConsultaOferta);
         frmConsultaUsuario.setBounds(0,0, 500, 500);
         frmTrabajoUy.getContentPane().add(frmConsultaUsuario); 
-        frmConsultaPaquete = new ConsultaPaquete(ctrlTipos);
+        frmConsultaPaquete = new ConsultaPaquete(ctrlTipos, frmAltaTipoPublicacion);
         frmTrabajoUy.getContentPane().add(frmConsultaPaquete);
         
         frmTrabajoUy.getContentPane().setLayout(null);
@@ -221,6 +221,7 @@ public class main {
         JMenuItem menuItemConsultaPaquete = new JMenuItem("Consulta de Paquete de Tipos de Publicacion");
         menuItemConsultaPaquete.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	frmConsultaPaquete.FalseDataCargada();
                 frmConsultaPaquete.cargarPaquetes();
             	frmConsultaPaquete.setVisible(true);
             }
@@ -399,10 +400,14 @@ public class main {
                 int j=0;
                 while ((line2 = br2.readLine()) != null) {
                 	if(j>0) {
+                		
                 		String[] data2 = line2.split(";");
-                		String [] data3= data2[1].replaceAll(" ", "").split(",");
-                		for (int l=0; l<data3.length; l++) {
-                			lkeywords.add(keywords.get(Integer.parseInt(data3[l].substring(1))-1));
+                		if(data[0].equals(data2[0])) {
+                			String [] data3= data2[1].replaceAll(" ", "").split(",");
+                			for (int l=0; l<data3.length; l++) {
+                				lkeywords.add(keywords.get(Integer.parseInt(data3[l].substring(1))-1));
+                			}
+                			break;
                 		}
                 	}
                 	j++;

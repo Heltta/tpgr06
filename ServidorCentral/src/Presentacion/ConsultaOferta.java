@@ -54,7 +54,9 @@ public class ConsultaOferta extends JInternalFrame{
 	private JTextField tfFecha;
 	private JTextField tfCosto;
 	private JTable table;
-	DefaultTableModel dtm;
+	private DefaultTableModel dtm;
+	private final JList<String> lsKeywords;
+	private JTextField tfTipo;
 
 	public ConsultaOferta(IUsuario ctrlUsuario) {
 		setClosable(true);
@@ -65,22 +67,39 @@ public class ConsultaOferta extends JInternalFrame{
         setMaximizable(true);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setTitle("Consulta de oferta laboral");
-		setBounds(400, 0, 420, 550);
-		setMinimumSize(new Dimension(420, 550));
+		setBounds(400, 0, 420, 600);
+		setMinimumSize(new Dimension(420, 600));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {0, 0, 0, 25};
-		gridBagLayout.rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25};
+		gridBagLayout.rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 74, 23, 74, 0, 25};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
+		
+		JLabel lblTipo = new JLabel("Tipo");
+		GridBagConstraints gbc_lblTipo = new GridBagConstraints();
+		gbc_lblTipo.anchor = GridBagConstraints.EAST;
+		gbc_lblTipo.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTipo.gridx = 1;
+		gbc_lblTipo.gridy = 12;
+		getContentPane().add(lblTipo, gbc_lblTipo);
+		
+		tfTipo = new JTextField();
+		tfTipo.setEditable(false);
+		GridBagConstraints gbc_tfTipo = new GridBagConstraints();
+		gbc_tfTipo.insets = new Insets(0, 0, 5, 0);
+		gbc_tfTipo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tfTipo.gridx = 2;
+		gbc_tfTipo.gridy = 12;
+		getContentPane().add(tfTipo, gbc_tfTipo);
+		tfTipo.setColumns(10);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.gridheight = 2;
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 2;
-		gbc_scrollPane.gridy = 13;
+		gbc_scrollPane.gridy = 14;
 		getContentPane().add(scrollPane, gbc_scrollPane);
 		
 		table = new JTable();
@@ -91,7 +110,7 @@ public class ConsultaOferta extends JInternalFrame{
 				new Object[][] {
 				},
 				new String[] {
-					"Fecha", "CV", "Descripción"
+					"Postulante", "Fecha", "CV", "Descripción"
 				}) ;
 		table.setModel(dtm);
 		scrollPane.setViewportView(table);
@@ -281,7 +300,7 @@ public class ConsultaOferta extends JInternalFrame{
 		GridBagConstraints gbc_lblPostulaciones = new GridBagConstraints();
 		gbc_lblPostulaciones.insets = new Insets(0, 0, 5, 0);
 		gbc_lblPostulaciones.gridx = 2;
-		gbc_lblPostulaciones.gridy = 12;
+		gbc_lblPostulaciones.gridy = 13;
 		getContentPane().add(lblPostulaciones, gbc_lblPostulaciones);
 		
 		JButton btnCerrar = new JButton("Cerrar");
@@ -292,10 +311,28 @@ public class ConsultaOferta extends JInternalFrame{
 			}
 		});
 		
+		JLabel lblKeywords = new JLabel("KeyWords");
+		GridBagConstraints gbc_lblKeywords = new GridBagConstraints();
+		gbc_lblKeywords.insets = new Insets(0, 0, 5, 0);
+		gbc_lblKeywords.gridx = 2;
+		gbc_lblKeywords.gridy = 15;
+		getContentPane().add(lblKeywords, gbc_lblKeywords);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
+		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 0);
+		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane_1.gridx = 2;
+		gbc_scrollPane_1.gridy = 16;
+		getContentPane().add(scrollPane_1, gbc_scrollPane_1);
+		
+		lsKeywords = new JList<String>();
+		scrollPane_1.setViewportView(lsKeywords);
+		
 		GridBagConstraints gbc_btnCerrar = new GridBagConstraints();
 		gbc_btnCerrar.anchor = GridBagConstraints.EAST;
 		gbc_btnCerrar.gridx = 2;
-		gbc_btnCerrar.gridy = 15;
+		gbc_btnCerrar.gridy = 17;
 		getContentPane().add(btnCerrar, gbc_btnCerrar);
 		
 			cbEmpresa.addItemListener(new ItemListener() {
@@ -349,23 +386,30 @@ public class ConsultaOferta extends JInternalFrame{
 	}
 	private void mostrarDatos(DTOfertaLaboral datos, DefaultTableModel dtm) {
 		if(datos != null) {
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy");
 			tfNombre.setText(datos.getNombre());
 			tfCiudad.setText(datos.getCiudad());
 			tfDepartamento.setText(datos.getDepartamento());
 			tfHorario.setText(datos.getHorario().getInicio().toString() + " - " + datos.getHorario().getFin().toString()); //Puede estar vacio el horario?
 			tfRemuneracion.setText(Integer.toString(datos.getRemuneracion()));
-			tfFecha.setText(datos.getFecha().toString());
+			tfFecha.setText(formato.format(datos.getFecha()));
 			tfCosto.setText(Double.toString(datos.getCosto()));
+			tfTipo.setText(datos.getTipo());
 			Set<DTPostulacion> postulaciones = datos.getPostulaciones();
-			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy");
-			String[] data = new String[3];
+			String[] data = new String[4];
 			for(DTPostulacion post : postulaciones) {
-				data[0] = formato.format(post.getFechaPostulacion());
-				data[1] = post.getResumenCV();
-				data[2] = post.getDescripcion();
+				data[0] = post.getPostulante();
+				data[1] = formato.format(post.getFechaPostulacion());
+				data[2] = post.getResumenCV();
+				data[3] = post.getDescripcion();
 				dtm.addRow(data);
 				table.setModel(dtm);
 			}
+			final DefaultListModel<String> model = new DefaultListModel<String>();
+			  for(String key : datos.getKeywords()) {
+				  model.addElement(key);
+			  }
+			  lsKeywords.setModel(model);
 		}
 	}
 	public void CargarDatosVisuales(String oferta) {
@@ -381,7 +425,9 @@ public class ConsultaOferta extends JInternalFrame{
 		tfRemuneracion.setText("");
 		tfFecha.setText("");
 		tfCosto.setText("");
+		tfTipo.setText("");
 		DefaultTableModel tb = (DefaultTableModel) table.getModel();
 		tb.setRowCount(0);
+		lsKeywords.setModel(new DefaultListModel<String>());
 	};
 }

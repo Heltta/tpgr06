@@ -18,7 +18,7 @@ public class DTOfertaLaboral {
 	private Set<String> Keywords;
 	
 	public DTOfertaLaboral(String nombre,String descripcion, String ciudad, String departamento, DTHorario horario, int remuneracion,
-			Date fecha, String tipo, Set<String> keywords, Set<DTPostulacion> postulaciones) {
+			Date fecha, String tipo, Set<String> keywords, Set<DTPostulacion> postulaciones, double costo) {
 		super();
 		this.nombre = nombre;
 		this.descripcion=descripcion;
@@ -28,6 +28,7 @@ public class DTOfertaLaboral {
 		this.remuneracion = remuneracion;
 		this.fecha = fecha;
 		this.tipo = tipo;
+		this.costo=costo;
 		Keywords = keywords;
 		this.postulaciones=postulaciones;
 	}

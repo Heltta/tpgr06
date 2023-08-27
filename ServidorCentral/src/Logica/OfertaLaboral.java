@@ -30,7 +30,7 @@ public class OfertaLaboral {
 		this.remuneracion = remuneracion;
 		this.fecha = fecha;
 		this.tipo = tipo;
-		Keywords = keywords;
+		Keywords = Set.copyOf(keywords);
 		Postulantes= new HashMap<String,Postulante>();
 		compra=null;
 	}

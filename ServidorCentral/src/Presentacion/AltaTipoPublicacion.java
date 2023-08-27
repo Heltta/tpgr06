@@ -15,10 +15,12 @@ import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
 
 import Excepciones.nombreTipoPublicacionRepetido;
+import Logica.DTTipoPublicacion;
 import Logica.ITipos;
 
 import java.awt.event.ActionListener;
 import java.util.Date;
+import java.util.Map;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
@@ -37,6 +39,8 @@ public class AltaTipoPublicacion extends JInternalFrame {
 	private JDateChooser chooserFechaAlta;
 	private ITipos ctrlTipos;
 	private JTextField textFieldCosto;	
+	private JButton btnCancelar;
+	private JButton btnAceptar;
 	
 	public AltaTipoPublicacion(ITipos ctrlTipos) {
 		this.ctrlTipos = ctrlTipos;
@@ -203,7 +207,7 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		gbc_chooserFechaAlta.gridy = 9;
 		getContentPane().add(chooserFechaAlta, gbc_chooserFechaAlta);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -211,7 +215,7 @@ public class AltaTipoPublicacion extends JInternalFrame {
 			}
 		});
 		
-		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cmdAltaTipoPublicacion(e);
@@ -285,7 +289,15 @@ public class AltaTipoPublicacion extends JInternalFrame {
 	}
 	
 	private void limpiarAltaTipo() {
+		setTitle("Alta de Tipo de Publicacion de Oferta Laboral");
 		textFieldNombre.setText("");
+		btnAceptar.setEnabled(true);
+		textFieldNombre.setEditable(true);
+		textAreaDescripcion.setEditable(true);
+		textFieldCosto.setEditable(true);
+		textFieldDuracion.setEditable(true);
+		textFieldExposicion.setEditable(true);
+		chooserFechaAlta.setEnabled(true);
 		textAreaDescripcion.selectAll();
 		textAreaDescripcion.replaceSelection("");
 		textFieldExposicion.setText("");
@@ -294,4 +306,24 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		textFieldCosto.setText("");
 		
 	};
+	
+	public void mostrarDatosTipo(String nombreTipo) {
+		setTitle("Informacion Tipo de Publicacion");
+		textFieldNombre.setEditable(false);
+		textAreaDescripcion.setEditable(false);
+		textFieldCosto.setEditable(false);
+		textFieldDuracion.setEditable(false);
+		textFieldExposicion.setEditable(false);
+		chooserFechaAlta.setEnabled(false);
+		btnAceptar.setEnabled(false);
+		Map<String, DTTipoPublicacion> dataTipos = ctrlTipos.obtenerDataTipos();
+		DTTipoPublicacion dataTipo = dataTipos.get(nombreTipo);
+		textFieldNombre.setText(nombreTipo);
+		textAreaDescripcion.setText(dataTipo.getDescripcion());
+		textFieldCosto.setText(Double.toString(dataTipo.getCosto()));
+		textFieldDuracion.setText(Double.toString(dataTipo.getDuracion()));
+		textFieldExposicion.setText(Integer.toString(dataTipo.getExposicion()));
+		chooserFechaAlta.setDate(dataTipo.getFecha());
+		setVisible(true);
+	}
 }
