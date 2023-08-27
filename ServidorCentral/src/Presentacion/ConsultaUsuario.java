@@ -1,6 +1,7 @@
 package Presentacion;
 
 import java.awt.EventQueue;
+import java.util.Date;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -268,7 +269,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		else {
 			DTPostulante dataPostulante= (DTPostulante) datosUsuario;
 			cNacionalidad.setText(dataPostulante.getNacionalidad());
-			LocalDate fechaNacimiento=dataPostulante.getFechaNacimiento();
+			Date fechaNacimiento=dataPostulante.getFechaNacimiento();
 			String nacimiento= fechaNacimiento.toString();
 			cNacimiento.setText(nacimiento);
 			String [] listaOfertasPostulante = dataPostulante.getNombreOfertas().toArray(new String[0]);
