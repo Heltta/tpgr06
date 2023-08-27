@@ -28,6 +28,7 @@ import javax.swing.JTextArea;
 import javax.swing.JList;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
@@ -283,8 +284,8 @@ public class ConsultaUsuario extends JInternalFrame {
 			DTPostulante dataPostulante= (DTPostulante) datosUsuario;
 			cNacionalidad.setText(dataPostulante.getNacionalidad());
 			Date fechaNacimiento=dataPostulante.getFechaNacimiento();
-			String nacimiento= fechaNacimiento.toString();
-			cNacimiento.setText(nacimiento);
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy");
+			cNacimiento.setText(formato.format(fechaNacimiento));
 			if (dataPostulante.getNombreOfertas() != null) {
 				String [] listaOfertasPostulante = dataPostulante.getNombreOfertas().toArray(new String[0]);
 				lOfertasPostulante.setModel(new DefaultComboBoxModel<String>(listaOfertasPostulante));
