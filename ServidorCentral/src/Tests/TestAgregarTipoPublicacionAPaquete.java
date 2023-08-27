@@ -35,7 +35,7 @@ public class TestAgregarTipoPublicacionAPaquete {
 	//Agregar a paquete vacio
 	void AltaTipoPublicacionTest1() throws nombreTipoPublicacionRepetido, nombrePaqueteRepetido{
 		ctrlTipos.ingresarDatosTipoPublicacion("Basico", "Paquete economico para pequeñas empresas", 0, new Date(2023,4,12), 0, 0);
-		ctrlTipos.ingresarDatosPaquete("Paquete Basico", "Paquete de Tipo basico", 20, 0.5, 1599.99, new Date(2021,5,10));
+		ctrlTipos.ingresarDatosPaquete("Paquete Basico", "Paquete de Tipo basico", 20, 0.5,  new Date(2021,5,10));
 		ctrlTipos.agregarTipoPublicacion("Paquete Basico", "Basico", 3);
 		Map<String, DTPaquete> dataPaquetes = ctrlTipos.obtenerDataPaquetes();
 		Assertions.assertTrue(dataPaquetes.containsKey("Paquete Basico"));
@@ -53,7 +53,7 @@ public class TestAgregarTipoPublicacionAPaquete {
 	@Test
 	void AltaTipoPublicacionTest2() throws nombreTipoPublicacionRepetido, nombrePaqueteRepetido{
 		ctrlTipos.ingresarDatosTipoPublicacion("Basico", "Paquete economico para pequeñas empresas", 0, new Date(2023,4,12), 0, 0);
-		ctrlTipos.ingresarDatosPaquete("Paquete Basico", "Paquete de Tipo basico", 20, 0.5, 1599.99, new Date(2021,5,10));
+		ctrlTipos.ingresarDatosPaquete("Paquete Basico", "Paquete de Tipo basico", 20, 0.5, new Date(2021,5,10));
 		ctrlTipos.agregarTipoPublicacion("Paquete Basico", "Basico", 3);
 		ctrlTipos.agregarTipoPublicacion("Paquete Basico", "Basico", 5);
 		Map<String, DTPaquete> dataPaquetes = ctrlTipos.obtenerDataPaquetes();

@@ -48,6 +48,7 @@ public class PostulacionOferta extends JInternalFrame {
 	private IUsuario ctrlUsuario;
 	
 	public PostulacionOferta(IUsuario ctrlUsuario, ConsultaOferta frmConsultaOferta) {
+		setClosable(true);
 		this.ctrlUsuario = ctrlUsuario;
 		
 		setResizable(true);
