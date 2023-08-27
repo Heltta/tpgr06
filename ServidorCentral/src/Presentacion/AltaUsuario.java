@@ -23,6 +23,8 @@ import Logica.IUsuario;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class AltaUsuario extends JInternalFrame {
 	/**
@@ -139,6 +141,12 @@ public class AltaUsuario extends JInternalFrame {
 		gbc_tipoUsuario.gridy = 5;
 		getContentPane().add(tipoUsuario, gbc_tipoUsuario);
 		tiposDeUsuarioCombo = new JComboBox(listaTiposDeUsuarios);
+		tiposDeUsuarioCombo.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				cambiarTipoUsuario();
+			}
+				
+		});
 		tiposDeUsuarioCombo.setSelectedIndex(-1);
 		GridBagConstraints gbc_tiposDeUsuarioCombo = new GridBagConstraints();
 		gbc_tiposDeUsuarioCombo.insets = new Insets(0, 0, 5, 5);
@@ -279,6 +287,22 @@ public class AltaUsuario extends JInternalFrame {
                     JOptionPane.INFORMATION_MESSAGE);
 		}
 		
+	}
+
+	// Cambia los campos habilitados acorde a la eleccion del Actor
+	private void cambiarTipoUsuario() {
+		String tipoDeUsuarioElegido = (String) (tiposDeUsuarioCombo.getSelectedItem());
+		if(tipoDeUsuarioElegido == "Postulante") {
+			fechaDeNacimientoChooser.setEnabled(true);
+			nacionalidadField.setEnabled(true);
+			descripcionField.setEnabled(false);
+			linkField.setEnabled(false);
+		} else if (tipoDeUsuarioElegido == "Empresa") {
+			fechaDeNacimientoChooser.setEnabled(false);
+			nacionalidadField.setEnabled(false);
+			descripcionField.setEnabled(true);
+			linkField.setEnabled(true);
+		}
 	}
 	
 	private void limpiarAltaTipo() {
