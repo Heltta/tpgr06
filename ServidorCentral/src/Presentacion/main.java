@@ -184,9 +184,9 @@ public class main {
     	ManejadorOferta mo = ManejadorOferta.getInstancia();
 		ManejadorUsuario mu = ManejadorUsuario.getInstance();
 		//Postulantes
-		Postulante post = new Postulante("Juan123", "j123@mail.com", "Juan", "Perez", "Uruguayo", LocalDate.of(1996, 3, 4));
-		Postulante post1 = new Postulante("Gonzalo123", "g123@mail.com", "Gonzalo", "Diaz", "Argentino", LocalDate.of(1997, 6, 14));
-		Postulante post2 = new Postulante("Marcos123", "m123@mail.com", "Marcos", "Lopez", "Chileno", LocalDate.of(1998, 9, 25));
+		Postulante post = new Postulante("Juan123", "j123@mail.com", "Juan", "Perez", "Uruguayo", new Date(1996, 3, 4));
+		Postulante post1 = new Postulante("Gonzalo123", "g123@mail.com", "Gonzalo", "Diaz", "Argentino", new Date(1997, 6, 14));
+		Postulante post2 = new Postulante("Marcos123", "m123@mail.com", "Marcos", "Lopez", "Chileno", new Date(1998, 9, 25));
 		mu.agregarUsuario(post);
 		mu.agregarUsuario(post1);
 		mu.agregarUsuario(post2);
