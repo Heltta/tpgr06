@@ -23,7 +23,7 @@ public class DTTipoPublicacion {
 		return nombre == tipoIn.nombre && descripcion == tipoIn.descripcion && exposicion == tipoIn.exposicion && duracion == tipoIn.duracion
 				&& costo == tipoIn.costo && fecha.compareTo(tipoIn.fecha) == 0;
 	}
-
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -47,8 +47,6 @@ public class DTTipoPublicacion {
 	public Date getFecha() {
 		return fecha;
 	}
-	
-	
 }
 
 
