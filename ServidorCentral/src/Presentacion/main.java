@@ -144,8 +144,7 @@ public class main {
         JMenuItem menuItemConsultaUser = new JMenuItem("Consulta de Usuario");
         menuItemConsultaUser.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String [] nicknames= ctrlUsuario.listarUsuarios().toArray(new String[0]);
-                frmConsultaUsuario.update(nicknames);
+                frmConsultaUsuario.update();
                 frmConsultaUsuario.setVisible(true);
             }
         });

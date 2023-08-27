@@ -57,6 +57,7 @@ public class ConsultaOferta extends JInternalFrame{
 	DefaultTableModel dtm;
 
 	public ConsultaOferta(IUsuario ctrlUsuario) {
+		setClosable(true);
 		this.ctrlUsuario = ctrlUsuario;
 		
 		setResizable(true);

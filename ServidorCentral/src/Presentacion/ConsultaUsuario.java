@@ -32,6 +32,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import javax.swing.SwingConstants;
 
 public class ConsultaUsuario extends JInternalFrame {
 	private IUsuario IU;
@@ -88,6 +89,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(lNicknames, gbc_comboBox);
 		
 		JLabel lblNewLabel_1 = new JLabel("Nombre:");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_1.gridx = 0;
@@ -104,6 +106,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(cNombre, gbc_textArea);
 		
 		JLabel lblNewLabel_2 = new JLabel("Apellido:");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_2.gridx = 0;
@@ -167,7 +170,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		gbc_textArea_1_3.gridy = 6;
 		getContentPane().add(cNacimiento, gbc_textArea_1_3);
 		
-		JLabel lblNewLabel_10 = new JLabel("Ofertas laborales postuladas del postulante:");
+		JLabel lblNewLabel_10 = new JLabel("Ofertas laborales a las que se postulo:");
 		GridBagConstraints gbc_lblNewLabel_10 = new GridBagConstraints();
 		gbc_lblNewLabel_10.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_10.gridx = 0;
@@ -255,9 +258,10 @@ public class ConsultaUsuario extends JInternalFrame {
 		});
 		getContentPane().add(lOfertasEmpresa, gbc_lPostulaciones_2);
 	}
-	public void update(String[] nickUsuarios){
+	public void update(){
 		limpiarDatosUnicos();
-		lNicknames.setModel(new DefaultComboBoxModel<String> (nickUsuarios));
+		String [] nicknames= IU.listarUsuarios().toArray(new String[0]);
+		lNicknames.setModel(new DefaultComboBoxModel<String> (nicknames));
 	}
 	public void seleccionarNickname(String nickname) {
 		limpiarDatosUnicos();
