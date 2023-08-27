@@ -83,8 +83,8 @@ public Boolean existeUsuario(String nickUsuario) {
 	return this.usuarios.containsKey(nickUsuario);
 }
 
-	public Boolean existeEmailDeUsuario(String nickUsuario) {
-		return this.usuariosByEmail.containsKey(nickUsuario);
+	public Boolean existeEmailDeUsuario(String emailUsuario) {
+		return this.usuariosByEmail.containsKey(emailUsuario);
 	}
 
 public void clear() {
