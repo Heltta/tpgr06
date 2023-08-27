@@ -282,8 +282,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		}
 	}
 	public void seleccionarOferta(String nombreOferta) {
-		String nombreEmpresa= (String) lNicknames.getSelectedItem();
-		frameOferta.CargarDatosVisuales(nombreEmpresa, nombreOferta);
+		frameOferta.CargarDatosVisuales(nombreOferta);
 		frameOferta.setVisible(true);
 		//if(frameOferta!=null)frameOferta.setVisible(false);
 		//frameOferta= new ConsultaOferta(IU);

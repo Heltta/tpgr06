@@ -107,7 +107,7 @@ public class PostulacionOferta extends JInternalFrame {
 					  frmConsultaOferta.limpiarCampos();
 					  frmConsultaOferta.setVisible(false);
 					  if(cbOferta.getSelectedIndex() != 0) {
-						  frmConsultaOferta.CargarDatosVisuales(cbEmpresa.getSelectedItem().toString(), cbOferta.getSelectedItem().toString());
+						  frmConsultaOferta.CargarDatosVisuales(cbOferta.getSelectedItem().toString());
 						  frmConsultaOferta.setVisible(true); 
 						  final DefaultListModel<String> model = new DefaultListModel<String>();
 						  for(String post : ctrlUsuario.listarPostulantes()) {

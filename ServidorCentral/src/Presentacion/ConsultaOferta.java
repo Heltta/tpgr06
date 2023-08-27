@@ -367,7 +367,7 @@ public class ConsultaOferta extends JInternalFrame{
 			}
 		}
 	}
-	public void CargarDatosVisuales(String empresa, String oferta) {
+	public void CargarDatosVisuales(String oferta) {
 		cbEmpresa.setEnabled(false);
 		cbOferta.setEnabled(false);
 		mostrarDatos(ctrlUsuario.seleccionarOfertaLaboral(oferta),dtm);
