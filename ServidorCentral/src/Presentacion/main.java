@@ -271,7 +271,7 @@ public class main {
     	
     	ArrayList<String> systemTagE= new ArrayList<String>();
     	ArrayList<String> descE= new ArrayList<String>();
-    	ArrayList<String> nombreE= new ArrayList<String>();
+    	ArrayList<String> linkE= new ArrayList<String>();
     	int i=0;
     	try (BufferedReader br = new BufferedReader(new FileReader(postulantesCSV))) {
     		while ((line = br.readLine()) != null) {
@@ -297,10 +297,10 @@ public class main {
                 String[] data = line.split(";");
                 String sysName = data[0].trim();
                 String desc = data[1].trim();
-                String nombre= data[2].trim();
+                String link= data[2].trim();
                 systemTagE.add(sysName);
                 descE.add(desc);
-                nombreE.add(nombre);
+                linkE.add(link);
     			}
                 i++;
             }
@@ -314,21 +314,23 @@ public class main {
     			if(i>0) {
                 String[] data = line.split(";");
                 String sysName = data[0].trim();
-                String nickname = data[1].trim();
-                String nombre= data[2].trim();
-                String apellido= data[3].trim();
-                String mail= data[4].trim();
+                String nickname = data[2].trim();
+                String nombre= data[3].trim();
+                String apellido= data[4].trim();
+                String mail= data[5].trim();
                 if(systemTagPostulantes.contains(sysName)) {
-                	
+                	String[] numerosFecha = fechaP.get(i-1).split("/");
+                	Date fecha =new Date(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
+                	ctrlUsuario.ingresarPostulante(nickname, nombre, apellido, mail, fecha, nacionalidadP.get(systemTagPostulantes.indexOf(sysName)));
                 }else {
-                	
+                	ctrlUsuario.ingresarEmpresa(nickname, nombre, apellido, mail, nickname ,descE.get(systemTagE.indexOf(sysName)), linkE.get(systemTagE.indexOf(sysName)));
                 }
     			}
                 i++;
             }
     	}
-    	catch(IOException e){
+    	catch (Exception e) {
     		e.printStackTrace();
-    	}
+		}
     }
 }
