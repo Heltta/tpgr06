@@ -97,7 +97,7 @@ public class main {
         frmConsultaUsuario = new ConsultaUsuario(ctrlUsuario, frmConsultaOferta);
         frmConsultaUsuario.setBounds(0,0, 500, 500);
         frmTrabajoUy.getContentPane().add(frmConsultaUsuario); 
-        frmConsultaPaquete = new ConsultaPaquete(ctrlTipos);
+        frmConsultaPaquete = new ConsultaPaquete(ctrlTipos, frmAltaTipoPublicacion);
         frmTrabajoUy.getContentPane().add(frmConsultaPaquete);
         
         frmTrabajoUy.getContentPane().setLayout(null);
@@ -151,8 +151,7 @@ public class main {
         JMenuItem menuItemConsultaUser = new JMenuItem("Consulta de Usuario");
         menuItemConsultaUser.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String [] nicknames= ctrlUsuario.listarUsuarios().toArray(new String[0]);
-                frmConsultaUsuario.update(nicknames);
+                frmConsultaUsuario.update();
                 frmConsultaUsuario.setVisible(true);
             }
         });
@@ -222,6 +221,7 @@ public class main {
         JMenuItem menuItemConsultaPaquete = new JMenuItem("Consulta de Paquete de Tipos de Publicacion");
         menuItemConsultaPaquete.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	frmConsultaPaquete.FalseDataCargada();
                 frmConsultaPaquete.cargarPaquetes();
             	frmConsultaPaquete.setVisible(true);
             }

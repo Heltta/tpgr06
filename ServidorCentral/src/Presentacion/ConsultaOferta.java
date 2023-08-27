@@ -59,6 +59,7 @@ public class ConsultaOferta extends JInternalFrame{
 	private JTextField tfTipo;
 
 	public ConsultaOferta(IUsuario ctrlUsuario) {
+		setClosable(true);
 		this.ctrlUsuario = ctrlUsuario;
 		
 		setResizable(true);
