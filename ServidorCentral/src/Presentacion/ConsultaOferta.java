@@ -64,7 +64,7 @@ public class ConsultaOferta extends JInternalFrame{
         setMaximizable(true);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setTitle("Consulta de oferta laboral");
-		setBounds(0, 0, 420, 550);
+		setBounds(400, 0, 420, 550);
 		setMinimumSize(new Dimension(420, 550));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {0, 0, 0, 25};

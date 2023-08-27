@@ -1,5 +1,6 @@
 package Presentacion;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -46,6 +47,7 @@ public class main {
                 try {
                     main window = new main();
                     window.frmTrabajoUy.setBounds(0,0,900,700);
+                    window.frmTrabajoUy.setMinimumSize(new Dimension(870,620));
                     window.frmTrabajoUy.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
