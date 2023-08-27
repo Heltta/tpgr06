@@ -29,6 +29,7 @@ public interface IUsuario {
 			String nombre,
 			String apellido,
 			String correoElectronico,
+			String nombreEmpresa,
 			String descripcion,
 			String link) throws Exception;
 
