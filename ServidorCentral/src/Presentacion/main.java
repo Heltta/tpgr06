@@ -101,8 +101,12 @@ public class main {
         frmTrabajoUy.getContentPane().add(frmConsultaPaquete);
         
         frmTrabajoUy.getContentPane().setLayout(null);
-        csvDirectory= System.getProperty("user.dir") + "\\src\\TProg_DatosPruebaTarea1_2023-CSVs-v1_0\\";
-
+        String os = System.getProperty("os.name");
+        if(os.equals("Linux")) {
+            csvDirectory= System.getProperty("user.dir") + "/src/TProg_DatosPruebaTarea1_2023-CSVs-v1_0/";
+        }else {
+        	csvDirectory= System.getProperty("user.dir") + "\\src\\TProg_DatosPruebaTarea1_2023-CSVs-v1_0\\";
+        }
     }
 
     private void initialize() {
@@ -228,8 +232,6 @@ public class main {
         });
         menuTipos.add(menuItemConsultaPaquete);
         
-        JMenuItem menuItemAltaKeyword = new JMenuItem("Alta de Keyword");
-        menuTipos.add(menuItemAltaKeyword);
     };
     
 
@@ -468,21 +470,7 @@ public class main {
                 BufferedReader br2 = new BufferedReader(new FileReader(tipoPubliPaq));
                 String line2;
                 int j=0;
-                double costo=0;
-                while ((line2 = br2.readLine()) != null) {
-        			if(j>0) { //Ref; Paquete; Tipos; Cantidad
-                    String[] data2 = line2.split(";");
-                    int paq= Integer.parseInt(data2[1].trim().substring(3));
-                    int tip= Integer.parseInt(data2[2].trim().substring(2));
-                    int cant= Integer.parseInt(data2[3].trim());
-                    if(paq==i) {
-                    	costo=costo+costoTipos.get(tip-1);
-                    }                    
-        			}
-                    j++;
-                }
-                ctrlTipos.ingresarDatosPaquete(nombre, descr, duracion, descuento, costo, fecha);
-                costo=0;
+                ctrlTipos.ingresarDatosPaquete(nombre, descr, duracion, descuento, fecha);
     			}
                 i++;
             }

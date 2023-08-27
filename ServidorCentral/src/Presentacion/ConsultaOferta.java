@@ -105,6 +105,7 @@ public class ConsultaOferta extends JInternalFrame{
 		table = new JTable();
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setEnabled(false);
+		table.getTableHeader().setReorderingAllowed(false);
 		table.setRowSelectionAllowed(false);
 		dtm = new DefaultTableModel(
 				new Object[][] {
@@ -413,8 +414,12 @@ public class ConsultaOferta extends JInternalFrame{
 		}
 	}
 	public void CargarDatosVisuales(String oferta) {
-		cbEmpresa.setSelectedIndex(0);
-		cbOferta.setSelectedIndex(0);
+		if(cbEmpresa.getItemCount() > 0) {
+			cbEmpresa.setSelectedIndex(0);
+		}
+		if(cbOferta.getItemCount() > 0) {
+			cbOferta.setSelectedIndex(0);
+		}
 		cbEmpresa.setEnabled(false);
 		cbOferta.setEnabled(false);
 		mostrarDatos(ctrlUsuario.seleccionarOfertaLaboral(oferta),dtm);

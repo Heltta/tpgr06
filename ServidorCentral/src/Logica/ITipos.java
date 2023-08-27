@@ -21,6 +21,6 @@ public interface ITipos {
 	public abstract Set<String> listarTiposPublicacion();
 	public void agregarTipoPublicacion(String nombrePaquete, String nombreTipo, int cant);
 	public abstract void borrarPaquetes();
-	public abstract void ingresarDatosPaquete(String nombre, String descripcion, int validez, double descuento, double costo, Date fechaAlta) throws nombrePaqueteRepetido;
+	public abstract void ingresarDatosPaquete(String nombre, String descripcion, int validez, double descuento, Date fechaAlta) throws nombrePaqueteRepetido;
 	public abstract Map<String, DTPaquete> obtenerDataPaquetes();
 }

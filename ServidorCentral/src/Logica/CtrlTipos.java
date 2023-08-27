@@ -70,13 +70,13 @@ public class CtrlTipos implements ITipos {
 		paquete.agregarTipo(tipo, cant);
 	}
 	
-	public void ingresarDatosPaquete(String nombre, String descripcion, int validez, double descuento, double costo, Date fechaAlta)throws nombrePaqueteRepetido {
+	public void ingresarDatosPaquete(String nombre, String descripcion, int validez, double descuento, Date fechaAlta)throws nombrePaqueteRepetido {
 		ManejadorPaquete muPaquete = ManejadorPaquete.getInstance();
 		boolean existe = muPaquete.existePaquete(nombre);
 		if (existe) {
 			throw new nombrePaqueteRepetido("Ya existe un Paquete de nombre " + nombre);
 		} else {
-			PaqueteTipoPublicacion nuevoPaquete = new PaqueteTipoPublicacion(nombre, descripcion, descuento, fechaAlta, costo, validez);
+			PaqueteTipoPublicacion nuevoPaquete = new PaqueteTipoPublicacion(nombre, descripcion, descuento, fechaAlta, validez);
 			muPaquete.agregarPaquete(nuevoPaquete);
 		}
 	}

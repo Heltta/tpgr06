@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
 import java.awt.event.ActionEvent;
+import javax.swing.ListSelectionModel;
 
 @SuppressWarnings("serial")
 public class PostulacionOferta extends JInternalFrame {
@@ -48,6 +49,7 @@ public class PostulacionOferta extends JInternalFrame {
 	private IUsuario ctrlUsuario;
 	
 	public PostulacionOferta(IUsuario ctrlUsuario, ConsultaOferta frmConsultaOferta) {
+		setClosable(true);
 		this.ctrlUsuario = ctrlUsuario;
 		
 		setResizable(true);
@@ -100,6 +102,7 @@ public class PostulacionOferta extends JInternalFrame {
 			  }
 		});	
 		lsPostulantes = new JList<String>();
+		lsPostulantes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		cbOferta.addItemListener(new ItemListener() {
 			  public void itemStateChanged(ItemEvent itemEvent) {
 				  if (itemEvent.getStateChange() == ItemEvent.SELECTED) {

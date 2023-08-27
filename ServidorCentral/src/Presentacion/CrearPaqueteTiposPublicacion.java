@@ -210,7 +210,7 @@ public class CrearPaqueteTiposPublicacion extends JInternalFrame{
 			int descuentoP = (int) spinnerDescuento.getValue();
 			Date fechaP = dateChooserAlta.getDate();
 			try {
-				ctrlTipos.ingresarDatosPaquete(nombreP, descripcionP, validezP, descuentoP, 0, fechaP);
+				ctrlTipos.ingresarDatosPaquete(nombreP, descripcionP, validezP, descuentoP, fechaP);
 				JOptionPane.showMessageDialog(this, "El Paquete de Tipos de Publicacion se ha creado con exito", "Crear Paquete de Tipos de Publicacion",
 						JOptionPane.INFORMATION_MESSAGE);
 				limpiarCrearPaquete();
