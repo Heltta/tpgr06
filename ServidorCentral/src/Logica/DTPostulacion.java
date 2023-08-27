@@ -4,17 +4,19 @@ import java.util.Date;
 
 public class DTPostulacion {
 
-	Date fechaPostulacion;
-	String resumenCV;
-	String descripcion;
-	String nombreOferta;
+	private Date fechaPostulacion;
+	private String resumenCV;
+	private String descripcion;
+	private String nombreOferta;
+	private String postulante;
 	
-	public DTPostulacion(Date fechaPostulacion, String resumenCV, String descripcion, String nombreOferta) {
+	public DTPostulacion(Date fechaPostulacion, String resumenCV, String descripcion, String nombreOferta, String post) {
 		super();
 		this.fechaPostulacion = fechaPostulacion;
 		this.resumenCV = resumenCV;
 		this.descripcion = descripcion;
 		this.nombreOferta= nombreOferta;
+		this.postulante = post;
 	}
 	public Date getFechaPostulacion() {
 		return fechaPostulacion;
@@ -27,5 +29,8 @@ public class DTPostulacion {
 	}
 	public String getNombreOferta() {
 		return nombreOferta;
+	}
+	public String getPostulante() {
+		return postulante;
 	}
 }

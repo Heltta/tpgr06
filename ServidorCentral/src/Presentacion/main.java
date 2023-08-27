@@ -400,10 +400,14 @@ public class main {
                 int j=0;
                 while ((line2 = br2.readLine()) != null) {
                 	if(j>0) {
+                		
                 		String[] data2 = line2.split(";");
-                		String [] data3= data2[1].replaceAll(" ", "").split(",");
-                		for (int l=0; l<data3.length; l++) {
-                			lkeywords.add(keywords.get(Integer.parseInt(data3[l].substring(1))-1));
+                		if(data[0].equals(data2[0])) {
+                			String [] data3= data2[1].replaceAll(" ", "").split(",");
+                			for (int l=0; l<data3.length; l++) {
+                				lkeywords.add(keywords.get(Integer.parseInt(data3[l].substring(1))-1));
+                			}
+                			break;
                 		}
                 	}
                 	j++;

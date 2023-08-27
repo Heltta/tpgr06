@@ -64,7 +64,7 @@ public class CtrlUsuario implements IUsuario {
 		    Postulante post = postulantes.get(clave);
 		    if (post.Postulaciones.containsKey(nombre)) {
 		    	Postulacion postulacion = post.Postulaciones.get(nombre);
-		    	DTPostulacion dataPostulacion= new DTPostulacion(postulacion.getFechaPostulacion(), postulacion.getResumenCV(), postulacion.getDescripcion(), nombre);
+		    	DTPostulacion dataPostulacion= new DTPostulacion(postulacion.getFechaPostulacion(), postulacion.getResumenCV(), postulacion.getDescripcion(), nombre, post.getNickname());
 				postulaciones.add(dataPostulacion);
 		    }
 		}
