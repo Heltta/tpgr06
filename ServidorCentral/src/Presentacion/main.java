@@ -101,8 +101,12 @@ public class main {
         frmTrabajoUy.getContentPane().add(frmConsultaPaquete);
         
         frmTrabajoUy.getContentPane().setLayout(null);
-        csvDirectory= System.getProperty("user.dir") + "\\src\\TProg_DatosPruebaTarea1_2023-CSVs-v1_0\\";
-
+        String os = System.getProperty("os.name");
+        if(os.equals("Linux")) {
+            csvDirectory= System.getProperty("user.dir") + "/src/TProg_DatosPruebaTarea1_2023-CSVs-v1_0/";
+        }else {
+        	csvDirectory= System.getProperty("user.dir") + "\\src\\TProg_DatosPruebaTarea1_2023-CSVs-v1_0\\";
+        }
     }
 
     private void initialize() {
