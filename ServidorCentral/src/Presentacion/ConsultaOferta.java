@@ -105,6 +105,7 @@ public class ConsultaOferta extends JInternalFrame{
 		table = new JTable();
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setEnabled(false);
+		table.getTableHeader().setReorderingAllowed(false);
 		table.setRowSelectionAllowed(false);
 		dtm = new DefaultTableModel(
 				new Object[][] {
