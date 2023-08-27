@@ -184,6 +184,16 @@ public class ConsultaUsuario extends JInternalFrame {
 		gbc_lPostulaciones_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lPostulaciones_1.gridx = 3;
 		gbc_lPostulaciones_1.gridy = 7;
+		lOfertasPostulante.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frameOferta.limpiarCampos();
+				frameOferta.setVisible(false);
+	            JComboBox<String> source = (JComboBox<String>) e.getSource();
+	            String selectedOption = (String) source.getSelectedItem();
+	            seleccionarOferta(selectedOption);
+			}
+		});
 		getContentPane().add(lOfertasPostulante, gbc_lPostulaciones_1);
 		
 		JLabel lblNewLabel_6 = new JLabel("Nombre de la empresa:");
