@@ -32,6 +32,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.FileSystems;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -101,12 +102,15 @@ public class main {
         frmTrabajoUy.getContentPane().add(frmConsultaPaquete);
         
         frmTrabajoUy.getContentPane().setLayout(null);
-        String os = System.getProperty("os.name");
-        if(os.equals("Linux")) {
-            csvDirectory= System.getProperty("user.dir") + "/src/TProg_DatosPruebaTarea1_2023-CSVs-v1_0/";
-        }else {
-        	csvDirectory= System.getProperty("user.dir") + "\\src\\TProg_DatosPruebaTarea1_2023-CSVs-v1_0\\";
-        }
+        String separador = FileSystems.getDefault().getSeparator();
+        csvDirectory= System.getProperty("user.dir") + separador + "src" + separador + "TProg_DatosPruebaTarea1_2023-CSVs-v1_0" + separador;
+
+        //String os = System.getProperty("os.name");
+        //if(os.equals("Linux")) {
+        //    csvDirectory= System.getProperty("user.dir") + "/src/TProg_DatosPruebaTarea1_2023-CSVs-v1_0/";
+        //}else {
+        //	csvDirectory= System.getProperty("user.dir") + "\\src\\TProg_DatosPruebaTarea1_2023-CSVs-v1_0\\";
+        //}
     }
 
     private void initialize() {
