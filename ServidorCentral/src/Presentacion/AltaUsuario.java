@@ -17,6 +17,7 @@ import java.awt.Component;
 import javax.swing.Box;
 import java.awt.Dimension;
 import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JTextFieldDateEditor;
 
 import Logica.IUsuario;
 
@@ -187,6 +188,8 @@ public class AltaUsuario extends JInternalFrame {
 		fechaDeNacimientoChooser = new JDateChooser();
 		GridBagConstraints gbc_fechaDeNacimientoChooser = new GridBagConstraints();
 		fechaDeNacimientoChooser.setEnabled(false);
+		JTextFieldDateEditor editorFecha = (JTextFieldDateEditor) fechaDeNacimientoChooser.getDateEditor();
+		editorFecha.setEditable(false);
 		gbc_fechaDeNacimientoChooser.insets = new Insets(0, 0, 5, 5);
 		gbc_fechaDeNacimientoChooser.fill = GridBagConstraints.BOTH;
 		gbc_fechaDeNacimientoChooser.gridx = 2;
@@ -347,6 +350,7 @@ public class AltaUsuario extends JInternalFrame {
 		fechaDeNacimientoChooser.setDate(null);
 		// Campos de Empresa
 		descripcionField.setText("");
+		nombreEmpresaField.setText("");
 		linkField.setText("");
 		
 	};
