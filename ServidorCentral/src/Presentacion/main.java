@@ -1,26 +1,44 @@
 package Presentacion;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import Logica.DTHorario;
+import Logica.Empresa;
 import Logica.Fabrica;
 import Logica.ITipos;
 import Logica.IUsuario;
+import Logica.ManejadorOferta;
+import Logica.ManejadorUsuario;
+import Logica.OfertaLaboral;
+import Logica.Postulante;
+import Logica.TipoPublicacion;
 
 import javax.swing.JMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.util.Date;
+
 import javax.swing.JInternalFrame;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class main {
 
     private JFrame frmTrabajoUy;
     private AltaTipoPublicacion frmAltaTipoPublicacion;
     private PostulacionOferta frmPostulacionOferta;
+    private AltaUsuario frmAltaUsuario;
     private IUsuario ctrlUsuario;
     private ITipos ctrlTipos;
     private AltaOferta frmAltaOferta;
@@ -28,6 +46,7 @@ public class main {
     private AgregarTipoPublicacionAPaquete frmAgregarTipoPublicacionAPaquete;
     private ConsultaOferta frmConsultaOferta;
     private CrearPaqueteTiposPublicacion frmCrearPaqueteTiposPublicacion;
+    private ConsultaPaquete frmConsultaPaquete;
 
 
     public static void main(String[] args) {
@@ -35,7 +54,8 @@ public class main {
             public void run() {
                 try {
                     main window = new main();
-                    window.frmTrabajoUy.setBounds(0,0,800,600);
+                    window.frmTrabajoUy.setBounds(0,0,900,700);
+                    window.frmTrabajoUy.setMinimumSize(new Dimension(870,620));
                     window.frmTrabajoUy.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -51,20 +71,29 @@ public class main {
         frmTrabajoUy.getContentPane().setLayout(null);
         frmAltaTipoPublicacion = new AltaTipoPublicacion(ctrlTipos);
         frmAltaOferta = new AltaOferta(ctrlUsuario);
-        frmPostulacionOferta = new PostulacionOferta(ctrlUsuario);
-        frmConsultaOferta = new ConsultaOferta(ctrlUsuario, "", "");
+        frmConsultaOferta = new ConsultaOferta(ctrlUsuario);
+        frmPostulacionOferta = new PostulacionOferta(ctrlUsuario, frmConsultaOferta);
+        frmAltaUsuario = new AltaUsuario(ctrlUsuario);
+        frmCrearPaqueteTiposPublicacion = new CrearPaqueteTiposPublicacion(ctrlTipos);
         frmAgregarTipoPublicacionAPaquete = new AgregarTipoPublicacionAPaquete(ctrlTipos);
-        frmAgregarTipoPublicacionAPaquete.setBounds(491, 56, 423, 266);
+        frmAgregarTipoPublicacionAPaquete.setBounds(0, 0, 423, 266);
         frmTrabajoUy.getContentPane().add(frmAgregarTipoPublicacionAPaquete);
         frmTrabajoUy.getContentPane().add(frmAltaTipoPublicacion);
         frmTrabajoUy.getContentPane().add(frmAltaOferta);
         frmTrabajoUy.getContentPane().add(frmPostulacionOferta);
         frmTrabajoUy.getContentPane().add(frmConsultaOferta);
-        frmConsultaUsuario = new ConsultaUsuario(ctrlUsuario);
+        frmTrabajoUy.getContentPane().add(frmAltaUsuario);
+        frmTrabajoUy.getContentPane().add(frmCrearPaqueteTiposPublicacion);
+        frmConsultaUsuario = new ConsultaUsuario(ctrlUsuario, frmConsultaOferta);
         frmConsultaUsuario.setBounds(0,0, 500, 500);
         frmTrabajoUy.getContentPane().add(frmConsultaUsuario); 
+        frmConsultaPaquete = new ConsultaPaquete(ctrlTipos);
+        frmTrabajoUy.getContentPane().add(frmConsultaPaquete);
         
         frmTrabajoUy.getContentPane().setLayout(null);
+        
+        CargarDatosDePrueba();
+        cargarDatosUsuarios();
     }
 
     private void initialize() {
@@ -90,6 +119,11 @@ public class main {
         menuBar.add(menuTipos);
         
         JMenuItem menuItemAltaUser = new JMenuItem("Alta Usuario");
+        menuItemAltaUser.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frmAltaUsuario.setVisible(true);
+            }
+        });
         menuUsuarios.add(menuItemAltaUser);
 
         JMenuItem menuItemConsultaUser = new JMenuItem("Consulta de Usuario");
@@ -123,7 +157,8 @@ public class main {
         JMenuItem menuItemConsultaOferta = new JMenuItem("Consulta de Oferta Laboral");
         menuItemConsultaOferta.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frmConsultaOferta.setVisible(true);
+                frmConsultaOferta.ListarEmpresas();
+            	frmConsultaOferta.setVisible(true);
             }
         });
         menuOferta.add(menuItemConsultaOferta);
@@ -132,7 +167,8 @@ public class main {
         menuOferta.add(menuItemPostulacion);
         menuItemPostulacion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frmPostulacionOferta.setVisible(true);
+                frmPostulacionOferta.ListarEmpresas();
+            	frmPostulacionOferta.setVisible(true);
             }
         });
         JMenuItem menuItemAltaTipo = new JMenuItem("Alta de Tipo de Publicacion de Oferta Laboral");
@@ -144,6 +180,11 @@ public class main {
         menuTipos.add(menuItemAltaTipo);
         
         JMenuItem menuItemCrearPaquete = new JMenuItem("Crear Paquete de Tipos de Publicacion");
+        menuItemCrearPaquete.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		frmCrearPaqueteTiposPublicacion.setVisible(true);
+        	}
+        });
         menuTipos.add(menuItemCrearPaquete);
         
         JMenuItem menuItemAgregarTipo = new JMenuItem("Agregar Tipo de Publicacion a Paquete");
@@ -157,14 +198,139 @@ public class main {
         menuTipos.add(menuItemAgregarTipo);
         
         JMenuItem menuItemConsultaPaquete = new JMenuItem("Consulta de Paquete de Tipos de Publicacion");
+        menuItemConsultaPaquete.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frmConsultaPaquete.cargarPaquetes();
+            	frmConsultaPaquete.setVisible(true);
+            }
+        });
         menuTipos.add(menuItemConsultaPaquete);
         
         JMenuItem menuItemAltaKeyword = new JMenuItem("Alta de Keyword");
         menuTipos.add(menuItemAltaKeyword);
     };
     
+    @SuppressWarnings("deprecation")
     public void CargarDatosDePrueba() {
-    	//De mientras que no hay alta de usuario.
+    	ManejadorOferta mo = ManejadorOferta.getInstancia();
+		ManejadorUsuario mu = ManejadorUsuario.getInstance();
+		//Postulantes
+		Postulante post = new Postulante("Juan123", "j123@mail.com", "Juan", "Perez", "Uruguayo", new Date(1996, 3, 4));
+		Postulante post1 = new Postulante("Gonzalo123", "g123@mail.com", "Gonzalo", "Diaz", "Argentino", new Date(1997, 6, 14));
+		Postulante post2 = new Postulante("Marcos123", "m123@mail.com", "Marcos", "Lopez", "Chileno", new Date(1998, 9, 25));
+		mu.agregarUsuario(post);
+		mu.agregarUsuario(post1);
+		mu.agregarUsuario(post2);
+		//Empresa
+		Empresa emp = new Empresa("Artech123", "artech@mail.com", "Rodrigo", "Rodriguez", "Artech SA", "Empresa de tecnologia", "asd");
+		Empresa emp1 = new Empresa("Tecni123", "tecni@mail.com", "Alvaro", "Rios", "Tecni SA", "Empresa de tecnicos", "asd");
+		Empresa emp2 = new Empresa("Simba123", "simba@mail.com", "Julieta", "Pio", "Simba SA", "Empresa de sabana", "asd");
+		mu.agregarUsuario(emp);
+		mu.agregarUsuario(emp1);
+		mu.agregarUsuario(emp2);
+		
+		DTHorario horario = new DTHorario("09:00", "18:00");
+		DTHorario horario1 = new DTHorario("08:00", "16:00");
+		DTHorario horario2 = new DTHorario("08:00", "14:00");
+		Date fecha = new Date(2023,3,4);
+		Date fecha1 = new Date(2022,12,3);
+		Date fecha2 = new Date(2023,4,14);
+		TipoPublicacion tipo = new TipoPublicacion("Oro", "descrip", 1, new Date(2023,5,1), 5000, 9);
+		TipoPublicacion tipo1 = new TipoPublicacion("Plata", "descrip", 2, new Date(2023,7,2), 3000, 8);
+		TipoPublicacion tipo2 = new TipoPublicacion("Bronce", "descrip", 3, new Date(2023,4,25), 2000, 6);
+		OfertaLaboral oferta = new OfertaLaboral("Desarrollador", "trabajo junior", "Ciudad", "Mdeo", horario, 3000, fecha, tipo, null);
+		OfertaLaboral oferta1 = new OfertaLaboral("Tecnico", "trabajo pc", "Ciudad1", "Mdeo1", horario1, 2000, fecha1, tipo1, null);
+		OfertaLaboral oferta2 = new OfertaLaboral("Animalista", "trabajo animales", "Ciudad2", "Mdeo2", horario2, 5000, fecha2, tipo2, null);
+		oferta.agregarPostulante(post);
+		oferta.agregarPostulante(post1);
+		oferta1.agregarPostulante(post);
+		post.postularAOferta(oferta, fecha, "cv asd", "Descr");
+		post1.postularAOferta(oferta, fecha1, "cv 2", "Descr2");
+		post.postularAOferta(oferta1, fecha, "cv asd", "Descr");
+		emp.agregarOferta(oferta);
+		emp1.agregarOferta(oferta1);
+		emp2.agregarOferta(oferta2);
+		mo.agregarOferta(oferta);
+		mo.agregarOferta(oferta1);
+		mo.agregarOferta(oferta2);
+    }
+    public void cargarDatosPrueba2() {
+
+    }
+    public void cargarDatosUsuarios() {
+    	String csvDirectory = System.getProperty("user.dir") + "\\src\\TProg_DatosPruebaTarea1_2023-CSVs-v1_0\\";
+    	String usuariosCSV=csvDirectory+"Usuarios.csv";
+    	String postulantesCSV=csvDirectory+"Usuarios-Postulantes.csv";
+    	String empresasCSV=csvDirectory+"Usuarios-Empresas.csv";
+    	String line;
+    	ArrayList<String> systemTagUsuarios= new ArrayList<String>();
     	
+    	ArrayList<String> systemTagPostulantes= new ArrayList<String>();
+    	ArrayList<String> fechaP= new ArrayList<String>();
+    	ArrayList<String> nacionalidadP= new ArrayList<String>();
+    	
+    	ArrayList<String> systemTagE= new ArrayList<String>();
+    	ArrayList<String> descE= new ArrayList<String>();
+    	ArrayList<String> linkE= new ArrayList<String>();
+    	int i=0;
+    	try (BufferedReader br = new BufferedReader(new FileReader(postulantesCSV))) {
+    		while ((line = br.readLine()) != null) {
+    			if(i>0) {
+                String[] data = line.split(";");
+                String sysName = data[0].trim();
+                String fecha = data[1].trim();
+                String nacionalidad= data[2].trim();
+                systemTagPostulantes.add(sysName);
+                fechaP.add(fecha);
+                nacionalidadP.add(nacionalidad);
+    			}
+                i++;
+            }
+    	}
+    	catch(IOException e){
+    		e.printStackTrace();
+    	}
+    	i=0;
+    	try (BufferedReader br = new BufferedReader(new FileReader(empresasCSV))) {
+    		while ((line = br.readLine()) != null) {
+    			if(i>0) {
+                String[] data = line.split(";");
+                String sysName = data[0].trim();
+                String desc = data[1].trim();
+                String link= data[2].trim();
+                systemTagE.add(sysName);
+                descE.add(desc);
+                linkE.add(link);
+    			}
+                i++;
+            }
+    	}
+    	catch(IOException e){
+    		e.printStackTrace();
+    	}
+    	i=0;
+    	try (BufferedReader br = new BufferedReader(new FileReader(usuariosCSV))) {
+    		while ((line = br.readLine()) != null) {
+    			if(i>0) {
+                String[] data = line.split(";");
+                String sysName = data[0].trim();
+                String nickname = data[2].trim();
+                String nombre= data[3].trim();
+                String apellido= data[4].trim();
+                String mail= data[5].trim();
+                if(systemTagPostulantes.contains(sysName)) {
+                	String[] numerosFecha = fechaP.get(i-1).split("/");
+                	Date fecha =new Date(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
+                	ctrlUsuario.ingresarPostulante(nickname, nombre, apellido, mail, fecha, nacionalidadP.get(systemTagPostulantes.indexOf(sysName)));
+                }else {
+                	ctrlUsuario.ingresarEmpresa(nickname, nombre, apellido, mail, nickname ,descE.get(systemTagE.indexOf(sysName)), linkE.get(systemTagE.indexOf(sysName)));
+                }
+    			}
+                i++;
+            }
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+		}
     }
 }

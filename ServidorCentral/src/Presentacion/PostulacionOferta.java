@@ -10,6 +10,7 @@ import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
 import java.awt.Insets;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
@@ -33,6 +34,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Set;
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
@@ -45,14 +47,13 @@ public class PostulacionOferta extends JInternalFrame {
 	private final JList<String> lsPostulantes;
 	private IUsuario ctrlUsuario;
 	
-	public PostulacionOferta(IUsuario ctrlUsuario) {
+	public PostulacionOferta(IUsuario ctrlUsuario, ConsultaOferta frmConsultaOferta) {
 		this.ctrlUsuario = ctrlUsuario;
 		
 		setResizable(true);
         setIconifiable(true);
         setMaximizable(true);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        setClosable(true);
 		setTitle("Postulación a oferta laboral");
 		setBounds(0, 0, 400, 480);
 		setMinimumSize(new Dimension(400, 480));
@@ -72,47 +73,55 @@ public class PostulacionOferta extends JInternalFrame {
 		
 		cbOferta = new JComboBox<String>();
 		cbOferta.addItem("Seleccionar");
-		
 		cbEmpresa = new JComboBox<String>();
-		cbEmpresa.addItem("Seleccionar");
-		for(String empresa : ctrlUsuario.listarEmpresas()) {
-			cbEmpresa.addItem(empresa);
-		}
-		
+
 		cbEmpresa.addItemListener(new ItemListener() {
 			  public void itemStateChanged(ItemEvent itemEvent) {
-				  if(cbEmpresa.getSelectedIndex() != 0) {
-					  cbOferta.removeAllItems();
-					  cbOferta.addItem("Seleccionar");
-					  for(String oferta : ctrlUsuario.obtenerOfertasDeEmpresa(cbEmpresa.getSelectedItem().toString())) {
-						  cbOferta.addItem(oferta);
+				  if (itemEvent.getStateChange() == ItemEvent.SELECTED) {
+					  frmConsultaOferta.limpiarCampos();
+					  frmConsultaOferta.setVisible(false);
+					  if(cbEmpresa.getSelectedIndex() != 0) {
+						  cbOferta.removeAllItems();
+						  String empresa = (cbEmpresa.getSelectedItem() != null)?cbEmpresa.getSelectedItem().toString():"";
+						  Set<String> ofertas = ctrlUsuario.obtenerOfertasDeEmpresa(empresa);
+						  String[] ofertasCombo = new String[ofertas.size()+1];
+						  ofertasCombo[0] = "Seleccionar";
+						  int i = 1;
+						  for(String of : ofertas) {
+							  ofertasCombo[i] = of;
+							  i++;
+						  }
+						  cbOferta.setModel(new DefaultComboBoxModel<String> (ofertasCombo));
+					  }else {
+						  cbOferta.removeAllItems();
+						  cbOferta.addItem("Seleccionar");
 					  }
-				  }else {
-					  cbOferta.removeAllItems();
-					  cbOferta.addItem("Seleccionar");
 				  }
 			  }
 		});	
 		lsPostulantes = new JList<String>();
 		cbOferta.addItemListener(new ItemListener() {
 			  public void itemStateChanged(ItemEvent itemEvent) {
-				  if(cbOferta.getSelectedIndex() != 0) {
-					 ConsultaOferta consulta = new ConsultaOferta(ctrlUsuario, cbEmpresa.getSelectedItem().toString(), cbOferta.getSelectedItem().toString());
-					 consulta.setVisible(true); 
-					 final DefaultListModel<String> model = new DefaultListModel<String>();
-					 for(String post : ctrlUsuario.listarPostulantes()) {
-						 model.addElement(post);
-					 }
-					 lsPostulantes.setModel(model);
-				  }
+				  if (itemEvent.getStateChange() == ItemEvent.SELECTED) {
+					  limpiarCamposPostulacion();
+					  frmConsultaOferta.limpiarCampos();
+					  frmConsultaOferta.setVisible(false);
+					  if(cbOferta.getSelectedIndex() != 0) {
+						  frmConsultaOferta.CargarDatosVisuales(cbOferta.getSelectedItem().toString());
+						  frmConsultaOferta.setVisible(true); 
+						  final DefaultListModel<String> model = new DefaultListModel<String>();
+						  for(String post : ctrlUsuario.listarPostulantes()) {
+							  model.addElement(post);
+						  }
+						  lsPostulantes.setModel(model);
+					  }
+				  } 
 			  }
 		});
 		lsPostulantes.addListSelectionListener(new ListSelectionListener(){
 			public void valueChanged(ListSelectionEvent e){
 				if (!lsPostulantes.isSelectionEmpty()) {
-					taCV.setEditable(false);
-					taMotivacion.setEditable(true);
-					chooserFecha.setEnabled(true);
+					
 				}
 			}
 		});
@@ -178,7 +187,6 @@ public class PostulacionOferta extends JInternalFrame {
 		getContentPane().add(scrollPane, gbc_scrollPane);
 		
 		taCV = new JTextArea();
-		taCV.setEditable(false);
 		scrollPane.setViewportView(taCV);
 		taCV.setLineWrap(true);
 		
@@ -199,15 +207,13 @@ public class PostulacionOferta extends JInternalFrame {
 		getContentPane().add(scrollPane_1, gbc_scrollPane_1);
 		
 		taMotivacion = new JTextArea();
-		taMotivacion.setEditable(false);
 		scrollPane_1.setViewportView(taMotivacion);
 		taMotivacion.setLineWrap(true);
 		
 		chooserFecha = new JDateChooser();
-		chooserFecha.getCalendarButton().setEnabled(false);
 		JTextFieldDateEditor editorFecha = (JTextFieldDateEditor) chooserFecha.getDateEditor();
 		editorFecha.setEditable(false);
-		editorFecha.setEnabled(false);
+		editorFecha.setEnabled(true);
 		
 		JLabel lblFecha = new JLabel("Fecha");
 		GridBagConstraints gbc_lblFecha = new GridBagConstraints();
@@ -226,7 +232,7 @@ public class PostulacionOferta extends JInternalFrame {
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cmdPostulacionAOferta(e);
+				cmdPostulacionAOferta(e, frmConsultaOferta);
 			}
 		});
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
@@ -239,7 +245,11 @@ public class PostulacionOferta extends JInternalFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frmConsultaOferta.limpiarCampos();
+				frmConsultaOferta.setVisible(false);
 				limpiarCamposPostulacion();
+				cbOferta.removeAllItems();
+				cbOferta.addItem("Seleccionar");
 				setVisible(false);
 			}
 		});
@@ -248,7 +258,18 @@ public class PostulacionOferta extends JInternalFrame {
 		gbc_btnCancelar.gridy = 15;
 		getContentPane().add(btnCancelar, gbc_btnCancelar);
 	}
-	private void cmdPostulacionAOferta(ActionEvent e) {
+	public void ListarEmpresas() {
+		Set<String> empresas = ctrlUsuario.listarEmpresas();
+		String[] empresasCombo = new String[empresas.size()+1];
+		empresasCombo[0] = "Seleccionar";
+		int i = 1;
+		for(String emp : empresas) {
+			empresasCombo[i] = emp;
+			i++;
+		}
+		cbEmpresa.setModel(new DefaultComboBoxModel<String> (empresasCombo));
+	}
+	private void cmdPostulacionAOferta(ActionEvent e, ConsultaOferta frmConsultaOferta) {
 		String empresa = this.cbEmpresa.getSelectedItem().toString();
 		String oferta = this.cbOferta.getSelectedItem().toString();
 		String postulante = (lsPostulantes.getSelectedValue() == null)?"":lsPostulantes.getSelectedValue();
@@ -269,6 +290,12 @@ public class PostulacionOferta extends JInternalFrame {
 			if(cantidadErrores == 0) {
 				ctrlUsuario.ingresarDatosPostulacion(postulante, cv, motivacion, oferta, fecha);
 				JOptionPane.showMessageDialog(this, "Se ha agregado la postulación con éxito", "Postulación a oferta laboral", JOptionPane.INFORMATION_MESSAGE);
+				limpiarCamposPostulacion();
+				frmConsultaOferta.limpiarCampos();
+				frmConsultaOferta.setVisible(false);
+				cbOferta.removeAllItems();
+				cbOferta.addItem("Seleccionar");
+				cbEmpresa.setSelectedIndex(0);
 			}else {
 				throw new Exception(mensaje);
 			}
@@ -282,23 +309,22 @@ public class PostulacionOferta extends JInternalFrame {
 	}
 	private ArrayList<String> verificarCampos(String empresa, String oferta, String postulante, String cv, String motivacion, Date fecha){
 		ArrayList<String> error = new ArrayList<String>();
-		error.add((empresa.equals("Seleccionar"))?"Empresa":"");
-		error.add((oferta.equals("Seleccionar"))?"Oferta":"");
-		error.add((postulante.isEmpty())?"Postulante":"");
-		error.add((cv.isEmpty())?"CV":"");
-		error.add((motivacion.isEmpty())?"Motivacion":"");
-		error.add((fecha == null)?"Fecha":"");
+		error.add((empresa.equals("Seleccionar"))?"Seleccionar una empresa":"");
+		error.add((oferta.equals("Seleccionar"))?"Seleccionar una oferta":"");
+		error.add((postulante.isEmpty())?"Seleccionar un postulante":"");
+		error.add((cv.isEmpty())?"Ingresar un CV resumido":"");
+		error.add((motivacion.isEmpty())?"Ingresar su motivacion":"");
+		error.add((fecha == null)?"Ingresar una Fecha":"");
 	
 		return error;
 	}
 	private void limpiarCamposPostulacion() {
-		cbEmpresa.setSelectedIndex(0);
-		cbOferta.setSelectedIndex(0);
 		taCV.selectAll();
 		taCV.replaceSelection("");
 		taMotivacion.selectAll();
 		taMotivacion.replaceSelection("");
-		chooserFecha.setDate(new Date());
+		chooserFecha.setDate(null);
+		lsPostulantes.setModel(new DefaultListModel<String>());
 	};
 	
 }

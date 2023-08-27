@@ -1,15 +1,19 @@
 package Logica;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import Excepciones.PostulanteRepetido;
 import Excepciones.nombreTipoPublicacionRepetido;
 
 public class CtrlUsuario implements IUsuario {
-
+	
 
 	public void ingresarDatosPostulacion(String postulante, String cv, String motivacion, String oferta, Date fecha) throws PostulanteRepetido {
 		ManejadorOferta mo = ManejadorOferta.getInstancia();
@@ -52,16 +56,22 @@ public class CtrlUsuario implements IUsuario {
 		OfertaLaboral o = mo.obtenerOferta(nombre);
 		String nombreTipo=o.getTipo().getNombre();
 		Map<String,Postulante> postulantes= o.getPostulantes();
-		Set<DTPostulacion> postulaciones = new TreeSet<>();
-		postulantes.forEach((String nombrePostulante, Postulante postulante) -> {
-			if(postulante.Postulaciones.containsKey(nombre)) {
-				Postulacion postulacion= postulante.Postulaciones.get(nombre);
-				DTPostulacion dataPostulacion= new DTPostulacion(postulacion.getFechaPostulacion(), postulacion.getResumenCV(), postulacion.getDescripcion(), nombre);
+		Set<DTPostulacion> postulaciones = new HashSet<>();
+		
+		Iterator<String> it = postulantes.keySet().iterator();
+		while(it.hasNext()){
+		    String clave = it.next();
+		    Postulante post = postulantes.get(clave);
+		    if (post.Postulaciones.containsKey(nombre)) {
+		    	Postulacion postulacion = post.Postulaciones.get(nombre);
+		    	DTPostulacion dataPostulacion= new DTPostulacion(postulacion.getFechaPostulacion(), postulacion.getResumenCV(), postulacion.getDescripcion(), nombre);
 				postulaciones.add(dataPostulacion);
-			}
-		});
+		    }
+		}
 		DTOfertaLaboral dataOferta= new DTOfertaLaboral(o.getNombre() ,o.getDescripcion(), o.getCiudad(), o.getDepartamento(), o.getHorario(), o.getRemuneracion(), o.getFecha(), nombreTipo, o.getKeywords(), postulaciones);
 		return dataOferta;
+		
+
 	}
 	public Set<String> listarEmpresas(){
 		ManejadorUsuario mu = ManejadorUsuario.getInstance();
@@ -101,7 +111,47 @@ public class CtrlUsuario implements IUsuario {
 		if(mu.existeUsuario(empresa)) {
 			return ((Empresa) mu.getUsuario(empresa)).getNombreOfertas();
 		}else {
-			return null;
+			return new HashSet<String>();
 		}
+	}
+	
+	private void checkUnicidad(String email, String nick) throws Exception {
+		ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstance();
+		if(manejadorUsuario.existeEmailDeUsuario(email)) {
+			throw new Exception("Correo electrónico ya existe");
+		}
+		if(manejadorUsuario.existeUsuario(nick)) {
+			throw new Exception("Nickname ya existe");
+		}
+	}
+	
+	public void ingresarPostulante(
+			String nickName,
+			String nombre,
+			String apellido,
+			String correoElectronico,
+			Date fechaNacimiento,
+			String nacionalidad) throws Exception {
+		
+		ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstance();
+		
+		checkUnicidad(correoElectronico, nickName);
+		manejadorUsuario.agregarUsuario(new Postulante(nickName, nombre, apellido, correoElectronico, nacionalidad, fechaNacimiento));
+	}
+	
+	public void ingresarEmpresa(
+			String nickName,
+			String nombre,
+			String apellido,
+			String correoElectronico,
+			String nombreEmpresa,
+			String descripcion,
+			String link) throws Exception {
+		
+		ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstance();
+		
+		checkUnicidad(correoElectronico, nickName);
+		
+		manejadorUsuario.agregarUsuario(new Empresa(nickName, nombre, apellido, nombreEmpresa, correoElectronico, descripcion, link));
 	}
 }

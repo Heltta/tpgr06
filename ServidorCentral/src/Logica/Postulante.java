@@ -7,10 +7,10 @@ import java.util.Map;
 
 public class Postulante extends Usuario {
 	String nacionalidad;
-	LocalDate fechaNacimiento;
+	Date fechaNacimiento;
 	Map<String, Postulacion> Postulaciones;
 	
-	void postularAOferta(OfertaLaboral oferta, Date fecha, String cv, String descripcion) {
+	public void postularAOferta(OfertaLaboral oferta, Date fecha, String cv, String descripcion) {
 		if(!Postulaciones.containsKey(oferta.getNombre())) {
 			Postulacion post = new Postulacion(fecha, cv, descripcion, oferta);
 			Postulaciones.put(oferta.getNombre(), post);
@@ -18,7 +18,7 @@ public class Postulante extends Usuario {
 		oferta.agregarPostulante(this);
 	}
 	
-	public Postulante(String nickname,String mail,String nombre,String apellido,String nacionalidad, LocalDate fechaNacimiento) {
+	public Postulante(String nickname,String mail,String nombre,String apellido,String nacionalidad, Date fechaNacimiento) {
 		super(nickname,mail,nombre,apellido);
 		this.nacionalidad = nacionalidad;
 		this.fechaNacimiento = fechaNacimiento;
@@ -30,10 +30,10 @@ public class Postulante extends Usuario {
 	public void setNacionalidad(String nacionalidad) {
 		this.nacionalidad = nacionalidad;
 	}
-	public LocalDate getFechaNacimiento() {
+	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}
-	public void setFechaNacimiento(LocalDate fechaNacimiento) {
+	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 	public Map<String, Postulacion> getPostulaciones() {

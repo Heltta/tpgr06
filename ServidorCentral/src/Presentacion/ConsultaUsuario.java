@@ -1,6 +1,7 @@
 package Presentacion;
 
 import java.awt.EventQueue;
+import java.util.Date;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -46,13 +47,14 @@ public class ConsultaUsuario extends JInternalFrame {
 	private JComboBox lOfertasPostulante;
 	private JComboBox lOfertasEmpresa;
 	private ConsultaOferta frameOferta;
-	
-	public ConsultaUsuario(IUsuario IUs) {
+
+	public ConsultaUsuario(IUsuario IUs, ConsultaOferta frmConsultaOferta) {
 		setClosable(true);
 		IU=IUs;
+		frameOferta = frmConsultaOferta;
 		setResizable(true);
 		setTitle("Consulta de Usuario");
-		setBounds(100, 100, 497, 431);
+		setBounds(0, 0, 497, 431);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -76,6 +78,8 @@ public class ConsultaUsuario extends JInternalFrame {
 		lNicknames.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				frameOferta.limpiarCampos();
+				frameOferta.setVisible(false);
 	            JComboBox<String> source = (JComboBox<String>) e.getSource();
 	            String selectedOption = (String) source.getSelectedItem();
 	            seleccionarNickname(selectedOption);
@@ -232,7 +236,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		gbc_lblNewLabel_11.gridx = 0;
 		gbc_lblNewLabel_11.gridy = 11;
 		getContentPane().add(lblNewLabel_11, gbc_lblNewLabel_11);
-		
+
 		lOfertasEmpresa = new JComboBox();
 		GridBagConstraints gbc_lPostulaciones_2 = new GridBagConstraints();
 		gbc_lPostulaciones_2.insets = new Insets(0, 0, 5, 0);
@@ -242,6 +246,8 @@ public class ConsultaUsuario extends JInternalFrame {
 		lOfertasEmpresa.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				frameOferta.limpiarCampos();
+				frameOferta.setVisible(false);
 	            JComboBox<String> source = (JComboBox<String>) e.getSource();
 	            String selectedOption = (String) source.getSelectedItem();
 	            seleccionarOferta(selectedOption);
@@ -250,9 +256,11 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(lOfertasEmpresa, gbc_lPostulaciones_2);
 	}
 	public void update(String[] nickUsuarios){
+		limpiarDatosUnicos();
 		lNicknames.setModel(new DefaultComboBoxModel<String> (nickUsuarios));
 	}
 	public void seleccionarNickname(String nickname) {
+		limpiarDatosUnicos();
 		DTUsuario datosUsuario= IU.mostrarDatosUsuario(nickname);
 		cNombre.setText(datosUsuario.getNombre());
 		cApellido.setText(datosUsuario.getApellido());
@@ -262,22 +270,40 @@ public class ConsultaUsuario extends JInternalFrame {
 			cEmpresa.setText(dataEmpresa.getNombreEmpresa());
 			cDescripcion.setText(dataEmpresa.getDescripcion());
 			cLink.setText(dataEmpresa.getLink());
-			String [] listaOfertasEmpresa= dataEmpresa.getNombreOfertas().toArray(new String[0]);
+			if (dataEmpresa.getNombreOfertas() != null) {
+				String [] listaOfertasEmpresa= dataEmpresa.getNombreOfertas().toArray(new String[0]);
 			lOfertasEmpresa.setModel(new DefaultComboBoxModel<String> (listaOfertasEmpresa));
+			}
 		}
 		else {
 			DTPostulante dataPostulante= (DTPostulante) datosUsuario;
 			cNacionalidad.setText(dataPostulante.getNacionalidad());
-			LocalDate fechaNacimiento=dataPostulante.getFechaNacimiento();
+			Date fechaNacimiento=dataPostulante.getFechaNacimiento();
 			String nacimiento= fechaNacimiento.toString();
 			cNacimiento.setText(nacimiento);
-			String [] listaOfertasPostulante = dataPostulante.getNombreOfertas().toArray(new String[0]);
-			lOfertasPostulante.setModel(new DefaultComboBoxModel<String>(listaOfertasPostulante));
+			if (dataPostulante.getNombreOfertas() != null) {
+				String [] listaOfertasPostulante = dataPostulante.getNombreOfertas().toArray(new String[0]);
+				lOfertasPostulante.setModel(new DefaultComboBoxModel<String>(listaOfertasPostulante));
+			}
 		}
 	}
 	public void seleccionarOferta(String nombreOferta) {
-		String nombreEmpresa= (String) lNicknames.getSelectedItem();
-		if(frameOferta!=null)frameOferta.setVisible(false);
-		frameOferta= new ConsultaOferta(IU, nombreEmpresa, nombreOferta);
+		frameOferta.CargarDatosVisuales(nombreOferta);
+		frameOferta.setVisible(true);
+		//if(frameOferta!=null)frameOferta.setVisible(false);
+		//frameOferta= new ConsultaOferta(IU);
+	}
+	public void limpiarDatosUnicos() {
+		cNombre.setText("");
+		cApellido.setText("");
+		cCorreo.setText("");
+		cNacionalidad.setText("");
+		cNacimiento.setText("");
+		cEmpresa.setText("");
+		cDescripcion.setText("");
+		cLink.setText("");
+		lOfertasEmpresa.setModel(new DefaultComboBoxModel<String>());
+		lOfertasPostulante.setModel(new DefaultComboBoxModel<String>());
+		
 	}
 }

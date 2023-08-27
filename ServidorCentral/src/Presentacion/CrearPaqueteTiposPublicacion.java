@@ -23,6 +23,11 @@ import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.SpinnerNumberModel;
 import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JTextFieldDateEditor;
+
+import Excepciones.nombrePaqueteRepetido;
+import Excepciones.nombreTipoPublicacionRepetido;
+
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -95,7 +100,7 @@ public class CrearPaqueteTiposPublicacion extends JInternalFrame{
         gbc_scrollPane.gridy = 2;
         getContentPane().add(scrollPane, gbc_scrollPane);
         
-        JTextArea textAreaDescripcion = new JTextArea();
+        textAreaDescripcion = new JTextArea();
         textAreaDescripcion.setLineWrap(true);
         scrollPane.setViewportView(textAreaDescripcion);
         
@@ -157,6 +162,9 @@ public class CrearPaqueteTiposPublicacion extends JInternalFrame{
         gbc_dateChooserAlta.gridy = 7;
         getContentPane().add(dateChooserAlta, gbc_dateChooserAlta);
         
+		JTextFieldDateEditor editorFechaAlta = (JTextFieldDateEditor) dateChooserAlta.getDateEditor();
+		editorFechaAlta.setEditable(false);
+        
         JPanel panel_2 = new JPanel();
         GridBagConstraints gbc_panel_2 = new GridBagConstraints();
         gbc_panel_2.insets = new Insets(0, 0, 5, 5);
@@ -169,6 +177,7 @@ public class CrearPaqueteTiposPublicacion extends JInternalFrame{
         JButton btnAceptar = new JButton("Aceptar");
         btnAceptar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		cmdCrearPaqueteTipos(e);
         	}
         });
         panel_2.add(btnAceptar);
@@ -179,6 +188,8 @@ public class CrearPaqueteTiposPublicacion extends JInternalFrame{
         JButton btnCancelar = new JButton("Cancelar");
         btnCancelar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		setVisible(false);
+        		limpiarCrearPaquete();
         	}
         });
         panel_2.add(btnCancelar);
@@ -189,6 +200,24 @@ public class CrearPaqueteTiposPublicacion extends JInternalFrame{
         gbc_rigidArea.gridy = 10;
         getContentPane().add(rigidArea, gbc_rigidArea);
 	}
+	
+	private void cmdCrearPaqueteTipos(ActionEvent e) {
+		if (checkFormulario()) {
+			String nombreP = textFieldNombre.getText();
+			String descripcionP = textAreaDescripcion.getText();
+			int validezP = (int) spinnerValidez.getValue();
+			int descuentoP = (int) spinnerDescuento.getValue();
+			Date fechaP = dateChooserAlta.getDate();
+			try {
+				ctrlTipos.ingresarDatosPaquete(nombreP, descripcionP, validezP, descuentoP, 0, fechaP);
+				JOptionPane.showMessageDialog(this, "El Paquete de Tipos de Publicacion se ha creado con exito", "Crear Paquete de Tipos de Publicacion",
+						JOptionPane.INFORMATION_MESSAGE);
+			} catch (nombrePaqueteRepetido e1) {
+				JOptionPane.showMessageDialog(this, e1.getMessage(), "Crear Paquete Tipos de Publicacion",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+	}
 
 	private boolean checkFormulario() {
 		String descripcion = textAreaDescripcion.getText();
@@ -197,16 +226,9 @@ public class CrearPaqueteTiposPublicacion extends JInternalFrame{
     	if (descripcion.isEmpty() || nombre.isEmpty() || fecha == null) {
 			JOptionPane.showMessageDialog(this, "Debe llenar todos los campos", "Crear Paquete de Tipos de Publicacion", JOptionPane.ERROR_MESSAGE);
 			return false;
-    	} else {
-			try {
-				Integer.parseInt((String)spinnerValidez.getValue());
-				Integer.parseInt((String)spinnerDescuento.getValue());
-			}catch (NumberFormatException ev) {
-				JOptionPane.showMessageDialog(this, "Debe ingresar un valor entero", "Agregar Tipo de Publicacion a Paquete", JOptionPane.ERROR_MESSAGE);
-				return false;
-			}
-    	return true;
     	}
+
+    	return true;
 	}
 	private void limpiarCrearPaquete() {
 		textFieldNombre.setText("");
