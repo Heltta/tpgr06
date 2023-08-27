@@ -1,6 +1,7 @@
 package Tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
@@ -150,4 +151,217 @@ public class TestAltaUsuario {
 		 assertEquals(datosValidos.getDescripcion(), datosEmpresaCreado.getDescripcion());
 		 assertEquals(datosValidos.getLink(), datosEmpresaCreado.getLink());
 	 }
+	 
+	 @Test
+	 void ingresarPostulanteCasoInvalidoNickRepetido() {
+		 @SuppressWarnings("deprecation")
+		 DTPostulante datosValidos = new DTPostulante(
+			 "xX_the_original_Xx",
+			 "so_original@gmail.com",
+			 "Juan",
+			 "Perez",
+			 "Uruguay",
+			 new Date(1,1,2000),
+			 new HashSet<String>());
+		 
+		 @SuppressWarnings("deprecation")
+		 DTPostulante datosNickRepetido = new DTPostulante(
+			 "xX_the_original_Xx",
+			 "so_original2000@gmail.com",
+			 "Luis",
+			 "Rodriguez",
+			 "Chile",
+			 new Date(1,1,2000),
+			 new HashSet<String>());
+		
+		Fabrica fab = Fabrica.getInstance();
+		IUsuario ctrlUsuario = fab.getIUsuario();
+			
+		try {
+			ctrlUsuario.ingresarPostulante(
+					 datosValidos.getNickname(),
+					 datosValidos.getNombre(),
+					 datosValidos.getApellido(),
+					 datosValidos.getMail(),
+					 datosValidos.getFechaNacimiento(),
+					 datosValidos.getNacionalidad());
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+		
+		 
+		Exception thrown = assertThrows(Exception.class, () -> {
+			ctrlUsuario.ingresarPostulante(
+					datosNickRepetido.getNickname(),
+					datosNickRepetido.getNombre(),
+					datosNickRepetido.getApellido(),
+					datosNickRepetido.getMail(),
+					datosNickRepetido.getFechaNacimiento(),
+					datosNickRepetido.getNacionalidad());
+		});
+		 
+		  assertEquals("Nickname ya existe", thrown.getMessage());
+		 
+	 }
+	 
+	 @Test
+	 void ingresarEmpresaCasoInvalidoNickRepetido() {
+		 DTEmpresa datosValidos = new DTEmpresa(
+			 "ofertasImperdibles",
+			 "super_ofertas@gmail.com",
+			 "José",
+			 "Washington",
+			 "Ofertas Imperdibles",
+			 "La cadena de supermercados con los mejores precios del mundo",
+			 "https://www.supimperdibles.com.uy",
+			 new HashSet<String>());
+		 
+		 DTEmpresa datosNickRepetido = new DTEmpresa(
+			 "ofertasImperdibles",
+			 "ofertas_imperdibles@gmail.com",
+			 "Álvaro",
+			 "Bosques",
+			 "Super Ofertas Imperdibles",
+			 "Cadenas de supermercados con precios insuperables",
+			 "https://www.mejorandotuscompras.com.uy",
+			 new HashSet<String>());
+		
+		Fabrica fab = Fabrica.getInstance();
+		IUsuario ctrlUsuario = fab.getIUsuario();
+			
+		try {
+			ctrlUsuario.ingresarEmpresa(
+					 datosValidos.getNickname(),
+					 datosValidos.getNombre(),
+					 datosValidos.getApellido(),
+					 datosValidos.getMail(),
+					 datosValidos.getNombreEmpresa(),
+					 datosValidos.getDescripcion(),
+					 datosValidos.getLink());
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+		
+		 
+		Exception thrown = assertThrows(Exception.class, () -> {
+			ctrlUsuario.ingresarEmpresa(
+					datosNickRepetido.getNickname(),
+					datosNickRepetido.getNombre(),
+					datosNickRepetido.getApellido(),
+					datosNickRepetido.getMail(),
+					datosNickRepetido.getNombreEmpresa(),
+					datosNickRepetido.getDescripcion(),
+					datosNickRepetido.getLink());
+		});
+		 
+		  assertEquals("Nickname ya existe", thrown.getMessage());
+		 
+	 }
+	 
+	 @Test
+	 void ingresarPostulanteCasoInvalidoMailRepetido() {
+		 @SuppressWarnings("deprecation")
+		 DTPostulante datosValidos = new DTPostulante(
+			 "darkest_originalus",
+			 "is_not_a_phase_mom@gmail.com",
+			 "Jimmy",
+			 "Wong",
+			 "United States of America",
+			 new Date(1,1,2000),
+			 new HashSet<String>());
+		 
+		 @SuppressWarnings("deprecation")
+		 DTPostulante datosMailRepetido = new DTPostulante(
+			 "xX-the-baddest-demon-Xx",
+			 "is_not_a_phase_mom@gmail.com",
+			 "Timmy",
+			 "Jhones",
+			 "United States of America",
+			 new Date(1,1,2000),
+			 new HashSet<String>());
+		
+		Fabrica fab = Fabrica.getInstance();
+		IUsuario ctrlUsuario = fab.getIUsuario();
+			
+		try {
+			ctrlUsuario.ingresarPostulante(
+					 datosValidos.getNickname(),
+					 datosValidos.getNombre(),
+					 datosValidos.getApellido(),
+					 datosValidos.getMail(),
+					 datosValidos.getFechaNacimiento(),
+					 datosValidos.getNacionalidad());
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+		
+		 
+		Exception thrown = assertThrows(Exception.class, () -> {
+			ctrlUsuario.ingresarPostulante(
+					datosMailRepetido.getNickname(),
+					datosMailRepetido.getNombre(),
+					datosMailRepetido.getApellido(),
+					datosMailRepetido.getMail(),
+					datosMailRepetido.getFechaNacimiento(),
+					datosMailRepetido.getNacionalidad());
+		});
+		 
+		  assertEquals("Correo electrónico ya existe", thrown.getMessage());
+		 
+	 }
+	 
+	 @Test
+	 void ingresarEmpresaCasoInvalidoMailRepetido() {
+		 DTEmpresa datosValidos = new DTEmpresa(
+			 "tata-consultancy-services",
+			 "tata@gmail.com",
+			 "Emir",
+			 "Sharma",
+			 "Tata Consultancy Services",
+			 "We are not a supermarket",
+			 "https://www.tcs.com",
+			 new HashSet<String>());
+		 
+		 DTEmpresa datosMailRepetido = new DTEmpresa(
+			 "tata-supermercado",
+			 "tata@gmail.com",
+			 "Gustavo",
+			 "Dominguez",
+			 "Super Ofertas Imperdibles",
+			 "Cadenas de supermercados con precios insuperables",
+			 "https://www.tata.com.uy",
+			 new HashSet<String>());
+		
+		Fabrica fab = Fabrica.getInstance();
+		IUsuario ctrlUsuario = fab.getIUsuario();
+			
+		try {
+			ctrlUsuario.ingresarEmpresa(
+					 datosValidos.getNickname(),
+					 datosValidos.getNombre(),
+					 datosValidos.getApellido(),
+					 datosValidos.getMail(),
+					 datosValidos.getNombreEmpresa(),
+					 datosValidos.getDescripcion(),
+					 datosValidos.getLink());
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+		
+		 
+		Exception thrown = assertThrows(Exception.class, () -> {
+			ctrlUsuario.ingresarEmpresa(
+					datosMailRepetido.getNickname(),
+					datosMailRepetido.getNombre(),
+					datosMailRepetido.getApellido(),
+					datosMailRepetido.getMail(),
+					datosMailRepetido.getNombreEmpresa(),
+					datosMailRepetido.getDescripcion(),
+					datosMailRepetido.getLink());
+		});
+		 
+		  assertEquals("Correo electrónico ya existe", thrown.getMessage());
+		 
+	 }
+
 }
