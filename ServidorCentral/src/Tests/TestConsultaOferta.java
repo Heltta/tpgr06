@@ -3,6 +3,7 @@ package Tests;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Date;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -37,7 +38,7 @@ public class TestConsultaOferta {
 		DTHorario horario = new DTHorario("08:00", "17:00");
 		Date fecha = new Date(2023,3,4);
 		TipoPublicacion tipo = new TipoPublicacion("Oro", "descrip", 1, new Date(2023,5,1), 1000, 5);
-		OfertaLaboral oferta = new OfertaLaboral("Desarrollador", "trabajo junior", "Ciudad", "Mdeo", horario, 3000, fecha, tipo, null);
+		OfertaLaboral oferta = new OfertaLaboral("Desarrollador", "trabajo junior", "Ciudad", "Mdeo", horario, 3000, fecha, tipo, new HashSet<String>());
 		emp.agregarOferta(oferta);
 		mu.agregarUsuario(post);
 		mu.agregarUsuario(emp);
