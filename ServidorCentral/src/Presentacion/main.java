@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import Logica.DTHorario;
 import Logica.Empresa;
@@ -102,13 +103,6 @@ public class main {
         frmTrabajoUy.getContentPane().setLayout(null);
         csvDirectory= System.getProperty("user.dir") + "\\src\\TProg_DatosPruebaTarea1_2023-CSVs-v1_0\\";
 
-        cargarDatosUsuarios();
-        cargarTipoPublicacion();
-        cargarKeywords();
-        cargarOfertasLaborales();
-        cargarPostulaciones();
-        cargarPaquetes();
-        cargarTipoPaquetes();
     }
 
     private void initialize() {
@@ -123,6 +117,19 @@ public class main {
         
         JMenuBar menuBar = new JMenuBar();
         frmTrabajoUy.setJMenuBar(menuBar);
+        
+        JMenu menuCargaDatos = new JMenu("Cargar datos de prueba");
+        menuBar.add(menuCargaDatos);
+        JMenuItem subMenuCarga = new JMenuItem("Cargar Datos");
+        subMenuCarga.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	cargarDatosPrueba();
+            	subMenuCarga.setVisible(false);
+            	menuCargaDatos.setVisible(false);
+            	JOptionPane.showMessageDialog(subMenuCarga, "Se cargaron los datos correctamente");
+            }
+        });
+        menuCargaDatos.add(subMenuCarga);
 
         JMenu menuUsuarios = new JMenu("Usuario");
         menuBar.add(menuUsuarios);
@@ -226,8 +233,14 @@ public class main {
     };
     
 
-    public void cargarDatosPrueba2() {
-
+    public void cargarDatosPrueba() {
+    	cargarDatosUsuarios();
+        cargarTipoPublicacion();
+        cargarKeywords();
+        cargarOfertasLaborales();
+        cargarPostulaciones();
+        cargarPaquetes();
+        cargarTipoPaquetes();
     }
     public void cargarDatosUsuarios() {
     	String usuariosCSV=csvDirectory+"Usuarios.csv";
