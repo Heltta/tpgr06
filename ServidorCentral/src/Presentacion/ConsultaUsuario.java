@@ -234,7 +234,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		gbc_lblNewLabel_11.gridx = 0;
 		gbc_lblNewLabel_11.gridy = 11;
 		getContentPane().add(lblNewLabel_11, gbc_lblNewLabel_11);
-		
+
 		lOfertasEmpresa = new JComboBox();
 		GridBagConstraints gbc_lPostulaciones_2 = new GridBagConstraints();
 		gbc_lPostulaciones_2.insets = new Insets(0, 0, 5, 0);
