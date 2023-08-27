@@ -28,6 +28,7 @@ public class DTOfertaLaboral {
 		this.remuneracion = remuneracion;
 		this.fecha = fecha;
 		this.tipo = tipo;
+		this.costo=costo;
 		Keywords = keywords;
 		this.postulaciones=postulaciones;
 	}
