@@ -31,6 +31,7 @@ import com.toedter.calendar.JTextFieldDateEditor;
 import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ListSelectionModel;
 @SuppressWarnings("serial")
 public class AltaOferta extends JInternalFrame{
 	private IUsuario IU;
@@ -235,6 +236,7 @@ public class AltaOferta extends JInternalFrame{
 		getContentPane().add(LabelKeywords, gbc_LabelKeywords);
 		
 		list = new JList<String>();
+		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		list.setBorder(new LineBorder(new Color(0, 0, 0)));
 		GridBagConstraints gbc_list = new GridBagConstraints();
 		gbc_list.gridheight = 3;
@@ -270,8 +272,10 @@ public class AltaOferta extends JInternalFrame{
         String entU = this.textFieldEn.getText();
         String salU = this.textFieldSal.getText();
         Date fechaU = this.dateChooser.getDate();
+        String nomTipo = (String)comboBoxTipo.getSelectedItem();
+		String nickname = (String)comboBoxEmpresa.getSelectedItem();
 
-        if (nombreU.isEmpty() || descU.isEmpty() || remU.isEmpty()||ciudadU.isEmpty()||entU.isEmpty()||salU.isEmpty()||fechaU==null) {
+        if (nombreU.isEmpty() || descU.isEmpty() || remU.isEmpty()||ciudadU.isEmpty()||entU.isEmpty()||salU.isEmpty()||fechaU==null||nomTipo=="Seleccionar"||nickname=="Seleccionar") {
             JOptionPane.showMessageDialog(this, "No puede haber campos vacíos", "Alta de Oferta Laboral",
                     JOptionPane.ERROR_MESSAGE);
             return false;
