@@ -234,7 +234,6 @@ public class AltaUsuario extends JInternalFrame {
 		submit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cmdAltaUsuario(e);
-				limpiarAltaTipo();
 			}
 		});
 		GridBagConstraints gbc_submit = new GridBagConstraints();
@@ -282,35 +281,44 @@ public class AltaUsuario extends JInternalFrame {
 			} else {
 				throw new Exception("Ningun tipo de Usuario elegido");
 			}
+			limpiarAltaTipo();
 		} catch (Exception exc) {
 			JOptionPane.showMessageDialog(this, exc.getMessage(), "Agregar Usuario",
                     JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 	}
+	
+	private void setEnabledPostulanteFields(Boolean estado) {
+		fechaDeNacimientoChooser.setEnabled(estado);
+		nacionalidadField.setEnabled(estado);
+	}
+	
+	private void setEnabledEmpresaFields(Boolean estado) {
+		descripcionField.setEnabled(estado);
+		linkField.setEnabled(estado);
+	}
 
 	// Cambia los campos habilitados acorde a la eleccion del Actor
 	private void cambiarTipoUsuario() {
 		String tipoDeUsuarioElegido = (String) (tiposDeUsuarioCombo.getSelectedItem());
 		if(tipoDeUsuarioElegido == "Postulante") {
-			fechaDeNacimientoChooser.setEnabled(true);
-			nacionalidadField.setEnabled(true);
-			descripcionField.setEnabled(false);
-			linkField.setEnabled(false);
+			setEnabledPostulanteFields(true);
+			setEnabledEmpresaFields(false);
 		} else if (tipoDeUsuarioElegido == "Empresa") {
-			fechaDeNacimientoChooser.setEnabled(false);
-			nacionalidadField.setEnabled(false);
-			descripcionField.setEnabled(true);
-			linkField.setEnabled(true);
+			setEnabledPostulanteFields(false);
+			setEnabledEmpresaFields(true);
 		}
 	}
 	
 	private void limpiarAltaTipo() {
 		tiposDeUsuarioCombo.setSelectedIndex(-1);
+		setEnabledPostulanteFields(false);
+		setEnabledEmpresaFields(false);
 		// Campos de Usuario
 		nicknameField.setText("");
-		emailField.selectAll();
-		nombreField.replaceSelection("");
+		emailField.setText("");
+		nombreField.setText("");
 		apellidoField.setText("");
 		// Campos de Postulante
 		nacionalidadField.setText("");
