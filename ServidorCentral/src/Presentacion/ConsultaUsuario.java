@@ -78,6 +78,8 @@ public class ConsultaUsuario extends JInternalFrame {
 		lNicknames.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				frameOferta.limpiarCampos();
+				frameOferta.setVisible(false);
 	            JComboBox<String> source = (JComboBox<String>) e.getSource();
 	            String selectedOption = (String) source.getSelectedItem();
 	            seleccionarNickname(selectedOption);
@@ -244,6 +246,8 @@ public class ConsultaUsuario extends JInternalFrame {
 		lOfertasEmpresa.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				frameOferta.limpiarCampos();
+				frameOferta.setVisible(false);
 	            JComboBox<String> source = (JComboBox<String>) e.getSource();
 	            String selectedOption = (String) source.getSelectedItem();
 	            seleccionarOferta(selectedOption);
