@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Date;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ public class TestPostulacionOferta {
 		ManejadorOferta mo = ManejadorOferta.getInstancia();
 		ManejadorUsuario mu = ManejadorUsuario.getInstance();
 		mu.agregarUsuario(new Postulante("Juan123", "hola@mail.com", "Juan", "Perez", "Uruguayo", null));
-		mo.agregarOferta(new OfertaLaboral("Desarrollador", "trabajo junior", "Ciudad", "Mdeo", new DTHorario("08:00", "17:00"), 3000, new Date(2023,3,4), new TipoPublicacion("Oro", "descrip", 1, new Date(2023,5,1), 1000, 5), null));
+		mo.agregarOferta(new OfertaLaboral("Desarrollador", "trabajo junior", "Ciudad", "Mdeo", new DTHorario("08:00", "17:00"), 3000, new Date(2023,3,4), new TipoPublicacion("Oro", "descrip", 1, new Date(2023,5,1), 1000, 5), new HashSet<String>()));
 		String postulante = "Juan123";
 		String cv = "Juan, soy estudiante.";
 		String motivacion = "ganas de trabajar";
@@ -49,7 +50,7 @@ public class TestPostulacionOferta {
 		ManejadorUsuario mu = ManejadorUsuario.getInstance();
 		Postulante post = new Postulante("Juan123", "hola@mail.com", "Juan", "Perez", "Uruguayo", null);
 		mu.agregarUsuario(post);
-		OfertaLaboral oferta = new OfertaLaboral("Desarrollador", "trabajo junior", "Ciudad", "Mdeo", new DTHorario("08:00", "17:00"), 3000, new Date(2023,3,4), new TipoPublicacion("Oro", "descrip", 1, new Date(2023,5,1), 1000, 5), null);
+		OfertaLaboral oferta = new OfertaLaboral("Desarrollador", "trabajo junior", "Ciudad", "Mdeo", new DTHorario("08:00", "17:00"), 3000, new Date(2023,3,4), new TipoPublicacion("Oro", "descrip", 1, new Date(2023,5,1), 1000, 5), new HashSet<String>());
 		//oferta.agregarPostulante(post);
 		mo.agregarOferta(oferta);
 		

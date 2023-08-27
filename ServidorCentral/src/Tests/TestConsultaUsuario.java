@@ -45,7 +45,7 @@ public class TestConsultaUsuario {
 		Postulante post = new Postulante("Juan123", "hola@mail.com", "Juan", "Perez", "Uruguayo", fecha );
 		DTHorario horario = new DTHorario("08:00", "17:00");
 		TipoPublicacion tipo = new TipoPublicacion("Oro", "descrip", 1, new Date(2023,5,1), 1000, 5);
-		OfertaLaboral oferta = new OfertaLaboral("Desarrollador", "trabajo junior", "Ciudad", "Mdeo", horario, 3000, fecha, tipo, null);
+		OfertaLaboral oferta = new OfertaLaboral("Desarrollador", "trabajo junior", "Ciudad", "Mdeo", horario, 3000, fecha, tipo, new HashSet<String>());
 		mo.agregarOferta(oferta);
 		mu.agregarUsuario(post);
 		try {
@@ -75,7 +75,7 @@ public class TestConsultaUsuario {
 		DTHorario horario = new DTHorario("08:00", "17:00");
 		Date fecha = new Date(2023,3,4);
 		TipoPublicacion tipo = new TipoPublicacion("Oro", "descrip", 1, new Date(2023,5,1), 1000, 5);
-		OfertaLaboral oferta = new OfertaLaboral("Desarrollador", "trabajo junior", "Ciudad", "Mdeo", horario, 3000, fecha, tipo, null);
+		OfertaLaboral oferta = new OfertaLaboral("Desarrollador", "trabajo junior", "Ciudad", "Mdeo", horario, 3000, fecha, tipo, new HashSet<String>());
 		emp.agregarOferta(oferta);
 		mu.agregarUsuario(emp);
 		mo.agregarOferta(oferta);
