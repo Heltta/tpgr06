@@ -25,6 +25,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.border.LineBorder;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
@@ -221,6 +223,12 @@ public class AltaOferta extends JInternalFrame{
 		getContentPane().add(textFieldCiudad, gbc_textFieldCiudad);
 		textFieldCiudad.setColumns(10);
 		
+		addInternalFrameListener(new InternalFrameAdapter(){
+            public void internalFrameClosing(InternalFrameEvent e) {
+                limpiarFormulario();
+            }
+        });
+		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -313,6 +321,7 @@ public class AltaOferta extends JInternalFrame{
         comboBoxEmpresa.setSelectedIndex(0);
 		comboBoxTipo.setSelectedIndex(0);
 		comboBoxDepartamento.setSelectedIndex(0);
+		list.clearSelection();
 		
 	}
 	
@@ -336,6 +345,7 @@ public class AltaOferta extends JInternalFrame{
 			else {
 				JOptionPane.showMessageDialog(this, "La oferta se registró con éxito", "Alta de Oferta Laboral",
 	                    JOptionPane.PLAIN_MESSAGE);
+				limpiarFormulario();
 			}
 			}
            

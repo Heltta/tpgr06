@@ -278,7 +278,7 @@ public class AltaUsuario extends JInternalFrame {
 	private void cmdAltaUsuario(ActionEvent e) {
 		String tipoDeAltaUsuario = (String) (this.tiposDeUsuarioCombo.getSelectedItem());
 		String nickname = this.nicknameField.getText();
-		String nombre = this.emailField.getText();
+		String nombre = this.nombreField.getText();
 		String apellido = this.apellidoField.getText();
 		String correoElectronico = this.emailField.getText();
 	
@@ -294,7 +294,7 @@ public class AltaUsuario extends JInternalFrame {
 					
 			} else if (tipoDeAltaUsuario == "Empresa") {
 				// El Actor eligio crear una Empresa
-				String nombreEmpresa = this.descripcionField.getText();
+				String nombreEmpresa = this.nombreEmpresaField.getText();
 				String descripcion = this.descripcionField.getText();
 				String link = this.linkField.getText();
 				
