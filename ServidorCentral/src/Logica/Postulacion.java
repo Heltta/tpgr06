@@ -18,26 +18,19 @@ public class Postulacion {
 	public Date getFechaPostulacion() {
 		return fechaPostulacion;
 	}
-	public void setFechaPostulacion(Date fechaPostulacion) {
-		this.fechaPostulacion = fechaPostulacion;
-	}
+
 	public String getResumenCV() {
 		return resumenCV;
 	}
-	public void setResumenCV(String resumenCV) {
-		this.resumenCV = resumenCV;
-	}
+
 	public String getDescripcion() {
 		return descripcion;
 	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+
 	public OfertaLaboral getOferta() {
 		return oferta;
 	}
-	public void setOferta(OfertaLaboral oferta) {
-		this.oferta = oferta;
-	}
+
+	
 	
 }
