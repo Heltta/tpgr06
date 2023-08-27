@@ -8,7 +8,7 @@ public class ManejadorKeywords {
 	private static ManejadorKeywords instance = null;
 	private Map<String, Keyword> keywords;
 	
-	public ManejadorKeywords() {
+	private ManejadorKeywords() {
 		keywords = new HashMap<String, Keyword>();
 	}
 	

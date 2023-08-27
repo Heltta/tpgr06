@@ -9,7 +9,7 @@ public class ManejadorTipo {
 	private static ManejadorTipo instance = null;
 	private Map<String, TipoPublicacion> tiposPublicacion;
 	
-	public ManejadorTipo() {
+	private ManejadorTipo() {
 		tiposPublicacion = new HashMap<String, TipoPublicacion>();
 	}
 	

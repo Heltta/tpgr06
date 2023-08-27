@@ -110,7 +110,7 @@ public class CtrlUsuario implements IUsuario {
 		if(mu.existeUsuario(empresa)) {
 			return ((Empresa) mu.getUsuario(empresa)).getNombreOfertas();
 		}else {
-			return null;
+			return new HashSet<String>();
 		}
 	}
 }

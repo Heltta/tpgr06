@@ -8,7 +8,7 @@ public class ManejadorPaquete {
 	private static ManejadorPaquete instance = null;
 	private Map<String, PaqueteTipoPublicacion> paquetes;
 	
-	public ManejadorPaquete() {
+	private ManejadorPaquete() {
 		paquetes = new HashMap<String, PaqueteTipoPublicacion>();
 	}
 	
