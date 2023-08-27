@@ -1,9 +1,12 @@
 package Logica;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+
 import java.util.ArrayList;
 import Excepciones.PostulanteRepetido;
 import Excepciones.nombreTipoPublicacionRepetido;
@@ -23,7 +26,7 @@ public class CtrlUsuario implements IUsuario {
 			}
 		}
 	}
-
+	
 	public ArrayList<String> listarUsuarios(){
 		ManejadorUsuario manejador=ManejadorUsuario.getInstance();
 		return manejador.getNicknames();
@@ -52,16 +55,22 @@ public class CtrlUsuario implements IUsuario {
 		OfertaLaboral o = mo.obtenerOferta(nombre);
 		String nombreTipo=o.getTipo().getNombre();
 		Map<String,Postulante> postulantes= o.getPostulantes();
-		Set<DTPostulacion> postulaciones = new TreeSet<>();
-		postulantes.forEach((String nombrePostulante, Postulante postulante) -> {
-			if(postulante.Postulaciones.containsKey(nombre)) {
-				Postulacion postulacion= postulante.Postulaciones.get(nombre);
-				DTPostulacion dataPostulacion= new DTPostulacion(postulacion.getFechaPostulacion(), postulacion.getResumenCV(), postulacion.getDescripcion(), nombre);
+		Set<DTPostulacion> postulaciones = new HashSet<>();
+		
+		Iterator<String> it = postulantes.keySet().iterator();
+		while(it.hasNext()){
+		    String clave = it.next();
+		    Postulante post = postulantes.get(clave);
+		    if (post.Postulaciones.containsKey(nombre)) {
+		    	Postulacion postulacion = post.Postulaciones.get(nombre);
+		    	DTPostulacion dataPostulacion= new DTPostulacion(postulacion.getFechaPostulacion(), postulacion.getResumenCV(), postulacion.getDescripcion(), nombre);
 				postulaciones.add(dataPostulacion);
-			}
-		});
+		    }
+		}
 		DTOfertaLaboral dataOferta= new DTOfertaLaboral(o.getNombre() ,o.getDescripcion(), o.getCiudad(), o.getDepartamento(), o.getHorario(), o.getRemuneracion(), o.getFecha(), nombreTipo, o.getKeywords(), postulaciones);
 		return dataOferta;
+		
+
 	}
 	public Set<String> listarEmpresas(){
 		ManejadorUsuario mu = ManejadorUsuario.getInstance();

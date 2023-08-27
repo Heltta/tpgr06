@@ -271,7 +271,7 @@ public class AltaTipoPublicacion extends JInternalFrame {
 			JOptionPane.showMessageDialog(this, "Debe llenar todos los campos", "Alta Tipo de Publicacion", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
-		
+	
 		try {
 			Double.parseDouble(costoT);
 			Double.parseDouble(duracionT);

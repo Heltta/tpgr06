@@ -45,7 +45,7 @@ public class main {
             public void run() {
                 try {
                     main window = new main();
-                    window.frmTrabajoUy.setBounds(0,0,800,700);
+                    window.frmTrabajoUy.setBounds(0,0,900,700);
                     window.frmTrabajoUy.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -61,8 +61,8 @@ public class main {
         frmTrabajoUy.getContentPane().setLayout(null);
         frmAltaTipoPublicacion = new AltaTipoPublicacion(ctrlTipos);
         frmAltaOferta = new AltaOferta(ctrlUsuario);
-        frmPostulacionOferta = new PostulacionOferta(ctrlUsuario);
-        frmConsultaOferta = new ConsultaOferta(ctrlUsuario, "", "");
+        frmConsultaOferta = new ConsultaOferta(ctrlUsuario);
+        frmPostulacionOferta = new PostulacionOferta(ctrlUsuario, frmConsultaOferta);
         frmAgregarTipoPublicacionAPaquete = new AgregarTipoPublicacionAPaquete(ctrlTipos);
         frmAgregarTipoPublicacionAPaquete.setBounds(491, 56, 423, 266);
         frmTrabajoUy.getContentPane().add(frmAgregarTipoPublicacionAPaquete);
@@ -70,7 +70,7 @@ public class main {
         frmTrabajoUy.getContentPane().add(frmAltaOferta);
         frmTrabajoUy.getContentPane().add(frmPostulacionOferta);
         frmTrabajoUy.getContentPane().add(frmConsultaOferta);
-        frmConsultaUsuario = new ConsultaUsuario(ctrlUsuario);
+        frmConsultaUsuario = new ConsultaUsuario(ctrlUsuario, frmConsultaOferta);
         frmConsultaUsuario.setBounds(0,0, 500, 500);
         frmTrabajoUy.getContentPane().add(frmConsultaUsuario); 
         
@@ -211,6 +211,9 @@ public class main {
 		oferta.agregarPostulante(post);
 		oferta.agregarPostulante(post1);
 		oferta1.agregarPostulante(post);
+		post.postularAOferta(oferta, fecha, "cv asd", "Descr");
+		post1.postularAOferta(oferta, fecha1, "cv 2", "Descr2");
+		post.postularAOferta(oferta1, fecha, "cv asd", "Descr");
 		emp.agregarOferta(oferta);
 		emp1.agregarOferta(oferta1);
 		emp2.agregarOferta(oferta2);

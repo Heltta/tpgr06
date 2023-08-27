@@ -29,6 +29,7 @@ import javax.swing.JTextField;
 import javax.swing.ListModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -53,15 +54,15 @@ public class ConsultaOferta extends JInternalFrame{
 	private JTextField tfFecha;
 	private JTextField tfCosto;
 	private JTable table;
+	DefaultTableModel dtm;
 
-	public ConsultaOferta(IUsuario ctrlUsuario, String empresa, String oferta) {
+	public ConsultaOferta(IUsuario ctrlUsuario) {
 		this.ctrlUsuario = ctrlUsuario;
 		
 		setResizable(true);
         setIconifiable(true);
         setMaximizable(true);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        setClosable(true);
 		setTitle("Consulta de oferta laboral");
 		setBounds(0, 0, 420, 550);
 		setMinimumSize(new Dimension(420, 550));
@@ -85,7 +86,7 @@ public class ConsultaOferta extends JInternalFrame{
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setEnabled(false);
 		table.setRowSelectionAllowed(false);
-		DefaultTableModel dtm = new DefaultTableModel(
+		dtm = new DefaultTableModel(
 				new Object[][] {
 				},
 				new String[] {
@@ -296,13 +297,6 @@ public class ConsultaOferta extends JInternalFrame{
 		gbc_btnCerrar.gridy = 15;
 		getContentPane().add(btnCerrar, gbc_btnCerrar);
 		
-		if(!empresa.isEmpty() && !oferta.isEmpty()) {
-			cbEmpresa.setEnabled(false);
-			cbOferta.setEnabled(false);
-			cbOferta.addItem(empresa);
-			cbEmpresa.addItem(oferta);
-			mostrarDatos(ctrlUsuario.seleccionarOfertaLaboral(oferta),dtm);
-		}
 			cbEmpresa.addItemListener(new ItemListener() {
 				public void itemStateChanged(ItemEvent itemEvent) {
 					if (itemEvent.getStateChange() == ItemEvent.SELECTED) {
@@ -329,6 +323,7 @@ public class ConsultaOferta extends JInternalFrame{
 			cbOferta.addItemListener(new ItemListener() {
 				public void itemStateChanged(ItemEvent itemEvent) {
 					if (itemEvent.getStateChange() == ItemEvent.SELECTED) {
+						limpiarCampos();
 						if(cbOferta.getSelectedIndex() != 0) {
 							mostrarDatos(ctrlUsuario.seleccionarOfertaLaboral(cbOferta.getSelectedItem().toString()),dtm);
 						}
@@ -337,6 +332,10 @@ public class ConsultaOferta extends JInternalFrame{
 			});
 	}
 	public void ListarEmpresas() {
+		cbEmpresa.setEnabled(true);
+		cbOferta.setEnabled(true);
+		cbOferta.removeAllItems();
+		cbOferta.addItem("Seleccionar");
 		Set<String> empresas = ctrlUsuario.listarEmpresas();
 		String[] empresasCombo = new String[empresas.size()+1];
 		empresasCombo[0] = "Seleccionar";
@@ -358,7 +357,7 @@ public class ConsultaOferta extends JInternalFrame{
 			tfCosto.setText(Double.toString(datos.getCosto()));
 			Set<DTPostulacion> postulaciones = datos.getPostulaciones();
 			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy");
-			String[] data = new String[postulaciones.size() + 1];
+			String[] data = new String[3];
 			for(DTPostulacion post : postulaciones) {
 				data[0] = formato.format(post.getFechaPostulacion());
 				data[1] = post.getResumenCV();
@@ -368,7 +367,12 @@ public class ConsultaOferta extends JInternalFrame{
 			}
 		}
 	}
-	private void limpiarCampos() {
+	public void CargarDatosVisuales(String empresa, String oferta) {
+		cbEmpresa.setEnabled(false);
+		cbOferta.setEnabled(false);
+		mostrarDatos(ctrlUsuario.seleccionarOfertaLaboral(oferta),dtm);
+	}
+	public void limpiarCampos() {
 		tfNombre.setText("");
 		tfCiudad.setText("");
 		tfDepartamento.setText("");
@@ -376,6 +380,7 @@ public class ConsultaOferta extends JInternalFrame{
 		tfRemuneracion.setText("");
 		tfFecha.setText("");
 		tfCosto.setText("");
-		table.removeAll();
+		DefaultTableModel tb = (DefaultTableModel) table.getModel();
+		tb.setRowCount(0);
 	};
 }
