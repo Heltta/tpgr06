@@ -46,6 +46,8 @@ public class TestAltaOferta {
 		OfertaLaboral of = mo.obtenerOferta("Oferta Test");
 		Assertions.assertEquals(of.getKeywords(),setk);
 		Assertions.assertEquals(of.getTipo(),tipo1);
+		Assertions.assertTrue(emp1.getOfertas().containsKey(of.getNombre()));
+		Assertions.assertEquals(500, of.getCosto());;
 	}
 	
 	@SuppressWarnings("deprecation")
