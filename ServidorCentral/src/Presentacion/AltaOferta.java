@@ -31,6 +31,7 @@ import com.toedter.calendar.JTextFieldDateEditor;
 import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ListSelectionModel;
 @SuppressWarnings("serial")
 public class AltaOferta extends JInternalFrame{
 	private IUsuario IU;
@@ -44,6 +45,7 @@ public class AltaOferta extends JInternalFrame{
 	private JTextField textFieldSal;
 	private JTextArea textArea;
 	private JDateChooser dateChooser;
+	JComboBox<String> comboBoxDepartamento;
 	public AltaOferta(IUsuario IUs) {
 		setResizable(true);
         setIconifiable(true);
@@ -96,6 +98,7 @@ public class AltaOferta extends JInternalFrame{
 		getContentPane().add(scrollPane, gbc_scrollPane);
 		
 		textArea = new JTextArea();
+		textArea.setLineWrap(true);
 		scrollPane.setViewportView(textArea);
 		
 		JLabel LabelRemuneracion = new JLabel("Remuneración: ");
@@ -193,7 +196,7 @@ public class AltaOferta extends JInternalFrame{
 		gbc_LabelDepartamento.gridy = 8;
 		getContentPane().add(LabelDepartamento, gbc_LabelDepartamento);
 		
-		JComboBox<String> comboBoxDepartamento = new JComboBox<String>(new String[] {"Montevideo", "Artigas", "Canelones", "CerroLargo", "Colonia", "Durazno", "Flores", "Florida", "Lavalleja", "Maldonado", "Paysandú", "Rivera", "Rocha", "RíoNegro", "Salto", "SanJosé", "Soriano", "Tacuarembó", "TreintaYTres"});
+		comboBoxDepartamento = new JComboBox<String>(new String[] {"Montevideo", "Artigas", "Canelones", "CerroLargo", "Colonia", "Durazno", "Flores", "Florida", "Lavalleja", "Maldonado", "Paysandú", "Rivera", "Rocha", "RíoNegro", "Salto", "SanJosé", "Soriano", "Tacuarembó", "TreintaYTres"});
 		GridBagConstraints gbc_comboBoxDepartamento = new GridBagConstraints();
 		gbc_comboBoxDepartamento.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxDepartamento.fill = GridBagConstraints.HORIZONTAL;
@@ -233,6 +236,7 @@ public class AltaOferta extends JInternalFrame{
 		getContentPane().add(LabelKeywords, gbc_LabelKeywords);
 		
 		list = new JList<String>();
+		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		list.setBorder(new LineBorder(new Color(0, 0, 0)));
 		GridBagConstraints gbc_list = new GridBagConstraints();
 		gbc_list.gridheight = 3;
@@ -251,20 +255,7 @@ public class AltaOferta extends JInternalFrame{
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(checkFormulario()) {
-				String nombre = textFieldNombre.getText();
-				String descripcion = textArea.getText();
-				int remuneracion = Integer.parseInt(textFieldRemuneracion.getText());
-				String ciudad = textFieldCiudad.getText();
-				String departamento = (String)comboBoxDepartamento.getSelectedItem();
-				String nomTipo = (String)comboBoxTipo.getSelectedItem();
-				String nickname = (String)comboBoxEmpresa.getSelectedItem();
-				Set<String> keywords = new HashSet<String>(list.getSelectedValuesList());
-				Date fecha = dateChooser.getDate();
-				DTHorario horario = new DTHorario(textFieldEn.getText(),textFieldSal.getText());
-				IU.ingresarOferta(nickname,nomTipo,nombre,descripcion,horario,remuneracion,fecha,ciudad,departamento,keywords);
-				}
-	           
+				ingresarOferta(e);
 			}
 		});
 		GridBagConstraints gbc_btnConfirmar = new GridBagConstraints();
@@ -281,8 +272,10 @@ public class AltaOferta extends JInternalFrame{
         String entU = this.textFieldEn.getText();
         String salU = this.textFieldSal.getText();
         Date fechaU = this.dateChooser.getDate();
+        String nomTipo = (String)comboBoxTipo.getSelectedItem();
+		String nickname = (String)comboBoxEmpresa.getSelectedItem();
 
-        if (nombreU.isEmpty() || descU.isEmpty() || remU.isEmpty()||ciudadU.isEmpty()||entU.isEmpty()||salU.isEmpty()||fechaU==null) {
+        if (nombreU.isEmpty() || descU.isEmpty() || remU.isEmpty()||ciudadU.isEmpty()||entU.isEmpty()||salU.isEmpty()||fechaU==null||nomTipo=="Seleccionar"||nickname=="Seleccionar") {
             JOptionPane.showMessageDialog(this, "No puede haber campos vacíos", "Alta de Oferta Laboral",
                     JOptionPane.ERROR_MESSAGE);
             return false;
@@ -315,6 +308,31 @@ public class AltaOferta extends JInternalFrame{
         textFieldSal.setText("");
         dateChooser.setCalendar(null);
 		
+	}
+	
+	private void ingresarOferta(ActionEvent e) {
+		if(checkFormulario()) {
+			String nombre = textFieldNombre.getText();
+			String descripcion = textArea.getText();
+			int remuneracion = Integer.parseInt(textFieldRemuneracion.getText());
+			String ciudad = textFieldCiudad.getText();
+			String departamento = (String)comboBoxDepartamento.getSelectedItem();
+			String nomTipo = (String)comboBoxTipo.getSelectedItem();
+			String nickname = (String)comboBoxEmpresa.getSelectedItem();
+			Set<String> keywords = new HashSet<String>(list.getSelectedValuesList());
+			Date fecha = dateChooser.getDate();
+			DTHorario horario = new DTHorario(textFieldEn.getText(),textFieldSal.getText());
+			boolean ingreso = IU.ingresarOferta(nickname,nomTipo,nombre,descripcion,horario,remuneracion,fecha,ciudad,departamento,keywords);
+			if (!ingreso) {
+				JOptionPane.showMessageDialog(this, "La oferta ya se encuentra en el sistema", "Alta de Oferta Laboral",
+	                    JOptionPane.ERROR_MESSAGE);
+			}
+			else {
+				JOptionPane.showMessageDialog(this, "La oferta se registró con éxito", "Alta de Oferta Laboral",
+	                    JOptionPane.ERROR_MESSAGE);
+			}
+			}
+           
 	}
 	
 	public void actualizar(String[] listaEmpresas, String[] listaTipos,String[] listaKeywords) {

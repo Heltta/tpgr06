@@ -68,7 +68,7 @@ public class CtrlUsuario implements IUsuario {
 				postulaciones.add(dataPostulacion);
 		    }
 		}
-		DTOfertaLaboral dataOferta= new DTOfertaLaboral(o.getNombre() ,o.getDescripcion(), o.getCiudad(), o.getDepartamento(), o.getHorario(), o.getRemuneracion(), o.getFecha(), nombreTipo, o.getKeywords(), postulaciones);
+		DTOfertaLaboral dataOferta= new DTOfertaLaboral(o.getNombre() ,o.getDescripcion(), o.getCiudad(), o.getDepartamento(), o.getHorario(), o.getRemuneracion(), o.getFecha(), nombreTipo, o.getKeywords(), postulaciones, o.getCosto());
 		return dataOferta;
 		
 
