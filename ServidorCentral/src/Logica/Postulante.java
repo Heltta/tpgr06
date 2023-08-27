@@ -10,7 +10,7 @@ public class Postulante extends Usuario {
 	Date fechaNacimiento;
 	Map<String, Postulacion> Postulaciones;
 	
-	void postularAOferta(OfertaLaboral oferta, Date fecha, String cv, String descripcion) {
+	public void postularAOferta(OfertaLaboral oferta, Date fecha, String cv, String descripcion) {
 		if(!Postulaciones.containsKey(oferta.getNombre())) {
 			Postulacion post = new Postulacion(fecha, cv, descripcion, oferta);
 			Postulaciones.put(oferta.getNombre(), post);
