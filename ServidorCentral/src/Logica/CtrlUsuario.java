@@ -136,9 +136,7 @@ public class CtrlUsuario implements IUsuario {
 		ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstance();
 		
 		checkUnicidad(correoElectronico, nickName);
-		
-		LocalDate localFechaNacimiento = LocalDate.ofInstant(fechaNacimiento.toInstant(), ZoneId.systemDefault());
-		manejadorUsuario.agregarUsuario(new Postulante(nickName, nombre, apellido, correoElectronico, nacionalidad, localFechaNacimiento));
+		manejadorUsuario.agregarUsuario(new Postulante(nickName, nombre, apellido, correoElectronico, nacionalidad, fechaNacimiento));
 	}
 	
 	public void ingresarEmpresa(

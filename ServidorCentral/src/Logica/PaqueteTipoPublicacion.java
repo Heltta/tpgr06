@@ -87,5 +87,6 @@ public class PaqueteTipoPublicacion {
 			Agrupa tipoAgregado = new Agrupa(tipo, cant);
 			TiposPublicacion.put(tipo.getNombre(), tipoAgregado);
 		}
+		costo = costo + tipo.getCosto()*cant*(descuento/100);
 	}
 }
