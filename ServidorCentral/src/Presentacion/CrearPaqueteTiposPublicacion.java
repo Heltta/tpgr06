@@ -144,6 +144,7 @@ public class CrearPaqueteTiposPublicacion extends JInternalFrame{
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         
         spinnerDescuento = new JSpinner();
+        spinnerDescuento.setModel(new SpinnerNumberModel(0, 0, 100, 1));
         panel.add(spinnerDescuento);
         
         JLabel lblFecha = new JLabel("Fecha:");
@@ -212,9 +213,10 @@ public class CrearPaqueteTiposPublicacion extends JInternalFrame{
 				ctrlTipos.ingresarDatosPaquete(nombreP, descripcionP, validezP, descuentoP, 0, fechaP);
 				JOptionPane.showMessageDialog(this, "El Paquete de Tipos de Publicacion se ha creado con exito", "Crear Paquete de Tipos de Publicacion",
 						JOptionPane.INFORMATION_MESSAGE);
+				limpiarCrearPaquete();
 			} catch (nombrePaqueteRepetido e1) {
 				JOptionPane.showMessageDialog(this, e1.getMessage(), "Crear Paquete Tipos de Publicacion",
-						JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}

@@ -5,6 +5,7 @@ import javax.swing.JInternalFrame;
 
 import Logica.DTAgrupa;
 import Logica.DTPaquete;
+import Logica.DTPostulacion;
 import Logica.DTTipoPublicacion;
 import Logica.ITipos;
 import java.awt.GridBagLayout;
@@ -14,7 +15,10 @@ import javax.swing.JComboBox;
 import java.awt.Insets;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.swing.JPanel;
@@ -25,11 +29,16 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 
 import com.toedter.calendar.JDateChooser;
 import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class ConsultaPaquete extends JInternalFrame{
 
@@ -42,8 +51,11 @@ public class ConsultaPaquete extends JInternalFrame{
 	private JDateChooser dateChooserAlta;
 	private boolean dataCargada;
 	private JScrollPane scrollPane_1;
+	private JTable table;
+	private DefaultTableModel dtm;
+	private JTextField textFieldCosto;
 	
-	public ConsultaPaquete(ITipos ctrlTipos) {
+	public ConsultaPaquete(ITipos ctrlTipos, AltaTipoPublicacion frmAltaTipo) {
 		this.ctrlTipos = ctrlTipos;
 		setResizable(true);
         setIconifiable(true);
@@ -56,14 +68,13 @@ public class ConsultaPaquete extends JInternalFrame{
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{0, 0, 257, 0, 0};
         gridBagLayout.rowHeights = new int[]{68, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        gridBagLayout.columnWeights = new double[]{1.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
-        gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+        gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+        gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
         getContentPane().setLayout(gridBagLayout);
         
         addInternalFrameListener(new InternalFrameAdapter() {
         	public void internalFrameClosing(InternalFrameEvent e) {
         		dataCargada = false;
-        		System.out.println(dataCargada);	
         	}
         });
         
@@ -96,7 +107,7 @@ public class ConsultaPaquete extends JInternalFrame{
         panel.add(comboBoxPaquete);
         comboBoxPaquete.addItemListener(new ItemListener() {
         	public void itemStateChanged(ItemEvent e) {
-        		if (e.getStateChange() == ItemEvent.SELECTED && dataCargada == true) {
+        		if (e.getStateChange() == ItemEvent.SELECTED && dataCargada == true && comboBoxPaquete.getSelectedIndex() != 0) {
         			cargarInfoPaquete((String) comboBoxPaquete.getSelectedItem());
         		}
         	}
@@ -182,13 +193,24 @@ public class ConsultaPaquete extends JInternalFrame{
         gbc_dateChooserAlta.gridy = 6;
         getContentPane().add(dateChooserAlta, gbc_dateChooserAlta);
         
-        JLabel lblNewLabel = new JLabel("Tipos de Publicacion:");
-        GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-        gbc_lblNewLabel.anchor = GridBagConstraints.EAST;
-        gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-        gbc_lblNewLabel.gridx = 0;
-        gbc_lblNewLabel.gridy = 7;
-        getContentPane().add(lblNewLabel, gbc_lblNewLabel);
+        JLabel lblCosto = new JLabel("Costo:");
+        GridBagConstraints gbc_lblCosto = new GridBagConstraints();
+        gbc_lblCosto.anchor = GridBagConstraints.EAST;
+        gbc_lblCosto.insets = new Insets(0, 0, 5, 5);
+        gbc_lblCosto.gridx = 0;
+        gbc_lblCosto.gridy = 7;
+        getContentPane().add(lblCosto, gbc_lblCosto);
+        
+        textFieldCosto = new JTextField();
+        textFieldCosto.setEditable(false);
+        GridBagConstraints gbc_textFieldCosto = new GridBagConstraints();
+        gbc_textFieldCosto.gridwidth = 2;
+        gbc_textFieldCosto.insets = new Insets(0, 0, 5, 5);
+        gbc_textFieldCosto.fill = GridBagConstraints.HORIZONTAL;
+        gbc_textFieldCosto.gridx = 1;
+        gbc_textFieldCosto.gridy = 7;
+        getContentPane().add(textFieldCosto, gbc_textFieldCosto);
+        textFieldCosto.setColumns(10);
         
         scrollPane_1 = new JScrollPane();
         scrollPane_1.setPreferredSize(new Dimension(2, 23));
@@ -198,9 +220,39 @@ public class ConsultaPaquete extends JInternalFrame{
         gbc_scrollPane_1.insets = new Insets(0, 0, 5, 5);
         gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
         gbc_scrollPane_1.gridx = 1;
-        gbc_scrollPane_1.gridy = 7;
+        gbc_scrollPane_1.gridy = 8;
         getContentPane().add(scrollPane_1, gbc_scrollPane_1);
-     
+        
+        table = new JTable();
+        dtm = new DefaultTableModel(
+        	new Object[][] {
+        	},
+        	new String[] {
+        		"Nombre", "Cantidad"
+        	});
+        
+        table.setModel(dtm);
+        table.getColumnModel().getColumn(0).setResizable(false);
+        table.setDefaultEditor(Object.class, null);
+        scrollPane_1.setViewportView(table);
+        
+        table.getSelectionModel().addListSelectionListener((ListSelectionListener) new ListSelectionListener(){
+			public void valueChanged(ListSelectionEvent e) {
+				int row = table.getSelectedRow();
+				if (row != -1) {
+					String nombreTipo = (String) table.getValueAt(row, 0);
+	            	frmAltaTipo.mostrarDatosTipo(nombreTipo);
+				}
+			}
+        });
+        
+        JLabel lblNewLabel = new JLabel("Tipos de Publicacion:");
+        GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+        gbc_lblNewLabel.anchor = GridBagConstraints.EAST;
+        gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+        gbc_lblNewLabel.gridx = 0;
+        gbc_lblNewLabel.gridy = 8;
+        getContentPane().add(lblNewLabel, gbc_lblNewLabel);
         
         Component rigidArea_1 = Box.createRigidArea(new Dimension(20, 20));
         GridBagConstraints gbc_rigidArea_1 = new GridBagConstraints();
@@ -208,6 +260,18 @@ public class ConsultaPaquete extends JInternalFrame{
         gbc_rigidArea_1.gridx = 3;
         gbc_rigidArea_1.gridy = 10;
         getContentPane().add(rigidArea_1, gbc_rigidArea_1);
+        
+        addInternalFrameListener(new InternalFrameAdapter(){
+            public void internalFrameClosing(InternalFrameEvent e) {
+                textAreaDescripcion.selectAll();
+                textAreaDescripcion.replaceSelection("");
+                textFieldDescuento.setText("");
+                textFieldValidez.setText("");
+                dateChooserAlta.setDate(null);
+                textFieldCosto.setText("");
+                dtm.setRowCount(0);
+            }
+        });
         
 	}
 	
@@ -218,21 +282,20 @@ public class ConsultaPaquete extends JInternalFrame{
 			textFieldDescuento.setText(Double.toString(dataPaquete.getDescuento()));
 			textFieldValidez.setText(Integer.toString(dataPaquete.getPeriodoValidez()));
 			textAreaDescripcion.setText(dataPaquete.getDescripcion());
+			textFieldCosto.setText(Double.toString(dataPaquete.getCosto()));
 			dateChooserAlta.setDate(dataPaquete.getFecha());
-			Object[][] tableData = new Object[dataPaquete.getTipos().keySet().size()][2];
-			int index = 0;
-			System.out.println(dataPaquete.getTipos().keySet().size());
-			for (String key : dataPaquete.getTipos().keySet()) {
-				DTAgrupa dataTipoKey = dataPaquete.getTipos().get(key);
-				tableData[index][0] = dataTipoKey.getNombreTipo();
-				System.out.println(dataTipoKey.getNombreTipo());
-				tableData[index][1] = dataTipoKey.getCant();
-			}
-			String[] cabezales = {"Nombre", "Cantidad"}; 
-	        tableTipos = new JTable(tableData, cabezales);
-	        scrollPane_1.setViewportView(tableTipos);
+			dataPaquete.getTipos();
+			dtm.setNumRows(0);
+			Map<String, DTAgrupa> dataTipos = dataPaquete.getTipos();
+			String[] data = new String[2];
+			for(String keyTipo : dataTipos.keySet()) {
+				data[0] = dataTipos.get(keyTipo).getNombreTipo();
+				data[1] = Integer.toString(dataTipos.get(keyTipo).getCant());
+				dtm.addRow(data);
+				table.setModel(dtm);
 		}
 	}
+}
 	
     public void cargarPaquetes() {
     	comboBoxPaquete.removeAllItems();
@@ -242,5 +305,9 @@ public class ConsultaPaquete extends JInternalFrame{
     		comboBoxPaquete.addItem(paquete);
     	}
     	dataCargada = true;
+    }
+    
+    public void FalseDataCargada() {
+    	dataCargada = false;
     }
 }

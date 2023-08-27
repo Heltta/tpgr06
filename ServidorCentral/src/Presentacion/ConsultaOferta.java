@@ -54,7 +54,7 @@ public class ConsultaOferta extends JInternalFrame{
 	private JTextField tfFecha;
 	private JTextField tfCosto;
 	private JTable table;
-	DefaultTableModel dtm;
+	private DefaultTableModel dtm;
 
 	public ConsultaOferta(IUsuario ctrlUsuario) {
 		this.ctrlUsuario = ctrlUsuario;

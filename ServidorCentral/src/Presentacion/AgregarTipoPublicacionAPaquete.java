@@ -145,12 +145,8 @@ public class AgregarTipoPublicacionAPaquete extends JInternalFrame {
         btnAgregar.setHorizontalAlignment(SwingConstants.LEFT);
         btnAgregar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		System.out.println(comboBoxPaquete.getSelectedIndex());
         		if(checkFormulario()) {
-        			ctrlTipos.agregarTipoPublicacion(comboBoxPaquete.getSelectedItem().toString(), 
-            				comboBoxTipo.getSelectedItem().toString(), Integer.parseInt((String)spinnerCant.getValue()));
-            		setVisible(false);
-            		limpiarAgregarTipoAPaquete();
+        			cmdAgregarTipo();
         		}
         	}
         });
@@ -185,6 +181,15 @@ public class AgregarTipoPublicacionAPaquete extends JInternalFrame {
     		comboBoxPaquete.addItem(paquete);
     	}
     }
+    
+    public void cmdAgregarTipo() {
+    	ctrlTipos.agregarTipoPublicacion(comboBoxPaquete.getSelectedItem().toString(), 
+				comboBoxTipo.getSelectedItem().toString(), (int) spinnerCant.getValue());
+		JOptionPane.showMessageDialog(this, "El Tipo de Publicacion fue agregado con exito", "Agregar Tipo de Publicacion a Paquete",
+				JOptionPane.INFORMATION_MESSAGE);
+		setVisible(false);
+		limpiarAgregarTipoAPaquete();
+    }
 
     public void cargarTiposPaquete() {
     	comboBoxTipo.removeAllItems();
@@ -211,14 +216,7 @@ public class AgregarTipoPublicacionAPaquete extends JInternalFrame {
     	} else if (comboBoxPaquete.getSelectedIndex() == 0 || comboBoxTipo.getSelectedIndex() == 0) {
     		JOptionPane.showMessageDialog(this, "Debe seleccionar un valor de la lista", "Agregar Tipo de Publicacion a Paquete", JOptionPane.ERROR_MESSAGE);
     		return false;
-    	} else {
-			try {
-				Integer.parseInt((String)spinnerCant.getValue());
-			}catch (NumberFormatException ev) {
-				JOptionPane.showMessageDialog(this, "Debe ingresar un valor entero", "Agregar Tipo de Publicacion a Paquete", JOptionPane.ERROR_MESSAGE);
-				return false;
-			}
+    	} 
     	return true;
-    	}
     }
 }
