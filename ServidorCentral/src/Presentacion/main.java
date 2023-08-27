@@ -26,6 +26,12 @@ import java.util.Date;
 
 import javax.swing.JInternalFrame;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class main {
 
@@ -79,6 +85,7 @@ public class main {
         frmTrabajoUy.getContentPane().setLayout(null);
         
         CargarDatosDePrueba();
+        cargarDatosUsuarios();
     }
 
     private void initialize() {
@@ -224,6 +231,80 @@ public class main {
 		mo.agregarOferta(oferta2);
     }
     public void cargarDatosPrueba2() {
+
+    }
+    public void cargarDatosUsuarios() {
+    	String csvDirectory = System.getProperty("user.dir") + "\\src\\TProg_DatosPruebaTarea1_2023-CSVs-v1_0\\";
+    	String usuariosCSV=csvDirectory+"Usuarios.csv";
+    	String postulantesCSV=csvDirectory+"Usuarios-Postulantes.csv";
+    	String empresasCSV=csvDirectory+"Usuarios-Empresas.csv";
+    	String line;
+    	ArrayList<String> systemTagUsuarios= new ArrayList<String>();
     	
+    	ArrayList<String> systemTagPostulantes= new ArrayList<String>();
+    	ArrayList<String> fechaP= new ArrayList<String>();
+    	ArrayList<String> nacionalidadP= new ArrayList<String>();
+    	
+    	ArrayList<String> systemTagE= new ArrayList<String>();
+    	ArrayList<String> descE= new ArrayList<String>();
+    	ArrayList<String> nombreE= new ArrayList<String>();
+    	int i=0;
+    	try (BufferedReader br = new BufferedReader(new FileReader(postulantesCSV))) {
+    		while ((line = br.readLine()) != null) {
+    			if(i>0) {
+                String[] data = line.split(";");
+                String sysName = data[0].trim();
+                String fecha = data[1].trim();
+                String nacionalidad= data[2].trim();
+                systemTagPostulantes.add(sysName);
+                fechaP.add(fecha);
+                nacionalidadP.add(nacionalidad);
+    			}
+                i++;
+            }
+    	}
+    	catch(IOException e){
+    		e.printStackTrace();
+    	}
+    	i=0;
+    	try (BufferedReader br = new BufferedReader(new FileReader(empresasCSV))) {
+    		while ((line = br.readLine()) != null) {
+    			if(i>0) {
+                String[] data = line.split(";");
+                String sysName = data[0].trim();
+                String desc = data[1].trim();
+                String nombre= data[2].trim();
+                systemTagE.add(sysName);
+                descE.add(desc);
+                nombreE.add(nombre);
+    			}
+                i++;
+            }
+    	}
+    	catch(IOException e){
+    		e.printStackTrace();
+    	}
+    	i=0;
+    	try (BufferedReader br = new BufferedReader(new FileReader(usuariosCSV))) {
+    		while ((line = br.readLine()) != null) {
+    			if(i>0) {
+                String[] data = line.split(";");
+                String sysName = data[0].trim();
+                String nickname = data[1].trim();
+                String nombre= data[2].trim();
+                String apellido= data[3].trim();
+                String mail= data[4].trim();
+                if(systemTagPostulantes.contains(sysName)) {
+                	
+                }else {
+                	
+                }
+    			}
+                i++;
+            }
+    	}
+    	catch(IOException e){
+    		e.printStackTrace();
+    	}
     }
 }
