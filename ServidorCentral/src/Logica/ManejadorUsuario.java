@@ -12,6 +12,7 @@ import java.util.Set;
 public class ManejadorUsuario {
 	
 	Map<String,Usuario> usuarios;
+	Map<String,Usuario> usuariosByEmail; // map usando al email como key
 	private static ManejadorUsuario instance;
 	
 	public static ManejadorUsuario getInstance() {
@@ -23,6 +24,7 @@ public class ManejadorUsuario {
 	
 	private ManejadorUsuario() {
 		usuarios= new HashMap<String,Usuario>();
+		usuariosByEmail= new HashMap<String,Usuario>();
 	}
 	
 	 public Usuario obtenerUsuario(String nickUsuario) {
@@ -75,12 +77,18 @@ public class ManejadorUsuario {
  
 public void agregarUsuario(Usuario u) {
 	this.usuarios.put(u.getNickname(),u);
+	this.usuariosByEmail.put(u.getMail(),u);
 }
 public Boolean existeUsuario(String nickUsuario) {
 	return this.usuarios.containsKey(nickUsuario);
 }
 
+	public Boolean existeEmailDeUsuario(String nickUsuario) {
+		return this.usuariosByEmail.containsKey(nickUsuario);
+	}
+
 public void clear() {
 	this.usuarios.clear();
+	this.usuariosByEmail.clear();
 }
 }

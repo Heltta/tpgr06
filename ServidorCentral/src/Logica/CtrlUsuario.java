@@ -6,13 +6,14 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import Excepciones.PostulanteRepetido;
 import Excepciones.nombreTipoPublicacionRepetido;
 
 public class CtrlUsuario implements IUsuario {
-
+	
 
 	public void ingresarDatosPostulacion(String postulante, String cv, String motivacion, String oferta, Date fecha) throws PostulanteRepetido {
 		ManejadorOferta mo = ManejadorOferta.getInstancia();
@@ -112,5 +113,45 @@ public class CtrlUsuario implements IUsuario {
 		}else {
 			return new HashSet<String>();
 		}
+	}
+	
+	private void checkUnicidad(String email, String nick) throws Exception {
+		ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstance();
+		if(manejadorUsuario.existeEmailDeUsuario(email)) {
+			throw new Exception("Correo electrónico ya existe");
+		}
+		if(manejadorUsuario.existeUsuario(nick)) {
+			throw new Exception("Nickname ya existe");
+		}
+	}
+	
+	public void ingresarPostulante(
+			String nickName,
+			String nombre,
+			String apellido,
+			String correoElectronico,
+			Date fechaNacimiento,
+			String nacionalidad) throws Exception {
+		
+		ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstance();
+		
+		checkUnicidad(correoElectronico, nickName);
+		manejadorUsuario.agregarUsuario(new Postulante(nickName, nombre, apellido, correoElectronico, nacionalidad, fechaNacimiento));
+	}
+	
+	public void ingresarEmpresa(
+			String nickName,
+			String nombre,
+			String apellido,
+			String correoElectronico,
+			String nombreEmpresa,
+			String descripcion,
+			String link) throws Exception {
+		
+		ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstance();
+		
+		checkUnicidad(correoElectronico, nickName);
+		
+		manejadorUsuario.agregarUsuario(new Empresa(nickName, nombre, apellido, nombreEmpresa, correoElectronico, descripcion, link));
 	}
 }

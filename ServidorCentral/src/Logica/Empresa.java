@@ -18,7 +18,7 @@ public class Empresa extends Usuario {
 		this.nombreEmpresa = nombreEmpresa;
 		this.descripcion = descripcion;
 		this.link = link;
-		this.Ofertas=new HashMap<String,OfertaLaboral>();;
+		this.Ofertas=new HashMap<String,OfertaLaboral>();
 	}
 	public String getNombreEmpresa() {
 		return nombreEmpresa;
