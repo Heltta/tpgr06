@@ -325,7 +325,7 @@ public class ConsultaOferta extends JInternalFrame{
 		gbc_scrollPane_1.gridy = 16;
 		getContentPane().add(scrollPane_1, gbc_scrollPane_1);
 		
-		lsKeywords = new JList();
+		lsKeywords = new JList<String>();
 		scrollPane_1.setViewportView(lsKeywords);
 		
 		GridBagConstraints gbc_btnCerrar = new GridBagConstraints();
