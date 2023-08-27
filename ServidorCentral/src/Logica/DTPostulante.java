@@ -8,7 +8,7 @@ public class DTPostulante extends DTUsuario {
 	LocalDate fechaNacimiento;
 	Set<String> nombreOfertas;
 	
-	public DTPostulante(String nickname,String mail,String nombre,String apellido,String nacionalidad, LocalDate fechaNacimiento, Set<String> nombreOferas) {
+	public DTPostulante(String nickname,String mail,String nombre,String apellido,String nacionalidad, LocalDate fechaNacimiento, Set<String> nombreOfertas) {
 		super(nickname,mail,nombre,apellido);
 		this.nacionalidad = nacionalidad;
 		this.fechaNacimiento = fechaNacimiento;

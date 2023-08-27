@@ -46,14 +46,14 @@ public class ConsultaUsuario extends JInternalFrame {
 	private JComboBox lOfertasPostulante;
 	private JComboBox lOfertasEmpresa;
 	private ConsultaOferta frameOferta;
-	
+
 	public ConsultaUsuario(IUsuario IUs, ConsultaOferta frmConsultaOferta) {
 		setClosable(true);
 		IU=IUs;
 		frameOferta = frmConsultaOferta;
 		setResizable(true);
 		setTitle("Consulta de Usuario");
-		setBounds(100, 100, 497, 431);
+		setBounds(0, 0, 497, 431);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -263,8 +263,10 @@ public class ConsultaUsuario extends JInternalFrame {
 			cEmpresa.setText(dataEmpresa.getNombreEmpresa());
 			cDescripcion.setText(dataEmpresa.getDescripcion());
 			cLink.setText(dataEmpresa.getLink());
-			String [] listaOfertasEmpresa= dataEmpresa.getNombreOfertas().toArray(new String[0]);
+			if (dataEmpresa.getNombreOfertas() != null) {
+				String [] listaOfertasEmpresa= dataEmpresa.getNombreOfertas().toArray(new String[0]);
 			lOfertasEmpresa.setModel(new DefaultComboBoxModel<String> (listaOfertasEmpresa));
+			}
 		}
 		else {
 			DTPostulante dataPostulante= (DTPostulante) datosUsuario;
@@ -272,8 +274,10 @@ public class ConsultaUsuario extends JInternalFrame {
 			LocalDate fechaNacimiento=dataPostulante.getFechaNacimiento();
 			String nacimiento= fechaNacimiento.toString();
 			cNacimiento.setText(nacimiento);
-			String [] listaOfertasPostulante = dataPostulante.getNombreOfertas().toArray(new String[0]);
-			lOfertasPostulante.setModel(new DefaultComboBoxModel<String>(listaOfertasPostulante));
+			if (dataPostulante.getNombreOfertas() != null) {
+				String [] listaOfertasPostulante = dataPostulante.getNombreOfertas().toArray(new String[0]);
+				lOfertasPostulante.setModel(new DefaultComboBoxModel<String>(listaOfertasPostulante));
+			}
 		}
 	}
 	public void seleccionarOferta(String nombreOferta) {

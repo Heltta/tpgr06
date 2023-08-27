@@ -46,7 +46,7 @@ public class AltaTipoPublicacion extends JInternalFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Alta de Tipo de Publicacion de Oferta Laboral");
-        setBounds(10, 40, 606, 571);
+        setBounds(0, 0, 606, 571);
 
 
         GridBagLayout gridBagLayout = new GridBagLayout();

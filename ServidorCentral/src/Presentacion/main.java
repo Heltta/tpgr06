@@ -66,7 +66,7 @@ public class main {
         frmConsultaOferta = new ConsultaOferta(ctrlUsuario);
         frmPostulacionOferta = new PostulacionOferta(ctrlUsuario, frmConsultaOferta);
         frmAgregarTipoPublicacionAPaquete = new AgregarTipoPublicacionAPaquete(ctrlTipos);
-        frmAgregarTipoPublicacionAPaquete.setBounds(491, 56, 423, 266);
+        frmAgregarTipoPublicacionAPaquete.setBounds(0, 0, 423, 266);
         frmTrabajoUy.getContentPane().add(frmAgregarTipoPublicacionAPaquete);
         frmTrabajoUy.getContentPane().add(frmAltaTipoPublicacion);
         frmTrabajoUy.getContentPane().add(frmAltaOferta);

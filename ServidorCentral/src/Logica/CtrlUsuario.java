@@ -26,7 +26,7 @@ public class CtrlUsuario implements IUsuario {
 			}
 		}
 	}
-	
+
 	public ArrayList<String> listarUsuarios(){
 		ManejadorUsuario manejador=ManejadorUsuario.getInstance();
 		return manejador.getNicknames();
