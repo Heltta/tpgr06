@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -196,7 +197,7 @@ public class AltaOferta extends JInternalFrame{
 		gbc_LabelDepartamento.gridy = 8;
 		getContentPane().add(LabelDepartamento, gbc_LabelDepartamento);
 		
-		comboBoxDepartamento = new JComboBox<String>(new String[] {"Montevideo", "Artigas", "Canelones", "CerroLargo", "Colonia", "Durazno", "Flores", "Florida", "Lavalleja", "Maldonado", "Paysandú", "Rivera", "Rocha", "RíoNegro", "Salto", "SanJosé", "Soriano", "Tacuarembó", "TreintaYTres"});
+		comboBoxDepartamento = new JComboBox<String>(new String[] {"Seleccionar","Montevideo", "Artigas", "Canelones", "CerroLargo", "Colonia", "Durazno", "Flores", "Florida", "Lavalleja", "Maldonado", "Paysandú", "Rivera", "Rocha", "RíoNegro", "Salto", "SanJosé", "Soriano", "Tacuarembó", "TreintaYTres"});
 		GridBagConstraints gbc_comboBoxDepartamento = new GridBagConstraints();
 		gbc_comboBoxDepartamento.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxDepartamento.fill = GridBagConstraints.HORIZONTAL;
@@ -236,10 +237,11 @@ public class AltaOferta extends JInternalFrame{
 		getContentPane().add(LabelKeywords, gbc_LabelKeywords);
 		
 		list = new JList<String>();
+		list.setVisibleRowCount(5);
+		list.setLayoutOrientation(JList.VERTICAL_WRAP);
 		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		list.setBorder(new LineBorder(new Color(0, 0, 0)));
 		GridBagConstraints gbc_list = new GridBagConstraints();
-		gbc_list.gridheight = 3;
 		gbc_list.insets = new Insets(0, 0, 5, 5);
 		gbc_list.fill = GridBagConstraints.BOTH;
 		gbc_list.gridx = 2;
@@ -274,8 +276,9 @@ public class AltaOferta extends JInternalFrame{
         Date fechaU = this.dateChooser.getDate();
         String nomTipo = (String)comboBoxTipo.getSelectedItem();
 		String nickname = (String)comboBoxEmpresa.getSelectedItem();
+		String departamento = (String)comboBoxDepartamento.getSelectedItem();
 
-        if (nombreU.isEmpty() || descU.isEmpty() || remU.isEmpty()||ciudadU.isEmpty()||entU.isEmpty()||salU.isEmpty()||fechaU==null||nomTipo=="Seleccionar"||nickname=="Seleccionar") {
+        if (nombreU.isEmpty() || descU.isEmpty() || remU.isEmpty()||ciudadU.isEmpty()||entU.isEmpty()||salU.isEmpty()||fechaU==null||nomTipo=="Seleccionar"||nickname=="Seleccionar"||departamento=="Seleccionar") {
             JOptionPane.showMessageDialog(this, "No puede haber campos vacíos", "Alta de Oferta Laboral",
                     JOptionPane.ERROR_MESSAGE);
             return false;
@@ -307,6 +310,9 @@ public class AltaOferta extends JInternalFrame{
         textFieldEn.setText("");
         textFieldSal.setText("");
         dateChooser.setCalendar(null);
+        comboBoxEmpresa.setSelectedIndex(0);
+		comboBoxTipo.setSelectedIndex(0);
+		comboBoxDepartamento.setSelectedIndex(0);
 		
 	}
 	
@@ -329,15 +335,26 @@ public class AltaOferta extends JInternalFrame{
 			}
 			else {
 				JOptionPane.showMessageDialog(this, "La oferta se registró con éxito", "Alta de Oferta Laboral",
-	                    JOptionPane.ERROR_MESSAGE);
+	                    JOptionPane.PLAIN_MESSAGE);
 			}
 			}
            
 	}
 	
 	public void actualizar(String[] listaEmpresas, String[] listaTipos,String[] listaKeywords) {
-		comboBoxEmpresa.setModel(new DefaultComboBoxModel<String> (listaEmpresas));
-		comboBoxTipo.setModel(new DefaultComboBoxModel<String> (listaTipos));
+		String[] empresas = Arrays.copyOf(listaEmpresas, listaEmpresas.length+1);
+		empresas[0]="Seleccionar";
+		System.arraycopy(listaEmpresas, 0, empresas, 1, listaEmpresas.length);
+		String[] tipos = Arrays.copyOf(listaTipos, listaTipos.length+1);
+		tipos[0]="Seleccionar";
+		System.arraycopy(listaTipos, 0,tipos, 1, listaTipos.length);
+		comboBoxEmpresa.setModel(new DefaultComboBoxModel<String> (empresas));
+		comboBoxTipo.setModel(new DefaultComboBoxModel<String> (tipos));
+		comboBoxEmpresa.setSelectedIndex(0);
+		comboBoxTipo.setSelectedIndex(0);
+		comboBoxDepartamento.setSelectedIndex(0);
+		
+		
 		DefaultListModel<String> modeloKey=new DefaultListModel<String>();
 		for(int i=0;i<listaKeywords.length;i++) {
 			modeloKey.addElement(listaKeywords[i]);
