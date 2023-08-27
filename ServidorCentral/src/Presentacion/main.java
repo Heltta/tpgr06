@@ -223,4 +223,7 @@ public class main {
 		mo.agregarOferta(oferta1);
 		mo.agregarOferta(oferta2);
     }
+    public void cargarDatosPrueba2() {
+    	
+    }
 }

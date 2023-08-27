@@ -252,9 +252,11 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(lOfertasEmpresa, gbc_lPostulaciones_2);
 	}
 	public void update(String[] nickUsuarios){
+		limpiarDatosUnicos();
 		lNicknames.setModel(new DefaultComboBoxModel<String> (nickUsuarios));
 	}
 	public void seleccionarNickname(String nickname) {
+		limpiarDatosUnicos();
 		DTUsuario datosUsuario= IU.mostrarDatosUsuario(nickname);
 		cNombre.setText(datosUsuario.getNombre());
 		cApellido.setText(datosUsuario.getApellido());
@@ -287,5 +289,18 @@ public class ConsultaUsuario extends JInternalFrame {
 		frameOferta.setVisible(true);
 		//if(frameOferta!=null)frameOferta.setVisible(false);
 		//frameOferta= new ConsultaOferta(IU);
+	}
+	public void limpiarDatosUnicos() {
+		cNombre.setText("");
+		cApellido.setText("");
+		cCorreo.setText("");
+		cNacionalidad.setText("");
+		cNacimiento.setText("");
+		cEmpresa.setText("");
+		cDescripcion.setText("");
+		cLink.setText("");
+		lOfertasEmpresa.setModel(new DefaultComboBoxModel<String>());
+		lOfertasPostulante.setModel(new DefaultComboBoxModel<String>());
+		
 	}
 }
