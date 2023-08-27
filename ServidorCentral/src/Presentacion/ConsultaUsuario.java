@@ -125,7 +125,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		gbc_lblNewLabel_3.gridx = 0;
 		gbc_lblNewLabel_3.gridy = 4;
 		getContentPane().add(lblNewLabel_3, gbc_lblNewLabel_3);
-		
+
 		cCorreo = new JTextArea();
 		cCorreo.setEditable(false);
 		GridBagConstraints gbc_textArea_1_1 = new GridBagConstraints();

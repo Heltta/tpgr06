@@ -101,7 +101,7 @@ public class main {
         
         frmTrabajoUy.getContentPane().setLayout(null);
         csvDirectory= System.getProperty("user.dir") + "\\src\\TProg_DatosPruebaTarea1_2023-CSVs-v1_0\\";
-        CargarDatosDePrueba();
+
         cargarDatosUsuarios();
         cargarTipoPublicacion();
         cargarKeywords();
@@ -225,50 +225,7 @@ public class main {
         menuTipos.add(menuItemAltaKeyword);
     };
     
-    @SuppressWarnings("deprecation")
-    public void CargarDatosDePrueba() {
-    	ManejadorOferta mo = ManejadorOferta.getInstancia();
-		ManejadorUsuario mu = ManejadorUsuario.getInstance();
-		//Postulantes
-		Postulante post = new Postulante("Juan123", "j123@mail.com", "Juan", "Perez", "Uruguayo", new Date(1996, 3, 4));
-		Postulante post1 = new Postulante("Gonzalo123", "g123@mail.com", "Gonzalo", "Diaz", "Argentino", new Date(1997, 6, 14));
-		Postulante post2 = new Postulante("Marcos123", "m123@mail.com", "Marcos", "Lopez", "Chileno", new Date(1998, 9, 25));
-		mu.agregarUsuario(post);
-		mu.agregarUsuario(post1);
-		mu.agregarUsuario(post2);
-		//Empresa
-		Empresa emp = new Empresa("Artech123", "artech@mail.com", "Rodrigo", "Rodriguez", "Artech SA", "Empresa de tecnologia", "asd");
-		Empresa emp1 = new Empresa("Tecni123", "tecni@mail.com", "Alvaro", "Rios", "Tecni SA", "Empresa de tecnicos", "asd");
-		Empresa emp2 = new Empresa("Simba123", "simba@mail.com", "Julieta", "Pio", "Simba SA", "Empresa de sabana", "asd");
-		mu.agregarUsuario(emp);
-		mu.agregarUsuario(emp1);
-		mu.agregarUsuario(emp2);
-		
-		DTHorario horario = new DTHorario("09:00", "18:00");
-		DTHorario horario1 = new DTHorario("08:00", "16:00");
-		DTHorario horario2 = new DTHorario("08:00", "14:00");
-		Date fecha = new Date(2023,3,4);
-		Date fecha1 = new Date(2022,12,3);
-		Date fecha2 = new Date(2023,4,14);
-		TipoPublicacion tipo = new TipoPublicacion("Oro", "descrip", 1, new Date(2023,5,1), 5000, 9);
-		TipoPublicacion tipo1 = new TipoPublicacion("Plata", "descrip", 2, new Date(2023,7,2), 3000, 8);
-		TipoPublicacion tipo2 = new TipoPublicacion("Bronce", "descrip", 3, new Date(2023,4,25), 2000, 6);
-		OfertaLaboral oferta = new OfertaLaboral("Desarrollador", "trabajo junior", "Ciudad", "Mdeo", horario, 3000, fecha, tipo, null);
-		OfertaLaboral oferta1 = new OfertaLaboral("Tecnico", "trabajo pc", "Ciudad1", "Mdeo1", horario1, 2000, fecha1, tipo1, null);
-		OfertaLaboral oferta2 = new OfertaLaboral("Animalista", "trabajo animales", "Ciudad2", "Mdeo2", horario2, 5000, fecha2, tipo2, null);
-		oferta.agregarPostulante(post);
-		oferta.agregarPostulante(post1);
-		oferta1.agregarPostulante(post);
-		post.postularAOferta(oferta, fecha, "cv asd", "Descr");
-		post1.postularAOferta(oferta, fecha1, "cv 2", "Descr2");
-		post.postularAOferta(oferta1, fecha, "cv asd", "Descr");
-		emp.agregarOferta(oferta);
-		emp1.agregarOferta(oferta1);
-		emp2.agregarOferta(oferta2);
-		mo.agregarOferta(oferta);
-		mo.agregarOferta(oferta1);
-		mo.agregarOferta(oferta2);
-    }
+
     public void cargarDatosPrueba2() {
 
     }
