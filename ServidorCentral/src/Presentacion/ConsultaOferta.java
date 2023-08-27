@@ -413,8 +413,12 @@ public class ConsultaOferta extends JInternalFrame{
 		}
 	}
 	public void CargarDatosVisuales(String oferta) {
-		cbEmpresa.setSelectedIndex(0);
-		cbOferta.setSelectedIndex(0);
+		if(cbEmpresa.getItemCount() > 0) {
+			cbEmpresa.setSelectedIndex(0);
+		}
+		if(cbOferta.getItemCount() > 0) {
+			cbOferta.setSelectedIndex(0);
+		}
 		cbEmpresa.setEnabled(false);
 		cbOferta.setEnabled(false);
 		mostrarDatos(ctrlUsuario.seleccionarOfertaLaboral(oferta),dtm);
