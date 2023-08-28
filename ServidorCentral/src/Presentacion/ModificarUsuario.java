@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -382,6 +383,7 @@ public class ModificarUsuario extends JInternalFrame {
 		lNicknames.setSelectedIndex(0);
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void cargarInfoUser(String nombre) {
 		DTUsuario dataUser = IUs.mostrarDatosUsuario(nombre);
 		emailField.setText(dataUser.getMail());
@@ -399,7 +401,9 @@ public class ModificarUsuario extends JInternalFrame {
 			tiposDeUsuarioCombo.setSelectedItem((String) "Postulante");
 			DTPostulante dataPostulante = IUs.getDataPostulante(nombre);
 			nacionalidadField.setText(dataPostulante.getNacionalidad());
-			fechaDeNacimientoChooser.setDate(dataPostulante.getFechaNacimiento());	
+			Date fechaNacimiento = dataPostulante.getFechaNacimiento();
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy");
+			fechaDeNacimientoChooser.setDate(new Date(formato.format(fechaNacimiento)));
 			nombreEmpresaField.setText("");
 			descripcionField.setText("");
 			linkField.setText("");
