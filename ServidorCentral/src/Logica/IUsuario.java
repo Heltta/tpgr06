@@ -16,21 +16,12 @@ public interface IUsuario {
 	public abstract DTOfertaLaboral seleccionarOfertaLaboral(String nombre);
 	public abstract void ingresarDatosPostulacion(String postulante, String cv, String motivacion, String oferta, Date fecha)throws PostulanteRepetido;
 	public abstract Set<String> obtenerOfertasDeEmpresa(String empresa);
-	public abstract void ingresarPostulante(
-			String nickName,
-			String nombre,
-			String apellido,
-			String correoElectronico,
-			Date fechaNacimiento,
-			String nacionalidad) throws Exception;
+	public DTEmpresa getDataEmpresa(String nombre);
+	public DTPostulante getDataPostulante(String nombre);
+	public abstract void ingresarPostulante(String nickName,String nombre,String apellido,
+			String correoElectronico,Date fechaNacimiento,String nacionalidad) throws Exception;
 	
-	public abstract void ingresarEmpresa(
-			String nickName,
-			String nombre,
-			String apellido,
-			String correoElectronico,
-			String nombreEmpresa,
-			String descripcion,
-			String link) throws Exception;
-
+	public abstract void ingresarEmpresa(String nickName,String nombre,String apellido,
+			String correoElectronico,String nombreEmpresa,String descripcion,String link) throws Exception;
+	public void editarDatosBasicos(String nickname, String email, String nombre, String apellido, String nacionalidad, Date fecha, String descripcion, String link);
 }

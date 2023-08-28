@@ -292,7 +292,7 @@ public class AltaTipoPublicacion extends JInternalFrame {
 		return true;
 	}
 	
-	private void limpiarAltaTipo() {
+	public void limpiarAltaTipo() {
 		setTitle("Alta de Tipo de Publicacion de Oferta Laboral");
 		textFieldNombre.setText("");
 		btnAceptar.setEnabled(true);

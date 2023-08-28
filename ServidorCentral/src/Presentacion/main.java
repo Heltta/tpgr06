@@ -51,6 +51,7 @@ public class main {
     private ConsultaOferta frmConsultaOferta;
     private CrearPaqueteTiposPublicacion frmCrearPaqueteTiposPublicacion;
     private ConsultaPaquete frmConsultaPaquete;
+    private ModificarUsuario frmModificarUsuario;
     
     private String csvDirectory;
     private ArrayList<String> keywords;
@@ -98,6 +99,9 @@ public class main {
         frmTrabajoUy.getContentPane().add(frmConsultaUsuario); 
         frmConsultaPaquete = new ConsultaPaquete(ctrlTipos, frmAltaTipoPublicacion);
         frmTrabajoUy.getContentPane().add(frmConsultaPaquete);
+        frmModificarUsuario = new ModificarUsuario(ctrlUsuario);
+        frmTrabajoUy.getContentPane().add(frmModificarUsuario);
+        
         
         frmTrabajoUy.getContentPane().setLayout(null);
         String separador = FileSystems.getDefault().getSeparator();
@@ -164,6 +168,12 @@ public class main {
         menuUsuarios.add(menuItemConsultaUser);
         
         JMenuItem menuItemModDatosUser = new JMenuItem("Modificar Datos de Usuario");
+        menuItemModDatosUser.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	frmModificarUsuario.update();
+                frmModificarUsuario.setVisible(true);
+            }
+        });
         menuUsuarios.add(menuItemModDatosUser);
         
         JMenuItem menuItemAltaOferta = new JMenuItem("Alta de Oferta Laboral");
@@ -201,6 +211,7 @@ public class main {
         JMenuItem menuItemAltaTipo = new JMenuItem("Alta de Tipo de Publicacion de Oferta Laboral");
         menuItemAltaTipo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	frmAltaTipoPublicacion.limpiarAltaTipo();
                 frmAltaTipoPublicacion.setVisible(true);
             }
         });
@@ -440,7 +451,7 @@ public class main {
                 String fechaAlta= data[4].trim();
                 int oID= Integer.parseInt(data[5].trim().substring(1));
                 String[] numerosFecha = fechaAlta.split("/");
-                Date fecha =new Date(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
+                Date fecha = new Date(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
                 ctrlUsuario.ingresarDatosPostulacion(usuarios.get(uID-1), cv, mot, ofertas.get(oID-1) , fecha);
     			}
                 i++;

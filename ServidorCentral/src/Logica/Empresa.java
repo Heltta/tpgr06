@@ -48,4 +48,19 @@ public class Empresa extends Usuario {
 		}
 		return lista;
 	}
+	public void setNombreEmpresa(String nombreEmpresa) {
+		this.nombreEmpresa = nombreEmpresa;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	public void setLink(String link) {
+		this.link = link;
+	}
+	public void setOfertas(Map<String, OfertaLaboral> ofertas) {
+		Ofertas = ofertas;
+	}
+	public void setCompras(Map<String, Compra> compras) {
+		Compras = compras;
+	}
 }
