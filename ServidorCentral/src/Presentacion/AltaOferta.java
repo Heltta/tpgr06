@@ -61,12 +61,12 @@ public class AltaOferta extends JInternalFrame{
 		setResizable(true);
 		setIconifiable(true);
 		setTitle("Alta de Oferta Laboral");
-		setBounds(0, 0, 500, 440);
-		setMinimumSize(new Dimension(500,440));
+		setBounds(0, 0, 530, 440);
+		setMinimumSize(new Dimension(530,440));
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] {40, 133, 257, 0, 50};
+		gridBagLayout.columnWidths = new int[] {142, 79, 184, 85, 50};
 		gridBagLayout.rowHeights = new int[] {30, 30, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30};
-		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
 		
@@ -259,14 +259,6 @@ public class AltaOferta extends JInternalFrame{
 		gbc_list.gridy = 10;
 		getContentPane().add(list, gbc_list);
 		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				limpiarFormulario();
-			}
-		});
-		
 		
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
@@ -277,11 +269,20 @@ public class AltaOferta extends JInternalFrame{
 		GridBagConstraints gbc_btnConfirmar = new GridBagConstraints();
 		gbc_btnConfirmar.anchor = GridBagConstraints.EAST;
 		gbc_btnConfirmar.insets = new Insets(0, 0, 0, 5);
-		gbc_btnConfirmar.gridx = 2;
+		gbc_btnConfirmar.gridx = 1;
 		gbc_btnConfirmar.gridy = 14;
 		getContentPane().add(btnConfirmar, gbc_btnConfirmar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				limpiarFormulario();
+			}
+		});
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
-		gbc_btnCancelar.gridx = 3;
+		gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
+		gbc_btnCancelar.gridx = 2;
 		gbc_btnCancelar.gridy = 14;
 		getContentPane().add(btnCancelar, gbc_btnCancelar);
 	} 

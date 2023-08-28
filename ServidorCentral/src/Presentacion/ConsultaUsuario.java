@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import java.awt.GridLayout;
@@ -57,6 +59,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		setResizable(true);
 		setTitle("Consulta de Usuario");
 		setBounds(0, 0, 500, 500);
+		setMinimumSize(new Dimension(500,500));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
