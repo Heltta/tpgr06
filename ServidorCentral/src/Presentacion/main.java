@@ -65,7 +65,7 @@ public class main {
             public void run() {
                 try {
                     main window = new main();
-                    window.frmTrabajoUy.setBounds(0,0,900,700);
+                    window.frmTrabajoUy.setBounds(0,0,950,700);
                     window.frmTrabajoUy.setMinimumSize(new Dimension(870,620));
                     window.frmTrabajoUy.setVisible(true);
                 } catch (Exception e) {

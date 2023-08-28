@@ -50,8 +50,8 @@ public class AltaTipoPublicacion extends JInternalFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Alta de Tipo de Publicacion de Oferta Laboral");
-        setBounds(0, 0, 606, 571);
-
+        setBounds(0, 0, 400, 400);
+        setMinimumSize(new Dimension(400,400));
 
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[] {30, 30, 0, 0, 0, 30, 0, 30, 0};

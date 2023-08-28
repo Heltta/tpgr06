@@ -64,7 +64,8 @@ public class ConsultaPaquete extends JInternalFrame{
         setClosable(true);
         setTitle("Consulta de Paquete de Tipos de Publicacion de Ofertas Laborales");
         dataCargada = false;
-        setBounds(10, 40, 606, 571);
+        setBounds(300, 0, 500, 400);
+        setMinimumSize(new Dimension(500,400));
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{0, 0, 257, 0, 0};
         gridBagLayout.rowHeights = new int[]{68, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
