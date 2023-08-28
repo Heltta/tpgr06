@@ -411,7 +411,7 @@ public class ModificarUsuario extends JInternalFrame {
 			DTPostulante dataPostulante = IUs.getDataPostulante(nombre);
 			nacionalidadField.setText(dataPostulante.getNacionalidad());
 			Date fechaNacimiento = dataPostulante.getFechaNacimiento();
-			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy");
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 			fechaDeNacimientoChooser.setDate(fechaNacimiento);
 			nombreEmpresaField.setText("");
 			descripcionField.setText("");
