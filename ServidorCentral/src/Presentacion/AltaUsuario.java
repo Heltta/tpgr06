@@ -26,6 +26,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
+import java.awt.geom.Dimension2D;
 import java.awt.event.ItemEvent;
 
 public class AltaUsuario extends JInternalFrame {
@@ -50,15 +51,17 @@ public class AltaUsuario extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public AltaUsuario(IUsuario ctrlUsuario) {
+		setResizable(true);
 		this.ctrlUsuario = ctrlUsuario;
 		setClosable(true);
 		setTitle("Crear Usuario");
-		setBounds(100, 100, 450, 450);
+		setBounds(0, 0, 450, 450);
+		setMinimumSize(new Dimension(450,450));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {0, 120, 169, 30};
-		gridBagLayout.rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 1.0, 1.0};
-		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
+		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0};
 		getContentPane().setLayout(gridBagLayout);
 		
 		Component rigidArea = Box.createRigidArea(new Dimension(20, 20));
@@ -197,32 +200,13 @@ public class AltaUsuario extends JInternalFrame {
 		gbc_fechaDeNacimientoChooser.gridy = 7;
 		getContentPane().add(fechaDeNacimientoChooser, gbc_fechaDeNacimientoChooser);
 		
-		JLabel nombreEmpresa = new JLabel("Nombre de la empresa");
-		nombreEmpresa.setEnabled(false);
-		GridBagConstraints gbc_nombreEmpresa = new GridBagConstraints();
-		gbc_nombreEmpresa.anchor = GridBagConstraints.EAST;
-		gbc_nombreEmpresa.insets = new Insets(0, 0, 5, 5);
-		gbc_nombreEmpresa.gridx = 1;
-		gbc_nombreEmpresa.gridy = 8;
-		getContentPane().add(nombreEmpresa, gbc_nombreEmpresa);
-		
-		nombreEmpresaField = new JTextField();
-		nombreEmpresaField.setEnabled(false);
-		nombreEmpresaField.setColumns(10);
-		GridBagConstraints gbc_nombreEmpresaField = new GridBagConstraints();
-		gbc_nombreEmpresaField.insets = new Insets(0, 0, 5, 5);
-		gbc_nombreEmpresaField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_nombreEmpresaField.gridx = 2;
-		gbc_nombreEmpresaField.gridy = 8;
-		getContentPane().add(nombreEmpresaField, gbc_nombreEmpresaField);
-		
 		JLabel descripcion = new JLabel("Descripcion");
 		descripcion.setEnabled(false);
 		GridBagConstraints gbc_descripcion = new GridBagConstraints();
 		gbc_descripcion.anchor = GridBagConstraints.EAST;
 		gbc_descripcion.insets = new Insets(0, 0, 5, 5);
 		gbc_descripcion.gridx = 1;
-		gbc_descripcion.gridy = 9;
+		gbc_descripcion.gridy = 8;
 		getContentPane().add(descripcion, gbc_descripcion);
 		
 		descripcionField = new JTextField();
@@ -231,7 +215,7 @@ public class AltaUsuario extends JInternalFrame {
 		gbc_descripcionField.insets = new Insets(0, 0, 5, 5);
 		gbc_descripcionField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_descripcionField.gridx = 2;
-		gbc_descripcionField.gridy = 9;
+		gbc_descripcionField.gridy = 8;
 		getContentPane().add(descripcionField, gbc_descripcionField);
 		descripcionField.setColumns(10);
 		
@@ -241,7 +225,7 @@ public class AltaUsuario extends JInternalFrame {
 		gbc_link.anchor = GridBagConstraints.EAST;
 		gbc_link.insets = new Insets(0, 0, 5, 5);
 		gbc_link.gridx = 1;
-		gbc_link.gridy = 10;
+		gbc_link.gridy = 9;
 		getContentPane().add(link, gbc_link);
 		
 		linkField = new JTextField();
@@ -250,7 +234,7 @@ public class AltaUsuario extends JInternalFrame {
 		gbc_linkField.insets = new Insets(0, 0, 5, 5);
 		gbc_linkField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_linkField.gridx = 2;
-		gbc_linkField.gridy = 10;
+		gbc_linkField.gridy = 9;
 		getContentPane().add(linkField, gbc_linkField);
 		linkField.setColumns(10);
 		
@@ -262,16 +246,38 @@ public class AltaUsuario extends JInternalFrame {
 		});
 		GridBagConstraints gbc_submit = new GridBagConstraints();
 		gbc_submit.anchor = GridBagConstraints.EAST;
-		gbc_submit.insets = new Insets(0, 0, 0, 5);
+		gbc_submit.insets = new Insets(0, 0, 5, 5);
 		gbc_submit.gridx = 2;
-		gbc_submit.gridy = 11;
+		gbc_submit.gridy = 10;
 		getContentPane().add(submit, gbc_submit);
 		
 		Component rigidArea_1 = Box.createRigidArea(new Dimension(20, 20));
 		GridBagConstraints gbc_rigidArea_1 = new GridBagConstraints();
+		gbc_rigidArea_1.insets = new Insets(0, 0, 5, 0);
 		gbc_rigidArea_1.gridx = 3;
 		gbc_rigidArea_1.gridy = 11;
 		getContentPane().add(rigidArea_1, gbc_rigidArea_1);
+		
+		JLabel nombreEmpresa = new JLabel("Nombre de la empresa");
+		nombreEmpresa.setEnabled(false);
+		nombreEmpresa.setVisible(false);
+		GridBagConstraints gbc_nombreEmpresa = new GridBagConstraints();
+		gbc_nombreEmpresa.anchor = GridBagConstraints.EAST;
+		gbc_nombreEmpresa.insets = new Insets(0, 0, 0, 5);
+		gbc_nombreEmpresa.gridx = 1;
+		gbc_nombreEmpresa.gridy = 12;
+		getContentPane().add(nombreEmpresa, gbc_nombreEmpresa);
+		
+		nombreEmpresaField = new JTextField();
+		nombreEmpresaField.setEnabled(false);
+		nombreEmpresaField.setColumns(10);
+		nombreEmpresaField.setVisible(false);
+		GridBagConstraints gbc_nombreEmpresaField = new GridBagConstraints();
+		gbc_nombreEmpresaField.insets = new Insets(0, 0, 0, 5);
+		gbc_nombreEmpresaField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_nombreEmpresaField.gridx = 2;
+		gbc_nombreEmpresaField.gridy = 12;
+		getContentPane().add(nombreEmpresaField, gbc_nombreEmpresaField);
 
 	}
 
@@ -306,7 +312,7 @@ public class AltaUsuario extends JInternalFrame {
 				}	
 			} else if (tipoDeAltaUsuario == "Empresa") {
 				// El Actor eligio crear una Empresa
-				String nombreEmpresa = this.nombreEmpresaField.getText();
+				//String nombreEmpresa = this.nombreEmpresaField.getText();
 				String descripcion = this.descripcionField.getText();
 				String link = this.linkField.getText();
 				error = verificarCampos(false, nickname, correoElectronico, nombre, apellido, "", null, descripcion);
@@ -317,7 +323,7 @@ public class AltaUsuario extends JInternalFrame {
 					}
 				}
 				if(cantidadErrores == 0) {
-					ctrlUsuario.ingresarEmpresa(nickname, nombre, apellido, correoElectronico, nombreEmpresa, descripcion, link);
+					ctrlUsuario.ingresarEmpresa(nickname, nombre, apellido, correoElectronico, nickname, descripcion, link);//En el lugar del nombre de la empresa queda el nickname.
 				JOptionPane.showMessageDialog(this, "La Empresa se ha creado con éxito", "Agregar Usuario",
 	                    JOptionPane.INFORMATION_MESSAGE);
 				}else {
@@ -340,7 +346,7 @@ public class AltaUsuario extends JInternalFrame {
 	}
 	
 	private void setEnabledEmpresaFields(Boolean estado) {
-		nombreEmpresaField.setEnabled(estado);
+		//nombreEmpresaField.setEnabled(estado);
 		descripcionField.setEnabled(estado);
 		linkField.setEnabled(estado);
 	}
@@ -385,7 +391,7 @@ public class AltaUsuario extends JInternalFrame {
 		fechaDeNacimientoChooser.setDate(null);
 		// Campos de Empresa
 		descripcionField.setText("");
-		nombreEmpresaField.setText("");
+		//nombreEmpresaField.setText("");
 		linkField.setText("");
 		
 	};
