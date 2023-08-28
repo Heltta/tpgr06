@@ -62,9 +62,9 @@ public class ModificarUsuario extends JInternalFrame {
         setResizable(true);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {0, 120, 169, 30};
-		gridBagLayout.rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 1.0};
-		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
+		gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
 		getContentPane().setLayout(gridBagLayout);
 		
 		Component rigidArea = Box.createRigidArea(new Dimension(20, 20));
@@ -93,6 +93,8 @@ public class ModificarUsuario extends JInternalFrame {
         	public void itemStateChanged(ItemEvent e) {
         		if (e.getStateChange() == ItemEvent.SELECTED && lNicknames.getSelectedIndex() != 0) {
         			cargarInfoUser((String) lNicknames.getSelectedItem());
+        		}else if(lNicknames.getSelectedIndex() == 0) {
+        			limpiarMod();
         		}
         	}
         });
@@ -211,32 +213,13 @@ public class ModificarUsuario extends JInternalFrame {
 		gbc_fechaDeNacimientoChooser.gridy = 7;
 		getContentPane().add(fechaDeNacimientoChooser, gbc_fechaDeNacimientoChooser);
 		
-		JLabel nombreEmpresa = new JLabel("Nombre de la empresa");
-		nombreEmpresa.setEnabled(false);
-		GridBagConstraints gbc_nombreEmpresa = new GridBagConstraints();
-		gbc_nombreEmpresa.anchor = GridBagConstraints.EAST;
-		gbc_nombreEmpresa.insets = new Insets(0, 0, 5, 5);
-		gbc_nombreEmpresa.gridx = 1;
-		gbc_nombreEmpresa.gridy = 8;
-		getContentPane().add(nombreEmpresa, gbc_nombreEmpresa);
-		
-		nombreEmpresaField = new JTextField();
-		nombreEmpresaField.setEnabled(false);
-		nombreEmpresaField.setColumns(10);
-		GridBagConstraints gbc_nombreEmpresaField = new GridBagConstraints();
-		gbc_nombreEmpresaField.insets = new Insets(0, 0, 5, 5);
-		gbc_nombreEmpresaField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_nombreEmpresaField.gridx = 2;
-		gbc_nombreEmpresaField.gridy = 8;
-		getContentPane().add(nombreEmpresaField, gbc_nombreEmpresaField);
-		
 		JLabel descripcion = new JLabel("Descripcion");
 		descripcion.setEnabled(false);
 		GridBagConstraints gbc_descripcion = new GridBagConstraints();
 		gbc_descripcion.anchor = GridBagConstraints.EAST;
 		gbc_descripcion.insets = new Insets(0, 0, 5, 5);
 		gbc_descripcion.gridx = 1;
-		gbc_descripcion.gridy = 9;
+		gbc_descripcion.gridy = 8;
 		getContentPane().add(descripcion, gbc_descripcion);
 		
 		descripcionField = new JTextField();
@@ -245,7 +228,7 @@ public class ModificarUsuario extends JInternalFrame {
 		gbc_descripcionField.insets = new Insets(0, 0, 5, 5);
 		gbc_descripcionField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_descripcionField.gridx = 2;
-		gbc_descripcionField.gridy = 9;
+		gbc_descripcionField.gridy = 8;
 		getContentPane().add(descripcionField, gbc_descripcionField);
 		descripcionField.setColumns(10);
 		
@@ -255,18 +238,8 @@ public class ModificarUsuario extends JInternalFrame {
 		gbc_link.anchor = GridBagConstraints.EAST;
 		gbc_link.insets = new Insets(0, 0, 5, 5);
 		gbc_link.gridx = 1;
-		gbc_link.gridy = 10;
+		gbc_link.gridy = 9;
 		getContentPane().add(link, gbc_link);
-		
-		linkField = new JTextField();
-		linkField.setEnabled(false);
-		GridBagConstraints gbc_linkField = new GridBagConstraints();
-		gbc_linkField.insets = new Insets(0, 0, 5, 5);
-		gbc_linkField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_linkField.gridx = 2;
-		gbc_linkField.gridy = 10;
-		getContentPane().add(linkField, gbc_linkField);
-		linkField.setColumns(10);
 		
 		JButton submit = new JButton("Guardar");
 		submit.addActionListener(new ActionListener() {
@@ -274,76 +247,112 @@ public class ModificarUsuario extends JInternalFrame {
 				cmdModificarDatos(e);
 			}
 		});
+		
+		linkField = new JTextField();
+		linkField.setEnabled(false);
+		GridBagConstraints gbc_linkField = new GridBagConstraints();
+		gbc_linkField.insets = new Insets(0, 0, 5, 5);
+		gbc_linkField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_linkField.gridx = 2;
+		gbc_linkField.gridy = 9;
+		getContentPane().add(linkField, gbc_linkField);
+		linkField.setColumns(10);
 		GridBagConstraints gbc_submit = new GridBagConstraints();
 		gbc_submit.anchor = GridBagConstraints.EAST;
-		gbc_submit.insets = new Insets(0, 0, 0, 5);
+		gbc_submit.insets = new Insets(0, 0, 5, 5);
 		gbc_submit.gridx = 2;
 		gbc_submit.gridy = 11;
 		getContentPane().add(submit, gbc_submit);
 		
+		JLabel nombreEmpresa = new JLabel("Nombre de la empresa");
+		nombreEmpresa.setEnabled(false);
+		nombreEmpresa.setVisible(false);
+		GridBagConstraints gbc_nombreEmpresa = new GridBagConstraints();
+		gbc_nombreEmpresa.anchor = GridBagConstraints.EAST;
+		gbc_nombreEmpresa.insets = new Insets(0, 0, 0, 5);
+		gbc_nombreEmpresa.gridx = 1;
+		gbc_nombreEmpresa.gridy = 12;
+		getContentPane().add(nombreEmpresa, gbc_nombreEmpresa);
+		
+		nombreEmpresaField = new JTextField();
+		nombreEmpresaField.setEnabled(false);
+		nombreEmpresaField.setColumns(10);
+		nombreEmpresaField.setVisible(false);
+		GridBagConstraints gbc_nombreEmpresaField = new GridBagConstraints();
+		gbc_nombreEmpresaField.insets = new Insets(0, 0, 0, 5);
+		gbc_nombreEmpresaField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_nombreEmpresaField.gridx = 2;
+		gbc_nombreEmpresaField.gridy = 12;
+		getContentPane().add(nombreEmpresaField, gbc_nombreEmpresaField);
+		
 		Component rigidArea_1 = Box.createRigidArea(new Dimension(20, 20));
 		GridBagConstraints gbc_rigidArea_1 = new GridBagConstraints();
 		gbc_rigidArea_1.gridx = 3;
-		gbc_rigidArea_1.gridy = 11;
+		gbc_rigidArea_1.gridy = 12;
 		getContentPane().add(rigidArea_1, gbc_rigidArea_1);
 
 	}
 
 	
 	private void cmdModificarDatos(ActionEvent e) {
-		boolean esPostulante = (tiposDeUsuarioCombo.getSelectedItem() == "Postulante");
-		String tipoDeAltaUsuario = (String) (this.tiposDeUsuarioCombo.getSelectedItem());
-		String nickname = (String) lNicknames.getSelectedItem();
-		String email = emailField.getText();
-		String nombre = nombreField.getText();
-		String apellido = apellidoField.getText();
-		Date fecha = fechaDeNacimientoChooser.getDate();
-		String descripcion = descripcionField.getText();
-		String link = linkField.getText();
-		Date fechaNacimiento = this.fechaDeNacimientoChooser.getDate();
-		String nacionalidad = this.nacionalidadField.getText();
-		ArrayList<String> error;
-		int cantidadErrores = 0;
-		String mensaje = "Revisar los siguientes campos:\n";
 		try {
-			if(tipoDeAltaUsuario == "Postulante") {
-				// El Actor eligio crear un Postulante
-				error = verificarCampos(true, nickname, email, nombre, apellido, nacionalidad, fechaNacimiento, "");
-				for(String cadena : error) {
-					if(!cadena.isEmpty()) {
-						cantidadErrores++;
-						mensaje += "-" + cadena + "\n";
+			if(lNicknames.getSelectedIndex() != 0) {
+				boolean esPostulante = (tiposDeUsuarioCombo.getSelectedItem() == "Postulante");
+				String tipoDeAltaUsuario = (String) (this.tiposDeUsuarioCombo.getSelectedItem());
+				String nickname = (String) lNicknames.getSelectedItem();
+				String email = emailField.getText();
+				String nombre = nombreField.getText();
+				String apellido = apellidoField.getText();
+				Date fecha = fechaDeNacimientoChooser.getDate();
+				String descripcion = descripcionField.getText();
+				String link = linkField.getText();
+				Date fechaNacimiento = this.fechaDeNacimientoChooser.getDate();
+				String nacionalidad = this.nacionalidadField.getText();
+				ArrayList<String> error;
+				int cantidadErrores = 0;
+				String mensaje = "Revisar los siguientes campos:\n";
+		
+				if(tipoDeAltaUsuario == "Postulante") {
+					// El Actor eligio crear un Postulante
+					error = verificarCampos(true, nickname, email, nombre, apellido, nacionalidad, fechaNacimiento, "");
+					for(String cadena : error) {
+						if(!cadena.isEmpty()) {
+							cantidadErrores++;
+							mensaje += "-" + cadena + "\n";
+						}
 					}
-				}
-				if(cantidadErrores == 0) {
-					IUs.editarDatosBasicos(nickname, email, nombre, apellido, nacionalidad, fecha, descripcion, link);
-				JOptionPane.showMessageDialog(this, "Se han cambiado los datos con exito", "Modificar Datos de Usuario",
+					if(cantidadErrores == 0) {
+						IUs.editarDatosBasicos(nickname, email, nombre, apellido, nacionalidad, fecha, descripcion, link);
+						JOptionPane.showMessageDialog(this, "Se han cambiado los datos con exito", "Modificar Datos de Usuario",
 	                    JOptionPane.INFORMATION_MESSAGE);
-				}else {
-					throw new Exception(mensaje);
-				}	
-			} else if (tipoDeAltaUsuario == "Empresa") {
-				// El Actor eligio crear una Empresa
-				//String nombreEmpresa = this.nombreEmpresaField.getText();
-				error = verificarCampos(false, nickname, email, nombre, apellido, "", null, descripcion);
-				for(String cadena : error) {
-					if(!cadena.isEmpty()) {
-						cantidadErrores++;
-						mensaje += "-" + cadena + "\n";
+					}else {
+						throw new Exception(mensaje);
+					}	
+				} else if (tipoDeAltaUsuario == "Empresa") {
+					// El Actor eligio crear una Empresa
+					//String nombreEmpresa = this.nombreEmpresaField.getText();
+					error = verificarCampos(false, nickname, email, nombre, apellido, "", null, descripcion);
+					for(String cadena : error) {
+						if(!cadena.isEmpty()) {
+							cantidadErrores++;
+							mensaje += "-" + cadena + "\n";
+						}
 					}
-				}
-				if(cantidadErrores == 0) {
-					IUs.editarDatosBasicos(nickname, email, nombre, apellido, nacionalidad, fecha, descripcion, link);
-				JOptionPane.showMessageDialog(this, "Se han cambiado los datos con exito", "Modificar Datos de Usuario",
+					if(cantidadErrores == 0) {
+						IUs.editarDatosBasicos(nickname, email, nombre, apellido, nacionalidad, fecha, descripcion, link);
+						JOptionPane.showMessageDialog(this, "Se han cambiado los datos con exito", "Modificar Datos de Usuario",
 	                    JOptionPane.INFORMATION_MESSAGE);
-				}else {
-					throw new Exception(mensaje);
+					}else {
+						throw new Exception(mensaje);
+					}
+				} else {
+					throw new Exception("Ningun tipo de Usuario elegido");
 				}
-			} else {
-				throw new Exception("Ningun tipo de Usuario elegido");
+				limpiarMod();
+				lNicknames.setSelectedIndex(0);
+			}else {
+				throw new Exception("Debe seleccionar un usuario para modificar.");
 			}
-			limpiarMod();
-			lNicknames.setSelectedIndex(0);
 		} catch (Exception exc) {
 			JOptionPane.showMessageDialog(this, exc.getMessage(), "Agregar Usuario",
                     JOptionPane.INFORMATION_MESSAGE);
