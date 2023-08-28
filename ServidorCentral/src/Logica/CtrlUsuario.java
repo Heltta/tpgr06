@@ -32,6 +32,39 @@ public class CtrlUsuario implements IUsuario {
 		ManejadorUsuario manejador=ManejadorUsuario.getInstance();
 		return manejador.getNicknames();
 	}
+	
+	public void editarDatosBasicos(String nickname, String email, String nombre, String apellido, String nacionalidad, Date fecha, String descripcion, String link) {
+		ManejadorUsuario mu = ManejadorUsuario.getInstance();
+		Usuario user = mu.getUsuario(nickname);
+		user.setNombre(nombre);
+		user.setApellido(apellido);
+		if(user instanceof Postulante) {
+			((Postulante) user).setNacionalidad(nacionalidad);
+			((Postulante) user).setFechaNacimiento(fecha);
+		} else if (user instanceof Empresa) {
+			((Empresa) user).setDescripcion(descripcion);
+			((Empresa) user).setLink(link);
+		}
+	}
+	
+	//Solo recibe nombre de postulante
+	public DTPostulante getDataPostulante(String nombre) {
+		ManejadorUsuario mu = ManejadorUsuario.getInstance();
+		Postulante user = (Postulante) mu.getUsuario(nombre);
+		DTPostulante dataPostulante = new DTPostulante(user.getNickname(), user.getMail(), user.getNombre(), user.getApellido(),
+				user.getNacionalidad(), user.getFechaNacimiento(), user.getPostulaciones().keySet());
+		return dataPostulante;
+	}
+	
+	//Solo recibe nombre de empresa
+	public DTEmpresa getDataEmpresa(String nombre) {
+		ManejadorUsuario mu = ManejadorUsuario.getInstance();
+		Empresa user = (Empresa) mu.getUsuario(nombre);
+		DTEmpresa dataEmpresa = new DTEmpresa(user.getNickname(), user.getMail(), user.getNombre(), user.getApellido(),
+				user.getNombreEmpresa(), user.getDescripcion(), user.getLink(), user.getOfertas().keySet());
+		return dataEmpresa;
+	}
+	
 	public DTUsuario mostrarDatosUsuario(String nickname) {
 		ManejadorUsuario manejador=ManejadorUsuario.getInstance();
 		Usuario u= manejador.getUsuario(nickname);

@@ -42,4 +42,6 @@ public class Postulante extends Usuario {
 	public void setPostulaciones(Map<String, Postulacion> postulaciones) {
 		Postulaciones = postulaciones;
 	}
+	
+	
 }

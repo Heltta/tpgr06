@@ -134,6 +134,7 @@ public class ConsultaPaquete extends JInternalFrame{
         getContentPane().add(scrollPane, gbc_scrollPane);
         
         textAreaDescripcion = new JTextArea();
+        textAreaDescripcion.setLineWrap(true);
         textAreaDescripcion.setEditable(false);
         scrollPane.setViewportView(textAreaDescripcion);
         
@@ -235,6 +236,7 @@ public class ConsultaPaquete extends JInternalFrame{
         table.getColumnModel().getColumn(0).setResizable(false);
         table.setDefaultEditor(Object.class, null);
         scrollPane_1.setViewportView(table);
+        table.getTableHeader().setReorderingAllowed(false);
         
         table.getSelectionModel().addListSelectionListener((ListSelectionListener) new ListSelectionListener(){
 			public void valueChanged(ListSelectionEvent e) {

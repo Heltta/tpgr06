@@ -27,57 +27,35 @@ public class PaqueteTipoPublicacion {
 	public String getNombre() {
 		return nombre;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	
+
 	public String getDescripcion() {
 		return descripcion;
-	}
-	
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
 	}
 	
 	public double getDescuento() {
 		return descuento;
 	}
-	
-	public void setDescuento(double descuento) {
-		this.descuento = descuento;
-	}
+
 	
 	public Date getFecha() {
 		return fecha;
 	}
-	
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
+
 	
 	public double getCosto() {
 		return costo;
 	}
-	
-	public void setCosto(double costo) {
-		this.costo = costo;
-	}
+
 	
 	public int getPeriodoValidez() {
 		return PeriodoValidez;
 	}
-	
-	public void setPeriodoValidez(int periodoValidez) {
-		PeriodoValidez = periodoValidez;
-	}
+
 	
 	public Map<String, Agrupa> getTiposPublicacion() {
 		return TiposPublicacion;
 	}
-	
-	public void setTiposPublicacion(Map<String, Agrupa> tiposPublicacion) {
-		TiposPublicacion = tiposPublicacion;
-	}
+
 	
 	public void agregarTipo(TipoPublicacion tipo, int cant) {
 		if (TiposPublicacion.containsKey(tipo.getNombre())) {

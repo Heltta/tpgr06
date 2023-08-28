@@ -27,12 +27,6 @@ public class ManejadorUsuario {
 		usuariosByEmail= new HashMap<String,Usuario>();
 	}
 	
-	 public Usuario obtenerUsuario(String nickUsuario) {
-		 Usuario u=null;
-		 if (usuarios.containsKey(nickUsuario)) { u=usuarios.get(nickUsuario);}
-		 return u;
-	 }
-	
 	public ArrayList<String> getNicknames(){
 		ArrayList<String> nicknames = new ArrayList<String>();
 		usuarios.forEach((nickname, usuario)->{
