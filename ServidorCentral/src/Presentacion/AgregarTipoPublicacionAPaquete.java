@@ -36,7 +36,7 @@ public class AgregarTipoPublicacionAPaquete extends JInternalFrame {
 	private ITipos ctrlTipos;
 	private JComboBox<String> comboBoxPaquete;
 	private JComboBox<String> comboBoxTipo;
-	private JSpinner spinnerCant;
+	private JTextField textField;
 
 	public AgregarTipoPublicacionAPaquete(ITipos ctrlTipos) {
 		this.ctrlTipos = ctrlTipos;
@@ -128,9 +128,9 @@ public class AgregarTipoPublicacionAPaquete extends JInternalFrame {
         getContentPane().add(panel_3, gbc_panel_3);
         panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.X_AXIS));
         
-        spinnerCant = new JSpinner();
-        spinnerCant.setModel(new SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
-        panel_3.add(spinnerCant);
+        textField = new JTextField();
+        panel_3.add(textField);
+        textField.setColumns(10);
        
         JPanel panel = new JPanel();
         GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -185,7 +185,7 @@ public class AgregarTipoPublicacionAPaquete extends JInternalFrame {
     
     public void cmdAgregarTipo() {
     	ctrlTipos.agregarTipoPublicacion(comboBoxPaquete.getSelectedItem().toString(), 
-				comboBoxTipo.getSelectedItem().toString(), (int) spinnerCant.getValue());
+				comboBoxTipo.getSelectedItem().toString(),  Integer.parseInt(textField.getText()));
 		JOptionPane.showMessageDialog(this, "El Tipo de Publicacion fue agregado con exito", "Agregar Tipo de Publicacion a Paquete",
 				JOptionPane.INFORMATION_MESSAGE);
 		setVisible(false);
@@ -206,18 +206,20 @@ public class AgregarTipoPublicacionAPaquete extends JInternalFrame {
     	comboBoxPaquete.addItem("Seleccionar");
     	comboBoxTipo.removeAllItems();
     	comboBoxTipo.addItem("Seleccionar");
-    	spinnerCant.setValue(Integer.parseInt("1"));
+    	textField.setText("");
     }
     
     public boolean checkFormulario() {
-    	String cantT = spinnerCant.getValue().toString();
+    	String cantT = textField.getText();
     	if (cantT.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Debe llenar todos los campos", "Agregar Tipo de Publicacion a Paquete", JOptionPane.ERROR_MESSAGE);
 			return false;
     	} else if (comboBoxPaquete.getSelectedIndex() == 0 || comboBoxTipo.getSelectedIndex() == 0) {
     		JOptionPane.showMessageDialog(this, "Debe seleccionar un valor de la lista", "Agregar Tipo de Publicacion a Paquete", JOptionPane.ERROR_MESSAGE);
     		return false;
-    	} 
+    	} else if(Integer.parseInt(cantT)<=0) {
+    		JOptionPane.showMessageDialog(this, "La cantidad debe ser un valor natural", "Agregar Tipo de Publicacion a Paquete", JOptionPane.ERROR_MESSAGE);
+    	}
     	return true;
     }
 }

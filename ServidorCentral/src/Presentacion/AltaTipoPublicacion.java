@@ -275,11 +275,15 @@ public class AltaTipoPublicacion extends JInternalFrame {
 			JOptionPane.showMessageDialog(this, "Debe llenar todos los campos", "Alta Tipo de Publicacion", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
-	
+		
 		try {
-			Double.parseDouble(costoT);
-			Double.parseDouble(duracionT);
-			Integer.parseInt(exposicionT);
+			double cos =Double.parseDouble(costoT);
+			double dur =Double.parseDouble(duracionT);
+			int exp=Integer.parseInt(exposicionT);
+			if(exp<=0 || dur<=0 || cos<=0) {
+				JOptionPane.showMessageDialog(this, "Los campos numericos deben tener valores positivos", "Alta Tipo de Publicacion", JOptionPane.ERROR_MESSAGE);
+				return false;
+			}
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(this, "Debe ingresar un numero", "Alta Tipo de Publicacion", JOptionPane.ERROR_MESSAGE);
 			return false;
