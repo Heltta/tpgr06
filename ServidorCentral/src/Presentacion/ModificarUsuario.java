@@ -55,8 +55,10 @@ public class ModificarUsuario extends JInternalFrame {
 	public ModificarUsuario(IUsuario IUs) {
 		this.IUs = IUs;
 		setClosable(true);
-		setTitle("Crear Usuario");
-		setBounds(100, 100, 450, 450);
+		setTitle("Modificar Usuario");
+		setBounds(0, 0, 400, 400);
+        setMinimumSize(new Dimension(400,400));
+        setResizable(true);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {0, 120, 169, 30};
 		gridBagLayout.rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
