@@ -32,6 +32,8 @@ import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
 
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
@@ -59,9 +61,10 @@ public class AltaOferta extends JInternalFrame{
 		setResizable(true);
 		setIconifiable(true);
 		setTitle("Alta de Oferta Laboral");
-		setBounds(0, 0, 621, 441);
+		setBounds(0, 0, 500, 440);
+		setMinimumSize(new Dimension(500,440));
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] {40, 0, 100, 30, 50};
+		gridBagLayout.columnWidths = new int[] {40, 133, 257, 0, 50};
 		gridBagLayout.rowHeights = new int[] {30, 30, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30};
 		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
@@ -192,6 +195,14 @@ public class AltaOferta extends JInternalFrame{
 		getContentPane().add(textFieldSal, gbc_textFieldSal);
 		textFieldSal.setColumns(10);
 		
+		JLabel lblFormato = new JLabel(" (hh:mm)");
+		GridBagConstraints gbc_lblFormato = new GridBagConstraints();
+		gbc_lblFormato.anchor = GridBagConstraints.WEST;
+		gbc_lblFormato.insets = new Insets(0, 0, 5, 0);
+		gbc_lblFormato.gridx = 3;
+		gbc_lblFormato.gridy = 7;
+		getContentPane().add(lblFormato, gbc_lblFormato);
+		
 		JLabel LabelDepartamento = new JLabel("Departamento: ");
 		GridBagConstraints gbc_LabelDepartamento = new GridBagConstraints();
 		gbc_LabelDepartamento.insets = new Insets(0, 0, 5, 5);
@@ -229,14 +240,6 @@ public class AltaOferta extends JInternalFrame{
             }
         });
 		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				limpiarFormulario();
-			}
-		});
-		
 		JLabel LabelKeywords = new JLabel("Keywords");
 		GridBagConstraints gbc_LabelKeywords = new GridBagConstraints();
 		gbc_LabelKeywords.insets = new Insets(0, 0, 5, 5);
@@ -255,11 +258,14 @@ public class AltaOferta extends JInternalFrame{
 		gbc_list.gridx = 2;
 		gbc_list.gridy = 10;
 		getContentPane().add(list, gbc_list);
-		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
-		gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
-		gbc_btnCancelar.gridx = 0;
-		gbc_btnCancelar.gridy = 14;
-		getContentPane().add(btnCancelar, gbc_btnCancelar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				limpiarFormulario();
+			}
+		});
 		
 		
 		JButton btnConfirmar = new JButton("Confirmar");
@@ -269,9 +275,15 @@ public class AltaOferta extends JInternalFrame{
 			}
 		});
 		GridBagConstraints gbc_btnConfirmar = new GridBagConstraints();
-		gbc_btnConfirmar.gridx = 3;
+		gbc_btnConfirmar.anchor = GridBagConstraints.EAST;
+		gbc_btnConfirmar.insets = new Insets(0, 0, 0, 5);
+		gbc_btnConfirmar.gridx = 2;
 		gbc_btnConfirmar.gridy = 14;
 		getContentPane().add(btnConfirmar, gbc_btnConfirmar);
+		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
+		gbc_btnCancelar.gridx = 3;
+		gbc_btnCancelar.gridy = 14;
+		getContentPane().add(btnCancelar, gbc_btnCancelar);
 	} 
 
 	private boolean checkFormulario() {

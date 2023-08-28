@@ -56,7 +56,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		frameOferta = frmConsultaOferta;
 		setResizable(true);
 		setTitle("Consulta de Usuario");
-		setBounds(0, 0, 497, 431);
+		setBounds(0, 0, 500, 500);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
