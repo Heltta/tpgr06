@@ -36,10 +36,10 @@ import java.awt.event.ActionEvent;
 public class CrearPaqueteTiposPublicacion extends JInternalFrame{
 	private ITipos ctrlTipos;
 	private JTextField textFieldNombre;
-	private JSpinner spinnerValidez;
-	private JSpinner spinnerDescuento;
 	private JTextArea textAreaDescripcion;
 	private JDateChooser dateChooserAlta;
+	private JTextField textField;
+	private JTextField textField_1;
 	public CrearPaqueteTiposPublicacion(ITipos ctrlTipos) {
 		this.ctrlTipos = ctrlTipos;
 		setResizable(true);
@@ -121,9 +121,9 @@ public class CrearPaqueteTiposPublicacion extends JInternalFrame{
         getContentPane().add(panel_1, gbc_panel_1);
         panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.X_AXIS));
         
-        spinnerValidez = new JSpinner();
-        spinnerValidez.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
-        panel_1.add(spinnerValidez);
+        textField = new JTextField();
+        panel_1.add(textField);
+        textField.setColumns(10);
         
         JLabel lblDescuento = new JLabel("Descuento:");
         lblDescuento.setAlignmentX(Component.RIGHT_ALIGNMENT);
@@ -143,9 +143,9 @@ public class CrearPaqueteTiposPublicacion extends JInternalFrame{
         getContentPane().add(panel, gbc_panel);
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         
-        spinnerDescuento = new JSpinner();
-        spinnerDescuento.setModel(new SpinnerNumberModel(0, 0, 100, 1));
-        panel.add(spinnerDescuento);
+        textField_1 = new JTextField();
+        panel.add(textField_1);
+        textField_1.setColumns(10);
         
         JLabel lblFecha = new JLabel("Fecha:");
         GridBagConstraints gbc_lblFecha = new GridBagConstraints();
@@ -206,8 +206,8 @@ public class CrearPaqueteTiposPublicacion extends JInternalFrame{
 		if (checkFormulario()) {
 			String nombreP = textFieldNombre.getText();
 			String descripcionP = textAreaDescripcion.getText();
-			int validezP = (int) spinnerValidez.getValue();
-			int descuentoP = (int) spinnerDescuento.getValue();
+			int validezP = Integer.parseInt( textField.getText());
+			double descuentoP = Double.parseDouble(textField_1.getText());
 			Date fechaP = dateChooserAlta.getDate();
 			try {
 				ctrlTipos.ingresarDatosPaquete(nombreP, descripcionP, validezP, descuentoP, fechaP);
@@ -229,15 +229,20 @@ public class CrearPaqueteTiposPublicacion extends JInternalFrame{
 			JOptionPane.showMessageDialog(this, "Debe llenar todos los campos", "Crear Paquete de Tipos de Publicacion", JOptionPane.ERROR_MESSAGE);
 			return false;
     	}
-
+		int validezP = Integer.parseInt( textField.getText());
+		double descuentoP = Double.parseDouble(textField_1.getText());
+    	if(validezP<=0 || descuentoP<=0) {
+			JOptionPane.showMessageDialog(this, "Debe poner una validez entera y un descuento positivo", "Crear Paquete de Tipos de Publicacion", JOptionPane.ERROR_MESSAGE);
+			return false;
+    	}
     	return true;
 	}
 	private void limpiarCrearPaquete() {
 		textFieldNombre.setText("");
 		textAreaDescripcion.selectAll();
 		textAreaDescripcion.replaceSelection("");
-		spinnerValidez.setValue(Integer.parseInt("0"));
-		spinnerDescuento.setValue(Integer.parseInt("0"));
+		textField.setText("");
+		textField_1.setText("");
 		dateChooserAlta.setDate(null);
 	};
 }
