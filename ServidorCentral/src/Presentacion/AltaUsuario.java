@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JTextField;
@@ -281,27 +282,47 @@ public class AltaUsuario extends JInternalFrame {
 		String nombre = this.nombreField.getText();
 		String apellido = this.apellidoField.getText();
 		String correoElectronico = this.emailField.getText();
-	
+		ArrayList<String> error;
+		String mensaje = "Revisar los siguientes campos:\n";
+		int cantidadErrores = 0;
 		try {
 			if(tipoDeAltaUsuario == "Postulante") {
 				// El Actor eligio crear un Postulante
 				Date fechaNacimiento = this.fechaDeNacimientoChooser.getDate();
 				String nacionalidad = this.nacionalidadField.getText();
-				
-				ctrlUsuario.ingresarPostulante(nickname, nombre, apellido, correoElectronico, fechaNacimiento, nacionalidad);
+				error = verificarCampos(true, nickname, correoElectronico, nombre, apellido, nacionalidad, fechaNacimiento, "");
+				for(String cadena : error) {
+					if(!cadena.isEmpty()) {
+						cantidadErrores++;
+						mensaje += "-" + cadena + "\n";
+					}
+				}
+				if(cantidadErrores == 0) {
+					ctrlUsuario.ingresarPostulante(nickname, nombre, apellido, correoElectronico, fechaNacimiento, nacionalidad);
 				JOptionPane.showMessageDialog(this, "El Postulante se ha creado con éxito", "Agregar Usuario",
 	                    JOptionPane.INFORMATION_MESSAGE);
-					
+				}else {
+					throw new Exception(mensaje);
+				}	
 			} else if (tipoDeAltaUsuario == "Empresa") {
 				// El Actor eligio crear una Empresa
 				String nombreEmpresa = this.nombreEmpresaField.getText();
 				String descripcion = this.descripcionField.getText();
 				String link = this.linkField.getText();
-				
-				ctrlUsuario.ingresarEmpresa(nickname, nombre, apellido, correoElectronico, nombreEmpresa, descripcion, link);
+				error = verificarCampos(false, nickname, correoElectronico, nombre, apellido, "", null, descripcion);
+				for(String cadena : error) {
+					if(!cadena.isEmpty()) {
+						cantidadErrores++;
+						mensaje += "-" + cadena + "\n";
+					}
+				}
+				if(cantidadErrores == 0) {
+					ctrlUsuario.ingresarEmpresa(nickname, nombre, apellido, correoElectronico, nombreEmpresa, descripcion, link);
 				JOptionPane.showMessageDialog(this, "La Empresa se ha creado con éxito", "Agregar Usuario",
 	                    JOptionPane.INFORMATION_MESSAGE);
-				
+				}else {
+					throw new Exception(mensaje);
+				}
 			} else {
 				throw new Exception("Ningun tipo de Usuario elegido");
 			}
@@ -335,7 +356,21 @@ public class AltaUsuario extends JInternalFrame {
 			setEnabledEmpresaFields(true);
 		}
 	}
-	
+	private ArrayList<String> verificarCampos(Boolean esPostulante, String nickname, String email, String nombre, String apellido, String nacionalidad, Date fecha, String descripcion){
+		ArrayList<String> error = new ArrayList<String>();
+		error.add((nickname.isEmpty())?"Ingresar nickname":"");
+		error.add((email.isEmpty())?"Ingresar email":"");
+		error.add((nombre.isEmpty())?"Ingresar nombre":"");
+		error.add((apellido.isEmpty())?"Ingresar apellido":"");
+		if(esPostulante) {
+			error.add((nacionalidad.isEmpty())?"Ingresar nacionalidad":"");
+			error.add((fecha == null)?"Ingresar una Fecha":"");	
+		}else {
+			error.add((descripcion.isEmpty())?"Ingresar descripción":"");
+		}
+		return error;
+	}
+
 	private void limpiarAltaTipo() {
 		tiposDeUsuarioCombo.setSelectedIndex(-1);
 		setEnabledPostulanteFields(false);

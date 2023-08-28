@@ -46,7 +46,8 @@ public class AgregarTipoPublicacionAPaquete extends JInternalFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Agregar Tipo de Publicacion a Paquete");
-        setBounds(0, 0, 578, 444);
+        setBounds(0, 0, 500, 400);
+        setMinimumSize(new Dimension(450,350));
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         gridBagLayout.rowHeights = new int[]{0, 0, 0, 31, 27, 0, 0};

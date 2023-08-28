@@ -87,7 +87,6 @@ public class main {
         frmAltaUsuario = new AltaUsuario(ctrlUsuario);
         frmCrearPaqueteTiposPublicacion = new CrearPaqueteTiposPublicacion(ctrlTipos);
         frmAgregarTipoPublicacionAPaquete = new AgregarTipoPublicacionAPaquete(ctrlTipos);
-        frmAgregarTipoPublicacionAPaquete.setBounds(0, 0, 423, 266);
         frmTrabajoUy.getContentPane().add(frmAgregarTipoPublicacionAPaquete);
         frmTrabajoUy.getContentPane().add(frmAltaTipoPublicacion);
         frmTrabajoUy.getContentPane().add(frmAltaOferta);
@@ -96,7 +95,6 @@ public class main {
         frmTrabajoUy.getContentPane().add(frmAltaUsuario);
         frmTrabajoUy.getContentPane().add(frmCrearPaqueteTiposPublicacion);
         frmConsultaUsuario = new ConsultaUsuario(ctrlUsuario, frmConsultaOferta);
-        frmConsultaUsuario.setBounds(0,0, 500, 500);
         frmTrabajoUy.getContentPane().add(frmConsultaUsuario); 
         frmConsultaPaquete = new ConsultaPaquete(ctrlTipos, frmAltaTipoPublicacion);
         frmTrabajoUy.getContentPane().add(frmConsultaPaquete);
