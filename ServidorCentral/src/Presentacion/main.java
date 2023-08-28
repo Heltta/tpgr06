@@ -23,6 +23,7 @@ import javax.swing.JMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashSet;
 
@@ -321,7 +322,9 @@ public class main {
                 usuarios.add(nickname);
                 if(systemTagPostulantes.contains(sysName)) {
                 	String[] numerosFecha = fechaP.get(i-1).split("/");
-                	Date fecha =new Date(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
+                	LocalDate localfecha = LocalDate.of(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
+                	//Date fecha =new Date(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
+                	Date fecha = Date.from(localfecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
                 	ctrlUsuario.ingresarPostulante(nickname, nombre, apellido, mail, fecha, nacionalidadP.get(systemTagPostulantes.indexOf(sysName)));
                 }else {
                 	ctrlUsuario.ingresarEmpresa(nickname, nombre, apellido, mail, nickname ,descE.get(systemTagE.indexOf(sysName)), linkE.get(systemTagE.indexOf(sysName)));
@@ -373,7 +376,9 @@ public class main {
                 costoTipos.add(costo);
                 String fechaAlta= data[6].trim();
                 String[] numerosFecha = fechaAlta.split("/");
-                Date fecha =new Date(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
+                LocalDate localfecha = LocalDate.of(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
+            	Date fecha = Date.from(localfecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                //Date fecha =new Date(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
                 ctrlTipos.ingresarDatosTipoPublicacion(nombre, desc, Integer.parseInt(exp),fecha,(costo), Double.parseDouble(dur));
     			}
                 i++;
@@ -407,7 +412,9 @@ public class main {
                 int ixPubli= Integer.parseInt(data[8].trim().substring(2));
                 String fechaAlta= data[9].trim();
                 String[] numerosFecha = fechaAlta.split("/");
-                Date fecha =new Date(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
+                LocalDate localfecha = LocalDate.of(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0])-2);
+            	Date fecha = Date.from(localfecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                //Date fecha =new Date(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
                 Set<String> lkeywords= new HashSet<String>();
                 
                 BufferedReader br2 = new BufferedReader(new FileReader(OfertasKeysCSV));
@@ -451,7 +458,9 @@ public class main {
                 String fechaAlta= data[4].trim();
                 int oID= Integer.parseInt(data[5].trim().substring(1));
                 String[] numerosFecha = fechaAlta.split("/");
-                Date fecha = new Date(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
+                LocalDate localfecha = LocalDate.of(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0])-2);
+            	Date fecha = Date.from(localfecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                //Date fecha = new Date(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
                 ctrlUsuario.ingresarDatosPostulacion(usuarios.get(uID-1), cv, mot, ofertas.get(oID-1) , fecha);
     			}
                 i++;
@@ -479,7 +488,9 @@ public class main {
                 double descuento= Double.parseDouble(data[4].trim());
                 String fechaAlta= data[5].trim();
                 String[] numerosFecha = fechaAlta.split("/");
-                Date fecha =new Date(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
+                LocalDate localfecha = LocalDate.of(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0])-2);
+            	Date fecha = Date.from(localfecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                //Date fecha =new Date(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
                 BufferedReader br2 = new BufferedReader(new FileReader(tipoPubliPaq));
                 String line2;
                 int j=0;

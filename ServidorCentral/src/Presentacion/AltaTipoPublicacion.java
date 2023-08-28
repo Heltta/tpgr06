@@ -255,6 +255,7 @@ public class AltaTipoPublicacion extends JInternalFrame {
 				ctrlTipos.ingresarDatosTipoPublicacion(nombreT, descripcionT, exposicionT, fechaT, costoT, duracionT);
 				JOptionPane.showMessageDialog(this, "El Tipo de Publicacion se ha creado con éxito", "Agregar Tipo de Publicacion",
 	                    JOptionPane.INFORMATION_MESSAGE);
+				limpiarAltaTipo();
 			} catch (nombreTipoPublicacionRepetido exc) {
 				JOptionPane.showMessageDialog(this, exc.getMessage(), "Agregar Tipo de Publicacion",
 	                    JOptionPane.INFORMATION_MESSAGE);

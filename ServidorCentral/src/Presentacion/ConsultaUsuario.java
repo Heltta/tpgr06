@@ -298,7 +298,7 @@ public class ConsultaUsuario extends JInternalFrame {
 			DTPostulante dataPostulante= (DTPostulante) datosUsuario;
 			cNacionalidad.setText(dataPostulante.getNacionalidad());
 			Date fechaNacimiento=dataPostulante.getFechaNacimiento();
-			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy");
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 			cNacimiento.setText(formato.format(fechaNacimiento));
 			if (dataPostulante.getNombreOfertas() != null) {
 				String [] listaOfertasPostulante = dataPostulante.getNombreOfertas().toArray(new String[0]);
