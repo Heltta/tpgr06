@@ -387,7 +387,7 @@ public class ConsultaOferta extends JInternalFrame{
 	}
 	private void mostrarDatos(DTOfertaLaboral datos, DefaultTableModel dtm) {
 		if(datos != null) {
-			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy");
 			tfNombre.setText(datos.getNombre());
 			tfCiudad.setText(datos.getCiudad());
 			tfDepartamento.setText(datos.getDepartamento());
