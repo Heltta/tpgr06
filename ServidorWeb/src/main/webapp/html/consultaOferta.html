@@ -2,9 +2,97 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>consultaOferta</title>
+<link rel="stylesheet" href="../css/estilosGenericos.css">
+<link rel="stylesheet" href="../css/consultaOferta.css">
+<script src="../js/consultaOferta.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
-<body>
-
+<body class="bg-primary-subtle body-center">
+    <div class="container mainContainer mt-5 " id="blur">
+        <div class="row">
+            <div class="tamanio rounded-5 p-4 text-white bg-primary" style="margin: auto; width: 25rem;">
+                <form class="form">
+                    <div class="form-group">
+                        <label for="inputNombre">Nombre empresa</label>
+                        <input type="Text" class="form-control" id="inputNombre" placeholder="Nombre">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- hacer que las cards tengan 2 o 3 lineas y el texto se centre vertical y horizontalmente dentro de las cajas -->
+        <div class="oferta mt-5 row" style="padding: 5%;">
+        <button onclick="mostrarOcultarDatos()" class="card rounded-4 col mt-4">
+            <div class="card-body">
+                <h6 class="card-title">Oferta numero 1 de la promocion de ventas</h6>
+            </div>
+        </button>
+        <button class="card rounded-4 col mt-4">
+            <div class="card-body">
+                <h6 class="card-title">Oferta numero 1 de la promocion de ventas</h6>
+            </div>
+        </button>
+        <button class="card rounded-4 col mt-4">
+            <div class="card-body">
+                <h6 class="card-title">Oferta numero 1 de la promocion de ventas</h6>
+            </div>
+        </button>            
+        <button class="card rounded-4 col mt-4">
+            <div class="card-body">
+                <h6 class="card-title">Oferta numero 1 de la promocion de ventas</h6>
+            </div>
+        </button>            
+        <button class="card rounded-4 col mt-4">
+            <div class="card-body">
+                <h6 class="card-title">Oferta numero 1 de la promocion de ventas</h6>
+            </div>
+        </button>
+    </div>
+    <div id="popup" onclick="mostrarOcultarDatos()">
+        <div class="container mt-5" style="width: 25rem;">
+            <div class="rounded-5 p-4 text-white bg-primary" >
+                <form class="form">
+                    <div class="form-group">
+                        <label for="inputNombre">Nombre</label>
+                        <input type="Text" class="form-control" id="inputNombre" placeholder="Nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescripcion">Descripcion</label>
+                        <textarea name="message" rows="2" cols="30" class="form-control" id="inputDescripcion" placeholder="Descripcion"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputInicio">Horario inicio</label>
+                        <input type="time" class="form-control" id="inputInicio">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputFin">Horario fin</label>
+                        <input type="time" class="form-control" id="inputFin">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputRenumeracion">Remuneracion</label>
+                        <input type="number" class="form-control" id="inputRenumeracion" placeholder="Remuneracion" min="0" oninput="validity.valid||(value='');">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDepartamento">Departamento</label>
+                        <input type="text" class="form-control" id="inputDepartamento" placeholder="Departamento">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputCiudad">Ciudad</label>
+                        <input type="text" class="form-control" id="inputCiudad" placeholder="Ciudad">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputImagen">Imagen</label>
+                        <input type="url" class="form-control" id="inputImagen" placeholder="Url">
+                    </div>
+    
+                    <div class="form-group btn-pad">
+                        <button type="button" class="btn btn-light btn-lg btn-pad">Submit</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>
