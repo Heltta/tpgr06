@@ -1,1 +1,13 @@
 @charset "ISO-8859-1";
+
+.body-center {
+    margin: 0;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-pad{
+    padding-top: 5%;
+}

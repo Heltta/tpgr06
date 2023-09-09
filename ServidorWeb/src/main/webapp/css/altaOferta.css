@@ -1,5 +1,8 @@
 @charset "ISO-8859-1";
 
-.asd{
-    padding-top: 5%;
+.prueba{
+    display: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
 }
