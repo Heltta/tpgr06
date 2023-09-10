@@ -1,13 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>consultaUsuario</title>
+<link rel="stylesheet" href="../css/estilosGenericos.css">
+<link rel="stylesheet" href="../css/consultaOferta.css">
+<link rel="stylesheet" href="../css/ConsultaUsuario.css">
+<script src="../js/consultaOferta.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
-<body>
-    <p>
-        
-    </p>
+<body class="bg-primary-subtle body-center">
+    <div class="container mainContainer mt-5 " id="blur">
+        <div class="row">
+            <div class="tamanio rounded-5 p-4 text-white bg-primary" style="margin: auto; width: 25rem;">
+                <form class="form" method="post">
+                    <div class="form-group">
+                        <center>
+                           <label-titulo for="lbUsuario" class="form-group label">Usuarios</label>
+                        </center>
+                        <select name="cbUsuario" class="select-css">
+                            <option value="seleccionar">Seleccionar</option>
+                        </select>
+                        <input onclick="mostrarOcultarDatos()" type="button" name="btnVer" value="Ver Usuario"/>
+                    </div>
+                </form>    
+            </div> 
+        </div>
+    </div>
+    <div id="popup">
+        <div class="container mt-5" style="width: 50rem;">
+            <div class="rounded-5 p-4 text-white bg-primary" >
+                <form class="form" method="post">
+                    <div class="form-group">
+                        <label for="lbNickname">Nickname</label>
+                        <input type="Text" class="form-control" id="txtNickname">
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label for="lbNombre">Nombre</label>
+                                <input type="Text" class="form-control" id="txtNombre">
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="lbApellido">Apellido</label>
+                                <input type="Text" class="form-control" id="txtApellido">
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="form-group">
+                        <label for="lbMail">Mail</label>
+                        <input type="Text" class="form-control" id="txtMail">
+                    </div>
+                    <div class="form-group" style="visibility: unset;">
+                        <label for="lbClave" style="visibility: collapse;">Contraseña</label>
+                        <input type="password" class="form-control" id="passClave" style="visibility: collapse;">
+                    </div>
+                    <div class="form-group">
+                        <label for="lbFecha">Fecha</label>
+                        <input type="date" class="form-control" id="dtFecha">
+                    </div>
+                    <div class="form-group">
+                        <label for="lbNacionalidad">Nacionalidad</label>
+                        <input type="text" class="form-control" id="txtNacionalidad">
+                    </div>
+                    <div class="form-group">
+                        <label for="lbDescripcion">Descripcion</label>
+                        <input type="text" class="form-control" id="txtDescripcion">
+                    </div>
+                    <div class="form-group">
+                        <label for="lbLink">Link</label>
+                        <input type="text" class="form-control" id="txtLink">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputImagen">Imagen</label>
+                        <input type="url" class="form-control" id="inputImagen">
+                    </div>
+                    <br>
+                    <div class="form-group asd">
+                        <input onclick="habilitaModificar()" type="button" name="btnModificar" value="Modificar"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>

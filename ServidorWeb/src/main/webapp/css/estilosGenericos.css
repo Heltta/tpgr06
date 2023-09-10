@@ -1,5 +1,10 @@
 @charset "ISO-8859-1";
 
+.navbar-custom {
+    background: rgb(39,159,214);
+    background: linear-gradient(90deg, rgba(39,159,214,1) 31%, rgba(10,208,249,1) 95%);
+}
+
 .body-center {
     margin: 0;
     height: 90vh;
