@@ -1,17 +1,39 @@
-*,*:after,*:before{
-    box-sizing: border-box;
-  }
-  
-  html{
-    box-sizing: inherit;
-    background: linear-gradient(to left, #E8FFF9 , #eef2f3);
-  }
-  body{
-    margin: 2% auto;
-    text-align: center;
-    font-size: 14px;
-    font-family: Verdana;
-  }
+.card{
+  padding-right: 2%;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+.mainContainer{
+  transition: 0.5s;
+}
+
+.mainContainer#blur.active{
+  filter: blur(20px);
+  pointer-events: none;
+  user-select: none;
+}
+
+#popup{
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  box-shadow: 0 5px, 30px, rgba(0, 0, 0, .30);
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+#popup.active{
+  visibility: visible;
+  opacity: 1;
+  transition: 0.5s;
+}
   .select-css {
     display: block;
     font-size: 16px;
@@ -60,11 +82,8 @@
       background-color: orange;
   }
   
-  
   /* OTROS ESTILOS*/
   .styled-select { width: 240px; height: 34px; overflow: hidden; background: url(new_arrow.png) no-repeat right #ddd; border: 1px solid #ccc; }
-  
-   
   
   .sidebar-box select{
   display:block;
@@ -81,29 +100,6 @@
     background-repeat: no-repeat, repeat;
     background-position: right .7em top 50%, 0 0;
     background-size: .65em auto, 100%;}
-
-.mainContainer#blur.active{
-      filter: blur(20px);
-      pointer-events: none;
-      user-select: none;
-}
-  
-#popup{
-      position: fixed;
-      top: 40%;
-      left: 50%;
-      transform: translate(-50%,-50%);
-      box-shadow: 0 5px, 30px, rgba(0, 0, 0, .30);
-      visibility: hidden;
-      opacity: 0;
-      transition: 0.5s;
-}
-  
-#popup.active{
-      visibility: visible;
-      opacity: 1;
-      transition: 0.5s;
-}
 
 .bot {
   margin-top: 1em;
@@ -132,4 +128,9 @@ label-titulo{
   display:flex;
   justify-content: center;
   align-items: center;
+}
+img {
+  background-color: transparent;
+  display: block;
+  width: 80%;
 }
