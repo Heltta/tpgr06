@@ -28,31 +28,33 @@
             </div> 
         </div>
     </div>
-    <div id="popup" onclick="mostrarOcultarDatos()">
-        <div class="container mt-5" style="width: 40rem;">
+    <div id="popup">
+        <div class="container mt-5" style="width: 50rem;">
             <div class="rounded-5 p-4 text-white bg-primary" >
                 <form class="form" method="post">
                     <div class="form-group">
                         <label for="lbNickname">Nickname</label>
                         <input type="Text" class="form-control" id="txtNickname">
                     </div>
-                    <div class="form-group">
-                        <label for="lbNombre">Nombre</label>
-                        <input type="Text" class="form-control" id="txtNombre">
-                        <label for="inputInicio">Apellido</label>
-                        <input type="Text" class="form-control" id="txtApellido">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label for="lbNombre">Nombre</label>
+                                <input type="Text" class="form-control" id="txtNombre">
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="lbApellido">Apellido</label>
+                                <input type="Text" class="form-control" id="txtApellido">
+                            </div>
+                        </div>  
                     </div>
                     <div class="form-group">
                         <label for="lbMail">Mail</label>
                         <input type="Text" class="form-control" id="txtMail">
                     </div>
                     <div class="form-group" style="visibility: unset;">
-                        <label for="lbClave">Contraseña</label>
-                        <input type="password" class="form-control" id="passClave">
-                        <ol class="form-control">
-                            <li>Elemento1</li>
-                            <li>Elemento2</li>
-                        </ol>
+                        <label for="lbClave" style="visibility: collapse;">Contraseña</label>
+                        <input type="password" class="form-control" id="passClave" style="visibility: collapse;">
                     </div>
                     <div class="form-group">
                         <label for="lbFecha">Fecha</label>
@@ -76,7 +78,7 @@
                     </div>
                     <br>
                     <div class="form-group asd">
-                        <button type="button" class="btn btn-light btn-lg asd">Modificar</button>
+                        <input onclick="habilitaModificar()" type="button" name="btnModificar" value="Modificar"/>
                     </div>
                 </form>
             </div>
