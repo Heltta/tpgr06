@@ -69,7 +69,7 @@
             </div>  
         </div>
     </div>
-    <div id="popup" onclick="mostrarOcultarDatos()">
+    <div id="popup">
         <div class="container mt-5" style="width: 25rem;">
             <div class="rounded-5 p-4 text-white bg-primary" >
                 <form method="post" class="form">
@@ -105,7 +105,7 @@
                         <label for="inputImagen">Imagen</label>
                         <input type="url" class="form-control" id="inputImagen" placeholder="Url">
                     </div>
-                    <div class="form-group form-control mr-3">
+                    <div class="form-group form-control mt-3">
                         <label for="membership" class="">Keywords</label>
                         <select name="membership" id="membership">
                         <option value="free">Free</option>
@@ -115,7 +115,7 @@
                         </select>
                     </div>
                     <div class="form-group btn-pad">
-                        <button type="button" class="btn btn-light btn-lg btn-pad">Ok</button>
+                        <button type="button" class="btn btn-light btn-lg btn-pad" onclick="mostrarOcultarDatos()">Ok</button>
                     </div>
                 </form>
             </div>
