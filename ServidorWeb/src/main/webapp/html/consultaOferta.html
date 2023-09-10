@@ -18,6 +18,15 @@
                         <label for="inputNombre">Nombre empresa</label>
                         <input type="Text" class="form-control" id="inputNombre" placeholder="Nombre">
                     </div>
+                    <div class="form-group form-control mt-3">
+                        <label for="membership" class="">Elegir por keyword</label>
+                        <select name="membership" id="membership">
+                        <option value="free">Free</option>
+                        <option value="bronze">Bronze</option>
+                        <option value="silver" selected>Silver</option>
+                        <option value="Gold">Gold</option>
+                        </select>
+                    </div>
                 </form>
             </div>
         </div>
@@ -63,7 +72,7 @@
     <div id="popup" onclick="mostrarOcultarDatos()">
         <div class="container mt-5" style="width: 25rem;">
             <div class="rounded-5 p-4 text-white bg-primary" >
-                <form class="form">
+                <form method="post" class="form">
                     <div class="form-group">
                         <label for="inputNombre">Nombre</label>
                         <input type="Text" class="form-control" id="inputNombre" placeholder="Nombre">
@@ -96,7 +105,15 @@
                         <label for="inputImagen">Imagen</label>
                         <input type="url" class="form-control" id="inputImagen" placeholder="Url">
                     </div>
-    
+                    <div class="form-group form-control mr-3">
+                        <label for="membership" class="">Keywords</label>
+                        <select name="membership" id="membership">
+                        <option value="free">Free</option>
+                        <option value="bronze">Bronze</option>
+                        <option value="silver" selected>Silver</option>
+                        <option value="Gold">Gold</option>
+                        </select>
+                    </div>
                     <div class="form-group btn-pad">
                         <button type="button" class="btn btn-light btn-lg btn-pad">Ok</button>
                     </div>
