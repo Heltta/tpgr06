@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consulta de Postulacion</title>
+<link rel="stylesheet" href="../css/estilosGenericos.css">
+<link rel="stylesheet" href="../css/consultaOferta.css">
+<script src="../js/consultaOferta.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body class="bg-primary-subtle body-center">
+    <div class="container mainContainer mt-5 " id="blur">
+        <div class="row">
+            <div class="tamanio rounded-5 p-4 text-white bg-primary" style="margin: auto; width: 25rem;">
+                <form class="form">
+                    <div class="form-group form-control mt-3">
+                        <label for="Nombre Oferta" class="">Nombre de la Oferta Laboral: </label>
+                        <select name="Nombre Oferta" id="Nombre Oferta">
+                        <option value="seleccionar">Seleccionar...</option>
+                        <option value="nom1">Oferta 1</option>
+                        <option value="nom2">Oferta 2</option>
+                        <option value="nom3">Oferta 3</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- hacer que las cards tengan 2 o 3 lineas y el texto se centre vertical y horizontalmente dentro de las cajas -->
+        <div class="oferta mt-5 row" style="padding: 5%;">
+            <div class="form-group col mt-4">
+                <button onclick="mostrarOcultarDatos()" class="card rounded-4 ">
+                    <div class="card-body">
+						<img src ="../img/usuario.png" height="15%" width="15%"/>
+                        <h6 class="card-title">Postulante 1 de la Oferta</h6>
+                    </div>
+                </button>
+            </div>
+            <div class="form-group col mt-4">
+                <button onclick="mostrarOcultarDatos()" class="card rounded-4">
+                    <div class="card-body">
+						<img src ="../img/usuario.png" height="15%" width="15%"/>
+                        <h6 class="card-title">Postulante 2 de la Oferta</h6>
+                    </div>
+                </button>
+            </div>
+            <div class="form-group col mt-4">
+                <button onclick="mostrarOcultarDatos()" class="card rounded-4">
+                    <div class="card-body">
+						<img src ="../img/usuario.png" height="15%" width="15%"/>
+                        <h6 class="card-title">Postulante 3 de la Oferta</h6>
+                    </div>
+                </button>
+            </div>
+            <div class="form-group col mt-4">
+                <button onclick="mostrarOcultarDatos()" class="card rounded-4">
+                    <div class="card-body">
+						<img src ="../img/usuario.png" height="15%" width="15%"/>
+                        <h6 class="card-title">Postulante 4 de la Oferta</h6>
+                    </div>
+                </button>
+            </div>     
+        </div>
+    </div>
+    <div id="popup">
+        <div class="container mt-5" style="width: 25rem;">
+            <div class="rounded-5 p-4 text-white bg-primary" >
+                <form method="post" class="form">
+                    <div class="form-group">
+                        <label for="inputNombre">Nombre del Postulante</label>
+                        <input type="Text" class="form-control" id="inputNombre" placeholder="Nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescripcion">CV Reducido</label>
+                        <textarea name="message" rows="2" cols="30" class="form-control" id="inputCV" placeholder="CV Reducido"></textarea>
+                    </div>
+                    <div class="form-group">
+						<label for = "inputMotivacion">Motivacion</label>
+						<textarea name="message" rows = "2" cols ="42" class"form-control" id="inputMotivacion" placeholder="Motivacion"></textarea>
+					</div>
+					 <div class="form-group">
+                        <label for="inputFecha">Fecha de Postulacion</label>
+                        <input type="date" class="form-control" id="inputFecha" placeholder=myDate.toLocaleDateString('en-CA')>
+                    </div>
+                    <div class="form-group btn-pad">
+                        <button type="button" class="btn btn-light btn-lg btn-pad" onclick="mostrarOcultarDatos()">Ok</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>
