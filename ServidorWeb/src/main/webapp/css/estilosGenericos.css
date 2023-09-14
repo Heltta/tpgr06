@@ -6,11 +6,26 @@
     position: fixed;
     top: 0;
     width: 100%;
-}
-
-.navbar {
-    position: fixed;
-}
+  }
+  
+  .navbar-custom .navbar-brand {
+    color: white;
+    font-size: 20px;
+    margin-right: auto;
+  }
+  
+  .navbar-custom .navbar-brand #logo {
+    font-size: 20px;
+    margin-right: 0px;
+  }
+  
+  .navbar-custom .navbar-nav .nav-item .nav-link {
+    color: white;
+  }
+  
+  .navbar-custom .navbar-nav .nav-item .nav-link:hover {
+    color: #e0e0e0;
+  }
 
 .body-center {
     margin: 0;
@@ -38,18 +53,4 @@ img {
     background-color: transparent;
     display: block;
     width: 40%;
-  }
-  input[type=button], input[type=submit] {
-    background-color: white;
-    border: none;
-    color: black;
-    padding: 4px 4px; 
-    text-decoration: none;
-    margin: 4px 2px;
-    cursor: pointer;
-    text-align: center;
-    border-radius: 8px;
-    width: 120px;
-    text-align:center;
-    float: right;
   }
