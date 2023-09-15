@@ -1,5 +1,16 @@
 @charset "ISO-8859-1";
 
+html, body{
+  height: 100%;
+}
+
+header{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
 .navbar-custom {
     background: rgb(39,159,214);
     background: linear-gradient(90deg, rgba(39,159,214,1) 31%, rgba(10,208,249,1) 95%);
@@ -89,9 +100,21 @@ img {
   padding: 10px;
   text-align: left;
   border-bottom: 1px solid #ccc;
+  z-index: 1;
 }
 .user-menu a {
   color: #fff;
   text-decoration: none;
   display: block;
 }
+
+.custom-sidebar{
+  width: 200px;
+  height: 100%;
+  padding-top: 15px;
+}
+
+.sidebarGroup {
+  padding-bottom: 5px;
+}
+
