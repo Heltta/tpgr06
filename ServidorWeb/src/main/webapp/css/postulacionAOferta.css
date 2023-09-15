@@ -2,16 +2,32 @@
     padding-top: 20px;
 }
 
-.cardOfertas{
-    width: auto;
-    height: 555px;
-
+.divPostulacion {
+    height: 800px;
+    z-index: 0;
 }
 
-.ofertasFG{
-    padding-top: 20px;
+.formOferta {
+    height: 100%;
+    z-index: 0;
 }
 
-.body-postOferta{
-    height: auto;
+.card-oferta {
+    height: 65%;
+    z-index: 0; 
 }
+
+.card{
+    width: 550px;
+    position: relative;
+    z-index: 0;
+}
+
+.card-img-top{
+    height: 100%;
+    width: 75%;
+    align-self: center;
+    background-color: blue;
+    z-index: 0;
+}
+
