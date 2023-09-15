@@ -134,8 +134,9 @@ body {
     flex-grow: 1;
     text-align: center;
     position: relative;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
-.tablink:before,
+
 .tablink:after {
     content: '';
     position: absolute;
@@ -156,6 +157,8 @@ body {
 .tablink.active {
     background-color: #fff;
     color: #007bff;
+    border-bottom: 2px solid #007bff;
+    border-radius: 4px 4px 0 0;
 }
 
 .tablink.active:before,
@@ -271,4 +274,19 @@ textarea {
 .edit-button button::before {
     content: "\270E";
     font-size: 18px;
+}
+.password-toggle {
+    position: relative;
+}
+
+.password-toggle input[type="password"] {
+    padding-right: 30px;
+}
+
+.password-toggle .toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
 }
