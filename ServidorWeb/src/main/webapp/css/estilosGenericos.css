@@ -72,7 +72,9 @@ img {
   border-radius: 50%;
   margin-right: 10px;
 }
-
+.user-name{
+  font-weight: bold;
+}
 .user-menu {
   list-style-type: none;
   padding: 0;

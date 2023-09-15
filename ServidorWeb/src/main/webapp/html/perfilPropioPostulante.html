@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../css/estilosGenericos.css">
     <link rel="stylesheet" href="../css/perfilUsuario.css">
     <script src="../js/jsGenerico.js"></script>
+    <script src="../js/perfilUsuario.js"></script>
 </head>
 <body>
     <header>
@@ -32,30 +33,110 @@
         </nav>
     </header>
     <br><br><br>
-    <div class="container mt-5 user-profile">
-        <div class="user-info">
-            <img src="https://tinyurl.com/yckek63e" alt="Usuario">
-            <div>
-                <h2>lgarcia</h2>
-                <p>Lucía García</p>
+    <div class="profile">
+        <div class="profile-header">
+            <img src="https://tinyurl.com/yckek63e" alt="Avatar" class="u-avatar">
+            <div class="u-info">
+                <h1>Lucía García</h1>
+                <p>lgarcia</p>
                 <p>lgarcia85@gmail.com</p>
-                <p>15/03/1985</p>
-                <p>Uruguaya</p>
+                <p>Último Ingreso: <span id="last-login"></span></p>
             </div>
         </div>
-        <div class="job-list-title">
-            Postulaciones
+        <div class="profile-tabs">
+            <button class="tablink" onclick="openTab('perfil')">Perfil</button>
+            <button class="tablink" onclick="openTab('ofertas')">Ofertas Laborales</button>
+            <button class="tablink" onclick="openTab('paquetes')">Paquetes</button>
         </div>
-        <div class="job-list">
-            <ul class="job-list">
-                <li class="job-list-item">
-                    <img src="https://tinyurl.com/45nsf34m" alt="Oferta1">
-                    <div>
-                        <h3>Desarrollador Frontend</h3>
+        <div class="tabcontent" id="perfil">
+            <div class="profile-form">
+                <div class="row">
+                    <div class="label">
+                        <label for="nickname">Nickname:</label>
                     </div>
-                </li>
-            </ul>
+                    <div class="info">
+                        <input type="text" id="nickname" value="lgarcia" readonly>
+                        <div class="edit-button" style="visibility: collapse;">
+                            <button onclick="enableEdit('name')"></button>
+                        </div>
+                    </div>
+                    <div class="col"></div>
+                </div>
+                <div class="row">
+                    <div class="label">
+                        <label for="email">Email:</label>
+                    </div>
+                    <div class="info email-info">
+                        <input type="email" id="email" value="lgarcia85@gmail.com" readonly>
+                        <div class="edit-button" style="visibility: collapse;">
+                            <button onclick="enableEdit('name')"></button>
+                        </div>
+                    </div>
+                    <div class="col"></div>
+                </div>
+                <div class="row">
+                    <div class="label">
+                        <label for="name">Nombre:</label>
+                    </div>
+                    <div class="info">
+                        <input type="text" id="name" value="Lucía" readonly>
+                        <div class="edit-button">
+                            <button onclick="enableEdit('name')"></button>
+                        </div>
+                    </div>
+                    <div class="col"></div>
+                </div>
+                <div class="row">
+                    <div class="label">
+                        <label for="lastname">Apellido:</label>
+                    </div>
+                    <div class="info">
+                        <input type="text" id="lastname" value="García" readonly>
+                        <div class="edit-button">
+                            <button onclick="enableEdit('lastname')"></button>
+                        </div>
+                    </div>
+                    <div class="col"></div>
+                </div>
+                <div class="row">
+                    <div class="label">
+                        <label for="pass">Contraseña:</label>
+                    </div>
+                    <div class="info">
+                        <input type="password" id="pass" value="awdrg543" readonly>
+                        <div class="edit-button">
+                            <button onclick="enableEdit('pass')"></button>
+                        </div>
+                    </div>
+                    <div class="col"></div>
+                </div>
+                <div class="row">
+                    <div class="label">
+                        <label for="fecha">Fecha de Nacimiento:</label>
+                    </div>
+                    <div class="info">
+                        <input type="date" id="fecha" value="1985-03-15" readonly>
+                        <div class="edit-button">
+                            <button onclick="enableEdit('fecha')"></button>
+                        </div>
+                    </div>
+                    <div class="col"></div>
+                </div>
+                <div class="row">
+                    <div class="label">
+                        <label for="nacionalidad">Nacionalidad:</label>
+                    </div>
+                    <div class="info">
+                        <input type="text" id="nac" value="Uruguaya" readonly>
+                        <div class="edit-button">
+                            <button onclick="enableEdit('nac')"></button>
+                        </div>
+                    </div>
+                    <div class="col"></div>
+                </div>
+            </div>
         </div>
+    </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
