@@ -25,9 +25,9 @@
     <div class="container mt-5" style="width: 25rem;">
         <div class="rounded-5 p-4 text-white bg-primary">
             <form class="form ">
-                <div class="form-group form-control">
-                    <label for="membership" class="">Elegir tipo de oferta laboral</label>
-                    <select name="membership" id="membership">
+                <div class="form-group">
+                    <label for="membership">Elegir tipo de oferta laboral</label>
+                    <select name="membership" class="form-control" id="membership">
                         <option value="free">Free</option>
                         <option value="bronze">Bronze</option>
                         <option value="silver" selected>Silver</option>
@@ -68,23 +68,25 @@
                     <label for="inputImagen">Imagen</label>
                     <input type="url" class="form-control" id="inputImagen" placeholder="Url">
                 </div>
-                <div class="form-group form-control mt-4" style="margin: auto; width: 100%;">
-                    <label for="keywords">Keywords</label>
-                    <select name="keywords" id="multiple-checkboxes" class="dropdown" multiple="multiple">
-                        <option value="php">PHP</option>
-                        <option value="javascript">JavaScript</option>
-                        <option value="java">Java</option>
-                        <option value="sql">SQL</option>
-                        <option value="jquery">Jquery</option>
-                        <option value=".net">.Net</option>
-                    </select>
+                <div class="form-group" style>
+                    <label for="multiple-checkboxes">Keywords</label>
+                    <div id="elcheckbox" style="padding-top: 2px; width: 100%;">
+                        <select name="keywords" id="multiple-checkboxes" class="form-control dropdown" multiple="multiple">
+                            <option value="php">PHP</option>
+                            <option value="javascript">JavaScript</option>
+                            <option value="java">Java</option>
+                            <option value="sql">SQL</option>
+                            <option value="jquery">Jquery</option>
+                            <option value=".net">.Net</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group form-control mt-3">
                     <input type="checkbox" id="paquete" value="Bike">
                     <label for="paquete"> Pagar con paquete</label><br>
                 </div>
                 <div class="form-group btn-pad">
-                    <button type="button" class="btn btn-light btn-lg btn-pad">Submit</button>
+                    <button type="button" class="btn btn-light btn-lg">Confirmar</button>
                 </div>
             </form>
         </div>
