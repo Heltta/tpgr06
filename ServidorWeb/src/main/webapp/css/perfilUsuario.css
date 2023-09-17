@@ -278,5 +278,13 @@ textarea {
     right: 10px;
     transform: translateY(-50%);
     cursor: pointer;
-    
+}
+.row-button {
+    display: flex;
+    align-items: center;
+    margin-bottom: auto;
+    width: 90%;
+}
+#btnGuardar{
+    margin-left: auto;
 }
