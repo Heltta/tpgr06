@@ -223,15 +223,6 @@ body {
     border-radius: 4px;
     text-align: left;
 }
-.input-text input[type="text"], .email-info input[type="email"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-.profile-form textarea {
-    resize: vertical;
-}
 textarea {
     width: 100%;
     padding: 10px;
@@ -266,12 +257,8 @@ textarea {
 }
 .password-toggle {
     position: relative;
-}
-
-.password-toggle input[type="password"] {
     width: 100%;
 }
-
 .password-toggle .toggle-password {
     position: absolute;
     top: 45%;
