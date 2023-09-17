@@ -269,7 +269,7 @@ textarea {
 }
 
 .password-toggle input[type="password"] {
-    padding-right: 60px;
+    width: 100%;
 }
 
 .password-toggle .toggle-password {
