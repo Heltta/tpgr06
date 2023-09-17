@@ -41,13 +41,12 @@
                 <h1>Sophia Johnson</h1>
                 <p>EcoTech</p>
                 <p>info@EcoTech.com</p>
-                <p>Último Ingreso: <span id="last-login"></span></p>
             </div>
         </div>
         <div class="profile-tabs">
             <button class="tablink" onclick="openTab('perfil')">Perfil</button>
-            <button class="tablink" onclick="openTab('ofertas')">Ofertas Laborales</button>
-            <button class="tablink" onclick="openTab('paquetes')">Paquetes</button>
+            <button class="tablink" onclick="openTab('ofertas')">Publicaciones</button>
+            <button class="tablink" onclick="openTab('paquetes')">Compras de Paquetes</button>
         </div>
         <div class="tabcontent" id="perfil">
             <div class="profile-form">
@@ -61,7 +60,6 @@
                             <button onclick="enableEdit('name')"></button>
                         </div>
                     </div>
-                    <div class="col"></div>
                 </div>
                 <div class="row">
                     <div class="label">
@@ -73,7 +71,6 @@
                             <button onclick="enableEdit('name')"></button>
                         </div>
                     </div>
-                    <div class="col"></div>
                 </div>
                 <div class="row">
                     <div class="label">
@@ -85,7 +82,6 @@
                             <button onclick="enableEdit('name')"></button>
                         </div>
                     </div>
-                    <div class="col"></div>
                 </div>
                 <div class="row">
                     <div class="label">
@@ -97,7 +93,6 @@
                             <button onclick="enableEdit('lastname')"></button>
                         </div>
                     </div>
-                    <div class="col"></div>
                 </div>
                 <div class="row">
                     <div class="label">
@@ -112,7 +107,6 @@
                             <button onclick="enableEdit('password-input')"></button>
                         </div>
                     </div>
-                    <div class="col"></div>
                 </div>
                 <div class="row">
                     <div class="label">
@@ -125,7 +119,6 @@
                             <button onclick="enableEdit('desc')"></button>
                         </div>
                     </div>
-                    <div class="col"></div>
                 </div>
                 <div class="row">
                     <div class="label">
@@ -137,60 +130,67 @@
                             <button onclick="enableEdit('link')"></button>
                         </div>
                     </div>
-                    <div class="col"></div>
                 </div>
             </div>
         </div>
         <div class="tabcontent" id="ofertas">
-            <div class="container mt-5 user-profile">
+            <div class="container user-profile">
                 <div class="job-list-title">
-                    Publicadas
+                    Ofertas Laborales
                 </div>
                 <div class="job-list">
                     <ul class="job-list">
                         <li class="job-list-item">
-                            <img src="https://tinyurl.com/45nsf34m" alt="Oferta1">
-                            <div>
-                                <h3>Desarrollador Frontend</h3>
-                            </div>
+                            <a href="consultaOfertaDetallesVisitante.html">
+                               <img src="https://tinyurl.com/45nsf34m" alt="Oferta1">
+                                <div>
+                                    <h3>Desarrollador Frontend</h3>
+                                </div> 
+                            </a>
                         </li>
                         <li class="job-list-item">
-                            <img src="https://tinyurl.com/4n2vpurk" alt="Oferta2">
-                            <div>
-                                <h3>A. de Marketing Digital</h3>
-                            </div>
+                            <a href="consultaOfertaDetallesVisitante.html">
+                               <img src="https://tinyurl.com/4n2vpurk" alt="Oferta2">
+                                <div>
+                                    <h3>A. de Marketing Digital</h3>
+                                </div> 
+                            </a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="tabcontent" id="paquetes">
-            <div class="container mt-5 user-profile">
+            <div class="container user-profile">
                 <div class="job-list-title">
                     Paquetes
                 </div>
                 <div class="job-list">
                     <ul class="job-list">
                         <li class="job-list-item">
-                            <img src="https://shorturl.at/ceCD2" alt="Oferta1">
-                            <div>
-                                <h3>Básico</h3>
-                                <p> Publica ofertas laborales
-                                    en nuestra plataforma por
-                                    un período de 30 días
-                                </p>
-                            </div>
+                            <a href="">
+                               <img src="https://shorturl.at/ceCD2" alt="Oferta1">
+                                <div>
+                                    <h3>Básico</h3>
+                                    <p> Publica ofertas laborales
+                                        en nuestra plataforma por
+                                        un período de 30 días
+                                    </p>
+                                </div> 
+                            </a>
                         </li>
                         <li class="job-list-item">
-                            <img src="https://shorturl.at/gqtO6" alt="Oferta1">
-                            <div>
-                                <h3>Destacado</h3>
-                                <p> Publica ofertas laborales destacadas que se
-                                    mostrará en la parte
-                                    superior de los resultados
-                                    de búsqueda por 45 días
-                                </p>
-                            </div>
+                            <a href="">
+                               <img src="https://shorturl.at/gqtO6" alt="Oferta1">
+                                <div>
+                                    <h3>Destacado</h3>
+                                    <p> Publica ofertas laborales destacadas que se
+                                        mostrará en la parte
+                                        superior de los resultados
+                                        de búsqueda por 45 días
+                                    </p>
+                                </div> 
+                            </a>
                         </li>
                     </ul>
                 </div>

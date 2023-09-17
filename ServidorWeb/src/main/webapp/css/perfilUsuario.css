@@ -144,26 +144,17 @@ body {
     width: 1px;
     height: 100%;
     background-color: #000;
+    right: 0;
 }
 
 .tablink:before {
     left: 0;
 }
 
-.tablink:after {
-    right: 0;
-}
-
 .tablink.active {
     background-color: #fff;
     color: #007bff;
     border-bottom: 2px solid #007bff;
-    border-radius: 4px 4px 0 0;
-}
-
-.tablink.active:before,
-.tablink.active:after {
-    border-color: #fff transparent transparent transparent;
 }
 .tabcontent {
     display: none;
@@ -191,19 +182,16 @@ body {
 .profile-form {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
     margin-top: 0;
 }
 .row {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
     width: 100%;
 }
 .label {
     flex: 1;
     text-align: left;
-    margin-right: 10px;
 }
 .profile-form label {
     display: block;
@@ -233,6 +221,7 @@ body {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    text-align: left;
 }
 .input-text input[type="text"], .email-info input[type="email"] {
     width: 100%;
@@ -280,13 +269,14 @@ textarea {
 }
 
 .password-toggle input[type="password"] {
-    padding-right: 30px;
+    padding-right: 60px;
 }
 
 .password-toggle .toggle-password {
     position: absolute;
-    top: 50%;
+    top: 45%;
     right: 10px;
     transform: translateY(-50%);
     cursor: pointer;
+    
 }
