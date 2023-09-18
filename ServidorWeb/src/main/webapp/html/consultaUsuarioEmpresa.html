@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../css/ConsultaUsuario.css">
     <script src="../js/jsGenerico.js"></script>
 </head>
-<body>
+<body class="bg-primary-subtle body-center">
     <header>
         <nav class="navbar-custom navbar navbar-expand-lg navbar-dark custom-shadow sticky-top" id="navbar-text">
             <a class="navbar-brand" href="index.html">
@@ -31,11 +31,49 @@
             </div>
         </nav>
     </header>
-    <br><br><br>
-    <div class="job-list-title">
-        Usuarios
+    <nav id="sidebarMenu"
+    class="custom-sidebar collapse d-lg-block sidebar collapse .bg-info.bg-gradient custom-shadow">
+    <div class="position-sticky">
+        <div class="list-group list-group-flush mx-3 mt-4 ">
+            <div class="sidebarGroup ">
+                <div class="border border-primary rounded-2">
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple"></i><span>Mi
+                            Perfil</span></a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple"><span>Ofertas
+                            Laborales</span></a>
+                </div>
+            </div>
+            <div class="sidebarGroup">
+                <div class="border border-primary rounded-2">
+                    <span class="list-group-item py-2 ripple"><b>Keywords</b></span></a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple"><span>Tiempo
+                            Completo</span></a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple"><span>Medio
+                            Tiempo</span></a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple"><span>Remoto</span></a>
+                    <a href="#"
+                        class="list-group-item list-group-item-action py-2 ripple"><span>Freelance</span></a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple"><span>Temporal</span></a>
+                    <a href="#"
+                        class="list-group-item list-group-item-action py-2 ripple"><span>Permanente</span></a>
+                    <a href="#"
+                        class="list-group-item list-group-item-action py-2 ripple"><span>Computacion</span></a>
+                    <a href="#"
+                        class="list-group-item list-group-item-action py-2 ripple"><span>Administración</span></a>
+                    <a href="#"
+                        class="list-group-item list-group-item-action py-2 ripple"><span>Logística</span></a>
+                    <a href="#"
+                        class="list-group-item list-group-item-action py-2 ripple"><span>Contabilidad</span></a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="job-list">
+</nav>
+<div class="containerUsers container mt-5">
+    <div class="job-list-title mx-5">
+        <label>Usuarios</label>
+    </div>
+    <div class="job-list mx-5">
         <ul class="job-list">
             <li>
                 <a href="perfilPropioEmpresa.html">
@@ -67,5 +105,6 @@
             </li>
         </ul>
     </div>
+</div>
 </body>
 </html>
