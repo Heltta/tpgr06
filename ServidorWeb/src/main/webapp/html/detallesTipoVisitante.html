@@ -31,18 +31,22 @@
   </header>
   <nav id="sidebarMenu" class="custom-sidebar collapse d-lg-block sidebar collapse .bg-info.bg-gradient custom-shadow">
     <div class="position-sticky">
-      <div class="list-group list-group-flush mx-3 mt-4 ">
-        <div class="sidebarGroup ">
+      <div class="list-group list-group-flush mx-3 mt-4">
+        <div class="sidebarGroup">
           <div class="border border-primary rounded-2">
-            <a href="consultaOfertaVisitante.html" class="list-group-item list-group-item-action py-2 ripple"><span>Ofertas Laborales</span></a>
-            <a href="consultaUsuario.html" class="list-group-item list-group-item-action py-2 ripple"><span>Usuarios</span></a>
-            <a href="consultaTipoPublicacionVisitante.html" class="list-group-item list-group-item-action py-2 ripple"><span>Tipos de Publicación</span></a>
-            <a href="#" class="list-group-item list-group-item-action py-2 ripple"><span>Paquetes de Tipo de Publicación</span></a>
+            <a href="consultaOfertaVisitante.html"
+              class="list-group-item list-group-item-action py-2 ripple"><span>Ofertas Laborales</span></a>
+            <a href="consultaUsuario.html"
+              class="list-group-item list-group-item-action py-2 ripple"><span>Usuarios</span></a>
+            <a href="consultaTipoPublicacionVisitante.html"
+              class="list-group-item list-group-item-action py-2 ripple"><span>Tipos de Publicación</span></a>
+            <a href="#" class="list-group-item list-group-item-action py-2 ripple"><span>Paquetes de Tipo de
+                Publicación</span></a>
           </div>
         </div>
         <div class="sidebarGroup">
           <div class="border border-primary rounded-2">
-            <span class="list-group-item py-2 ripple"><b>Keywords</b></span></a>
+            <span class="list-group-item py-2 ripple"><b>Keywords</b></span>
             <a href="#" class="list-group-item list-group-item-action py-2 ripple"><span>Tiempo Completo</span></a>
             <a href="#" class="list-group-item list-group-item-action py-2 ripple"><span>Medio Tiempo</span></a>
             <a href="#" class="list-group-item list-group-item-action py-2 ripple"><span>Remoto</span></a>
@@ -58,27 +62,34 @@
       </div>
     </div>
   </nav>
-  
-    <div class="container mainContainer mt-5 " id="blur">
-            <div class="container mt-5 user-profile">
-        	<div class="user-info">
-            <img src="../img/usuario.png" alt="Tipo1">
-            <div>
-                <h2>Publicación Premium</h2>
-                <p>Costo: 4000</p>
-                <p>Duración: 30 días</p>
-                <p>Exposición: 1</p>
-            </div>
+  <main class="pt-3 px-1">
+    <h1 class="mb-4 text-capitalize text-center">Detalle de Tipo de Publicación</h1>
+    <section class="container">
+      <div class="row bg-primary rounded-3 text-white border-bottom border-2 border-info px-0 pt-1">
+        <h2 id="tipo-nombre">Premium</h2>
+      </div>
+      <div class="row d-flex flex-column py-2  justify-content-between">
+        <div class="d-flex flex-wrap justify-content-between my-2">
+          <div class="rounded mt-1">
+            <p id="tipo-exposicion">Exposición:<span class="text-secondary"> 1</span></p>
+          </div>
+          <div class="rounded mt-1">
+            <p id="tipo-duracion">Duración:<span class="text-secondary"> 30 dias</span></p>
+          </div>
+          <div class="rounded mt-1">
+            <p id="tipo-costo">Costo:<span class="text-secondary"> $4000</span></p>
+          </div>
+          <div class="rounded mt-1">
+            <p id="tipo-alta-fecha">Fecha de alta:<span class="text-secondary"> 10/08/2026</span></p>
+          </div>
         </div>
-        <!-- hacer que las cards tengan 2 o 3 lineas y el texto se centre vertical y horizontalmente dentro de las cajas -->
-         <div class="container mainContainer mt-5 " id="blur">
-			 <div class="row">
-				 <p align="right"><b>Fecha de Alta: </b><time>10/08/23</time></p>
-			 </div>
-			<div class ="card">
-				<h3><u><b>Descripción</u></b></h3><br>
-				<p>Obtén máxima visibilidad</p><br>
-			</div>
-         </div>
+        <div class="bg-white rounded border border-2 border-secondary-subtle my-2">
+          <h3 class="fw-bold text-decoration-underline mt-2">Descripción</h3>
+          <p class="fs-6">Obtener Maxima Visibilidad</p>
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
+
 </html>
