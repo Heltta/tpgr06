@@ -20,8 +20,8 @@
 }
 
 .card-img-top{
-    height: 100%;
-    width: 75%;
+    height: 60%;
+    width: 60%;
     align-self: center;
     background-color: blue;
     z-index: 0;
