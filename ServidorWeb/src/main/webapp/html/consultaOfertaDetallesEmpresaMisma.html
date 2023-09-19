@@ -83,7 +83,7 @@
     </nav>
     <div class="container mt-5" style="width: 25rem;">
         <div class="rounded-5 p-4 text-white bg-primary">
-            <form method="post" class="form">
+            <form method="post" class="form" id="redForm">
                 <div class="form-group">
                     <label for="inputNombre">Nombre</label>
                     <input type="Text" class="form-control" id="inputNombre" value="Desarrollador Frontend" readonly>
@@ -120,16 +120,17 @@
                         readonly>
                 </div>
                 <div class="form-group">
-                    <label for="membership" class="">Keywords</label>
-                    <select name="membership" id="membership" class="form-control">
+                    <label for="keywords" class="">Keywords</label>
+                    <select name="keywords" id="keywords" class="form-control">
                         <option value="Tiempo Completo">Tiempo Completo</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="membership" class="">Postulaciones</label>
-                    <select name="membership" id="membership" class="form-control">
-                        <option value="free">lgarcia</option>
-                        <option value="bronze">U3</option>
+                    <label for="postulaciones" class="">Postulaciones</label>
+                    <select name="postulaciones" id="pageSelect" class="form-control">
+                        
+                        <option value="perfilPostulanteLoggeado.html">lgarcia</option>
+                        <option value="perfilPostulanteLoggeado.html">U3</option>
                     </select>
                 </div>
                 <div class="form-group">
