@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="com.trabajouy.model.Usuario"%>
-<%@page import="com.trabajouy.model.Empresa"%>
+<%@page import="com.trabajouy.model.DTUsuario"%>
+<%@page import="com.trabajouy.model.DTEmpresa"%>
 
 <nav id="sidebarMenu" class="custom-sidebar collapse d-lg-block sidebar collapse .bg-info.bg-gradient custom-shadow" style="padding-top: 10%;">
         <div class="position-sticky">
@@ -9,7 +9,7 @@
             <div class="sidebarGroup ">
               <div class="border border-primary rounded-2">
               	<%
-					Usuario usr = (Usuario) session.getAttribute("usuario_logueado");
+					DTUsuario usr = (DTUsuario) session.getAttribute("usuario_logueado");
 					if (usr != null) {
 				%>
                 <a href="perfilPropioEmpresa.html" class="list-group-item list-group-item-action py-2 ripple"></i><span>Mi Perfil</span></a>
@@ -20,7 +20,7 @@
                 class="list-group-item list-group-item-action py-2 ripple"><span>Ofertas
                     Laborales</span></a>
                 <%
-					if (usr instanceof Empresa) {
+					if (usr instanceof DTEmpresa) {
 				%>
                 <a href="altaOferta.html" class="list-group-item list-group-item-action py-2 ripple"><span>Crear
                                 Oferta</span></a>

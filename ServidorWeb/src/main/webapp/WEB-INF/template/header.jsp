@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="com.trabajouy.model.Usuario"%>
+<%@page import="com.trabajouy.model.DTUsuario"%>
     
 <header>
 	<nav class="navbar-custom navbar navbar-expand-lg navbar-dark custom-shadow sticky-top" id="navbar-text">
@@ -7,7 +8,7 @@
 			<i class="bi bi-bag-fill" id="logo"></i>
 			<strong> Trabajo.uy </strong>
 				<%
-				Usuario usr = (Usuario) session.getAttribute("usuario_logueado");
+				DTUsuario usr = (DTUsuario) session.getAttribute("usuario_logueado");
 				
 				if (usr == null) {
 				%>

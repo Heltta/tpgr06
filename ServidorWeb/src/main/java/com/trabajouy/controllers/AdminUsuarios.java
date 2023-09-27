@@ -1,7 +1,15 @@
 package com.trabajouy.controllers;
 
 import java.io.IOException;
+import java.util.Date;
 
+import com.trabajouy.exceptions.PostulanteRepetido;
+import com.trabajouy.model.DTUsuario;
+import com.trabajouy.model.Fabrica;
+import com.trabajouy.model.IUsuario;
+import com.trabajouy.model.Usuario;
+
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -35,9 +43,37 @@ public class AdminUsuarios extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("deprecation")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		String nickname = request.getParameter("nickname");
+		String nombre = request.getParameter("nombre");
+		String apellido = request.getParameter("apellido");
+		String contraseña = request.getParameter("contraseña");
+		String confirmacion = request.getParameter("confirmacion");
+		String email = request.getParameter("email");
+		String fecha = request.getParameter("fecha");
+		String nacionalidad = request.getParameter("nacionalidad");
+		String descripcion = request.getParameter("descripcion");
+		String link = request.getParameter("link");
+		String tipouser = request.getParameter("tipoUsuario");
+		Fabrica fab = Fabrica.getInstance();
+		IUsuario ctrUser = fab.getIUsuario();
+		if ("postulante".equals(tipouser)) {
+			try {	
+				ctrUser.ingresarPostulante(nickname, nombre, apellido, email, new Date(fecha.replace("-", "/")) ,nacionalidad);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		} else if ("empresa".equals(tipouser)) {
+			try {
+				ctrUser.ingresarEmpresa(nickname, nombre, apellido, email, nickname, descripcion, link);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		DTUsuario usr = ctrUser.mostrarDatosUsuario(nickname); 
+		request.getSession().setAttribute("usuario_logueado", usr);
 	}
 
 }

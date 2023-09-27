@@ -19,36 +19,36 @@
     <jsp:include page="/WEB-INF/template/sideBar.jsp" />
     <div class="container mt-5" style="width: 40rem;">
         <div class="rounded-5 p-4 text-white bg-primary">
-            <form id="formAlta">
+            <form id="formAlta" method="POST">
                 <div class="row g-3">
                     <div class="col">
                         <label for="nickname">Nickname:</label><br>
-                        <input type="text" id="nickname" class="form-control"><br>
+                        <input type="text" id="nickname" name="nickname" class="form-control" required><br>
                     </div>
                 </div>
                 <div class="row g-3">
                     <div class="col">
                         <label for="nombre">Nombre:</label><br>
-                        <input type="text" id="nombre" class="form-control"><br>
+                        <input type="text" id="nombre" name="nombre" class="form-control" required><br>
                     </div>
                     <div class="col">
                         <label for="apellido">Apellido:</label><br>
-                        <input type="text" id="apellido" class="form-control"><br>
+                        <input type="text" id="apellido" name="apellido" class="form-control" required><br>
                     </div>
                 </div>
                 <div class="row g-3">
                     <div class="col">
                         <label for="contraseña">Contraseña:</label><br>
-                        <input type="password" id="contraseña" class="form-control"><br>
+                        <input type="password" id="contraseña" name="contraseña" class="form-control" required><br>
                     </div>
                     <div class="col">
                         <label for="confirmacion">Confirmación:</label><br>
-                        <input type="password" id="confirmacion" class="form-control"><br>
+                        <input type="password" id="confirmacion" name="confirmacion" class="form-control" required><br>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="email">Correo Electronico:</label><br>
-                    <input type="email" id="email" class="form-control"><br>
+                    <input type="email" id="email" name="email" class="form-control" required><br>
                 </div>
                 <div class="form-group">
 
@@ -69,22 +69,22 @@
                 <div name="postulante" id="postulante">
                     <div class="form-group">
                         <label for="fecha">Fecha de Nacimiento:</label><br>
-                        <input type="date" id="fecha" class="form-control"><br>
+                        <input type="date" id="fecha" name="fecha" class="form-control"><br>
                     </div>
                     <div class="form-group">
                         <label for="nacionalidad">Nacionalidad:</label><br>
-                        <input type="text" id="nacionalidad" class="form-control"><br>
+                        <input type="text" id="nacionalidad" name="nacionalidad" class="form-control"><br>
                     </div>
                 </div>
                 <div name="empresa" id="empresa">
                     <div class="form-group">
                         <label for="descripcion">Descripcion:</label><br>
-                        <textarea id="descripcion" class="form-control"
+                        <textarea id="descripcion" name="descripcion" class="form-control"
                             placeholder="Somos una empresa..."></textarea><br>
                     </div>
                     <div class="form-group">
                         <label for="link">Link:</label><br>
-                        <input type="url" id="url" placeholder="trabajo.uy" class="form-control"><br>
+                        <input type="url" id="url" name="url" placeholder="trabajo.uy" class="form-control"><br>
                     </div>
                 </div>
                 <input type="submit" class="btn btn-light" value="Aceptar">
