@@ -56,9 +56,8 @@
           <input type="button" class="btn btn-light" value="Cancelar"
             onclick="document.location='consultaOfertaLoggeado.html'">
         </div>
+       </form> 
     </div>
-    </form>
-  </div>
   </div>
 </body>
 </html>
