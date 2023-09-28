@@ -2,11 +2,14 @@ package com.trabajouy.controllers;
 
 import java.io.IOException;
 
+import com.trabajouy.model.Usuario;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class AltaOferta
@@ -27,7 +30,18 @@ public class AltaOferta extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		HttpSession session = request.getSession();
+		Usuario usr = (Usuario) session.getAttribute("usuario_logueado");
+		request.getRequestDispatcher("/WEB-INF/altaOferta/altaOferta.jsp").
+		forward(request, response);
+//		if (usr!=null && usr.getClass()==Empresa.class) {
+//			request.getRequestDispatcher("/WEB-INF/altaOferta/altaOferta.jsp").
+//			forward(request, response);
+//		}
+//		else {
+//			request.getRequestDispatcher("/WEB-INF/errorPages/404.jsp").
+//			forward(request, response);
+//		}
 	}
 
 	/**
