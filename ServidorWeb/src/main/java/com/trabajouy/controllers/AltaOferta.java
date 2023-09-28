@@ -1,7 +1,14 @@
 package com.trabajouy.controllers;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.Set;
 
+import com.trabajouy.model.DTHorario;
+import com.trabajouy.model.Empresa;
+import com.trabajouy.model.Fabrica;
+import com.trabajouy.model.IUsuario;
 import com.trabajouy.model.Usuario;
 
 import jakarta.servlet.ServletException;
@@ -49,7 +56,43 @@ public class AltaOferta extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+		HttpSession session = request.getSession();
+		Usuario usr = (Usuario) session.getAttribute("usuario_logueado");
+		if (usr!=null && usr.getClass()==Empresa.class) {
+			
+			String nombreTipo= request.getParameter("tipoOferta");
+			String nombre= request.getParameter("nombre");
+			String descripcion= request.getParameter("descripcion");
+			int remuneracion= Integer.parseInt( request.getParameter("remuneracion"));
+			String departamento= request.getParameter("departamento");
+			String ciudad= request.getParameter("ciudad");
+			String imagen= request.getParameter("imagen");
+			String horarioInicio= request.getParameter("horarioInicio");
+			String horarioFin= request.getParameter("horarioFin");
+			DTHorario horario= new DTHorario(horarioInicio, horarioFin);
+			
+			//keywords????
+			Set<String> keywords = null;
+			
+			String paquete =request.getParameter("paquete");
+			
+			Date fechaLocal = null;
+			Fabrica fab= Fabrica.getInstance();
+			IUsuario ctrlUsuario= fab.getIUsuario();
+			
+			String nickname= usr.getNickname();
+					
+			boolean result= ctrlUsuario.ingresarOferta(nickname,nombreTipo,nombre, descripcion, horario,remuneracion,fechaLocal,ciudad, departamento,keywords);
 
+
+			if(result) {
+				
+			}
+		}
+		else {
+			request.getRequestDispatcher("/WEB-INF/errorPages/404.jsp").
+			forward(request, response);
+		}
+
+	}
 }

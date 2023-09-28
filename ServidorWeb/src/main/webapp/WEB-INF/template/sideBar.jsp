@@ -3,6 +3,17 @@
 <%@page import="com.trabajouy.model.DTUsuario"%>
 <%@page import="com.trabajouy.model.DTEmpresa"%>
 
+<%@page import="java.util.Set"%>
+<%@page import="com.trabajouy.model.IUsuario"%>
+<%@page import="com.trabajouy.model.Fabrica"%>
+
+<%
+	Fabrica fabrica= Fabrica.getInstance();
+	IUsuario ctrlUsuario= fabrica.getIUsuario();
+	Set<String> listaKeywords= ctrlUsuario.listarKeywords();
+%>
+
+
 <nav id="sidebarMenu" class="custom-sidebar collapse d-lg-block sidebar collapse .bg-info.bg-gradient custom-shadow" style="padding-top: 10%;">
         <div class="position-sticky">
           <div class="list-group list-group-flush mx-3 mt-4 ">
@@ -37,17 +48,10 @@
             </div>
             <div class="sidebarGroup">
               <div class="border border-primary rounded-2">
-                <span class="list-group-item py-2 ripple"><b>Keywords</b></span></a>
-                <a href="consultaOfertaEmpresa.html" class="list-group-item list-group-item-action py-2 ripple"><span>Tiempo Completo</span></a>
-                <a href="consultaOfertaEmpresa.html" class="list-group-item list-group-item-action py-2 ripple"><span>Medio Tiempo</span></a>
-                <a href="consultaOfertaEmpresa.html" class="list-group-item list-group-item-action py-2 ripple"><span>Remoto</span></a>
-                <a href="consultaOfertaEmpresa.html" class="list-group-item list-group-item-action py-2 ripple"><span>Freelance</span></a>
-                <a href="consultaOfertaEmpresa.html" class="list-group-item list-group-item-action py-2 ripple"><span>Temporal</span></a>
-                <a href="consultaOfertaEmpresa.html" class="list-group-item list-group-item-action py-2 ripple"><span>Permanente</span></a>
-                <a href="consultaOfertaEmpresa.html" class="list-group-item list-group-item-action py-2 ripple"><span>Computacion</span></a>
-                <a href="consultaOfertaEmpresa.html" class="list-group-item list-group-item-action py-2 ripple"><span>Administración</span></a>
-                <a href="consultaOfertaEmpresa.html" class="list-group-item list-group-item-action py-2 ripple"><span>Logística</span></a>
-                <a href="consultaOfertaEmpresa.html" class="list-group-item list-group-item-action py-2 ripple"><span>Contabilidad</span></a>
+                <span class="list-group-item py-2 ripple"><b>Keywords</b></span>
+                <%for(String keyword :listaKeywords){ %>
+                    <a href="consultaOfertaEmpresa.html" class="list-group-item list-group-item-action py-2 ripple"><span><%=keyword %></span></a>
+                <%}%>
               </div>
             </div>
           </div>

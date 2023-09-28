@@ -85,8 +85,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="membership" class="">Elegir paquete </label>
-                    <select name="membership" id="membership" class="form-control dropdown">
+                    <label for="paquete" class="">Elegir paquete </label>
+                    <select name="paquete" id="paquete" class="form-control dropdown">
 	                    <%for(String paquete :listaPaquetes){ %>
 	                        <option value="<%= paquete %>"><%= paquete %></option>
 	                    <%}%>
