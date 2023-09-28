@@ -23,7 +23,7 @@
   <jsp:include page="/WEB-INF/template/sideBar.jsp" />
   <div class="d-flex container mt-5 divPostulacion" style="width: 50rem;">
     <div class="rounded-5 p-4 text-white bg-primary custom-shadow">
-      <form class="formOferta">
+      <form class="formOferta" method="POST">
         <div class="form-group card-oferta">
           <div class="card">
             <img src="https://tinyurl.com/45nsf34m" class="card-img-top" alt="Oferta Desarollador FrontEnd" />
@@ -45,11 +45,11 @@
         <div class="form-group">
           <label for="cv">CV:</label>
           <textarea id="cv" class="form-control"
-            placeholder="Informacion basica, experiencia laboral..."></textarea><br>
+            placeholder="Informacion basica, experiencia laboral..." name="cv"></textarea><br>
         </div>
         <div class="form-group">
           <label for="motivaion">Motivacion:</label>
-          <textarea id="motivacion" class="form-control"></textarea>
+          <textarea id="motivacion" class="form-control" name="motivacion"></textarea>
         </div>
         <div id="submitBtn">
           <input type="submit" class="btn btn-light" value="Aceptar">
