@@ -1,6 +1,12 @@
 package com.trabajouy.controllers;
 
 import java.io.IOException;
+import java.util.Set;
+
+import com.trabajouy.model.DTOfertaLaboral;
+import com.trabajouy.model.Fabrica;
+import com.trabajouy.model.IUsuario;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -26,6 +32,13 @@ public class Oferta extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		Fabrica fab= Fabrica.getInstance();
+		IUsuario ctrlUsuario= fab.getIUsuario();
+
+		Set<DTOfertaLaboral> ofertas= ctrlUsuario.listarOfertasLaborales();
+		
+		request.setAttribute("ofertas", ofertas);
+		
 		request.getRequestDispatcher("/WEB-INF/consultaOferta/consultaOferta.jsp").
 		forward(request, response);
 	}
@@ -37,5 +50,4 @@ public class Oferta extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

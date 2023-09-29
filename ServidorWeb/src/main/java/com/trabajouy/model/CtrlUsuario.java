@@ -186,4 +186,16 @@ public class CtrlUsuario implements IUsuario {
 		
 		manejadorUsuario.agregarUsuario(new Empresa(nickName, correoElectronico, nombre, apellido, nombreEmpresa, descripcion, link));
 	}
+	
+	public Set<DTOfertaLaboral> listarOfertasLaborales(){
+		ManejadorOferta manejadorOfertas= ManejadorOferta.getInstancia();
+		Map<String,OfertaLaboral> ofertas= manejadorOfertas.getOfertas();
+		Set<String> nombreOfertas= ofertas.keySet();
+		
+		Set<DTOfertaLaboral> dataOfertas= new HashSet<DTOfertaLaboral>();
+		for (String nombre:nombreOfertas) {
+			dataOfertas.add(seleccionarOfertaLaboral(nombre));
+		}
+		return dataOfertas;
+	}
 }

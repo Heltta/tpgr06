@@ -14,6 +14,7 @@ public interface IUsuario {
 	public abstract ArrayList<String> listarUsuarios();
 	public abstract DTUsuario mostrarDatosUsuario(String nickname);
 	public abstract DTOfertaLaboral seleccionarOfertaLaboral(String nombre);
+	public abstract Set<DTOfertaLaboral> listarOfertasLaborales();
 	public abstract void ingresarDatosPostulacion(String postulante, String cv, String motivacion, String oferta, Date fecha)throws PostulanteRepetido;
 	public abstract Set<String> obtenerOfertasDeEmpresa(String empresa);
 	public DTEmpresa getDataEmpresa(String nombre);

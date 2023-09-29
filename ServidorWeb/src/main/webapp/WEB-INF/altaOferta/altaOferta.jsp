@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html>
 <%@page import="java.util.Set"%>
-<%@page import="com.trabajouy.model.IUsuario"%>
-<%@page import="com.trabajouy.model.ITipos"%>
-<%@page import="com.trabajouy.model.Fabrica"%>
 <%
-	Fabrica fabrica= Fabrica.getInstance();
-	IUsuario ctrlUsuario= fabrica.getIUsuario();
-	ITipos ctrlTipos= fabrica.getITipos();
-	Set<String> listaTipos= ctrlUsuario.listarTiposDePublicacion();
-	Set<String> listaKeywords= ctrlUsuario.listarKeywords();
-	Set<String> listaPaquetes= ctrlTipos.listarPaquetes();
+Set<String> listaTipos= (Set<String>) request.getAttribute("listaTipos");
+Set<String> listaKeywords= (Set<String>) request.getAttribute("listaKeywords");
+Set<String> listaPaquetes= (Set<String>) request.getAttribute("listaPaquetes");
 %>
 
 <head>
@@ -34,7 +28,7 @@
                 <div class="form-group">
                     <label for="tipoOferta">Elegir tipo de oferta laboral</label>
                     <select name="tipoOferta" class="form-control" id="tipoOferta">
-                    <%for(String tipo :listaTipos){ %>
+                    <%for(String tipo : listaTipos){ %>
                         <option value="<%= tipo %>"><%= tipo %></option>
                     <%}%>
                     </select>

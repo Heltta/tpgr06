@@ -1,15 +1,15 @@
 package com.trabajouy.controllers;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
+import com.trabajouy.model.DTEmpresa;
 import com.trabajouy.model.DTHorario;
-import com.trabajouy.model.Empresa;
+import com.trabajouy.model.DTUsuario;
 import com.trabajouy.model.Fabrica;
+import com.trabajouy.model.ITipos;
 import com.trabajouy.model.IUsuario;
-import com.trabajouy.model.Usuario;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -38,10 +38,23 @@ public class AltaOferta extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		Usuario usr = (Usuario) session.getAttribute("usuario_logueado");
+		DTUsuario usr = (DTUsuario) session.getAttribute("usuario_logueado");
+		
+		Fabrica fabrica= Fabrica.getInstance();
+		IUsuario ctrlUsuario= fabrica.getIUsuario();
+		ITipos ctrlTipos= fabrica.getITipos();
+		
+		Set<String> listaTipos= ctrlUsuario.listarTiposDePublicacion();
+		Set<String> listaKeywords= ctrlUsuario.listarKeywords();
+		Set<String> listaPaquetes= ctrlTipos.listarPaquetes();
+		
+		request.setAttribute("listaPaquetes", listaPaquetes);
+		request.setAttribute("listaKeywords", listaKeywords);
+		request.setAttribute("listaTipos", listaTipos);
+		
 		request.getRequestDispatcher("/WEB-INF/altaOferta/altaOferta.jsp").
 		forward(request, response);
-//		if (usr!=null && usr.getClass()==Empresa.class) {
+//		if (usr!=null && usr.getClass()==DTEmpresa.class) {
 //			request.getRequestDispatcher("/WEB-INF/altaOferta/altaOferta.jsp").
 //			forward(request, response);
 //		}
@@ -57,8 +70,8 @@ public class AltaOferta extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		Usuario usr = (Usuario) session.getAttribute("usuario_logueado");
-		if (usr!=null && usr.getClass()==Empresa.class) {
+		DTUsuario usr = (DTUsuario) session.getAttribute("usuario_logueado");
+		if (usr!=null && usr.getClass()==DTEmpresa.class) {
 			
 			String nombreTipo= request.getParameter("tipoOferta");
 			String nombre= request.getParameter("nombre");
