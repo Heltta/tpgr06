@@ -8,9 +8,7 @@
 <%@page import="com.trabajouy.model.Fabrica"%>
 
 <%
-	Fabrica fabrica= Fabrica.getInstance();
-	IUsuario ctrlUsuario= fabrica.getIUsuario();
-	Set<String> listaKeywords= ctrlUsuario.listarKeywords();
+	Set<String> listaKeywords= (Set<String>) request.getAttribute("listaKeywords");
 %>
 
 

@@ -2,7 +2,11 @@
 <html>
 <%@page import="java.util.Set"%>
 <%@page import="com.trabajouy.model.DTOfertaLaboral"%>
-<% Set<DTOfertaLaboral> ofertas= (Set<DTOfertaLaboral>) request.getAttribute("ofertas"); %>
+<%@page import="java.net.URLEncoder"%>
+<%@page import="java.nio.charset.StandardCharsets"%>
+<%@page import="java.io.UnsupportedEncodingException"%>
+<% Set<DTOfertaLaboral> ofertas= (Set<DTOfertaLaboral>) request.getAttribute("ofertas");
+%>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,16 +32,29 @@
     <div class="scrolling-section container mt-1 user-profile">
       <div class="job-list">
         <ul class="job-list">
-          <a class="text-reset" href="consultaOfertaDetallesVisitante.html" class="link-dark ">
+        <%for(DTOfertaLaboral oferta:ofertas){
+        	String urlImagen="img/placeholder.png";
+        	Set<String> keywordsSet= oferta.getKeywords();
+        	String keywords="";
+        	for (String word: keywordsSet){
+        		keywords=keywords.concat( word+ ", ");
+        	}
+        	keywords = !keywords.isEmpty() ? keywords.substring(0, keywords.length()-2) : "";
+        	
+        	String urlDetalles= URLEncoder.encode(oferta.getNombre(), StandardCharsets.UTF_8.toString());
+        	
+        	%>
+          <a class="text-reset" href="/ServidorWeb/Oferta?n=<%=urlDetalles%>" class="link-dark ">
             <li class="job-list-item" onclick="mostrarOcultarDatos()">
-              <img src="https://tinyurl.com/45nsf34m" alt="Oferta1" style="height: 400px; width: 600;">
+              <img src="<%=urlImagen%>" alt="<%=oferta.getNombre()%>" style="height: 400px; width: 600;">
               <div>
-                <h2>Desarrollador Frontend</h3>
-                  <h4>Empresa: EcoTech</h4>
-                  <h5>Tiempo Completo, Medio tiempo, Remoto, Freelance, Temporal, Permanente</h5>
+                <h2><%=oferta.getNombre() %></h3>
+                  <h4>Empresa: Empresa</h4>
+                  <h5><%=keywords%></h5>
               </div>
           	</li>
           </a>
+        <%}%>
         </ul>
       </div>
     </div>

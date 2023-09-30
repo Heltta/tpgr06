@@ -34,13 +34,25 @@ public class Oferta extends HttpServlet {
 		// TODO Auto-generated method stub
 		Fabrica fab= Fabrica.getInstance();
 		IUsuario ctrlUsuario= fab.getIUsuario();
-
-		Set<DTOfertaLaboral> ofertas= ctrlUsuario.listarOfertasLaborales();
 		
-		request.setAttribute("ofertas", ofertas);
+		String nombreOferta=request.getParameter("n");
 		
-		request.getRequestDispatcher("/WEB-INF/consultaOferta/consultaOferta.jsp").
-		forward(request, response);
+		Set<String> listaKeywords= ctrlUsuario.listarKeywords();
+		request.setAttribute("listaKeywords", listaKeywords);
+		
+		if(nombreOferta!=null) {
+			//si no existe la oferta segun su nombre tirar 404
+			DTOfertaLaboral oferta= ctrlUsuario.seleccionarOfertaLaboral(nombreOferta);
+			request.setAttribute("oferta", oferta);
+			request.getRequestDispatcher("/WEB-INF/consultaOferta/consultaOfertaDetalles.jsp").
+			forward(request, response);
+		}
+		else {
+			Set<DTOfertaLaboral> ofertas= ctrlUsuario.listarOfertasLaborales();
+			request.setAttribute("ofertas", ofertas);
+			request.getRequestDispatcher("/WEB-INF/consultaOferta/consultaOferta.jsp").
+			forward(request, response);
+		}
 	}
 
 	/**

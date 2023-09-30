@@ -1,7 +1,10 @@
 package com.trabajouy.controllers;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.trabajouy.model.DTEmpresa;
@@ -83,11 +86,12 @@ public class AltaOferta extends HttpServlet {
 			String horarioInicio= request.getParameter("horarioInicio");
 			String horarioFin= request.getParameter("horarioFin");
 			DTHorario horario= new DTHorario(horarioInicio, horarioFin);
-			
-			//keywords????
-			Set<String> keywords = null;
+	
+			List<String> keywordsList= Arrays.asList(request.getParameterValues("keywords"));
+			Set<String> keywords = new HashSet<String>(keywordsList);
 			
 			String paquete =request.getParameter("paquete");
+			
 			
 			Date fechaLocal = null;
 			Fabrica fab= Fabrica.getInstance();

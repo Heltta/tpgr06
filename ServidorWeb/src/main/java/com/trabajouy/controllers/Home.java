@@ -54,6 +54,10 @@ public class Home extends HttpServlet {
 			//Codigo temporal para cargar datos de prueba
 			cargarDatosPrueba();
 		}
+		Fabrica fabrica= Fabrica.getInstance();
+		IUsuario ctrlUsuario= fabrica.getIUsuario();
+		Set<String> listaKeywords= ctrlUsuario.listarKeywords();
+		req.setAttribute("listaKeywords", listaKeywords);
 		req.getRequestDispatcher("/WEB-INF/home/Home.jsp").forward(req, res);
 	}
 
