@@ -123,14 +123,12 @@
                 </div>
                 <div class="form-group">
                     <label for="keywords" class="">Keywords</label>
-                    <select name="keywords" id="keywords" class="form-control">
-                        <option value="Tiempo Completo">Tiempo Completo</option>
-                    </select>
+                    <textarea name="message" rows="2" cols="30" class="form-control" id="inputKeywords"
+                        placeholder="keywords" readonly>Tiempo Completo</textarea>
                 </div>
                 <div class="form-group">
                     <label for="selectOption" class="">Postulaciones</label>
-                    <select name="selectOption" id="selectOption" class="form-control" oninput="redirect()">
-                        <option value ="">Elegir postulante para ver</option>
+                    <select name="selectOption" id="selectOption" class="form-control" oninput="redirect()" multiple="multiple">
                         <option value="consultaPostulacion1Empresa.html">lgarcia</option>
                         <option value="consultaPostulacion1Empresa.html">U3</option>
                     </select>
