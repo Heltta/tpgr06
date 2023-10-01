@@ -19,19 +19,11 @@
 	<jsp:include page="/WEB-INF/template/sideBar.jsp" />
     <div class="container mt-5 headerInicio">
         <h1>Bienvenido a Trabajo.uy</h1>
-        <div id="loginButtons" class="container mt-3">
-            <a href="altaUsuario.html" class="sinEstilo">
-                <input type="button" class="btn btn-light" value="Registrarse">
-            </a>
-            <a href="inicioSesion.html" class="sinEstilo">
-                <input type="button" class="btn btn-light" value="Iniciar sesion">
-            </a>
-        </div>
         <div class="container mt-5">
             <div class="row">
                 <div class="col mb-4">
                     <div class="card mb-4">
-                        <a href="consultaUsuario.html" class="sinEstilo">
+                        <a href="ConsultaUsuario" class="sinEstilo">
                             <img class="card-img-top" src="https://tinyurl.com/45nsf34m" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title">Usuarios</h5>
@@ -41,7 +33,7 @@
                 </div>
                 <div class="col mb-4">
                     <div class="card mb-4">
-                        <a href="consultaOfertaVisitante.html" class="sinEstilo">
+                        <a href="Oferta" class="sinEstilo">
                             <img class="card-img-top" src="https://tinyurl.com/4n2vpurk" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title">Ofertas Laborales</h5>
@@ -56,7 +48,7 @@
             <div class="row">
                 <div class="col mb-4">
                     <div class="card mb-4">
-                        <a href="consultaPaqueteVisitante.html" class="sinEstilo">
+                        <a href="ConsultaPaquetes" class="sinEstilo">
                             <img class="card-img-top" src="https://shorturl.at/ceCD2" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title">Paquetes de Tipos de Publicacion</h5>

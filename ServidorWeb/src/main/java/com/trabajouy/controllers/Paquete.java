@@ -1,6 +1,11 @@
 package com.trabajouy.controllers;
 
 import java.io.IOException;
+
+import com.trabajouy.model.Fabrica;
+import com.trabajouy.model.ITipos;
+import com.trabajouy.model.IUsuario;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Paquete
  */
-@WebServlet("/Paquete")
+@WebServlet({"/ConsultaPaquetes","/CompraPaquete"})
 public class Paquete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -26,7 +31,15 @@ public class Paquete extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String servletPath = request.getServletPath();
+		if("/ConsultaPaquetes".equals(servletPath)) {
+			Fabrica fab = Fabrica.getInstance();
+			IUsuario ctrlUsuario = fab.getIUsuario();
+			request.setAttribute("listaKeywords", ctrlUsuario.listarKeywords());
+			ITipos ctrlTipos = fab.getITipos();
+			request.setAttribute("listaPaquetes", ctrlTipos.obtenerDataPaquetes());
+			request.getRequestDispatcher("/WEB-INF/consultaPaquetes/consultapaquetes.jsp").forward(request, response);
+		}
 	}
 
 	/**

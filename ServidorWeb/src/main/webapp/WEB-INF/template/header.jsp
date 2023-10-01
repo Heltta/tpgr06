@@ -4,7 +4,7 @@
     
 <header>
 	<nav class="navbar-custom navbar navbar-expand-lg navbar-dark custom-shadow sticky-top" id="navbar-text">
-		<a class="navbar-brand" href="index.html">
+		<a class="navbar-brand" href="Home">
 			<i class="bi bi-bag-fill" id="logo"></i>
 			<strong> Trabajo.uy </strong>
 		</a>

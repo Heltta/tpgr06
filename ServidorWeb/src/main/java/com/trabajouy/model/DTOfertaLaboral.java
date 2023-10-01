@@ -32,6 +32,7 @@ public class DTOfertaLaboral {
 		this.costo=costo;
 		Keywords = keywords;
 		this.postulaciones=postulaciones;
+		this.nombreEmpresa = nombreEmpresa;
 	}
 	public String getNombre() {
 		return nombre;
