@@ -1,16 +1,18 @@
 package com.trabajouy.model;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
-public class TipoPublicacion {
+public class TipoPublicacion{
 	private String nombre;
 	private String descripcion;
 	private int exposicion;
-	private double duracion;
+	private int duracion;
 	private double costo;
 	private Date fecha;
 	
-	public TipoPublicacion(String nombre, String descripcion, int exposicion, Date fecha, double costo, double duracion){
+	public TipoPublicacion(String nombre, String descripcion, int exposicion, Date fecha, double costo, int duracion){
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.exposicion = exposicion;
@@ -43,4 +45,5 @@ public class TipoPublicacion {
 		return fecha;
 	}
 }
+
 

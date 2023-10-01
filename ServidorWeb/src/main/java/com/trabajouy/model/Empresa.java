@@ -19,6 +19,7 @@ public class Empresa extends Usuario {
 		this.descripcion = descripcion;
 		this.link = link;
 		this.Ofertas=new HashMap<String,OfertaLaboral>();
+		this.Compras=null;
 	}
 	public String getNombreEmpresa() {
 		return nombreEmpresa;
@@ -60,7 +61,14 @@ public class Empresa extends Usuario {
 	public void setOfertas(Map<String, OfertaLaboral> ofertas) {
 		Ofertas = ofertas;
 	}
-	public void setCompras(Map<String, Compra> compras) {
-		Compras = compras;
+	public void comprarPaquete(String nombrePaquete) {
+		ManejadorPaquete manejadorPaquete= ManejadorPaquete.getInstance();
+		PaqueteTipoPublicacion paquete= manejadorPaquete.obtenerPaquete(nombrePaquete);
+		Compra compraPaquete= new Compra(this, paquete);
+		Compras.put(nombrePaquete, compraPaquete);
+	}
+	public void canjearTipoDeCompra(String nombreTipo, String nombrePaquete) {
+		Compra compraPaquete= Compras.get(nombrePaquete);
+		compraPaquete.canjearTipo(nombreTipo);
 	}
 }

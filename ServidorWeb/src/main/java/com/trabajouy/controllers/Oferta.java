@@ -53,7 +53,6 @@ public class Oferta extends HttpServlet {
 				request.getRequestDispatcher("/WEB-INF/errorPages/404.jsp").
 				forward(request, response);
 			}
-
 		}
 		else {
 			Set<DTOfertaLaboral> ofertas= ctrlUsuario.listarOfertasLaborales();

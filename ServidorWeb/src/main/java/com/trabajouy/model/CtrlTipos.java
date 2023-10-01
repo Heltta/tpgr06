@@ -11,7 +11,7 @@ import java.util.Set;
 public class CtrlTipos implements ITipos {
 
 	public void ingresarDatosTipoPublicacion(String nombreT, String descripcionT, int exposicionT, Date fechaT,
-			double costoT, double duracionT) throws nombreTipoPublicacionRepetido {
+			double costoT, int duracionT) throws nombreTipoPublicacionRepetido {
 		ManejadorTipo muTipo = ManejadorTipo.getInstance();
 		boolean existeNombre = muTipo.existeTipoPublicacion(nombreT);
 		if (existeNombre) {
@@ -80,5 +80,4 @@ public class CtrlTipos implements ITipos {
 		}
 	}
 }
-
 

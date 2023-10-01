@@ -10,7 +10,7 @@ import com.trabajouy.exceptions.*;
 
 public interface ITipos {
 
-	 public abstract void ingresarDatosTipoPublicacion(String nombreT, String descripcionT, int exposicionT, Date fechaT, double costoT, double duracionT)
+	 public abstract void ingresarDatosTipoPublicacion(String nombreT, String descripcionT, int exposicionT, Date fechaT, double costoT, int duracionT)
 			throws nombreTipoPublicacionRepetido;
 	
 	public abstract Map<String, DTTipoPublicacion> obtenerDataTipos();
