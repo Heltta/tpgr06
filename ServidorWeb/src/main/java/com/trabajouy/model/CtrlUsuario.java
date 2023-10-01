@@ -207,4 +207,15 @@ public class CtrlUsuario implements IUsuario {
 		}
 		return dataOfertas;
 	}
+	public DTUsuario iniciarSesion(String nickname, String pass) {
+		ManejadorUsuario manejadorU = ManejadorUsuario.getInstance();
+		Usuario user = manejadorU.getUsuario(nickname);
+		DTUsuario datosUsuario = null;
+		if(user != null) {
+			if(user.getPass().equals(pass)) {
+				datosUsuario = mostrarDatosUsuario(nickname);
+			}
+		}
+		return datosUsuario;
+	}
 }

@@ -6,7 +6,7 @@ public class Usuario {
 	private String nombre;
 	private String apellido;
 	private String imagen;
-	
+	private String pass = "";
 	
 	public Usuario(String nickname, String mail, String nombre, String apellido) {
 		super();
@@ -16,13 +16,14 @@ public class Usuario {
 		this.apellido = apellido;
 	}
 	
-	public Usuario(String nickname, String mail, String nombre, String apellido, String imagen) {
+	public Usuario(String nickname, String mail, String nombre, String apellido, String imagen, String pass) {
 		super();
 		this.nickname = nickname;
 		this.mail = mail;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.imagen = imagen;
+		this.pass = pass;
 	}
 	
 	public String getNickname() {
@@ -41,7 +42,9 @@ public class Usuario {
 	public String getImagen() {
 		return imagen;
 	}
-
+	public String getPass() {
+		return pass;
+	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}

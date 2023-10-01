@@ -10,15 +10,15 @@
 		</a>
 		<div class="user-info-2">
 			<%
-				DTUsuario usr = (DTUsuario) session.getAttribute("usuario_logueado");
+				DTUsuario usr = (DTUsuario) session.getAttribute("usuarioLogueado");
 				if (usr == null) {
 			%>
 			<ul class="nav">
 				<li class="nav-item">
-			    	<a class="nav-link text-white fw-semibold" href="inicioSesion.html">Iniciar Sesión</a>
+			    	<a class="nav-link text-white fw-semibold" href="Sesion">Iniciar Sesión</a>
 			    </li>
 			    <li class="nav-item">
-			    	<a class="nav-link text-white fw-semibold" href="altaUsuario.html">Registrarse</a>
+			    	<a class="nav-link text-white fw-semibold" href="AltaUsuario">Registrarse</a>
 			    </li>
 			</ul>
 			<%
