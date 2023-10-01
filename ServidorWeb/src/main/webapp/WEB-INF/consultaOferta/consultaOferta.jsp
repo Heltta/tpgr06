@@ -44,12 +44,12 @@
         	String urlDetalles= URLEncoder.encode(oferta.getNombre(), StandardCharsets.UTF_8.toString());
         	
         	%>
-          <a class="text-reset" href="/ServidorWeb/Oferta?n=<%=urlDetalles%>" class="link-dark ">
+          <a class="text-reset" href="Oferta?n=<%=urlDetalles%>" class="link-dark ">
             <li class="job-list-item" onclick="mostrarOcultarDatos()">
               <img src="<%=urlImagen%>" alt="<%=oferta.getNombre()%>" style="height: 400px; width: 600;">
               <div>
                 <h2><%=oferta.getNombre() %></h3>
-                  <h4>Empresa: Empresa</h4>
+                  <h4>Empresa: <%=oferta.getNombreEmpresa() %></h4>
                   <h5><%=keywords%></h5>
               </div>
           	</li>

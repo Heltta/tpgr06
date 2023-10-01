@@ -22,6 +22,7 @@ public class DTOfertaLaboral {
 			Date fecha, String tipo, Set<String> keywords, Set<DTPostulacion> postulaciones, double costo) {
 		super();
 		this.nombre = nombre;
+		this.nombreEmpresa=nombreEmpresa;
 		this.descripcion=descripcion;
 		this.ciudad = ciudad;
 		this.departamento = departamento;
