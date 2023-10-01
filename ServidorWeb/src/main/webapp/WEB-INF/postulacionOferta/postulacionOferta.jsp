@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page import="com.trabajouy.model.DTOfertaLaboral"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +20,7 @@
 </head>
 
 <body class="bg-primary-subtle body-center body-postOferta">
+<%DTOfertaLaboral oferta = (DTOfertaLaboral) request.getAttribute("oferta");  %>
   <jsp:include page="/WEB-INF/template/header.jsp" />
   <jsp:include page="/WEB-INF/template/sideBar.jsp" />
   <div class="d-flex container mt-5 divPostulacion" style="width: 50rem;">
@@ -28,17 +30,16 @@
           <div class="card">
             <img src="https://tinyurl.com/45nsf34m" class="card-img-top" alt="Oferta Desarollador FrontEnd" />
             <div class="card-body">
-              <h5 class="card-title">Desarollador FrontEnd</h5>
+              <h5 class="card-title"> <%=oferta.getNombre() %> </h5>
               <p class="card-text">
-                Unete a nuestro equipo de desarrollo frontend y crea
-                experiencias de usuario excepcionales.
+                <%=oferta.getDescripcion() %>
               </p>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Echo Tech</li>
-              <li class="list-group-item">$90.000</li>
-              <li class="list-group-item">09:00-18:00</li>
-              <li class="list-group-item">Montevideo, Montevideo</li>
+              <li class="list-group-item"> <%=oferta.getNombreEmpresa() %></li>
+              <li class="list-group-item"> <%=oferta.getRemuneracion() %> </li>
+              <li class="list-group-item"> <%=oferta.getHorario().getInicio() + ":" + oferta.getHorario().getFin() %> </li>
+              <li class="list-group-item"> <%= oferta.getCiudad() + ", " + oferta.getDepartamento() %> </li>
             </ul>
           </div>
         </div>
@@ -48,7 +49,7 @@
             placeholder="Informacion basica, experiencia laboral..." name="cv"></textarea><br>
         </div>
         <div class="form-group">
-          <label for="motivaion">Motivacion:</label>
+          <label for="motivacion">Motivación:</label>
           <textarea id="motivacion" class="form-control" name="motivacion"></textarea>
         </div>
         <div id="submitBtn">

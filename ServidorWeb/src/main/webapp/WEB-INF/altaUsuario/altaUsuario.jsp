@@ -19,6 +19,9 @@
     <jsp:include page="/WEB-INF/template/sideBar.jsp" />
     <div class="container mt-5" style="width: 40rem;">
         <div class="rounded-5 p-4 text-white bg-primary">
+        <% if(request.getAttribute("exito") != null || request.getParameter("mensaje") != null) {%>
+        	<jsp:include page="/WEB-INF/mensajeAviso/Mensaje.jsp" />        	
+        <% } %>
             <form id="formAlta" method="POST">
                 <div class="row g-3">
                     <div class="col">
@@ -69,11 +72,11 @@
                 <div name="postulante" id="postulante">
                     <div class="form-group">
                         <label for="fecha">Fecha de Nacimiento:</label><br>
-                        <input type="date" id="fecha" name="fecha" class="form-control"><br>
+                        <input type="date" id="fecha" name="fecha" class="form-control" required><br>
                     </div>
                     <div class="form-group">
                         <label for="nacionalidad">Nacionalidad:</label><br>
-                        <input type="text" id="nacionalidad" name="nacionalidad" class="form-control"><br>
+                        <input type="text" id="nacionalidad" name="nacionalidad" class="form-control" required><br>
                     </div>
                 </div>
                 <div name="empresa" id="empresa">
