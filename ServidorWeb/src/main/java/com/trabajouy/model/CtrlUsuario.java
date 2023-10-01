@@ -83,9 +83,10 @@ public class CtrlUsuario implements IUsuario {
 		return datosUsuario;
 	}
 
-	public DTOfertaLaboral seleccionarOfertaLaboral(String nombre) {
+	public DTOfertaLaboral seleccionarOfertaLaboral(String nombre) throws noExisteOferta {
 		ManejadorOferta mo= ManejadorOferta.getInstancia();
 		OfertaLaboral o = mo.obtenerOferta(nombre);
+		if(o==null) throw new noExisteOferta("No existe una oferta laboral de nombre: "+nombre);
 		String nombreTipo=o.getTipo().getNombre();
 		Map<String,Postulante> postulantes= o.getPostulantes();
 		Set<DTPostulacion> postulaciones = new HashSet<>();
@@ -100,7 +101,7 @@ public class CtrlUsuario implements IUsuario {
 				postulaciones.add(dataPostulacion);
 		    }
 		}
-		DTOfertaLaboral dataOferta= new DTOfertaLaboral(o.getNombre() ,o.getDescripcion(), o.getCiudad(), o.getDepartamento(), o.getHorario(), o.getRemuneracion(), o.getFecha(), nombreTipo, o.getKeywords(), postulaciones, o.getCosto());
+		DTOfertaLaboral dataOferta= new DTOfertaLaboral(o.getNombre(), o.getPublicante().getNickname() ,o.getDescripcion(), o.getCiudad(), o.getDepartamento(), o.getHorario(), o.getRemuneracion(), o.getFecha(), nombreTipo, o.getKeywords(), postulaciones, o.getCosto());
 		return dataOferta;
 		
 
@@ -118,7 +119,7 @@ public class CtrlUsuario implements IUsuario {
 		return mt.obtenerTipos();
 	}
 	
-	public Boolean ingresarOferta(String nickname,String nombreTipo, String nombre, String descripcion, DTHorario horario,int remuneracion,Date fecha,String ciudad,String departamento,Set<String> keyword) {
+	public Boolean ingresarOferta(String nickname,String nombreTipo, String nombre, String descripcion, DTHorario horario,int remuneracion,Date fecha,String ciudad,String departamento,Set<String> keyword) throws nombreOfertaRepetido {
 		ManejadorOferta mo = ManejadorOferta.getInstancia();
 		Boolean res = !mo.existeOferta(nombre);
 		
@@ -127,10 +128,13 @@ public class CtrlUsuario implements IUsuario {
 			TipoPublicacion tipo = mt.obtenerTipo(nombreTipo);
 			ManejadorUsuario mu = ManejadorUsuario.getInstance();
 			Empresa e = (Empresa) mu.getUsuario(nickname);
-			OfertaLaboral o = new OfertaLaboral(nombre,descripcion,ciudad,departamento,horario,remuneracion,fecha,tipo,keyword);
+			OfertaLaboral o = new OfertaLaboral(nombre, e,descripcion,ciudad,departamento,horario,remuneracion,fecha,tipo,keyword);
 			o.setCosto();
 			e.agregarOferta(o);
 			mo.agregarOferta(o);
+		}
+		else {
+			throw new nombreOfertaRepetido("Ya existe una oferta laboral llamada: "+nombre);
 		}
 		return res;
 	}
@@ -194,7 +198,12 @@ public class CtrlUsuario implements IUsuario {
 		
 		Set<DTOfertaLaboral> dataOfertas= new HashSet<DTOfertaLaboral>();
 		for (String nombre:nombreOfertas) {
-			dataOfertas.add(seleccionarOfertaLaboral(nombre));
+			try {
+				dataOfertas.add(seleccionarOfertaLaboral(nombre));
+			} catch (noExisteOferta e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return dataOfertas;
 	}

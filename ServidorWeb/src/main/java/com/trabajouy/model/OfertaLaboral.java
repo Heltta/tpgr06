@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class OfertaLaboral {
+	
+	private Empresa publicante;
 	private String nombre;
 	private String descripcion;
 	private String ciudad;
@@ -19,7 +21,7 @@ public class OfertaLaboral {
 	private Set<String> Keywords;
 	private Compra compra;
 	
-	public OfertaLaboral(String nombre,String descripcion, String ciudad, String departamento, DTHorario horario, int remuneracion,
+	public OfertaLaboral(String nombre, Empresa publicante,String descripcion, String ciudad, String departamento, DTHorario horario, int remuneracion,
 			Date fecha, TipoPublicacion tipo, Set<String> keywords) {
 		super();
 		this.nombre = nombre;
@@ -30,6 +32,7 @@ public class OfertaLaboral {
 		this.remuneracion = remuneracion;
 		this.fecha = fecha;
 		this.tipo = tipo;
+		this.publicante=publicante;
 		Keywords = Set.copyOf(keywords);
 		Postulantes= new HashMap<String,Postulante>();
 		compra=null;
@@ -91,5 +94,8 @@ public class OfertaLaboral {
 		if(!Postulantes.containsKey(post.getNickname())) {
 			Postulantes.put(post.getNickname(), post);
 		}
+	}
+	public Empresa getPublicante() {
+		return publicante;
 	}
 }

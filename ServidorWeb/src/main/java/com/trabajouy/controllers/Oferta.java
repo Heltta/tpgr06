@@ -42,10 +42,18 @@ public class Oferta extends HttpServlet {
 		
 		if(nombreOferta!=null) {
 			//si no existe la oferta segun su nombre tirar 404
-			DTOfertaLaboral oferta= ctrlUsuario.seleccionarOfertaLaboral(nombreOferta);
-			request.setAttribute("oferta", oferta);
-			request.getRequestDispatcher("/WEB-INF/consultaOferta/consultaOfertaDetalles.jsp").
-			forward(request, response);
+			try {
+				DTOfertaLaboral oferta = ctrlUsuario.seleccionarOfertaLaboral(nombreOferta);
+				request.setAttribute("oferta", oferta);
+				request.getRequestDispatcher("/WEB-INF/consultaOferta/consultaOfertaDetalles.jsp").
+				forward(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				request.getRequestDispatcher("/WEB-INF/errorPages/404.jsp").
+				forward(request, response);
+			}
+
 		}
 		else {
 			Set<DTOfertaLaboral> ofertas= ctrlUsuario.listarOfertasLaborales();

@@ -6,6 +6,7 @@ import java.util.Set;
 public class DTOfertaLaboral {
 
 	private String nombre;
+	private String nombreEmpresa;
 	private String descripcion;
 	private String ciudad;
 	private String departamento;
@@ -17,7 +18,7 @@ public class DTOfertaLaboral {
 	private String tipo;
 	private Set<String> Keywords;
 	
-	public DTOfertaLaboral(String nombre,String descripcion, String ciudad, String departamento, DTHorario horario, int remuneracion,
+	public DTOfertaLaboral(String nombre, String nombreEmpresa,String descripcion, String ciudad, String departamento, DTHorario horario, int remuneracion,
 			Date fecha, String tipo, Set<String> keywords, Set<DTPostulacion> postulaciones, double costo) {
 		super();
 		this.nombre = nombre;
@@ -64,5 +65,8 @@ public class DTOfertaLaboral {
 	}
 	public DTHorario getHorario() {
 		return horario;
+	}
+	public String getNombreEmpresa() {
+		return nombreEmpresa;
 	}
 }

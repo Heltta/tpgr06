@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.trabajouy.exceptions.nombreOfertaRepetido;
 import com.trabajouy.model.DTEmpresa;
 import com.trabajouy.model.DTHorario;
 import com.trabajouy.model.DTUsuario;
@@ -99,8 +100,13 @@ public class AltaOferta extends HttpServlet {
 			
 			String nickname= usr.getNickname();
 					
-			boolean result= ctrlUsuario.ingresarOferta(nickname,nombreTipo,nombre, descripcion, horario,remuneracion,fechaLocal,ciudad, departamento,keywords);
-
+			boolean result=false;
+			try {
+				result = ctrlUsuario.ingresarOferta(nickname,nombreTipo,nombre, descripcion, horario,remuneracion,fechaLocal,ciudad, departamento,keywords);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			if(result) {
 				
