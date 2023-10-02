@@ -27,11 +27,11 @@
         </div>
         <div class="job-list mx-5">
             <ul class="job-list">
-            <%for(DTUsuario usuario : usuarios){
-            	String nickname = usuario.getNickname();
-            %>
+            	<%for(DTUsuario usuario : usuarios){
+            		String nickname = usuario.getNickname();
+            	%>
                 <li>
-                    <a href="perfilPostulanteVisitante.html" class="sinEstilo">
+                    <a href="/PerfilUsuario?usuario=<%=URLEncoder.encode(nickname, StandardCharsets.UTF_8.toString()) %>" class="sinEstilo">
                         <div class="user-card">
                             <img src="img/<%=nickname%>.png" alt="Usuario1">
                             <div class="user-info">
