@@ -12,6 +12,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Servlet implementation class Oferta
@@ -37,16 +41,20 @@ public class Oferta extends HttpServlet {
 		
 		String nombreOferta=request.getParameter("n");
 		
+		String keyword= request.getParameter("k");
 		Set<String> listaKeywords= ctrlUsuario.listarKeywords();
 		request.setAttribute("listaKeywords", listaKeywords);
 		
 		if(nombreOferta!=null) {
+			nombreOferta= URLDecoder.decode(nombreOferta,StandardCharsets.UTF_8.toString());
 			//si no existe la oferta segun su nombre tirar 404
 			try {
 				DTOfertaLaboral oferta = ctrlUsuario.seleccionarOfertaLaboral(nombreOferta);
 				request.setAttribute("oferta", oferta);
 				request.getRequestDispatcher("/WEB-INF/consultaOferta/consultaOfertaDetalles.jsp").
+				
 				forward(request, response);
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -55,7 +63,7 @@ public class Oferta extends HttpServlet {
 			}
 		}
 		else {
-			Set<DTOfertaLaboral> ofertas= ctrlUsuario.listarOfertasLaborales();
+			Set<DTOfertaLaboral> ofertas = (keyword!=null && listaKeywords.contains(keyword)) ?  ctrlUsuario.listarOfertasPorKeyword(keyword): ctrlUsuario.listarOfertasLaborales();
 			request.setAttribute("ofertas", ofertas);
 			request.getRequestDispatcher("/WEB-INF/consultaOferta/consultaOferta.jsp").
 			forward(request, response);

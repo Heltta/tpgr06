@@ -9,6 +9,8 @@ import java.util.TreeSet;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Collection;
+
 import com.trabajouy.exceptions.*;
 
 public class CtrlUsuario implements IUsuario {
@@ -203,6 +205,23 @@ public class CtrlUsuario implements IUsuario {
 			} catch (noExisteOferta e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+		}
+		return dataOfertas;
+	}
+	public Set<DTOfertaLaboral> listarOfertasPorKeyword(String keyword){
+		ManejadorOferta manejadorOfertas= ManejadorOferta.getInstancia();
+		Map<String,OfertaLaboral> mapOfertas= manejadorOfertas.getOfertas();
+		Collection<OfertaLaboral> ofertas=mapOfertas.values();
+		Set<DTOfertaLaboral> dataOfertas= new HashSet<DTOfertaLaboral>();
+		for(OfertaLaboral oferta:ofertas) {
+			if(oferta.getKeywords().contains(keyword)) {
+				try {
+					dataOfertas.add(seleccionarOfertaLaboral(oferta.getNombre()));
+				} catch (noExisteOferta e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		return dataOfertas;

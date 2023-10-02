@@ -21,26 +21,26 @@
 					DTUsuario usr = (DTUsuario) session.getAttribute("usuario_logueado");
 					if (usr != null) {
 				%>
-                <a href="perfilPropioEmpresa.html" class="list-group-item list-group-item-action py-2 ripple"></i><span>Mi Perfil</span></a>
+                <a href="perfil" class="list-group-item list-group-item-action py-2 ripple"></i><span>Mi Perfil</span></a>
                 <% 
                 	} 
                 %>
-                <a href="consultaOfertaEmpresa.html"
+                <a href="Oferta"
                 class="list-group-item list-group-item-action py-2 ripple"><span>Ofertas
                     Laborales</span></a>
                 <%
 					if (usr instanceof DTEmpresa) {
 				%>
-                <a href="altaOferta.html" class="list-group-item list-group-item-action py-2 ripple"><span>Crear
+                <a href="AltaOferta" class="list-group-item list-group-item-action py-2 ripple"><span>Crear
                                 Oferta</span></a>
                 <% 
                 	} 
                 %>
-                <a href="consultaUsuarioEmpresa.html"
+                <a href="consultaUsuario"
                     class="list-group-item list-group-item-action py-2 ripple"><span>Usuarios</span></a>
-                <a href="consultaTipoPublicacionEmpresa.html" class="list-group-item list-group-item-action py-2 ripple"><span>Tipos de
+                <a href="consultaTipoPublicacion" class="list-group-item list-group-item-action py-2 ripple"><span>Tipos de
                     Publicación</span></a>
-                <a href="consultaPaqueteEmpresa.html" class="list-group-item list-group-item-action py-2 ripple"><span>Paquetes de Tipo de
+                <a href="consultaPaquete" class="list-group-item list-group-item-action py-2 ripple"><span>Paquetes de Tipo de
                     Publicación</span></a>
               </div>
             </div>
@@ -48,7 +48,7 @@
               <div class="border border-primary rounded-2">
                 <span class="list-group-item py-2 ripple"><b>Keywords</b></span>
                 <%for(String keyword :listaKeywords){ %>
-                    <a href="consultaOfertaEmpresa.html" class="list-group-item list-group-item-action py-2 ripple"><span><%=keyword %></span></a>
+                    <a href="Oferta?k=<%=keyword%>" class="list-group-item list-group-item-action py-2 ripple"><span><%=keyword %></span></a>
                 <%}%>
               </div>
             </div>

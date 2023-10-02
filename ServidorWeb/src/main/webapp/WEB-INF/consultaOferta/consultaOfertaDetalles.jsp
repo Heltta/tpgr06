@@ -22,7 +22,7 @@
   for(String key:keywords){
 	  keywordStr+=key+ ", ";
   }
-  keywordStr=keywordStr.substring(0, keywordStr.length()-2);
+  if(keywordStr.length()>0)keywordStr=keywordStr.substring(0, keywordStr.length()-2);
   
   
   boolean esPostulanteNoPostulado=false;
