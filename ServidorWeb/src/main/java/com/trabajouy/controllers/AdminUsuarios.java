@@ -45,14 +45,14 @@ public class AdminUsuarios extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Fabrica fab = Fabrica.getInstance();
 		IUsuario ctrlUser = fab.getIUsuario();
 		Set<String> listaKeywords= ctrlUser.listarKeywords();
-		req.setAttribute("listaKeywords", listaKeywords);
-		req.getRequestDispatcher("/WEB-INF/altaUsuario/altaUsuario.jsp").
-		forward(req, res);
+		request.setAttribute("listaKeywords", listaKeywords);
+		request.getRequestDispatcher("/WEB-INF/altaUsuario/altaUsuario.jsp").
+		forward(request, response);
 	}
 
 	/**
@@ -64,19 +64,29 @@ public class AdminUsuarios extends HttpServlet {
 		String servletPath = request.getServletPath();
 		
 		if ("/AltaUsuario".equals(servletPath)) {
+			Fabrica fab = Fabrica.getInstance();
+			IUsuario ctrUser = fab.getIUsuario();
+			Set<String> listaKeywords= ctrUser.listarKeywords();
+			request.setAttribute("listaKeywords", listaKeywords);
 			String nickname = request.getParameter("nickname");
 			String nombre = request.getParameter("nombre");
 			String apellido = request.getParameter("apellido");
-			String contraseña = request.getParameter("contraseña");
+			String contraseña = request.getParameter("contrasenia");
 			String confirmacion = request.getParameter("confirmacion");
+			System.out.print(contraseña);
+			System.out.print(confirmacion);
+			if (!contraseña.equals(confirmacion)) {
+				request.setAttribute("exito", false);
+				request.setAttribute("mensaje", "La contraseña y la confirmación deben coincidir");
+				request.getRequestDispatcher("/WEB-INF/altaUsuario/altaUsuario.jsp").forward(request, response);
+				return;
+			}
 			String email = request.getParameter("email");
 			String fecha = request.getParameter("fecha");
 			String nacionalidad = request.getParameter("nacionalidad");
 			String descripcion = request.getParameter("descripcion");
 			String link = request.getParameter("link");
 			String tipouser = request.getParameter("tipoUsuario");
-			Fabrica fab = Fabrica.getInstance();
-			IUsuario ctrUser = fab.getIUsuario();
 			Part imagen = request.getPart("imagen");
 			String nombreImagen = imagen.getSubmittedFileName();
 			String separador = FileSystems.getDefault().getSeparator();
