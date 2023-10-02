@@ -3,14 +3,8 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<jsp:include page="/WEB-INF/template/commonHeadElements.jsp" />
     <title>perfilEmpresa</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="css/estilosGenericos.css">
     <link rel="stylesheet" href="css/perfilUsuario.css">
     <script src="js/perfilUsuario.js"></script>
 </head>
@@ -67,10 +61,10 @@
                 </div>
                 <div class="row">
                     <div class="label">
-                        <label for="descripcion">Descripción:</label>
+                        <label for="descripcion">Descripciï¿½n:</label>
                     </div>
                     <div class="info">
-                        <textarea id="desc" readonly>EcoTech Innovations es una empresa líder en soluciones tecnológicas sostenibles. Nuestro enfoque se centra en desarrollar y comercializar productos y servicios que aborden los desafíos ambientales más apremiantes de nuestro tiempo. Desde sistemas de energía renovable y dispositivos de monitorización ambiental hasta soluciones de gestión de residuos inteligentes, nuestra misión es proporcionar herramientas que permitan a las empresas y comunidades adoptar prácticas más ecológicas sin comprometer la eficiencia. Creemos en la convergencia armoniosa entre la tecnología y la naturaleza, y trabajamos incansablemente para impulsar un futuro más limpio y sostenible.
+                        <textarea id="desc" readonly>EcoTech Innovations es una empresa lï¿½der en soluciones tecnolï¿½gicas sostenibles. Nuestro enfoque se centra en desarrollar y comercializar productos y servicios que aborden los desafï¿½os ambientales mï¿½s apremiantes de nuestro tiempo. Desde sistemas de energï¿½a renovable y dispositivos de monitorizaciï¿½n ambiental hasta soluciones de gestiï¿½n de residuos inteligentes, nuestra misiï¿½n es proporcionar herramientas que permitan a las empresas y comunidades adoptar prï¿½cticas mï¿½s ecolï¿½gicas sin comprometer la eficiencia. Creemos en la convergencia armoniosa entre la tecnologï¿½a y la naturaleza, y trabajamos incansablemente para impulsar un futuro mï¿½s limpio y sostenible.
                         </textarea>
                     </div>
                 </div>

@@ -10,14 +10,8 @@ Set<String> listaNombreTipos= listaPaquetes.keySet();
 %>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<jsp:include page="/WEB-INF/template/commonHeadElements.jsp" />
     <title>altaOferta</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="css/estilosGenericos.css">
     <link rel="stylesheet" href="css/altaOferta.css">
     <link rel="stylesheet" href="js/altaOferta.js">
 </head>
