@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="es">
-
+<%@page import="java.util.Set"%>
+<%@page import="com.trabajouy.model.DTUsuario"%>
+<%@page import="java.net.URLEncoder"%>
+<%@page import="java.nio.charset.StandardCharsets"%>
+<%@page import="java.io.UnsupportedEncodingException"%>
+<% Set<DTUsuario> usuarios = (Set<DTUsuario>) request.getAttribute("usuarios"); %>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,34 +27,24 @@
         </div>
         <div class="job-list mx-5">
             <ul class="job-list">
+            <%for(DTUsuario usuario : usuarios){
+            	String nickname = usuario.getNickname();
+            %>
                 <li>
                     <a href="perfilPostulanteVisitante.html" class="sinEstilo">
                         <div class="user-card">
-                            <img src="img/lgarcia.png" alt="Usuario1">
+                            <img src="img/<%=nickname%>.png" alt="Usuario1">
                             <div class="user-info">
-                                <h3>lgarcia</h3>
+                                <h3><%=nickname%></h3>
                                 <ul>
-                                    <li>Lucía García</li>
-                                    <li>lgarcia85@example.com</li>
+                                    <li><%=usuario.getNombre() + " " + usuario.getApellido() %></li>
+                                    <li><%= usuario.getMail()%></li>
                                 </ul>
                             </div>
                         </div>
                     </a>
                 </li>
-                <li>
-                    <a href="perfilEmpresaVisitante.html" class="sinEstilo">
-                        <div class="user-card">
-                            <img src="img/EcoTech.png" alt="Usuario2">
-                            <div class="user-info">
-                                <h3>EcoTech</h3>
-                                <ul>
-                                    <li>Sophia Johnson</li>
-                                    <li>info@EcoTech.com</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </a>
-                </li>
+			<% } %>
             </ul>
         </div>
     </div>
