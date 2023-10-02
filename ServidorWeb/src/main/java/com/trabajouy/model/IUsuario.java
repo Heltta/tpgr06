@@ -24,5 +24,8 @@ public interface IUsuario {
 	
 	public abstract void ingresarEmpresa(String nickName,String nombre,String apellido,
 			String correoElectronico,String nombreEmpresa,String descripcion,String link) throws Exception;
-	public void editarDatosBasicos(String nickname, String email, String nombre, String apellido, String nacionalidad, Date fecha, String descripcion, String link);
+
+	public abstract void editarDatosBasicos(String nickname, String email, String nombre, String apellido, String nacionalidad, Date fecha, String descripcion, String link);
+	public abstract Set<DTOfertaLaboral> listarOfertasPorKeyword(String keyword);
+	public abstract DTUsuario iniciarSesion(String nickname, String pass);
 }
