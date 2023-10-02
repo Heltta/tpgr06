@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.trabajouy.exceptions.nombreOfertaRepetido;
@@ -42,7 +43,7 @@ public class AltaOferta extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		DTUsuario usr = (DTUsuario) session.getAttribute("usuario_logueado");
+		DTUsuario usr = (DTUsuario) session.getAttribute("usuarioLogueado");
 		
 		Fabrica fabrica= Fabrica.getInstance();
 		IUsuario ctrlUsuario= fabrica.getIUsuario();
@@ -50,22 +51,20 @@ public class AltaOferta extends HttpServlet {
 		
 		Set<String> listaTipos= ctrlUsuario.listarTiposDePublicacion();
 		Set<String> listaKeywords= ctrlUsuario.listarKeywords();
-		Set<String> listaPaquetes= ctrlTipos.listarPaquetes();
-		
-		request.setAttribute("listaPaquetes", listaPaquetes);
+
 		request.setAttribute("listaKeywords", listaKeywords);
 		request.setAttribute("listaTipos", listaTipos);
 		
-		request.getRequestDispatcher("/WEB-INF/altaOferta/altaOferta.jsp").
-		forward(request, response);
-//		if (usr!=null && usr.getClass()==DTEmpresa.class) {
-//			request.getRequestDispatcher("/WEB-INF/altaOferta/altaOferta.jsp").
-//			forward(request, response);
-//		}
-//		else {
-//			request.getRequestDispatcher("/WEB-INF/errorPages/404.jsp").
-//			forward(request, response);
-//		}
+		if (usr!=null && usr.getClass()==DTEmpresa.class) {
+			Map<String,Set<String>> listaPaquetesPorTipo= ctrlUsuario.listarPaquetesCompradosParaTipoPublicacionDeEmpresa(usr.getNickname());
+			request.setAttribute("listaPaquetes", listaPaquetesPorTipo);
+			request.getRequestDispatcher("/WEB-INF/altaOferta/altaOferta.jsp").
+			forward(request, response);
+		}
+		else {
+			request.getRequestDispatcher("/WEB-INF/errorPages/404.jsp").
+			forward(request, response);
+		}
 	}
 
 	/**
@@ -74,7 +73,7 @@ public class AltaOferta extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		DTUsuario usr = (DTUsuario) session.getAttribute("usuario_logueado");
+		DTUsuario usr = (DTUsuario) session.getAttribute("usuarioLogueado");
 		if (usr!=null && usr.getClass()==DTEmpresa.class) {
 			
 			String nombreTipo= request.getParameter("tipoOferta");

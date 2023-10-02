@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <%@page import="java.util.Set"%>
+<%@page import="java.util.Map"%>
 <%
 Set<String> listaTipos= (Set<String>) request.getAttribute("listaTipos");
 Set<String> listaKeywords= (Set<String>) request.getAttribute("listaKeywords");
-Set<String> listaPaquetes= (Set<String>) request.getAttribute("listaPaquetes");
+Map<String,Set<String>> listaPaquetes= (Map<String,Set<String>>) request.getAttribute("listaPaquetes");
+Set<String> listaNombreTipos= listaPaquetes.keySet();
 %>
 
 <head>
@@ -17,6 +19,7 @@ Set<String> listaPaquetes= (Set<String>) request.getAttribute("listaPaquetes");
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/estilosGenericos.css">
     <link rel="stylesheet" href="css/altaOferta.css">
+    <link rel="stylesheet" href="js/altaOferta.js">
 </head>
 
 <body class="bg-primary-subtle body-center">
@@ -27,7 +30,7 @@ Set<String> listaPaquetes= (Set<String>) request.getAttribute("listaPaquetes");
           <form class="form" method="POST">
               <div class="form-group">
                   <label for="tipoOferta">Elegir tipo de oferta laboral</label>
-                  <select name="tipoOferta" class="form-control" id="tipoOferta">
+                  <select name="tipoOferta" class="form-control" id="tipoOferta" onInput="trigger(this.value)">
                   <%for(String tipo : listaTipos){ %>
                       <option value="<%= tipo %>"><%= tipo %></option>
                   <%}%>
@@ -82,9 +85,11 @@ Set<String> listaPaquetes= (Set<String>) request.getAttribute("listaPaquetes");
                   <label for="paquete" class="">Elegir paquete </label>
                   <select name="paquete" id="paquete" class="form-control dropdown">
                   	<option value="sinPaquete">Sin paquete</option>
-                   <%for(String paquete :listaPaquetes){ %>
-                       <option value="<%= paquete %>"><%= paquete %></option>
-                   <%}%>
+                   <%for(String tipo :listaNombreTipos){
+                	   for(String nombrePaquete: listaPaquetes.get(tipo)){
+                	%>
+                       <option value="<%= tipo+nombrePaquete %>"><%= nombrePaquete %></option>
+                   <%}}%>
                   </select>
               </div>
               
@@ -98,12 +103,7 @@ Set<String> listaPaquetes= (Set<String>) request.getAttribute("listaPaquetes");
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
-    <script src="../js/multiSelectScripts/jquery.min.js"></script>
-    <script src="../js/multiSelectScripts/popper.js"></script>
-    <script src="../js/multiSelectScripts/bootstrap.min.js"></script>
-    <script src="../js/multiSelectScripts/bootstrap-multiselect.js"></script>
-    <script src="../js/multiSelectScripts/main.js"></script>
-    <script src="../js/jsGenerico.js"></script>
+    <script src="js/jsGenerico.js"></script>
 </body>
 
 </html>

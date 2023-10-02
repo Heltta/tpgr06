@@ -1,6 +1,8 @@
 package com.trabajouy.model;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -81,5 +83,25 @@ public class Empresa extends Usuario {
 	public void canjearTipoDeCompra(String nombreTipo, String nombrePaquete) {
 		Compra compraPaquete= Compras.get(nombrePaquete);
 		compraPaquete.canjearTipo(nombreTipo);
+	}
+	public Map<String,Set<String>> listarPaquetesCompradosConTipoSinCanjear() {
+		Map<String,Set<String>> mapaTipoPublicacionPaquete= new HashMap<String,Set<String>>();
+		if(Compras!=null) {
+			Collection<Compra> paquetes= Compras.values();
+			for(Compra compraPaquete: paquetes) {
+				Set<String> tiposDelPaquete= compraPaquete.getTiposNoCanjeados().keySet();
+				for(String nombreTipo: tiposDelPaquete) {
+					if(mapaTipoPublicacionPaquete.containsKey(nombreTipo)) {
+						mapaTipoPublicacionPaquete.get(nombreTipo).add(compraPaquete.getProducto().getNombre());
+					}
+					else {
+						Set<String> paquetesConTipo= new HashSet<String>();
+						paquetesConTipo.add(compraPaquete.getProducto().getNombre());
+						mapaTipoPublicacionPaquete.put(nombreTipo, paquetesConTipo);
+					}
+				}
+			}
+		}
+		return mapaTipoPublicacionPaquete;
 	}
 }

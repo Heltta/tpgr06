@@ -6,7 +6,7 @@ public class Usuario {
 	private String nombre;
 	private String apellido;
 	private String imagen;
-	private String pass = "";
+	private String pass ="";
 	
 	public Usuario(String nickname, String mail, String nombre, String apellido) {
 		super();

@@ -37,4 +37,7 @@ public class Compra {
 			}
 		}
 	}
+	public Map<String,Agrupa> getTiposNoCanjeados(){
+		return tiposNoCanjeados;
+	}
 }
