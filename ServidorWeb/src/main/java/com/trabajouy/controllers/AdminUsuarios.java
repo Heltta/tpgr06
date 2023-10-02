@@ -3,6 +3,7 @@ package com.trabajouy.controllers;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Date;
@@ -76,12 +77,19 @@ public class AdminUsuarios extends HttpServlet {
 			String tipouser = request.getParameter("tipoUsuario");
 			Fabrica fab = Fabrica.getInstance();
 			IUsuario ctrUser = fab.getIUsuario();
-
+			Part imagen = request.getPart("imagen");
+			String nombreImagen = imagen.getSubmittedFileName();
+			String separador = FileSystems.getDefault().getSeparator();
+			String mediaPath = System.getProperty("catalina.base") + separador + "wtpwebapps" + separador + "ServidorWeb" + separador + "media" + separador;
+			if (imagen == null) {
+				//imagen = /imagen/por/defecto
+			}
 			if ("postulante".equals(tipouser)) {
 				try {
-					ctrUser.ingresarPostulante(nickname, nombre, apellido, email, new Date(fecha.replace("-", "/")) ,nacionalidad);
+					ctrUser.ingresarPostulante(nickname, nombre, apellido, email, new Date(fecha.replace("-", "/")) ,nacionalidad, mediaPath, contraseña);
 					request.setAttribute("exito", true);
 					request.setAttribute("mensaje", "Usuario creado con exito");
+					if (imagen != null) imagen.write(mediaPath + nickname + nombreImagen);
 				} catch (Exception e) {
 					request.setAttribute("exito", false);
 					request.setAttribute("mensaje", e.getMessage());
@@ -90,16 +98,17 @@ public class AdminUsuarios extends HttpServlet {
 				}	
 			} else if ("empresa".equals(tipouser)) {
 				try {
-					ctrUser.ingresarEmpresa(nickname, nombre, apellido, email, nickname, descripcion, link);
+					ctrUser.ingresarEmpresa(nickname, nombre, apellido, email, nickname, descripcion, link, mediaPath, contraseña);
 					request.setAttribute("exito", true);
 					request.setAttribute("mensaje", "Usuario creado con exito");
+				    if (imagen != null) imagen.write(mediaPath + nickname + nombreImagen);
 				}catch (Exception e) {
 					request.setAttribute("exito", false);
 					request.setAttribute("mensaje", e.getMessage());
 					request.getRequestDispatcher("/WEB-INF/altaUsuario/altaUsuario.jsp").forward(request, response);
 					return;
 				}
-			}
+			}	
 			response.sendRedirect("AltaUsuario?mensaje=Usuario creado con exito");
 		} else if ("/ModificarUsuario".equals(servletPath)) {
 			

@@ -163,35 +163,37 @@ public class CtrlUsuario implements IUsuario {
 		}
 	}
 	
-	public void ingresarPostulante(
-			String nickName,
-			String nombre,
-			String apellido,
-			String correoElectronico,
-			Date fechaNacimiento,
-			String nacionalidad) throws Exception {
+	public void ingresarPostulante(String nickName, String nombre, String apellido, String correoElectronico,
+		Date fechaNacimiento, String nacionalidad) throws Exception {
 		
 		ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstance();
-		
 		checkUnicidad(correoElectronico, nickName);
 		manejadorUsuario.agregarUsuario(new Postulante(nickName, correoElectronico, nombre, apellido, nacionalidad, fechaNacimiento));
 	}
 	
-	public void ingresarEmpresa(
-			String nickName,
-			String nombre,
-			String apellido,
-			String correoElectronico,
-			String nombreEmpresa,
-			String descripcion,
-			String link) throws Exception {
+	public void ingresarPostulante(String nickName, String nombre, String apellido, String correoElectronico,
+			Date fechaNacimiento, String nacionalidad, String imagen, String pass) throws Exception {
+			
+			ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstance();
+			checkUnicidad(correoElectronico, nickName);
+			manejadorUsuario.agregarUsuario(new Postulante(nickName, correoElectronico, nombre, apellido, nacionalidad, fechaNacimiento, imagen, pass));
+		}
+	
+	public void ingresarEmpresa(String nickName, String nombre, String apellido, String correoElectronico, String nombreEmpresa, String descripcion,
+		String link) throws Exception {
 		
 		ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstance();
-		
 		checkUnicidad(correoElectronico, nickName);
-		
 		manejadorUsuario.agregarUsuario(new Empresa(nickName, correoElectronico, nombre, apellido, nombreEmpresa, descripcion, link));
 	}
+	
+	public void ingresarEmpresa(String nickName, String nombre, String apellido, String correoElectronico, String nombreEmpresa, String descripcion,
+			String link, String imagen, String pass) throws Exception {
+			
+			ManejadorUsuario manejadorUsuario = ManejadorUsuario.getInstance();
+			checkUnicidad(correoElectronico, nickName);
+			manejadorUsuario.agregarUsuario(new Empresa(nickName, correoElectronico, nombre, apellido, nombreEmpresa, descripcion, link, imagen, pass));
+		}
 	
 	public Set<DTOfertaLaboral> listarOfertasLaborales(){
 		ManejadorOferta manejadorOfertas= ManejadorOferta.getInstancia();

@@ -24,6 +24,14 @@ public class Postulante extends Usuario {
 		this.fechaNacimiento = fechaNacimiento;
 		this.Postulaciones= new HashMap<String, Postulacion>();
 	}
+	
+	public Postulante(String nickname,String mail,String nombre,String apellido,String nacionalidad, Date fechaNacimiento, String imagen, String pass) {
+		super(nickname,mail,nombre,apellido, imagen, pass);
+		this.nacionalidad = nacionalidad;
+		this.fechaNacimiento = fechaNacimiento;
+		this.Postulaciones= new HashMap<String, Postulacion>();
+	}
+	
 	public String getNacionalidad() {
 		return nacionalidad;
 	}

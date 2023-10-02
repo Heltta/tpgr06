@@ -13,7 +13,7 @@ public class Empresa extends Usuario {
 	
 
 	public Empresa(String nickname, String mail, String nombre, String apellido, String nombreEmpresa,
-			String descripcion, String link) {
+		String descripcion, String link) {
 		super(nickname, mail, nombre, apellido);
 		this.nombreEmpresa = nombreEmpresa;
 		this.descripcion = descripcion;
@@ -21,6 +21,17 @@ public class Empresa extends Usuario {
 		this.Ofertas=new HashMap<String,OfertaLaboral>();
 		this.Compras=null;
 	}
+	
+	public Empresa(String nickname, String mail, String nombre, String apellido, String nombreEmpresa,
+			String descripcion, String link, String imagen, String pass) {
+			super(nickname, mail, nombre, apellido, imagen, pass);
+			this.nombreEmpresa = nombreEmpresa;
+			this.descripcion = descripcion;
+			this.link = link;
+			this.Ofertas=new HashMap<String,OfertaLaboral>();
+			this.Compras=null;
+		}
+	
 	public String getNombreEmpresa() {
 		return nombreEmpresa;
 	}
