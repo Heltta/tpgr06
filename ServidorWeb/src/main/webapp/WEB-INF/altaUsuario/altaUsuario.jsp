@@ -22,7 +22,7 @@
         <% if(request.getAttribute("exito") != null || request.getParameter("mensaje") != null) {%>
         	<jsp:include page="/WEB-INF/mensajeAviso/Mensaje.jsp" />        	
         <% } %>
-            <form id="formAlta" method="POST">
+            <form id="formAlta" method="POST" enctype= "multipart/form-data">
                 <div class="row g-3">
                     <div class="col">
                         <label for="nickname">Nickname:</label><br>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="form-group">
                     <label for="imagen">Foto de Perfil (Opcional):</label><br>
-                    <input type="file" accept="image/*" id="foto" class="form-control"><br>
+                    <input name="imagen" type="file" accept="image/*" id="foto" class="form-control"><br>
                 </div>
                 <div class="form-group" id="tipoUser">
                     <label for="tipoUsuario">Tipo de Usuario:</label><br>

@@ -1,7 +1,14 @@
 package com.trabajouy.controllers;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Date;
+import java.util.Set;
+
+import org.apache.tomcat.jakartaee.commons.compress.utils.FileNameUtils;
 
 import com.trabajouy.exceptions.PostulanteRepetido;
 import com.trabajouy.model.DTUsuario;
@@ -11,16 +18,19 @@ import com.trabajouy.model.Usuario;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 
 
 /**
  * Servlet implementation class AdminUsuarios
  */
 @WebServlet({"/AltaUsuario","/ModificarUsuario"})
+@MultipartConfig
 public class AdminUsuarios extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -36,6 +46,10 @@ public class AdminUsuarios extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		Fabrica fab = Fabrica.getInstance();
+		IUsuario ctrlUser = fab.getIUsuario();
+		Set<String> listaKeywords= ctrlUser.listarKeywords();
+		req.setAttribute("listaKeywords", listaKeywords);
 		req.getRequestDispatcher("/WEB-INF/altaUsuario/altaUsuario.jsp").
 		forward(req, res);
 	}
@@ -47,6 +61,7 @@ public class AdminUsuarios extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String servletPath = request.getServletPath();
+		
 		if ("/AltaUsuario".equals(servletPath)) {
 			String nickname = request.getParameter("nickname");
 			String nombre = request.getParameter("nombre");
@@ -61,8 +76,9 @@ public class AdminUsuarios extends HttpServlet {
 			String tipouser = request.getParameter("tipoUsuario");
 			Fabrica fab = Fabrica.getInstance();
 			IUsuario ctrUser = fab.getIUsuario();
+
 			if ("postulante".equals(tipouser)) {
-				try {	
+				try {
 					ctrUser.ingresarPostulante(nickname, nombre, apellido, email, new Date(fecha.replace("-", "/")) ,nacionalidad);
 					request.setAttribute("exito", true);
 					request.setAttribute("mensaje", "Usuario creado con exito");

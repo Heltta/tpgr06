@@ -49,6 +49,7 @@ public class Home extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.print(System.getProperty("catalina.base"));
 		if(req.getSession().getAttribute("cantPaginas") == null) {
 			req.getSession().setAttribute("cantPaginas", 1);
 			//Codigo temporal para cargar datos de prueba
