@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Sesion
  */
-@WebServlet("/Sesion")
+@WebServlet({"/Sesion","/cerrarSesion"})
 public class Sesion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -31,6 +31,8 @@ public class Sesion extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String servletPath = request.getServletPath();
+		if(servletPath.equals("/Sesion")) {
 		if(request.getSession().getAttribute("usuarioLogueado") == null) {
 			Fabrica fab = Fabrica.getInstance();
 			IUsuario ctrlUsuario = fab.getIUsuario();
@@ -40,6 +42,15 @@ public class Sesion extends HttpServlet {
 		}else {
 			response.sendRedirect("Home");
 		}
+		}
+		if(servletPath.equals("/cerrarSesion")) {
+			Fabrica fab = Fabrica.getInstance();
+			IUsuario ctrlUsuario = fab.getIUsuario();
+			request.setAttribute("listaKeywords", ctrlUsuario.listarKeywords());
+			request.getSession().setAttribute("usuarioLogueado", null);
+			request.getRequestDispatcher("/WEB-INF/inicioSesion/cierreSesion.jsp").forward(request, response);
+		}
+		
 	}
 
 	/**

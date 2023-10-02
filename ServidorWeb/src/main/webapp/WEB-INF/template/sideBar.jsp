@@ -18,7 +18,7 @@
             <div class="sidebarGroup ">
               <div class="border border-primary rounded-2">
               	<%
-					DTUsuario usr = (DTUsuario) session.getAttribute("usuario_logueado");
+					DTUsuario usr = (DTUsuario) session.getAttribute("usuarioLogueado");
 					if (usr != null) {
 				%>
                 <a href="perfil" class="list-group-item list-group-item-action py-2 ripple"></i><span>Mi Perfil</span></a>

@@ -7,6 +7,8 @@
 <%@page import="com.trabajouy.model.DTPostulante"%>
 <%@page import="com.trabajouy.model.DTPostulacion"%>
 <%@page import="com.trabajouy.model.DTEmpresa"%>
+<%@page import="java.net.URLEncoder"%>
+<%@page import="java.nio.charset.StandardCharsets"%>
 <%DTOfertaLaboral oferta= (DTOfertaLaboral) request.getAttribute("oferta");  
   String linkImagen="";
   Set<String> keywords= oferta.getKeywords();
@@ -29,7 +31,7 @@
   boolean esPostulantePostulado=false;
   boolean esEmpresaDuenia=false;
   
-  DTUsuario usuario= (DTUsuario) session.getAttribute("usuario");
+  DTUsuario usuario= (DTUsuario) session.getAttribute("usuarioLogueado");
   if(usuario!=null){
 	  if(usuario.getClass() == DTPostulante.class){
 		  DTPostulante postulante= (DTPostulante) usuario;
@@ -109,7 +111,7 @@
                     <label for="selectOption" class="">Postulaciones</label>
                     <select name="selectOption" id="selectOption" class="form-control" oninput="redirect()" multiple="multiple">
                     	<%for(DTPostulacion post:postulaciones){ %>
-                        <option value="consultaPostulacion1Empresa.html"><%=post.getPostulante()%></option>
+                        <option value="Postulacion?n=<%=URLEncoder.encode(oferta.getNombre(), StandardCharsets.UTF_8.toString()) %>&p=<%=URLEncoder.encode(post.getPostulante(), StandardCharsets.UTF_8.toString()) %>"><%=post.getPostulante()%></option>
                         <%} %>
                     </select>
                 </div>
@@ -119,7 +121,7 @@
                     <input type="date" class="form-control" value="<%=fechaAlta%>" id="date" readonly>
                 </div>
                 <%if(esPostulantePostulado){ %>
-                <a class="btn btn-light mt-3" href="consultaPostulacion1Postulante.html">Ver Postulacion</a>
+                <a class="btn btn-light mt-3" href="Postulacion?n=<%=URLEncoder.encode(oferta.getNombre(), StandardCharsets.UTF_8.toString()) %>&p=<%=URLEncoder.encode(usuario.getNickname(), StandardCharsets.UTF_8.toString()) %>">Ver Postulacion</a>
                 <%}%>
                 <%if(esPostulanteNoPostulado){ %>
 				<a class="btn btn-light mt-3" href="consultaPostulacion1Postulante.html">Postularse</a>

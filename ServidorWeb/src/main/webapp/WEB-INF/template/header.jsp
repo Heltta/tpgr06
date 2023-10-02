@@ -30,7 +30,7 @@
 		    </div>
 		   	<ul class="user-menu" id="user-dropdown">
 		    	<li><a href="perfilPropioPostulante.html">Mi Perfil</a></li>
-		        <li><a href="cerrarSesion.html">Cerrar Sesión</a></li>
+		        <li><a href="cerrarSesion">Cerrar Sesión</a></li>
 		    </ul>
 		    <%
 				}

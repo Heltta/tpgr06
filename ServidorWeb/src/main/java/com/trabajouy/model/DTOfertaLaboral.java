@@ -17,6 +17,7 @@ public class DTOfertaLaboral {
 	private Set<DTPostulacion> postulaciones;
 	private String tipo;
 	private Set<String> Keywords;
+	private String imagen;
 	
 	public DTOfertaLaboral(String nombre, String nombreEmpresa,String descripcion, String ciudad, String departamento, DTHorario horario, int remuneracion,
 			Date fecha, String tipo, Set<String> keywords, Set<DTPostulacion> postulaciones, double costo) {
@@ -70,5 +71,29 @@ public class DTOfertaLaboral {
 	}
 	public String getNombreEmpresa() {
 		return nombreEmpresa;
+	}
+	public String getImagen() {
+		if (imagen == null)
+			return "";
+		else
+			return imagen;
+	}
+	public DTOfertaLaboral(String nombre, String nombreEmpresa,String descripcion, String ciudad, String departamento, DTHorario horario, int remuneracion,
+			Date fecha, String tipo, Set<String> keywords, Set<DTPostulacion> postulaciones, double costo,String imagen) {
+		super();
+		this.nombre = nombre;
+		this.nombreEmpresa=nombreEmpresa;
+		this.descripcion=descripcion;
+		this.ciudad = ciudad;
+		this.departamento = departamento;
+		this.horario = horario;
+		this.remuneracion = remuneracion;
+		this.fecha = fecha;
+		this.tipo = tipo;
+		this.costo=costo;
+		Keywords = keywords;
+		this.postulaciones=postulaciones;
+		this.nombreEmpresa = nombreEmpresa;
+		this.imagen = imagen;
 	}
 }
