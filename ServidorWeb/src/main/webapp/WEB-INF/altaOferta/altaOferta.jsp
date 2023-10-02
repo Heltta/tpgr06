@@ -63,7 +63,7 @@ Set<String> listaNombreTipos= listaPaquetes.keySet();
               </div>
               <div class="form-group">
                   <label for="inputImagen">Imagen</label>
-                  <input type="url" class="form-control" id="inputImagen" placeholder="Url" name="imagen">
+                  <input type="file" class="form-control" id="inputImagen" placeholder="Url" name="imagen">
               </div>
               <div class="form-group">
                   <label for="multiple-checkboxes">Keywords</label>
