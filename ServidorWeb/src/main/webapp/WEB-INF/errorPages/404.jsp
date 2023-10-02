@@ -20,7 +20,7 @@
 	<p>
 	Intentaste entrar a una página que no existe.
 	Puedes
-	<a href="/">volver</a> al inicio.
+	<a href="/ServidorWeb/Home">volver</a> al inicio.
 	</p>
 </BODY>
 </HTML>

@@ -126,7 +126,7 @@
 				<%}%>
 				
                 <div class="form-group btn-pad">
-                    <a href="consultaOfertaLoggeado.html">
+                    <a href="Oferta">
                         <button type="button" class="btn btn-light btn-lg">Ok</button>
                     </a>
                 </div>
