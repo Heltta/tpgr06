@@ -42,7 +42,7 @@
                 <div class="row g-3">
                     <div class="col">
                         <label for="contraseña">Contraseña:</label><br>
-                        <input type="password" id="contraseña" name="contraseña" class="form-control" required><br>
+                        <input type="password" id="contraseña" name="contrasenia" class="form-control" required><br>
                     </div>
                     <div class="col">
                         <label for="confirmacion">Confirmación:</label><br>
