@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.FileSystems;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -198,9 +199,11 @@ public void cargarTipoPublicacion() {
             costoTipos.add(costo);
             String fechaAlta= data[6].trim();
             String[] numerosFecha = fechaAlta.split("/");
-            LocalDate localfecha = LocalDate.of(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
-        	Date fecha = Date.from(localfecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            //Date fecha =new Date(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
+
+            //LocalDate localfecha = LocalDate.of(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
+           // Instant instante = localfecha.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        	//Date fecha = Date.from(instante);
+            Date fecha =new Date(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
             ctrlTipos.ingresarDatosTipoPublicacion(nombre, desc, Integer.parseInt(exp),fecha,(costo), Integer.parseInt(dur));
 			}
             i++;

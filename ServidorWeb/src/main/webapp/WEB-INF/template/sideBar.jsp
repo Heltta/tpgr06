@@ -36,11 +36,11 @@
                 <% 
                 	} 
                 %>
-                <a href="consultaUsuario"
+                <a href="ConsultaUsuario"
                     class="list-group-item list-group-item-action py-2 ripple"><span>Usuarios</span></a>
-                <a href="consultaTipoPublicacion" class="list-group-item list-group-item-action py-2 ripple"><span>Tipos de
+                <a href="Tipos" class="list-group-item list-group-item-action py-2 ripple"><span>Tipos de
                     Publicación</span></a>
-                <a href="consultaPaquete" class="list-group-item list-group-item-action py-2 ripple"><span>Paquetes de Tipo de
+                <a href="ConsultaPaquetes" class="list-group-item list-group-item-action py-2 ripple"><span>Paquetes de Tipo de
                     Publicación</span></a>
               </div>
             </div>
