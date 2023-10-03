@@ -118,11 +118,11 @@
                 <a class="btn btn-light mt-3" href="Postulacion?n=<%=URLEncoder.encode(oferta.getNombre(), StandardCharsets.UTF_8.toString()) %>&p=<%=URLEncoder.encode(usuario.getNickname(), StandardCharsets.UTF_8.toString()) %>">Ver Postulacion</a>
                 <%}%>
                 <%if(esPostulanteNoPostulado){ %>
-				<a class="btn btn-light mt-3" href="consultaPostulacion1Postulante.html">Postularse</a>
 				<%}%>
 				
                 <div class="form-group btn-pad">
                     <a href="Oferta">
+				<a class="btn btn-light mt-3" href="Postularse?n=<%=URLEncoder.encode(oferta.getNombre(), StandardCharsets.UTF_8.toString())%>">Postularse</a>
                         <button type="button" class="btn btn-light btn-lg">Ok</button>
                     </a>
                 </div>
