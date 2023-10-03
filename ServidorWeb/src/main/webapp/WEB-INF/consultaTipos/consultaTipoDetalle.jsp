@@ -34,7 +34,7 @@ String fechaAlta= formatter.format(fechaAltaDate);
             <p id="tipo-exposicion">Exposición:<span class="text-secondary"><%=dataTipo.getExposicion() %></span></p>
           </div>
           <div class="rounded mt-1">
-            <p id="tipo-duracion">Duración:<span class="text-secondary"> <%=dataTipo.getDuracion() %> dias</span></p>
+            <p id="tipo-duracion">Duración:<span class="text-secondary"> <%=(int)dataTipo.getDuracion() %> dias</span></p>
           </div>
           <div class="rounded mt-1">
             <p id="tipo-costo">Costo:<span class="text-secondary"> $<%=dataTipo.getCosto() %></span></p>
