@@ -1,6 +1,8 @@
 package com.trabajouy.controllers;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -19,7 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ConsultaUsuario
  */
-@WebServlet("/ConsultaUsuario")
+@WebServlet({"/ConsultaUsuario","/PerfilUsuario"})
 public class ConsultaUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -37,16 +39,25 @@ public class ConsultaUsuario extends HttpServlet {
 		// TODO Auto-generated method stub
 		Fabrica fab = Fabrica.getInstance();
 		IUsuario ctrlUsuario = fab.getIUsuario();
-		ArrayList<String> nicknamesUsuarios = ctrlUsuario.listarUsuarios();
-		Collections.sort(nicknamesUsuarios);
-		Set<DTUsuario> usuarios = new HashSet<DTUsuario>();
-		for(String nombre : nicknamesUsuarios){
-			usuarios.add(ctrlUsuario.mostrarDatosUsuario(nombre));
+		String servletPath = request.getServletPath();
+		if(servletPath.equals("/ConsultaUsuario")) {
+			ArrayList<String> nicknamesUsuarios = ctrlUsuario.listarUsuarios();
+			Collections.sort(nicknamesUsuarios);
+			Set<DTUsuario> usuarios = new HashSet<DTUsuario>();
+			for(String nombre : nicknamesUsuarios){
+				usuarios.add(ctrlUsuario.mostrarDatosUsuario(nombre));
+			}
+			request.setAttribute("usuarios", usuarios);
+			request.setAttribute("listaKeywords", ctrlUsuario.listarKeywords());
+			request.getRequestDispatcher("/WEB-INF/consultaUsuario/consultaUsuario.jsp").
+			forward(request, response);
 		}
-		request.setAttribute("usuarios", usuarios);
-		request.setAttribute("listaKeywords", ctrlUsuario.listarKeywords());
-		request.getRequestDispatcher("/WEB-INF/consultaUsuario/consultaUsuario.jsp").
-		forward(request, response);
+		else if(servletPath.equals("/PerfilUsuario")){
+			String nickname = URLDecoder.decode(request.getParameter("nickname"),StandardCharsets.UTF_8.toString());
+			DTUsuario user = ctrlUsuario.mostrarDatosUsuario(nickname);
+			request.setAttribute("detalleUsuario", user);
+			request.getRequestDispatcher("/WEB-INF/consultaUsuario/perfilUsuario.jsp").forward(request, response);
+		}
 	}
 
 	/**

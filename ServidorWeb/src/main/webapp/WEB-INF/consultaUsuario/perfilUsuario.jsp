@@ -1,12 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="es">
-
+<%@page import="java.util.Date"%>
+<%@page import="com.trabajouy.model.DTUsuario"%>
+<%@page import="com.trabajouy.model.DTPostulante"%>
+<%@page import="com.trabajouy.model.DTEmpresa"%>
+<% DTUsuario user = (DTUsuario) request.getAttribute("detalleUsuario");
+	enum Conexion{Postulante, Empresa, PropioEmpresa, PropioPostulante};
+	Conexion estadoConexion = Conexion.Postulante;
+	String nickname = user.getNickname();
+	String nombre = user.getNombre();
+	String apellido = user.getApellido();
+	String mail = user.getMail();
+	String imagen = user.getImagen();
+	Date fechaNac;
+	String nacionalidad = "";
+	String descripcion = "";
+	String link = "";
+	DTUsuario usuarioLogueado = (DTUsuario) request.getSession().getAttribute("usuarioLogueado");
+	if(user instanceof DTPostulante){
+		fechaNac = ((DTPostulante)user).getFechaNacimiento();
+		nacionalidad = ((DTPostulante)user).getNacionalidad();
+		if(usuarioLogueado != null){
+			estadoConexion = (usuarioLogueado.getNickname().equals(nickname))?Conexion.PropioPostulante:Conexion.Postulante;
+		}else{
+			estadoConexion = Conexion.Postulante;
+		}
+	}else if(user instanceof DTEmpresa){
+		descripcion = ((DTEmpresa)user).getDescripcion();
+		link = ((DTEmpresa)user).getLink();
+		if(usuarioLogueado != null){
+			estadoConexion = (usuarioLogueado.getNickname().equals(nickname))?Conexion.PropioEmpresa:Conexion.Empresa;
+		}else{
+			estadoConexion = Conexion.Empresa;
+		}
+	}
+%>
 <head>
-	<jsp:include page="/WEB-INF/template/commonHeadElements.jsp" />
-    <title>perfilEmpresa</title>
-    <link rel="stylesheet" href="css/perfilUsuario.css">
-    <script src="js/perfilUsuario.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>perfilPropioEmpresa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../css/estilosGenericos.css">
+    <link rel="stylesheet" href="../css/perfilUsuario.css">
+    <script src="../js/jsGenerico.js"></script>
+    <script src="../js/perfilUsuario.js"></script>
+    <jsp:include page="/WEB-INF/template/commonHeadElements.jsp" />
 </head>
 
 <body class="bg-primary-subtle body-center">
@@ -14,16 +57,28 @@
     <jsp:include page="/WEB-INF/template/sideBar.jsp" />
     <div class="profile">
         <div class="profile-header">
-            <img src="https://tinyurl.com/mr2hcufa" alt="Avatar" class="u-avatar">
+            <img src="img/<%=nickname%>.png" alt="Avatar" class="u-avatar">
             <div class="u-info">
-                <h1>Sophia Johnson</h1>
-                <p>EcoTech</p>
-                <p>info@EcoTech.com</p>
+                <h1><%=nombre + " " + apellido%></h1>
+                <p><%=nickname%></p>
+                <p><%=mail%></p>
             </div>
         </div>
         <div class="profile-tabs">
-            <button class="tablink" onclick="openTab('perfil')">Perfil</button>
-            <button class="tablink" onclick="openTab('ofertas')">Publicaciones</button>
+        	<button class="tablink" onclick="openTab('perfil')">Perfil</button>
+        	<%
+        	switch(estadoConexion){
+        		case Empresa :%>
+            		<button class="tablink" onclick="openTab('ofertas')">Publicaciones</button>
+            	<%break;%>
+        		<%case PropioPostulante :%>
+        			<button class="tablink" onclick="openTab('ofertas')">Postulaciones</button>
+        		<%break;%>
+           		<%case PropioEmpresa :%>  
+           			<button class="tablink" onclick="openTab('ofertas')">Publicaciones</button>
+            		<button class="tablink" onclick="openTab('paquetes')">Compras de Paquetes</button>
+            	<%break;%>
+            <%}%>
         </div>
         <div class="tabcontent" id="perfil">
             <div class="profile-form">
@@ -32,7 +87,7 @@
                         <label for="nickname">Nickname:</label>
                     </div>
                     <div class="info">
-                        <input type="text" id="nickname" value="EcoTech" readonly>
+                        <input type="text" id="nickname" value="<%=nickname%>" readonly>
                     </div>
                 </div>
                 <div class="row">
@@ -40,7 +95,7 @@
                         <label for="email">Email:</label>
                     </div>
                     <div class="info email-info">
-                        <input type="email" id="email" value="info@EcoTech.com" readonly>
+                        <input type="email" id="email" value="<%=mail%>" readonly>
                     </div>
                 </div>
                 <div class="row">
@@ -48,7 +103,7 @@
                         <label for="name">Nombre:</label>
                     </div>
                     <div class="info">
-                        <input type="text" id="name" value="Sophia" readonly>
+                        <input type="text" id="name" value="<%=nombre%>" readonly>
                     </div>
                 </div>
                 <div class="row">
@@ -56,16 +111,15 @@
                         <label for="lastname">Apellido:</label>
                     </div>
                     <div class="info">
-                        <input type="text" id="lastname" value="Johnson" readonly>
+                        <input type="text" id="lastname" value="<%=apellido%>" readonly>
                     </div>
                 </div>
                 <div class="row">
                     <div class="label">
-                        <label for="descripcion">Descripciï¿½n:</label>
+                        <label for="descripcion">Descripción:</label>
                     </div>
                     <div class="info">
-                        <textarea id="desc" readonly>EcoTech Innovations es una empresa lï¿½der en soluciones tecnolï¿½gicas sostenibles. Nuestro enfoque se centra en desarrollar y comercializar productos y servicios que aborden los desafï¿½os ambientales mï¿½s apremiantes de nuestro tiempo. Desde sistemas de energï¿½a renovable y dispositivos de monitorizaciï¿½n ambiental hasta soluciones de gestiï¿½n de residuos inteligentes, nuestra misiï¿½n es proporcionar herramientas que permitan a las empresas y comunidades adoptar prï¿½cticas mï¿½s ecolï¿½gicas sin comprometer la eficiencia. Creemos en la convergencia armoniosa entre la tecnologï¿½a y la naturaleza, y trabajamos incansablemente para impulsar un futuro mï¿½s limpio y sostenible.
-                        </textarea>
+                        <textarea id="desc" readonly><%=descripcion%></textarea>
                     </div>
                 </div>
                 <div class="row">
@@ -73,7 +127,7 @@
                         <label for="link">Link:</label>
                     </div>
                     <div class="info">
-                        <input type="text" id="link" value="http://www.ecotechinnovations.com/" readonly>
+                        <input type="text" id="link" value="<%=link%>" readonly>
                     </div>
                 </div>
             </div>

@@ -26,7 +26,7 @@
             		String nickname = usuario.getNickname();
             	%>
                 <li>
-                    <a href="/PerfilUsuario?usuario=<%=URLEncoder.encode(nickname, StandardCharsets.UTF_8.toString()) %>" class="sinEstilo">
+                    <a href="/PerfilUsuario?nickname=<%=URLEncoder.encode(nickname, StandardCharsets.UTF_8.toString()) %>" class="sinEstilo">
                         <div class="user-card">
                             <img src="img/<%=nickname%>.png" alt="Usuario1">
                             <div class="user-info">
