@@ -12,15 +12,17 @@ public class PaqueteTipoPublicacion{
     private Date fecha;
     private double costo;
     private int PeriodoValidez;
+    private String imagen;
     private Map<String, Agrupa> TiposPublicacion;
     
-    public PaqueteTipoPublicacion(String nombre, String descripcion, double descuento, Date fecha, int PeriodoValidez) {
+    public PaqueteTipoPublicacion(String nombre, String descripcion, double descuento, Date fecha, int PeriodoValidez, String imagen) {
     	this.nombre = nombre;
     	this.descripcion = descripcion;
     	this.descuento = descuento;
     	this.fecha = fecha;
     	this.costo = 0;
     	this.PeriodoValidez = PeriodoValidez;
+    	this.imagen=imagen;
     	TiposPublicacion = new HashMap<String, Agrupa>();
     }
     
@@ -66,5 +68,9 @@ public class PaqueteTipoPublicacion{
 			TiposPublicacion.put(tipo.getNombre(), tipoAgregado);
 		}
 		costo = costo + tipo.getCosto()*cant*(1-descuento/100);
+	}
+	
+	public String getImagen() {
+		return imagen;
 	}
 }

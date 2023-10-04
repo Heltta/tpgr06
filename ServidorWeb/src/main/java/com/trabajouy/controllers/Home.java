@@ -26,7 +26,7 @@ import com.trabajouy.model.*;
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String separador = FileSystems.getDefault().getSeparator();
-    private String csvDirectory= System.getProperty("catalina.base") + separador + "wtpwebapps" + separador + "ServidorWeb" + separador + "TProg_DatosPruebaTarea1_2023-CSVs-v1_0" + separador;
+    private String csvDirectory= System.getProperty("catalina.base") + separador + "wtpwebapps" + separador + "ServidorWeb" + separador + "Tprog_DatosPruebaT2_2023" + separador;
     private Fabrica fab = Fabrica.getInstance();
     private IUsuario ctrlUsuario = fab.getIUsuario();
     private ITipos ctrlTipos = fab.getITipos();
@@ -199,7 +199,6 @@ public void cargarTipoPublicacion() {
             costoTipos.add(costo);
             String fechaAlta= data[6].trim();
             String[] numerosFecha = fechaAlta.split("/");
-
             LocalDate localfecha = LocalDate.of(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
             Instant instante = localfecha.atStartOfDay(ZoneId.systemDefault()).toInstant();
         	Date fecha = Date.from(instante);
@@ -236,8 +235,27 @@ public void cargarOfertasLaborales() {
             int usuario= Integer.parseInt(data[7].trim().substring(1));
             int ixPubli= Integer.parseInt(data[8].trim().substring(2));
             String fechaAlta= data[9].trim();
+            String estadoStr= data[10].trim();
+            Estado estado;
+            switch (estadoStr) {
+            case "Confirmada":
+            	estado=Estado.Confirmado;
+            	break;
+            case "Rechazada":
+            	estado=Estado.Rechazado;
+            	break;
+            case "Ingresada":
+            	estado=Estado.Ingresado;
+            	break;
+            default:
+            	estado=null;
+            	break;
+            }
+            String urlImagen= data[12].trim();
+            
+            
             String[] numerosFecha = fechaAlta.split("/");
-            LocalDate localfecha = LocalDate.of(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0])-2);
+            LocalDate localfecha = LocalDate.of(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
         	Date fecha = Date.from(localfecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
             //Date fecha =new Date(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
             Set<String> lkeywords= new HashSet<String>();
@@ -259,7 +277,7 @@ public void cargarOfertasLaborales() {
             	}
             	j++;
             }
-            ctrlUsuario.ingresarOferta(usuarios.get(usuario-1), tipos.get(ixPubli-1), nombre, desc, horario, remuneracion, fecha, ciudad, dep, lkeywords);
+            ctrlUsuario.ingresarOferta(usuarios.get(usuario-1), tipos.get(ixPubli-1), nombre, desc, horario, remuneracion, fecha, ciudad, dep, lkeywords, guardarImagen(urlImagen));
             lkeywords.clear();
 			}
             i++;
@@ -269,6 +287,7 @@ public void cargarOfertasLaborales() {
 		e.printStackTrace();
 	}
 }
+
 public void cargarPostulaciones() {
 	String postuCSV = csvDirectory+"Postulaciones.csv";
 	String line;
@@ -283,7 +302,7 @@ public void cargarPostulaciones() {
             String fechaAlta= data[4].trim();
             int oID= Integer.parseInt(data[5].trim().substring(1));
             String[] numerosFecha = fechaAlta.split("/");
-            LocalDate localfecha = LocalDate.of(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0])-2);
+            LocalDate localfecha = LocalDate.of(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
         	Date fecha = Date.from(localfecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
             //Date fecha = new Date(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
             ctrlUsuario.ingresarDatosPostulacion(usuarios.get(uID-1), cv, mot, ofertas.get(oID-1) , fecha);
@@ -312,14 +331,17 @@ public void cargarPaquetes() {
             int duracion = Integer.parseInt(data[3].trim().replaceAll("[^0-9]", ""));
             double descuento= Double.parseDouble(data[4].trim());
             String fechaAlta= data[5].trim();
+            double costo= Double.parseDouble( data[6].trim());
+            String imagen= data[7].trim();
+            
             String[] numerosFecha = fechaAlta.split("/");
-            LocalDate localfecha = LocalDate.of(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0])-2);
+            LocalDate localfecha = LocalDate.of(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
         	Date fecha = Date.from(localfecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
             //Date fecha =new Date(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
             BufferedReader br2 = new BufferedReader(new FileReader(tipoPubliPaq));
             String line2;
             int j=0;
-            ctrlTipos.ingresarDatosPaquete(nombre, descr, duracion, descuento, fecha);
+            ctrlTipos.ingresarDatosPaquete(nombre, descr, duracion, descuento, fecha, guardarImagen(imagen));
 			}
             i++;
         }
@@ -351,7 +373,33 @@ public void cargarTipoPaquetes() {
 	}
 }
 public void cargarCompras() {
-	
+	String compraPaq = csvDirectory+"PaquetesCompras.csv";
+	String line;
+	int i=0;
+	try (BufferedReader br = new BufferedReader(new FileReader(compraPaq))) {
+		while ((line = br.readLine()) != null) {
+			if(i>0) { //Ref;Usuario;Paquete;Fecha;Valor
+            String[] data = line.split(";");
+
+            int UID= Integer.parseInt(data[1].trim().substring(1));
+            int PID= Integer.parseInt(data[2].trim().substring(3));
+            String fechaAlta= data[5].trim();
+            String[] numerosFecha = fechaAlta.split("/");
+            LocalDate localfecha = LocalDate.of(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0])-2);
+            ctrlTipos.comprarPaquete(usuarios.get(UID-1), paquetes.get(PID-1), localfecha);
+			}
+            i++;
+        }
+	}
+	catch (Exception e) {
+		e.printStackTrace();
+	}
 }
+
+public String guardarImagen(String link) {
+	//funcion que guarde la imagen de forma persistente en los archivos y que devuelva la ruta relativa en formato string
+	return "";
+}
+
 }
 

@@ -101,7 +101,7 @@ public class AltaOferta extends HttpServlet {
 					
 			boolean result=false;
 			try {
-				result = ctrlUsuario.ingresarOferta(nickname,nombreTipo,nombre, descripcion, horario,remuneracion,fechaLocal,ciudad, departamento,keywords);
+				result = ctrlUsuario.ingresarOferta(nickname,nombreTipo,nombre, descripcion, horario,remuneracion,fechaLocal,ciudad, departamento,keywords, imagen);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

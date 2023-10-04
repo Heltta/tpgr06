@@ -10,10 +10,10 @@ public class Compra {
 	private double costo;
 	private LocalDate fechaVencimiento;
 	
-	public Compra(Empresa comprador, PaqueteTipoPublicacion producto){
+	public Compra(Empresa comprador, PaqueteTipoPublicacion producto, LocalDate fecha){
 		this.producto=producto;
 		this.comprador=comprador;
-		fechaCompra= LocalDate.now();
+		fechaCompra= fecha;
 		this.costo=producto.getCosto();
 		this.fechaVencimiento= fechaCompra.plusDays(producto.getPeriodoValidez());
 		this.tiposNoCanjeados=producto.getTiposPublicacion();

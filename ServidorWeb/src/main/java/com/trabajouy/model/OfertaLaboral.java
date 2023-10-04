@@ -19,10 +19,12 @@ public class OfertaLaboral {
 	private Map<String,Postulante> Postulantes;
 	private TipoPublicacion tipo;
 	private Set<String> Keywords;
+	private Estado estado;
 	private Compra compra;
+	private String imagen;
 	
 	public OfertaLaboral(String nombre, Empresa publicante,String descripcion, String ciudad, String departamento, DTHorario horario, int remuneracion,
-			Date fecha, TipoPublicacion tipo, Set<String> keywords) {
+			Date fecha, TipoPublicacion tipo, Set<String> keywords, String imagen) {
 		super();
 		this.nombre = nombre;
 		this.descripcion=descripcion;
@@ -36,6 +38,8 @@ public class OfertaLaboral {
 		Keywords = Set.copyOf(keywords);
 		Postulantes= new HashMap<String,Postulante>();
 		compra=null;
+		estado=Estado.Ingresado;
+		this.imagen=imagen;
 	}
 	public String getNombre() {
 		return nombre;
@@ -97,5 +101,17 @@ public class OfertaLaboral {
 	}
 	public Empresa getPublicante() {
 		return publicante;
+	}
+	public Estado getEstado() {
+		return estado;
+	}
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+	public String getImagen() {
+		return imagen;
+	}
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 }

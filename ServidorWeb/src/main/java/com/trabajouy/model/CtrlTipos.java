@@ -3,6 +3,8 @@ package com.trabajouy.model;
 import java.util.Date;
 
 import com.trabajouy.exceptions.*;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
@@ -69,14 +71,22 @@ public class CtrlTipos implements ITipos {
 		paquete.agregarTipo(tipo, cant);
 	}
 	
-	public void ingresarDatosPaquete(String nombre, String descripcion, int validez, double descuento, Date fechaAlta)throws nombrePaqueteRepetido {
+	public void ingresarDatosPaquete(String nombre, String descripcion, int validez, double descuento, Date fechaAlta, String imagen)throws nombrePaqueteRepetido {
 		ManejadorPaquete muPaquete = ManejadorPaquete.getInstance();
 		boolean existe = muPaquete.existePaquete(nombre);
 		if (existe) {
 			throw new nombrePaqueteRepetido("Ya existe un Paquete de nombre " + nombre);
 		} else {
-			PaqueteTipoPublicacion nuevoPaquete = new PaqueteTipoPublicacion(nombre, descripcion, descuento, fechaAlta, validez);
+			PaqueteTipoPublicacion nuevoPaquete = new PaqueteTipoPublicacion(nombre, descripcion, descuento, fechaAlta, validez, imagen);
 			muPaquete.agregarPaquete(nuevoPaquete);
+		}
+	}
+	public void comprarPaquete(String nombreEmpresa, String nombrePaquete, LocalDate fecha) throws compraPaqueteRepetida {
+		ManejadorUsuario muUsuario= ManejadorUsuario.getInstance();
+		Empresa empresa = (Empresa) muUsuario.getUsuario(nombreEmpresa);
+		if(empresa.getCompras().containsKey(nombrePaquete)) throw new compraPaqueteRepetida("La empresa ya compro el paquete: " + nombrePaquete);
+		else {
+			empresa.comprarPaquete(nombrePaquete, fecha);
 		}
 	}
 }

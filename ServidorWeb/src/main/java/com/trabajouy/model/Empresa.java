@@ -1,5 +1,6 @@
 package com.trabajouy.model;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,8 +11,8 @@ public class Empresa extends Usuario {
 	String nombreEmpresa;
 	String descripcion;
 	String link;
-	Map<String, OfertaLaboral> Ofertas;
-	Map<String,Compra> Compras;
+	Map<String, OfertaLaboral> ofertas;
+	Map<String,Compra> compras;
 	
 
 	public Empresa(String nickname, String mail, String nombre, String apellido, String nombreEmpresa,
@@ -20,8 +21,8 @@ public class Empresa extends Usuario {
 		this.nombreEmpresa = nombreEmpresa;
 		this.descripcion = descripcion;
 		this.link = link;
-		this.Ofertas=new HashMap<String,OfertaLaboral>();
-		this.Compras=null;
+		this.ofertas=new HashMap<String,OfertaLaboral>();
+		this.compras=null;
 	}
 	
 	public Empresa(String nickname, String mail, String nombre, String apellido, String nombreEmpresa,
@@ -30,8 +31,8 @@ public class Empresa extends Usuario {
 			this.nombreEmpresa = nombreEmpresa;
 			this.descripcion = descripcion;
 			this.link = link;
-			this.Ofertas=new HashMap<String,OfertaLaboral>();
-			this.Compras=null;
+			this.ofertas=new HashMap<String,OfertaLaboral>();
+			this.compras=null;
 		}
 	
 	public String getNombreEmpresa() {
@@ -46,19 +47,19 @@ public class Empresa extends Usuario {
 	}
 
 	public Map<String, OfertaLaboral> getOfertas() {
-		return Ofertas;
+		return ofertas;
 	}
 
 	public void agregarOferta(OfertaLaboral o) {
-		if (Ofertas==null) {
-			Ofertas= new HashMap<String,OfertaLaboral>();
+		if (ofertas==null) {
+			ofertas= new HashMap<String,OfertaLaboral>();
 		}
-		this.Ofertas.put(o.getNombre(), o);
+		this.ofertas.put(o.getNombre(), o);
 	}
 	public Set<String> getNombreOfertas(){
 		Set<String> lista = null;
-		if(Ofertas != null) {
-			lista = Ofertas.keySet();
+		if(ofertas != null) {
+			lista = ofertas.keySet();
 		}
 		return lista;
 	}
@@ -72,22 +73,22 @@ public class Empresa extends Usuario {
 		this.link = link;
 	}
 	public void setOfertas(Map<String, OfertaLaboral> ofertas) {
-		Ofertas = ofertas;
+		ofertas = ofertas;
 	}
-	public void comprarPaquete(String nombrePaquete) {
+	public void comprarPaquete(String nombrePaquete, LocalDate fecha) {
 		ManejadorPaquete manejadorPaquete= ManejadorPaquete.getInstance();
 		PaqueteTipoPublicacion paquete= manejadorPaquete.obtenerPaquete(nombrePaquete);
-		Compra compraPaquete= new Compra(this, paquete);
-		Compras.put(nombrePaquete, compraPaquete);
+		Compra compraPaquete= new Compra(this, paquete, fecha);
+		compras.put(nombrePaquete, compraPaquete);
 	}
 	public void canjearTipoDeCompra(String nombreTipo, String nombrePaquete) {
-		Compra compraPaquete= Compras.get(nombrePaquete);
+		Compra compraPaquete= compras.get(nombrePaquete);
 		compraPaquete.canjearTipo(nombreTipo);
 	}
 	public Map<String,Set<String>> listarPaquetesCompradosConTipoSinCanjear() {
 		Map<String,Set<String>> mapaTipoPublicacionPaquete= new HashMap<String,Set<String>>();
-		if(Compras!=null) {
-			Collection<Compra> paquetes= Compras.values();
+		if(compras!=null) {
+			Collection<Compra> paquetes= compras.values();
 			for(Compra compraPaquete: paquetes) {
 				Set<String> tiposDelPaquete= compraPaquete.getTiposNoCanjeados().keySet();
 				for(String nombreTipo: tiposDelPaquete) {
@@ -103,5 +104,8 @@ public class Empresa extends Usuario {
 			}
 		}
 		return mapaTipoPublicacionPaquete;
+	}
+	public Map<String,Compra> getCompras(){
+		return compras;
 	}
 }

@@ -1,5 +1,6 @@
 package com.trabajouy.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
@@ -21,6 +22,7 @@ public interface ITipos {
 	public abstract Set<String> listarTiposPublicacion();
 	public void agregarTipoPublicacion(String nombrePaquete, String nombreTipo, int cant);
 	public abstract void borrarPaquetes();
-	public abstract void ingresarDatosPaquete(String nombre, String descripcion, int validez, double descuento, Date fechaAlta) throws nombrePaqueteRepetido;
+	public abstract void ingresarDatosPaquete(String nombre, String descripcion, int validez, double descuento, Date fechaAlta, String imagen) throws nombrePaqueteRepetido;
 	public abstract Map<String, DTPaquete> obtenerDataPaquetes();
+	public abstract void comprarPaquete(String nombreEmpresa, String nombrePaquete, LocalDate fecha) throws compraPaqueteRepetida;
 }

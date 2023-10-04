@@ -121,7 +121,7 @@ public class CtrlUsuario implements IUsuario {
 		return mt.obtenerTipos();
 	}
 	
-	public Boolean ingresarOferta(String nickname,String nombreTipo, String nombre, String descripcion, DTHorario horario,int remuneracion,Date fecha,String ciudad,String departamento,Set<String> keyword) throws nombreOfertaRepetido {
+	public Boolean ingresarOferta(String nickname,String nombreTipo, String nombre, String descripcion, DTHorario horario,int remuneracion,Date fecha,String ciudad,String departamento,Set<String> keyword, String imagen) throws nombreOfertaRepetido {
 		ManejadorOferta mo = ManejadorOferta.getInstancia();
 		Boolean res = !mo.existeOferta(nombre);
 		
@@ -130,7 +130,7 @@ public class CtrlUsuario implements IUsuario {
 			TipoPublicacion tipo = mt.obtenerTipo(nombreTipo);
 			ManejadorUsuario mu = ManejadorUsuario.getInstance();
 			Empresa e = (Empresa) mu.getUsuario(nickname);
-			OfertaLaboral o = new OfertaLaboral(nombre, e,descripcion,ciudad,departamento,horario,remuneracion,fecha,tipo,keyword);
+			OfertaLaboral o = new OfertaLaboral(nombre, e,descripcion,ciudad,departamento,horario,remuneracion,fecha,tipo,keyword, imagen);
 			o.setCosto();
 			e.agregarOferta(o);
 			mo.agregarOferta(o);
