@@ -84,10 +84,16 @@ public class CtrlTipos implements ITipos {
 	public void comprarPaquete(String nombreEmpresa, String nombrePaquete, LocalDate fecha) throws compraPaqueteRepetida {
 		ManejadorUsuario muUsuario= ManejadorUsuario.getInstance();
 		Empresa empresa = (Empresa) muUsuario.getUsuario(nombreEmpresa);
-		if(empresa.getCompras().containsKey(nombrePaquete)) throw new compraPaqueteRepetida("La empresa ya compro el paquete: " + nombrePaquete);
+		if(empresa.getCompras()!=null && empresa.getCompras().containsKey(nombrePaquete)) throw new compraPaqueteRepetida("La empresa ya compro el paquete: " + nombrePaquete);
 		else {
 			empresa.comprarPaquete(nombrePaquete, fecha);
 		}
+	}
+	public Set<String> listarPaquetesDisponiblesParaUsuarioYTipo(String nickname, String nombreTipo){
+		ManejadorUsuario manejadorU = ManejadorUsuario.getInstance();
+		Empresa empresa = (Empresa) manejadorU.getUsuario(nickname);
+		System.out.print(empresa.listarPaquetesCompradosPorTipoSinCanjear(nombreTipo));
+		return empresa.listarPaquetesCompradosPorTipoSinCanjear(nombreTipo);
 	}
 }
 

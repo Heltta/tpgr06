@@ -1,6 +1,7 @@
 package com.trabajouy.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
@@ -49,15 +50,17 @@ public class AltaOferta extends HttpServlet {
 		IUsuario ctrlUsuario= fabrica.getIUsuario();
 		ITipos ctrlTipos= fabrica.getITipos();
 		
-		Set<String> listaTipos= ctrlUsuario.listarTiposDePublicacion();
+		Set<String> setTipos= ctrlUsuario.listarTiposDePublicacion();
+		List<String> listaTipos = new ArrayList<String>(setTipos);
 		Set<String> listaKeywords= ctrlUsuario.listarKeywords();
 
 		request.setAttribute("listaKeywords", listaKeywords);
 		request.setAttribute("listaTipos", listaTipos);
 		
 		if (usr!=null && usr.getClass()==DTEmpresa.class) {
-			Map<String,Set<String>> listaPaquetesPorTipo= ctrlUsuario.listarPaquetesCompradosParaTipoPublicacionDeEmpresa(usr.getNickname());
-			request.setAttribute("listaPaquetes", listaPaquetesPorTipo);
+			String tipoPreseleccionado= listaTipos.get(0);
+			Set<String> listaPaquetes= ctrlTipos.listarPaquetesDisponiblesParaUsuarioYTipo(usr.getNickname(), tipoPreseleccionado);
+			request.setAttribute("listaPaquetes", listaPaquetes);
 			request.getRequestDispatcher("/WEB-INF/altaOferta/altaOferta.jsp").
 			forward(request, response);
 		}
@@ -74,41 +77,52 @@ public class AltaOferta extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		DTUsuario usr = (DTUsuario) session.getAttribute("usuarioLogueado");
+		Object mandarPaquetes= session.getAttribute("getPaquete");
+		session.removeAttribute("getPaquete");
 		if (usr!=null && usr.getClass()==DTEmpresa.class) {
-			
 			String nombreTipo= request.getParameter("tipoOferta");
-			String nombre= request.getParameter("nombre");
-			String descripcion= request.getParameter("descripcion");
-			int remuneracion= Integer.parseInt( request.getParameter("remuneracion"));
-			String departamento= request.getParameter("departamento");
-			String ciudad= request.getParameter("ciudad");
-			String imagen= request.getParameter("imagen");
-			String horarioInicio= request.getParameter("horarioInicio");
-			String horarioFin= request.getParameter("horarioFin");
-			DTHorario horario= new DTHorario(horarioInicio, horarioFin);
-	
-			List<String> keywordsList= Arrays.asList(request.getParameterValues("keywords"));
-			Set<String> keywords = new HashSet<String>(keywordsList);
-			
-			String paquete =request.getParameter("paquete");
-			
-			
-			Date fechaLocal = null;
-			Fabrica fab= Fabrica.getInstance();
-			IUsuario ctrlUsuario= fab.getIUsuario();
-			
-			String nickname= usr.getNickname();
-					
-			boolean result=false;
-			try {
-				result = ctrlUsuario.ingresarOferta(nickname,nombreTipo,nombre, descripcion, horario,remuneracion,fechaLocal,ciudad, departamento,keywords, imagen);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			if(result) {
+			if(mandarPaquetes==null) {
+				String nombre= request.getParameter("nombre");
+				String descripcion= request.getParameter("descripcion");
+				int remuneracion= Integer.parseInt( request.getParameter("remuneracion"));
+				String departamento= request.getParameter("departamento");
+				String ciudad= request.getParameter("ciudad");
+				String imagen= request.getParameter("imagen");
+				String horarioInicio= request.getParameter("horarioInicio");
+				String horarioFin= request.getParameter("horarioFin");
+				DTHorario horario= new DTHorario(horarioInicio, horarioFin);
+		
+				List<String> keywordsList= Arrays.asList(request.getParameterValues("keywords"));
+				Set<String> keywords = new HashSet<String>(keywordsList);
 				
+				String paquete =request.getParameter("paquete");
+				
+				
+				Date fechaLocal = null;
+				Fabrica fab= Fabrica.getInstance();
+				IUsuario ctrlUsuario= fab.getIUsuario();
+				
+				String nickname= usr.getNickname();
+						
+				boolean result=false;
+				try {
+					result = ctrlUsuario.ingresarOferta(nickname,nombreTipo,nombre, descripcion, horario,remuneracion,fechaLocal,ciudad, departamento,keywords, imagen);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if(result) {
+					
+				}
+				else {
+					
+				}
+			}
+			else {
+				Fabrica fabrica= Fabrica.getInstance();
+				ITipos ctrlTipos= fabrica.getITipos();
+				Set<String> listaPaquetes= ctrlTipos.listarPaquetesDisponiblesParaUsuarioYTipo(usr.getNickname(), nombreTipo);
+				request.setAttribute("listaPaquetes", listaPaquetes);
 			}
 		}
 		else {

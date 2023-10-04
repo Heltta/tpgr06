@@ -79,31 +79,27 @@ public class Empresa extends Usuario {
 		ManejadorPaquete manejadorPaquete= ManejadorPaquete.getInstance();
 		PaqueteTipoPublicacion paquete= manejadorPaquete.obtenerPaquete(nombrePaquete);
 		Compra compraPaquete= new Compra(this, paquete, fecha);
+		if(compras==null) {
+			compras= new HashMap<String,Compra>();
+		}
 		compras.put(nombrePaquete, compraPaquete);
 	}
 	public void canjearTipoDeCompra(String nombreTipo, String nombrePaquete) {
 		Compra compraPaquete= compras.get(nombrePaquete);
 		compraPaquete.canjearTipo(nombreTipo);
 	}
-	public Map<String,Set<String>> listarPaquetesCompradosConTipoSinCanjear() {
-		Map<String,Set<String>> mapaTipoPublicacionPaquete= new HashMap<String,Set<String>>();
+	public Set<String> listarPaquetesCompradosPorTipoSinCanjear(String nombreTipo) {
+		Set<String> paquetesAListar= new HashSet<String>();
 		if(compras!=null) {
 			Collection<Compra> paquetes= compras.values();
 			for(Compra compraPaquete: paquetes) {
 				Set<String> tiposDelPaquete= compraPaquete.getTiposNoCanjeados().keySet();
-				for(String nombreTipo: tiposDelPaquete) {
-					if(mapaTipoPublicacionPaquete.containsKey(nombreTipo)) {
-						mapaTipoPublicacionPaquete.get(nombreTipo).add(compraPaquete.getProducto().getNombre());
-					}
-					else {
-						Set<String> paquetesConTipo= new HashSet<String>();
-						paquetesConTipo.add(compraPaquete.getProducto().getNombre());
-						mapaTipoPublicacionPaquete.put(nombreTipo, paquetesConTipo);
-					}
+				if(tiposDelPaquete.contains(nombreTipo)) {
+					paquetesAListar.add(compraPaquete.getProducto().getNombre());
 				}
 			}
 		}
-		return mapaTipoPublicacionPaquete;
+		return paquetesAListar;
 	}
 	public Map<String,Compra> getCompras(){
 		return compras;

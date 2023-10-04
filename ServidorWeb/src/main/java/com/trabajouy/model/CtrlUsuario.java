@@ -239,9 +239,4 @@ public class CtrlUsuario implements IUsuario {
 		}
 		return datosUsuario;
 	}
-	public Map<String,Set<String>> listarPaquetesCompradosParaTipoPublicacionDeEmpresa(String nickname){
-		ManejadorUsuario manejadorU = ManejadorUsuario.getInstance();
-		Empresa empresa = (Empresa) manejadorU.getUsuario(nickname);
-		return empresa.listarPaquetesCompradosConTipoSinCanjear();
-	}
 }

@@ -1,14 +1,9 @@
-function trigger(optionValue) {
-    var select = document.getElementById("paquete");
-    var options = select.options;
-
-    for (var i = 0; i < options.length; i++) {
-		var id= options[i].value;
-		
-      if (id.search(optionValue) !== -1) {
-        options[i].style.display = "none";
-      }else{
-		options[i].style.display = "block";
-	  }
-    }
-  }
+function getPaquetes() {
+	var form = document.getElementById("elform");
+	var hiddenInput = document.createElement("input");
+    hiddenInput.type = "hidden";
+    hiddenInput.name = "getPaquete";
+    hiddenInput.value = "";  
+    form.appendChild(hiddenInput);
+	form.submit();
+}

@@ -80,6 +80,7 @@ public void cargarDatosPrueba() {
     cargarPostulaciones();
     cargarPaquetes();
     cargarTipoPaquetes();
+    cargarCompras();
 }
 public void cargarDatosUsuarios() {
 	String usuariosCSV=csvDirectory+"Usuarios.csv";
@@ -383,9 +384,9 @@ public void cargarCompras() {
 
             int UID= Integer.parseInt(data[1].trim().substring(1));
             int PID= Integer.parseInt(data[2].trim().substring(3));
-            String fechaAlta= data[5].trim();
+            String fechaAlta= data[3].trim();
             String[] numerosFecha = fechaAlta.split("/");
-            LocalDate localfecha = LocalDate.of(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0])-2);
+            LocalDate localfecha = LocalDate.of(Integer.parseInt(numerosFecha[2]),Integer.parseInt(numerosFecha[1]),Integer.parseInt(numerosFecha[0]));
             ctrlTipos.comprarPaquete(usuarios.get(UID-1), paquetes.get(PID-1), localfecha);
 			}
             i++;

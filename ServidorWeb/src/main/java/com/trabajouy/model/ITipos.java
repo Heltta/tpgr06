@@ -25,4 +25,5 @@ public interface ITipos {
 	public abstract void ingresarDatosPaquete(String nombre, String descripcion, int validez, double descuento, Date fechaAlta, String imagen) throws nombrePaqueteRepetido;
 	public abstract Map<String, DTPaquete> obtenerDataPaquetes();
 	public abstract void comprarPaquete(String nombreEmpresa, String nombrePaquete, LocalDate fecha) throws compraPaqueteRepetida;
+	public abstract Set<String> listarPaquetesDisponiblesParaUsuarioYTipo(String nickname, String nombreTipo);
 }
